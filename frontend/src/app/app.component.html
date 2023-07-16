@@ -1,11 +1,3 @@
 <div class="container">
-  <app-header></app-header>
-    <audio class="col-sm-12"
-      controls
-      src="./assets/{{sounds[0].url}}"
-           loop
-           [muted]="cisza"
-           [volume]="0.2"
-           autoplay
-    ></audio>
+  <router-outlet></router-outlet>
 </div>
