@@ -1,0 +1,9 @@
+body{
+  background: #0f0f0f;
+  color: white;
+}
+.container-img-background{
+  background-image: url('src/assets/fire-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
