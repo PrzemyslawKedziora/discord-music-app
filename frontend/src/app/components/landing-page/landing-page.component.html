@@ -1,0 +1,14 @@
+<div class="container vh-100 d-flex flex-column align-items-center justify-content-center landing-container">
+<div class="d-flex flex-column align-items-center justify-content-center content-group">
+  <p class="title-text">DISCORD MUSIC APP</p>
+  <div class="d-flex button-group">
+    <button class="btn btn-light fw-bold" routerLink="/dashboard">Listy</button>
+    <button class="btn btn-success fw-bold" routerLink="/login">Zaloguj</button>
+  </div>
+</div>
+  <img class="imageElement" #imageElement [src]="imageSRC" alt="pepe"
+       [ngStyle]="{ 'opacity': isImageVisible ? 1 : 0,
+   'transform': isImageVisible ? 'translateY(-100%)' : 'translateY(50%)',
+    'transition': 'opacity 0.5s, transform 0.5s' }">
+</div>
+<router-outlet></router-outlet>
