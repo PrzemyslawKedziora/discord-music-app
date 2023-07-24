@@ -15,4 +15,4 @@ const authorSchema = mongoose.Schema(
     { timestamps: true }
 );
 
-module.export = mongoose.model("Author", authorSchema);
+module.exports = mongoose.model("Author", authorSchema);

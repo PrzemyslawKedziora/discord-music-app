@@ -37,6 +37,10 @@ const songSchema = mongoose.Schema(
         required: true,
       },
     },
+    categories: [{
+      type: mongoose.Types.ObjectId,
+      ref: "Category",
+    }],
     likes: {
       type: Array,
       default: [],

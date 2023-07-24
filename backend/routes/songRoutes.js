@@ -5,14 +5,21 @@ const validateToken = require("../middleware/validateTokenHandler");
 
 const {
   addSong,
-  getSongList,
+  getAllSongs,
   getRandomSong,
+  getSongsByAuthor,
+  getSongsByCategory,
+
 } = require("../controllers/songController");
 
 router.post("/add", validateToken, addSong);
 
-router.get("/list", getSongList);
+router.get("/all", getAllSongs);
 
 router.get("/random", getRandomSong);
+
+router.get("/author/:authorID", getSongsByAuthor);
+
+router.get("/category/:categoryID", getSongsByCategory);
 
 module.exports = router;

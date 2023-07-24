@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const mongoose = require("mongoose");
 const Song = require("../models/songModel");
 
 //@desc Adds new song
@@ -9,7 +10,7 @@ const addSong = asyncHandler(async (req, res) => {
 
   // <---- Checking if user sent all necessary fields ---->
   // author - object { name, authorID}
-  if (!name || !ytURL || !author) {
+  if (!name || !ytURL || !author.name || !author.authorID) {
     res.status(400);
     throw new Error("You need to fulfill all fields!");
   }
@@ -30,9 +31,9 @@ const addSong = asyncHandler(async (req, res) => {
     likes: [],
   };
   const song = await Song.create(newSong);
-  console.log("New song created! ", song);
 
   if (song) {
+    console.log("New song created! ", song);
     res.status(201).json(song);
   } else {
     res.status(400);
@@ -40,10 +41,10 @@ const addSong = asyncHandler(async (req, res) => {
   }
 });
 
-//@desc Seding list of every Song
-//@route GET api/song/list
+//@desc Sending list of all songs
+//@route GET api/song/all
 //@access public
-const getSongList = asyncHandler(async (req, res) => {
+const getAllSongs = asyncHandler(async (req, res) => {
   const songList = await Song.find();
 
   if (!songList) {
@@ -56,6 +57,56 @@ const getSongList = asyncHandler(async (req, res) => {
   }
 });
 
+//@desc sending list of all song of given author
+//@route POST api/song/author/:authorID
+//@access public
+const getSongsByAuthor = asyncHandler(async (req, res) => {
+  const authorID = req.params.authorID;
+
+  // <---- Checking if the provided author id is valid ---->
+  if (!mongoose.Types.ObjectId.isValid(authorID)) {
+    res.status(400);
+    throw new Error("Invalid author");
+  }
+
+  // <---- Finding songs by the provided authorId ---->
+  const songs = await Song.find({ 'author.authorID' : authorID }).exec();
+
+  if (songs.length > 0) {
+    res.status(200).json(songs);
+  } else {
+    res.status(404);
+    throw new Error("No songs with this author found!");
+  }
+});
+
+//@desc sending list of all song of given category
+//@route POST api/song/category/:categoryID
+//@access public
+const getSongsByCategory = asyncHandler(async (req, res) => {
+  const categoryID = req.params.categoryID;
+
+  // <---- Checking if the provided category id is valid ---->
+  if (!mongoose.Types.ObjectId.isValid(categoryID)) {
+    res.status(400);
+    throw new Error("Invalid category");
+  }
+
+  // <---- Finding songs by the provided categoryID ---->
+  const songs = await Song.find({ categories: { $in: [categoryID] } }).exec();
+
+  if (songs.length > 0) {
+    res.status(200).json(songs);
+  } else {
+    res.status(404);
+    throw new Error("No songs with this author found!");
+  }
+
+});
+
+//@desc Sending a random song
+//@route GET api/song/random
+//@access public
 const getRandomSong = asyncHandler( async(req, res) => {
   const randomSong = await Song.aggregate([{ $sample: { size: 1 } }]).exec();
 
@@ -69,8 +120,12 @@ const getRandomSong = asyncHandler( async(req, res) => {
   }
 });
 
+
+
 module.exports = {
-  getSongList,
   addSong,
+  getAllSongs,
   getRandomSong,
+  getSongsByAuthor,
+  getSongsByCategory,
 };
