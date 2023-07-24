@@ -23,7 +23,8 @@ const addAuthor = asyncHandler (async (req, res) => {
 
     const newAuthor = {
         name,
-        pictureURL
+        pictureURL,
+        userID: req.user.id,
     };
     const author = await Author.create(newAuthor);
     console.log(author);

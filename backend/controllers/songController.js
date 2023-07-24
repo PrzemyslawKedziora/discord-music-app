@@ -6,11 +6,10 @@ const Song = require("../models/songModel");
 //@route POST api/song/add
 //@access private
 const addSong = asyncHandler(async (req, res) => {
-  const { name, ytURL, author } = req.body;
+  const { name, ytURL, authorID, categories } = req.body;
 
   // <---- Checking if user sent all necessary fields ---->
-  // author - object { name, authorID}
-  if (!name || !ytURL || !author.name || !author.authorID) {
+  if (!name || !ytURL || !authorID) {
     res.status(400);
     throw new Error("You need to fulfill all fields!");
   }
@@ -22,12 +21,19 @@ const addSong = asyncHandler(async (req, res) => {
     throw new Error("Song with this YouTube URL already exists!");
   }
 
+  let newCategories;
+  if (categories && categories.length > 0) {
+   newCategories = categories;
+  } else {
+    newCategories = [];
+  }
   // <---- Creating new song ---->
   const newSong = {
     name,
-    user: { userID: req.user.id, username: req.user.username },
+    userID: req.user.id,
     ytURL,
-    author: { name: author.name, authorID: author.authorID},
+    authorID,
+    categories: newCategories,
     likes: [],
   };
   const song = await Song.create(newSong);
@@ -40,6 +46,46 @@ const addSong = asyncHandler(async (req, res) => {
     throw new Error("Song data was not valid!");
   }
 });
+
+//@desc Edits an existing song
+//@route GET api/song/edit/:songID
+//@access private
+const editSong = asyncHandler(async (req, res) => {
+  const songID = req.params.songID;
+  const { name, ytURL, authorID, categories } = req.body;
+
+  // <---- Finding a song with ID fiven i params ---->
+  const song = await Song.findById(songID);
+  if (!song) {
+    req.status(400);
+    throw new Error("There is no song with this ID!");
+  }
+
+  // <---- Checking if user have permission to modify this song ---->
+  if (!req.user.id == song.userID) {
+    req.status(401);
+    throw new Error("You don't have permission to edit this song!");
+  }
+
+    // <---- Updating the song with the new data ---->
+    song.name = name;
+    song.ytURL = ytURL;
+    song.authorID = authorID;
+
+  // Clearing the existing categories and adding the new ones
+  if (categories && categories.length > 0) {
+    song.categories = categories;
+  } else {
+    song.categories = [];
+
+  // <---- Saving the updated song in the database ---->
+  const updatedSong = await song.save();
+
+  // <---- Sending the updated song as a response ---->
+  res.status(200).json(updatedSong);
+}
+});
+
 
 //@desc Sending list of all songs
 //@route GET api/song/all
@@ -120,6 +166,9 @@ const getRandomSong = asyncHandler( async(req, res) => {
   }
 });
 
+const postLikeSong = asyncHandler(async (req, res) => {
+  
+});
 
 
 module.exports = {
@@ -128,4 +177,5 @@ module.exports = {
   getRandomSong,
   getSongsByAuthor,
   getSongsByCategory,
+  editSong,
 };

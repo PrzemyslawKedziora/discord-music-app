@@ -11,6 +11,11 @@ const authorSchema = mongoose.Schema(
             type: String,
             required: false,
         },
+        userID: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+        }
     },
     { timestamps: true }
 );

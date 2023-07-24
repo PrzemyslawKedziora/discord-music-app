@@ -6,6 +6,11 @@ const categorySchema = mongoose.Schema({
         required: true,
         min: 2,
         max: 50
+    },
+    userID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
     }
 }, { timestamps: true });
 

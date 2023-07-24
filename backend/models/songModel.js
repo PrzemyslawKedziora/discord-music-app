@@ -8,34 +8,20 @@ const songSchema = mongoose.Schema(
       max: 200,
     },
     // User who uploaded this music piece
-    user: {
-      userID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-      },
-      username: {
-        type: String,
-        required: true,
-        max: 50,
-      },
+    userID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
     ytURL: {
       type: String,
       required: [true, "Please add YouTube URL"],
       unique: true,
     },
-    author: {
-      name: {
-        type: String,
-        required: true,
-        max: 50,
-      },
-      authorID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Author",
-        required: true,
-      },
+    authorID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Author",
+      required: true,
     },
     categories: [{
       type: mongoose.Types.ObjectId,
