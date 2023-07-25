@@ -1,1 +1,64 @@
-<p>register works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col d-flex justify-content-center align-items-center">
+      <div class="card">
+        <form [formGroup]="registerForm" class="box" (ngSubmit)="onSubmit()">
+          <h1>Rejestracja</h1>
+          <p class="head-text"> Wprowadź dane nowego użytkownika</p>
+          <input
+            type="text"
+            class="input"
+            placeholder="Adres e-mail"
+            formControlName="email"
+            [class.invalid]="registerForm.get('email')?.invalid &&
+        (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)"
+          >
+          <div *ngIf="registerForm.get('email')?.hasError('required') &&
+        (registerForm.get('email')?.touched || registerForm.get('email')?.dirty || isSubmitted)"
+               class="error">
+            Adres e-mail jest wymagany
+          </div>
+          <input
+            type="text"
+            class="input"
+            placeholder="Nazwa użytkownika"
+            formControlName="username"
+            [class.invalid]="registerForm.get('username')?.invalid &&
+        (registerForm.get('username')?.touched || registerForm.get('username')?.dirty)"
+          >
+          <div *ngIf="registerForm.get('username')?.hasError('required') &&
+        (registerForm.get('username')?.touched || registerForm.get('username')?.dirty || isSubmitted)"
+               class="error">
+            Nazwa użytkownika jest wymagana
+          </div>
+          <div *ngIf="(registerForm.get('username')?.value?.length<3 && registerForm.get('username')?.value?.touched)"
+               class="error">
+            Nazwa użytkownika powinna być dłuższa niż 3 znaki
+          </div>
+          <div *ngIf="
+        (registerForm.get('username')?.value?.length>32|| isSubmitted)"
+               class="error">
+            Nazwa użytkownika powinna być krótsza niż 32 znaki
+          </div>
+          <input type="password" placeholder="Hasło" formControlName="password">
+          <div *ngIf="registerForm.get('password')?.invalid &&
+        (registerForm.get('password')?.touched || registerForm.get('password')?.dirty || isSubmitted)"
+               class="error">
+            Hasło jest wymagane
+          </div>
+          <input type="password" placeholder="Powtórz hasło" formControlName="confirmPassword">
+          <div *ngIf="registerForm.get('confirmPassword')?.invalid &&
+        (registerForm.get('confirmPassword')?.touched || registerForm.get('confirmPassword')?.dirty || isSubmitted)"
+               class="error">
+            Powtórz hasło
+          </div>
+          <div *ngIf="passwordsNotConfirmed" class="error">
+            Hasła różnią się od siebie
+          </div>
+          <a class="head-text forgot" routerLink="/login">Mam już konto</a>
+          <input type="submit" value="Zarejestruj" >
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
