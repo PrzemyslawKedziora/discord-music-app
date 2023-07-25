@@ -8,15 +8,15 @@
       <input
         type="text"
         class="input"
-        placeholder="Nazwa użytkownika"
-        formControlName="name"
-        [class.invalid]="loginForm.get('name')?.invalid &&
-        (loginForm.get('name')?.touched || loginForm.get('name')?.dirty)"
+        placeholder="Adres e-mail"
+        formControlName="email"
+        [class.invalid]="loginForm.get('email')?.invalid &&
+        (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)"
       >
-        <div *ngIf="loginForm.get('name')?.hasError('required') &&
-        (loginForm.get('name')?.touched || loginForm.get('name')?.dirty || isSubmitted)"
+        <div *ngIf="loginForm.get('email')?.hasError('required') &&
+        (loginForm.get('email')?.touched || loginForm.get('email')?.dirty || isSubmitted)"
              class="error">
-          Nazwa użytkownika jest wymagana
+          Adres e-mail jest wymagany
         </div>
       <input type="password" placeholder="Hasło" formControlName="password">
         <div *ngIf="loginForm.get('password')?.invalid &&
