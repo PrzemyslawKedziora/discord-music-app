@@ -23,7 +23,7 @@ const addSong = asyncHandler(async (req, res) => {
 
   let newCategories;
   if (categories && categories.length > 0) {
-   newCategories = categories;
+    newCategories = categories;
   } else {
     newCategories = [];
   }
@@ -67,10 +67,10 @@ const editSong = asyncHandler(async (req, res) => {
     throw new Error("You don't have permission to edit this song!");
   }
 
-    // <---- Updating the song with the new data ---->
-    song.name = name;
-    song.ytURL = ytURL;
-    song.authorID = authorID;
+  // <---- Updating the song with the new data ---->
+  song.name = name;
+  song.ytURL = ytURL;
+  song.authorID = authorID;
 
   // Clearing the existing categories and adding the new ones
   if (categories && categories.length > 0) {
@@ -78,14 +78,13 @@ const editSong = asyncHandler(async (req, res) => {
   } else {
     song.categories = [];
 
-  // <---- Saving the updated song in the database ---->
-  const updatedSong = await song.save();
+    // <---- Saving the updated song in the database ---->
+    const updatedSong = await song.save();
 
-  // <---- Sending the updated song as a response ---->
-  res.status(200).json(updatedSong);
-}
+    // <---- Sending the updated song as a response ---->
+    res.status(200).json(updatedSong);
+  }
 });
-
 
 //@desc Sending list of all songs
 //@route GET api/songs/all
@@ -116,7 +115,7 @@ const getSongsByAuthor = asyncHandler(async (req, res) => {
   }
 
   // <---- Finding songs by the provided authorId ---->
-  const songs = await Song.find({ 'author.authorID' : authorID }).exec();
+  const songs = await Song.find({ "author.authorID": authorID }).exec();
 
   if (songs.length > 0) {
     res.status(200).json(songs);
@@ -147,13 +146,12 @@ const getSongsByCategory = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("No songs with this author found!");
   }
-
 });
 
 //@desc Sending a random song
 //@route GET api/songs/random
 //@access public
-const getRandomSong = asyncHandler( async(req, res) => {
+const getRandomSong = asyncHandler(async (req, res) => {
   const randomSong = await Song.aggregate([{ $sample: { size: 1 } }]).exec();
 
   if (!randomSong) {
@@ -166,13 +164,9 @@ const getRandomSong = asyncHandler( async(req, res) => {
   }
 });
 
-const postLikeSong = asyncHandler(async (req, res) => {
-  
-});
-
 //@desc Likes a song
-//@route GET api/songs/:songID/like
-//@access public
+//@route POST api/songs/:songID/like
+//@access private
 const likeSong = asyncHandler(async (req, res) => {
   const songID = req.params.songID;
 
@@ -193,13 +187,56 @@ const likeSong = asyncHandler(async (req, res) => {
   }
 
   // <---- Placing/taking like (current user ID) into/from song's likes array ---->
-  if (!song.likes.includes(req.user.id)) {
-    await song.updateOne({ $push: { likes: req.user.id }});
-    res.status(200).json({ message: "The song has been liked! "})
+  // <---- Placing/taking like (current user ID) into/from song's likes array ---->
+  const userLiked = song.likes.includes(req.user.id);
+
+  const update = userLiked
+    ? { $pull: { likes: req.user.id } }
+    : { $push: { likes: req.user.id } };
+
+  const updatedSong = await Song.findOneAndUpdate({ _id: songID }, update, { new: true, });
+
+  if (updatedSong) {
+    const message = userLiked
+      ? "The song has been disliked!"
+      : "The song has been liked!";
+    res.status(200).json({ message });
   } else {
-    await song.updateOne({ $pull: { likes: req.user.id } });
-    res.status(200).json({ message: "The song has been disliked!"});
+    res.status(400).json({ message: "Failed to update song!" });
   }
+});
+
+//@desc Likes a song
+//@route DELETE api/songs/:songID/delete
+//@access private
+const deleteSong = asyncHandler(async (req, res) => {
+  const songID = req.params.songID;
+
+  // <---- Checking if the provided song id is valid ---->
+  if (!mongoose.Types.ObjectId.isValid(songID)) {
+    res.status(400);
+    throw new Error("Invalid song");
+  }
+
+  // <---- Finding the song in the database ---->
+  const song = await Song.findById(songID);
+
+  if (!song) {
+    res.status(500);
+    throw new Error(
+      "There was a problem trying to get a song object from the database!"
+    );
+  }
+
+  // <---- Checking if the current user is the song's creator ---->
+  if (song.userID.toString() !== req.user.id) {
+    res.status(403);
+    throw new Error("You cannot delete song that was not added by you!");
+  }
+
+  // <---- Deleting song and sending the response ---->
+  await song.deleteOne();
+  res.status(200).json({ message: "Song deleted!" });
 });
 
 module.exports = {
@@ -209,5 +246,6 @@ module.exports = {
   getSongsByAuthor,
   getSongsByCategory,
   editSong,
-  likeSong
+  likeSong,
+  deleteSong,
 };

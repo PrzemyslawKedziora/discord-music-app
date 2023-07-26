@@ -11,6 +11,7 @@ const {
   getSongsByCategory,
   editSong,
   likeSong,
+  deleteSong,
 } = require("../controllers/songController");
 
 router.post("/add", validateToken, addSong);
@@ -25,8 +26,8 @@ router.get("/author/:authorID", getSongsByAuthor);
 
 router.get("/category/:categoryID", getSongsByCategory);
 
-router.post("/:songID/like", validateToken ,likeSong)
+router.post("/:songID/like", validateToken, likeSong);
 
-
+router.delete("/:songID/delete", validateToken, deleteSong);
 
 module.exports = router;
