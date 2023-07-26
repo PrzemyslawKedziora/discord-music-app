@@ -1,0 +1,82 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: linear-gradient(to right, #b92b27, #1565c0);
+  color: white;
+}
+.card{
+  margin-bottom:20px;
+  background: #0f0f0f;
+  border:none;
+}
+.box {
+  width: 500px;
+  padding: 40px;
+  background: #191919;
+  text-align: center;
+  transition: 0.25s;
+  margin-top: 100px
+}
+.box input[type="text"],
+.box input[type="password"] {
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 10px 10px;
+  width: 250px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s
+}
+.box input[type="text"]:focus,
+.box input[type="password"]:focus {
+  width: 300px;
+  border-color: #2ecc71
+}
+.box input[type="submit"] {
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer
+}
+.error{
+  position: relative;
+  bottom: 15px;
+  color: #a50004;
+}
+.box input[type="submit"]:hover {
+  background: #2ecc71
+}
+.box h1 {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500
+}
+.forgot{
+  text-decoration: underline;
+}
+.head-text{
+  color: white;
+}
+a.icoDiscord {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #7289da;
+  height: 60px;
+  width: 60px;
+  cursor: pointer;
+}
+
