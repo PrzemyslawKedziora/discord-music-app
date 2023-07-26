@@ -10,6 +10,7 @@ const {
   getSongsByAuthor,
   getSongsByCategory,
   editSong,
+  likeSong,
 } = require("../controllers/songController");
 
 router.post("/add", validateToken, addSong);
@@ -23,6 +24,8 @@ router.get("/random", getRandomSong);
 router.get("/author/:authorID", getSongsByAuthor);
 
 router.get("/category/:categoryID", getSongsByCategory);
+
+router.post("/:songID/like", validateToken ,likeSong)
 
 
 

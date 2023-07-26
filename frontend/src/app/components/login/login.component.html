@@ -2,13 +2,30 @@
   <div class="row">
     <div class="col d-flex justify-content-center align-items-center">
     <div class="card">
-      <form onsubmit="event.preventDefault()" class="box">
+      <form [formGroup]="loginForm" class="box" (ngSubmit)="onSubmit()">
       <h1>Login</h1>
       <p class="head-text"> Wprowadź login oraz hasło</p>
-      <input type="text" name="" placeholder="Nazwa użytkownika">
-      <input type="password" name="" placeholder="Hasło">
+      <input
+        type="text"
+        class="input"
+        placeholder="Adres e-mail"
+        formControlName="email"
+        [class.invalid]="loginForm.get('email')?.invalid &&
+        (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)"
+      >
+        <div *ngIf="loginForm.get('email')?.hasError('required') &&
+        (loginForm.get('email')?.touched || loginForm.get('email')?.dirty || isSubmitted)"
+             class="error">
+          Adres e-mail jest wymagany
+        </div>
+      <input type="password" placeholder="Hasło" formControlName="password">
+        <div *ngIf="loginForm.get('password')?.invalid &&
+        (loginForm.get('password')?.touched || loginForm.get('password')?.dirty || isSubmitted)"
+             class="error">
+          Hasło jest wymagane
+        </div>
         <a class="head-text forgot" routerLink="/register">Nie masz konta?</a>
-        <input type="submit" name="" value="Zaloguj" href="#">
+        <input type="submit" name="" value="Zaloguj" >
         <div class="col-md-12 d-flex justify-content-center">
           <a  class="bi bi-discord icoDiscord" title="Zaloguj za pomocą konta Discord">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fff" class="bi bi-discord" viewBox="0 0 16 16">

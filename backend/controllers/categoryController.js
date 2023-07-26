@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Category = require("../models/categoryModel");
 
-//@desc Adds a category
+//@desc Adds a category.
 //@route POST api/categories/add
 //@access private
 const addCategory = asyncHandler (async (req, res) => {

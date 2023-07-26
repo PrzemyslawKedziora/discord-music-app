@@ -6,6 +6,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { AdminRoutingModule } from "./admin/admin-routing.module";
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -13,12 +16,15 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     HeaderComponent,
     LandingPageComponent,
     DashboardComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
-  imports: [
-    BrowserModule,
-    NgbModule,
-    AdminRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        NgbModule,
+        AdminRoutingModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

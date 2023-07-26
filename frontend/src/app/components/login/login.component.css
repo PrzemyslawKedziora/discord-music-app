@@ -32,11 +32,6 @@ body {
   border-radius: 24px;
   transition: 0.25s
 }
-.box h1 {
-  color: white;
-  text-transform: uppercase;
-  font-weight: 500
-}
 .box input[type="text"]:focus,
 .box input[type="password"]:focus {
   width: 300px;
@@ -55,8 +50,18 @@ body {
   transition: 0.25s;
   cursor: pointer
 }
+.error{
+  position: relative;
+  bottom: 15px;
+  color: #a50004;
+}
 .box input[type="submit"]:hover {
   background: #2ecc71
+}
+.box h1 {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500
 }
 .forgot{
   text-decoration: underline;

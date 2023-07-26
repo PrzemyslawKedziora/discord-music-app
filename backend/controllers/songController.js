@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Song = require("../models/songModel");
 
 //@desc Adds new song
-//@route POST api/song/add
+//@route POST api/songs/add
 //@access private
 const addSong = asyncHandler(async (req, res) => {
   const { name, ytURL, authorID, categories } = req.body;
@@ -48,7 +48,7 @@ const addSong = asyncHandler(async (req, res) => {
 });
 
 //@desc Edits an existing song
-//@route GET api/song/edit/:songID
+//@route GET api/songs/edit/:songID
 //@access private
 const editSong = asyncHandler(async (req, res) => {
   const songID = req.params.songID;
@@ -88,7 +88,7 @@ const editSong = asyncHandler(async (req, res) => {
 
 
 //@desc Sending list of all songs
-//@route GET api/song/all
+//@route GET api/songs/all
 //@access public
 const getAllSongs = asyncHandler(async (req, res) => {
   const songList = await Song.find();
@@ -104,7 +104,7 @@ const getAllSongs = asyncHandler(async (req, res) => {
 });
 
 //@desc sending list of all song of given author
-//@route POST api/song/author/:authorID
+//@route POST api/songs/author/:authorID
 //@access public
 const getSongsByAuthor = asyncHandler(async (req, res) => {
   const authorID = req.params.authorID;
@@ -151,7 +151,7 @@ const getSongsByCategory = asyncHandler(async (req, res) => {
 });
 
 //@desc Sending a random song
-//@route GET api/song/random
+//@route GET api/songs/random
 //@access public
 const getRandomSong = asyncHandler( async(req, res) => {
   const randomSong = await Song.aggregate([{ $sample: { size: 1 } }]).exec();
@@ -170,6 +170,37 @@ const postLikeSong = asyncHandler(async (req, res) => {
   
 });
 
+//@desc Likes a song
+//@route GET api/songs/:songID/like
+//@access public
+const likeSong = asyncHandler(async (req, res) => {
+  const songID = req.params.songID;
+
+  // <---- Checking if the provided song id is valid ---->
+  if (!mongoose.Types.ObjectId.isValid(songID)) {
+    res.status(400);
+    throw new Error("Invalid song");
+  }
+
+  // <---- Finding the song in the database ---->
+  const song = await Song.findById(songID);
+
+  if (!song) {
+    res.status(500);
+    throw new Error(
+      "There was a problem trying to get a song object from the database!"
+    );
+  }
+
+  // <---- Placing/taking like (current user ID) into/from song's likes array ---->
+  if (!song.likes.includes(req.user.id)) {
+    await song.updateOne({ $push: { likes: req.user.id }});
+    res.status(200).json({ message: "The song has been liked! "})
+  } else {
+    await song.updateOne({ $pull: { likes: req.user.id } });
+    res.status(200).json({ message: "The song has been disliked!"});
+  }
+});
 
 module.exports = {
   addSong,
@@ -178,4 +209,5 @@ module.exports = {
   getSongsByAuthor,
   getSongsByCategory,
   editSong,
+  likeSong
 };
