@@ -49,7 +49,6 @@ const registerUser = asyncHandler( async (req, res) => {
         res.status(400);
         throw new Error("User data was not valid!");
     }
-
 });
 
 //@desc Login user
@@ -99,7 +98,7 @@ const loginUser = asyncHandler( async (req, res) => {
 //@route /api/users/current
 //@access private
 const currentUser = asyncHandler(async (req, res) => {
-    // <---- req.user was added in the jwt token validation middleware ---->
+    // <---- req.user was added in the jwt token validation middleware ---->,
     res.json(req.user);
 });
 

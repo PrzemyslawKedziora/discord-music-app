@@ -13,12 +13,14 @@ app.use(express.json());
 
 //  <----------- Middlewares ----------->
 app.use("/api/users", require("./routes/userRoutes"));
-
+app.use("/api/songs", require("./routes/songRoutes"));
+app.use("/api/authors", require("./routes/authorRoutes"));
+app.use("/api/categories", require("./routes/categoriesRoutes"));
 
 
 //  <----------- Connecting to the database and starting the app to listen ----------->
-const MONGODB_URI = "mongodb+srv://Franciszek123:Karmazyn123@diskontappcluster.r2vfgqh.mongodb.net/music";
-const PORT = 4200;
+const MONGODB_URI = process.env.DB_LINK;
+const PORT = process.env.PORT;
 
 mongoose
     .connect(MONGODB_URI)
