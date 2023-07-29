@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
+const mongoose = require("mongoose");
 
 // ======================= P U B L I C   R O U T E S =======================
 
@@ -92,8 +93,6 @@ const loginUser = asyncHandler( async (req, res) => {
     }
 });
 
-// ======================= P R I V A T E   R O U T E S =======================
-
 //@desc Current user information
 //@route /api/users/current
 //@access private
@@ -102,8 +101,57 @@ const currentUser = asyncHandler(async (req, res) => {
     res.json(req.user);
 });
 
+//@desc Edits an existing user
+//@route /api/users/:userID/edit
+//@access private
+const editUser = asyncHandler(async (req,res) => {
+    const userID = req.params.userID;
+    const { username, email, password, profilePicture } = req.body;
+
+    // <---- Checking if the provided user id is valid ---->
+    if (!mongoose.Types.ObjectId.isValid(userID)) {
+      res.status(400);
+      throw new Error("Invalid user!");
+    }
+  // <---- Finding the user in the database ---->
+    const user = await User.findById(userID);
+    if (!user) {
+        res.status(500);
+        throw new Error(
+            "There was a problem trying to get the user object from the database!"
+        );
+    }
+
+// <---- Checking if the current user is the edited user ---->
+  if (user._id.toString() !== req.user.id) {
+    res.status(403);
+    throw new Error("You cannot change other users' ids'!");
+  }
+
+// <---- Giving the user new values if they have been sent ---->
+  user.username = username ? username : user.username;
+  user.email = email ? email : user.email;
+  user.profilePicture = profilePicture ? profilePicture : user.profilePicture;
+
+// <---- If exists, validating, hashing and setting new password ---->
+  if (password) {
+    if (password.length < 5) {
+        throw new Error("Password not long enough");
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.password = hashedPassword;
+  }
+
+    // <---- Saving the updated song in the database ---->
+    const updatedUser = await user.save();
+
+    // <---- Sending the updated song as a response ---->
+    res.status(200).json(updatedUser);
+});
+
 module.exports = {
     registerUser,
     loginUser,
     currentUser,
+    editUser,
 };

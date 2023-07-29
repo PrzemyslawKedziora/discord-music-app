@@ -215,16 +215,15 @@ const deleteSong = asyncHandler(async (req, res) => {
   // <---- Checking if the provided song id is valid ---->
   if (!mongoose.Types.ObjectId.isValid(songID)) {
     res.status(400);
-    throw new Error("Invalid song");
+    throw new Error("Invalid song!");
   }
 
   // <---- Finding the song in the database ---->
   const song = await Song.findById(songID);
-
   if (!song) {
     res.status(500);
     throw new Error(
-      "There was a problem trying to get a song object from the database!"
+      "There was a problem trying to get the song object from the database!"
     );
   }
 
