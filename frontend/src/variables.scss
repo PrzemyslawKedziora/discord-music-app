@@ -1,0 +1,11 @@
+$background-main-color: #071e22;
+$main-green-color: #1d7874;
+$main-red-color: #ee2e31;
+$main-clay-color: #dec9b8;
+
+@mixin card-configuration{
+  margin-bottom:20px;
+  background: $background-main-color;
+  border:none;
+  box-shadow: 8px 8px 24px 0 rgba(66, 68, 90, 1);
+}
