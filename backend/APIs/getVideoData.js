@@ -7,15 +7,15 @@ const getVideoData = async (youtubeUrl) => {
 
     // Requesting YouTube API to the the information and thumbnail
     const response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${process.env.YOUTUBE_API_KEY}&part=snippet`);
-    const thumbnailUrl = response.data.items[0].snippet.thumbnails.default.url;
+    const thumbnailUrl = response.data.items[0].snippet.thumbnails.high.url;
     const songName = response.data.items[0].snippet.title;
 
     // Pobieramy miniaturkę jako base64
-    const thumbnailResponse = await axios.get(thumbnailUrl, { responseType: 'arraybuffer' });
-    const thumbnailBase64 = Buffer.from(thumbnailResponse.data, 'binary').toString('base64');
+    // const thumbnailResponse = await axios.get(thumbnailUrl, { responseType: 'arraybuffer' });
+    // const thumbnailBase64 = Buffer.from(thumbnailResponse.data, 'binary').toString('base64');
 
     return {
-      thumbnail: thumbnailBase64,
+      thumbnail: thumbnailUrl,
       name: songName,
     };
   } catch (error) {
