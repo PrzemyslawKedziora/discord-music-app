@@ -11,11 +11,19 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(express.json());
 
+
 //  <----------- Middlewares ----------->
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/songs", require("./routes/songRoutes"));
 app.use("/api/authors", require("./routes/authorRoutes"));
 app.use("/api/categories", require("./routes/categoriesRoutes"));
+
 
 
 //  <----------- Connecting to the database and starting the app to listen ----------->
