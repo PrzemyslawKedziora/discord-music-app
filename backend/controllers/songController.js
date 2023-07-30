@@ -90,7 +90,10 @@ const editSong = asyncHandler(async (req, res) => {
 //@route GET api/songs/all
 //@access public
 const getAllSongs = asyncHandler(async (req, res) => {
-  const songList = await Song.find();
+  const songList = await Song.find()
+    .populate("userID", "username")
+    .populate("authorID", "name")
+    .populate("categories", "name");
 
   if (!songList) {
     res.status(500);
@@ -194,7 +197,9 @@ const likeSong = asyncHandler(async (req, res) => {
     ? { $pull: { likes: req.user.id } }
     : { $push: { likes: req.user.id } };
 
-  const updatedSong = await Song.findOneAndUpdate({ _id: songID }, update, { new: true, });
+  const updatedSong = await Song.findOneAndUpdate({ _id: songID }, update, {
+    new: true,
+  });
 
   if (updatedSong) {
     const message = userLiked
@@ -238,6 +243,48 @@ const deleteSong = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Song deleted!" });
 });
 
+//@desc Gives a category to a song
+//@route DELETE api/songs/give-category/:songID/:categoryID
+//@access private
+const giveCategory = asyncHandler(async (req, res) => {
+  const { songID, categoryID } = req.params;
+
+  // <---- Checking if the provided song id is valid ---->
+  if (
+    !mongoose.Types.ObjectId.isValid(songID) ||
+    !mongoose.Types.ObjectId.isValid(CategoryID)
+  ) {
+    res.status(400);
+    throw new Error("Invalid or Category!!");
+  }
+
+  // <---- Finding the song in the database ---->
+  const song = await Song.findById(songID);
+  if (!song) {
+    res.status(500);
+    throw new Error(
+      "There was a problem trying to get the song object from the database!"
+    );
+  }
+
+  // <---- Finding the category in the database ---->
+  const category = await Category.findById(categoryID);
+  if (!category) {
+    res.status(400);
+    throw new Error("Category not found!");
+  }
+
+  // <---- Checking if user have permission to modify this song ---->
+  if (!req.user.id == song.userID) {
+    req.status(401);
+    throw new Error("You don't have permission to edit this song!");
+  }
+
+  song.categories.push(new mongoose.Types.ObjectId(categoryID));
+  await song.save();
+  res.status(200).json({ message: "song have been updated!" });
+});
+
 module.exports = {
   addSong,
   getAllSongs,
@@ -247,4 +294,5 @@ module.exports = {
   editSong,
   likeSong,
   deleteSong,
+  giveCategory,
 };
