@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
 const Song = require("../models/songModel");
+const getVideoData = require("../APIs/getVideoData");
 
 //@desc Adds new song
 //@route POST api/songs/add
@@ -9,7 +10,7 @@ const addSong = asyncHandler(async (req, res) => {
   const { name, ytURL, authorID, categories } = req.body;
 
   // <---- Checking if user sent all necessary fields ---->
-  if (!name || !ytURL || !authorID) {
+  if (!ytURL || !authorID) {
     res.status(400);
     throw new Error("You need to fulfill all fields!");
   }
@@ -27,11 +28,16 @@ const addSong = asyncHandler(async (req, res) => {
   } else {
     newCategories = [];
   }
+
+  // <---- Using YouTube API to get thumbnail in Base64 format ---->
+  const songData = await getVideoData(ytURL);
+
   // <---- Creating new song ---->
   const newSong = {
-    name,
+    name: songData.name,
     userID: req.user.id,
     ytURL,
+    thumbnail: songData.thumbnail,
     authorID,
     categories: newCategories,
     likes: [],
@@ -47,12 +53,12 @@ const addSong = asyncHandler(async (req, res) => {
   }
 });
 
-//@desc Edits an existing song
+//@desc Edits an existing song, only author and categories
 //@route GET api/songs/edit/:songID
 //@access private
 const editSong = asyncHandler(async (req, res) => {
   const songID = req.params.songID;
-  const { name, ytURL, authorID, categories } = req.body;
+  const { authorID, categories } = req.body;
 
   // <---- Finding a song with ID fiven i params ---->
   const song = await Song.findById(songID);
@@ -68,8 +74,6 @@ const editSong = asyncHandler(async (req, res) => {
   }
 
   // <---- Updating the song with the new data ---->
-  song.name = name;
-  song.ytURL = ytURL;
   song.authorID = authorID;
 
   // Clearing the existing categories and adding the new ones
@@ -118,7 +122,7 @@ const getSongsByAuthor = asyncHandler(async (req, res) => {
   }
 
   // <---- Finding songs by the provided authorId ---->
-  const songs = await Song.find({ "author.authorID": authorID }).exec();
+  const songs = await Song.find({ "authorID": authorID }).exec();
 
   if (songs.length > 0) {
     res.status(200).json(songs);
@@ -211,7 +215,7 @@ const likeSong = asyncHandler(async (req, res) => {
   }
 });
 
-//@desc Likes a song
+//@desc deletes a song
 //@route DELETE api/songs/:songID/delete
 //@access private
 const deleteSong = asyncHandler(async (req, res) => {

@@ -18,6 +18,10 @@ const songSchema = mongoose.Schema(
       required: [true, "Please add YouTube URL"],
       unique: true,
     },
+    thumbnail: {
+      type: String,
+      required: false,
+    },
     authorID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Author",
