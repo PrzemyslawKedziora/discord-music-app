@@ -8,3 +8,9 @@
          autoplay
   ></audio>
   <button class="btn btn-success" routerLink="/landing-page">testing button</button>
+<div *ngFor="let song of songs">
+  <div>{{song.name}}</div>
+  <div>{{song.author}}</div>
+  <div>{{song.ytURL}}</div>
+  <div>///////////////////</div>
+</div>
