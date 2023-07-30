@@ -122,7 +122,11 @@ const getSongsByAuthor = asyncHandler(async (req, res) => {
   }
 
   // <---- Finding songs by the provided authorId ---->
-  const songs = await Song.find({ "authorID": authorID }).exec();
+  const songs = await Song.find({ authorID: authorID })
+    .populate("userID", "username")
+    .populate("authorID", "name")
+    .populate("categories", "name")
+    .exec();
 
   if (songs.length > 0) {
     res.status(200).json(songs);
@@ -145,7 +149,11 @@ const getSongsByCategory = asyncHandler(async (req, res) => {
   }
 
   // <---- Finding songs by the provided categoryID ---->
-  const songs = await Song.find({ categories: { $in: [categoryID] } }).exec();
+  const songs = await Song.find({ categories: { $in: [categoryID] } })
+    .populate("userID", "username")
+    .populate("authorID", "name")
+    .populate("categories", "name")
+    .exec();
 
   if (songs.length > 0) {
     res.status(200).json(songs);
@@ -159,7 +167,11 @@ const getSongsByCategory = asyncHandler(async (req, res) => {
 //@route GET api/songs/random
 //@access public
 const getRandomSong = asyncHandler(async (req, res) => {
-  const randomSong = await Song.aggregate([{ $sample: { size: 1 } }]).exec();
+  const randomSong = await Song.aggregate([{ $sample: { size: 1 } }])
+    .populate("userID", "username")
+    .populate("authorID", "name")
+    .populate("categories", "name")
+    .exec();
 
   if (!randomSong) {
     res.status(500);
