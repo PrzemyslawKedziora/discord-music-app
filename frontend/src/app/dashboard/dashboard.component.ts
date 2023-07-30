@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { SongModel} from "../models/song.model";
 import axios from "axios";
 @Component({
@@ -6,14 +6,20 @@ import axios from "axios";
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent{
+export class DashboardComponent implements OnInit{
   constructor() {
     axios.get('http://localhost:4100/api/songs/all').then((response)=> {
-      console.log(response.data);
+      // console.log(response.data);
       for (let i=0;i<=response.data.length;i++){
         this.songs.push(response.data[i]);
+
+        console.log(this.songs);
       }
     })
+  }
+
+  ngOnInit(): void {
+    // console.log(this.songs)
   }
 
 
