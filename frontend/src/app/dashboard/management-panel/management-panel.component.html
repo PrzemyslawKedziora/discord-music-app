@@ -1,0 +1,12 @@
+<p>management-panel works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col col-sm-4 d-flex justify-content-between management-list">
+      <div class="add-song management-list-item" (click)="dashboard.addSong()" mat-button>Add song</div>
+      <div class="add-song management-list-item" (click)="$event" mat-button>Create list</div>
+      <div class="song-lists management-list-item">Search list</div>
+      <div class="sort management-list-item">Sort</div>
+      <div class="logIn management-list-item" routerLink="/login">Log in</div>
+    </div>
+  </div>
+</div>

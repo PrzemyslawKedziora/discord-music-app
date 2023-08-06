@@ -1,18 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { SongModel} from "../models/song.model";
 import axios from "axios";
+import {MatDialog} from "@angular/material/dialog";
+import {NewSongComponent} from "./management-panel/new-song/new-song.component";
+import {SongFormComponent} from "./management-panel/song-form/song-form.component";
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit{
-  constructor() {
+
+  constructor(public dialog: MatDialog) {
     axios.get('http://localhost:4100/api/songs/all').then((response)=> {
-      // console.log(response.data);
       for (let i=0;i<=response.data.length;i++){
         this.songs.push(response.data[i]);
-
         console.log(this.songs);
       }
     })
@@ -21,24 +23,18 @@ export class DashboardComponent implements OnInit{
   ngOnInit(): void {
     // console.log(this.songs)
   }
-
-
   songs: SongModel[]=[];
-  sounds:any[]=[
-    {
-      url: 'sound1.mp3',
-      nazwa: 'lorem ipsum'
-    },
-    {
-      url: 'sound1.mp3',
-      nazwa: 'lorem ipsum2'
-    },{
-      url: 'sound1.mp3',
-      nazwa: 'lorem ipsum'
-    }
-  ]
   isMuted:boolean=true;
+  isLoggedIn: boolean=true;
 
+  addSong(){
+    const dialogRef = this.dialog.open(NewSongComponent, {
+      disableClose: true,
+      width:'100vw',
+    });
 
-
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+    });
+  }
 }

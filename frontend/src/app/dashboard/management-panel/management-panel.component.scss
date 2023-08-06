@@ -1,0 +1,16 @@
+@import "src/variables";
+.container{
+  color: $main-clay-color;
+}
+.col{
+  border: 2px solid red;
+  width: 100vw;
+}
+.management-list-item:hover{
+  background: #1d7874;
+  cursor: pointer;
+  font-weight: bold;
+}
+.management-list-item{
+  padding: 0 5px;
+}

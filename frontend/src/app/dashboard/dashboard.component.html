@@ -1,16 +1,6 @@
 <app-header></app-header>
-  <audio class="col-sm-12"
-         controls
-         src="./assets/{{sounds[0].url}}"
-         loop
-         [muted]="isMuted"
-         [volume]="0.2"
-         autoplay
-  ></audio>
-  <button class="btn btn-success" routerLink="/landing-page">testing button</button>
+<app-management-panel *ngIf="isLoggedIn"></app-management-panel>
 <div *ngFor="let song of songs; index as index"
 class="d-flex justify-content-center align-items-center mb-3 flex-column">
-  <song-list-item [songData]="song" [songIndex]="index"></song-list-item>
-  <song-list-item [songData]="song" [songIndex]="index"></song-list-item>
   <song-list-item [songData]="song" [songIndex]="index"></song-list-item>
 </div>
