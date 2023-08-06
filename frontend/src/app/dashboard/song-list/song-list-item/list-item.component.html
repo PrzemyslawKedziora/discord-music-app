@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row" *ngIf="songData">
+    <div
+    class="d-flex align-baseline list-group-horizontal justify-content-between">
+      <div class="index d-flex align-items-center">{{songIndex+1}}</div>
+      <div class="my-auto">
+        <img [src]="songData.thumbnail" alt="image" style="height: 80px; width: 140px">
+      </div>
+      <div class=" my-auto song-description">
+        <div class="song-name">{{songData.name}}</div>
+        <div class="song-author-name my-auto">{{songData.authorID.name}}</div>
+      </div>
+      <div class="song-categories my-auto">{{songData.categories}}trap rap</div>
+      <div class="my-auto" (click)="like()">
+        <i style="margin-right: 5px" class="bi {{isLiked ? 'bi-heart-fill' : 'bi-heart'}}"></i>
+        <span class="song-like-number my-auto">{{songData.likes.length ? songData.likes.length : 0}}</span>
+      </div>
+      <div class="my-auto" (click)="deleteSong()" *ngIf="this.dashboard.isLoggedIn">
+        <i style="margin-right: 5px" class="bi {{isLiked ? 'bi-heart-fill' : 'bi-heart'}}"></i>
+        <span class="song-like-number my-auto">{{songData.likes.length ? songData.likes.length : 0}}</span>
+      </div>
+    </div>
+  </div>
+</div>

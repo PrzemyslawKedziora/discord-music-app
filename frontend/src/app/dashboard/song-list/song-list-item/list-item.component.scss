@@ -1,0 +1,18 @@
+@import "src/variables";
+.container{
+  color: $main-clay-color;
+}
+.list-group-horizontal{
+  width: 100vw;
+  height: 10vh;
+}
+.list-group-horizontal:hover{
+ cursor: pointer;
+  color: whitesmoke;
+}
+.my-auto{
+  max-width: 400px;
+}
+.song-description{
+  min-width: 350px;
+}
