@@ -12,20 +12,20 @@ export class ListItemComponent {
 @Input() songData!:SongModel;
 @Input() songIndex!:number;
 
-  constructor(public dashboard: DashboardComponent) {
-
-  }
-
+  constructor(public dashboard: DashboardComponent) {}
 
   imgPath:string = 'frontend/src/assets/pepe-the-frog-dance.gif';
-isLiked: boolean=false;
+  isLiked: boolean=false;
 
-like(){
+  like(){
   this.isLiked= !this.isLiked;
   if (this.isLiked) this.songData.likes.length++;
   else this.songData.likes.length--;
-}
-deleteSong(){
+  }
+  deleteSong(){
 
+  }
+  openInYT(url:string){
+    window.open(url,'_blank');
   }
 }

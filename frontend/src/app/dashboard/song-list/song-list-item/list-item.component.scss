@@ -7,7 +7,6 @@
   height: 10vh;
 }
 .list-group-horizontal:hover{
- cursor: pointer;
   color: whitesmoke;
 }
 .my-auto{
@@ -15,4 +14,16 @@
 }
 .song-description{
   min-width: 350px;
+}
+.index{
+  min-width: 20px;
+}
+.song-categories{
+  width: 70px;
+}
+.like-group{
+  width: 40px;
+}
+.data:hover{
+  cursor: pointer;
 }
