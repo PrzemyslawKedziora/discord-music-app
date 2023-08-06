@@ -1,9 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { SongModel} from "../models/song.model";
 import axios from "axios";
 import {MatDialog} from "@angular/material/dialog";
 import {NewSongComponent} from "./management-panel/new-song/new-song.component";
-import {SongFormComponent} from "./management-panel/song-form/song-form.component";
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
