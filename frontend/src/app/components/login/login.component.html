@@ -4,11 +4,11 @@
     <div class="card">
       <form [formGroup]="loginForm" class="box" (ngSubmit)="onSubmit()">
       <h1>Login</h1>
-      <p class="head-text"> Wprowadź login oraz hasło</p>
+      <p class="head-text"> Enter login and password</p>
       <input
         type="text"
         class="input"
-        placeholder="Adres e-mail"
+        placeholder="Email adress"
         formControlName="email"
         [class.invalid]="loginForm.get('email')?.invalid &&
         (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)"
@@ -16,18 +16,18 @@
         <div *ngIf="loginForm.get('email')?.hasError('required') &&
         (loginForm.get('email')?.touched || loginForm.get('email')?.dirty || isSubmitted)"
              class="error">
-          Adres e-mail jest wymagany
+          Email adress is mandatory
         </div>
-      <input type="password" placeholder="Hasło" formControlName="password">
+      <input type="password" placeholder="Password" formControlName="password">
         <div *ngIf="loginForm.get('password')?.invalid &&
         (loginForm.get('password')?.touched || loginForm.get('password')?.dirty || isSubmitted)"
              class="error">
-          Hasło jest wymagane
+          Password is mandatory
         </div>
-        <a class="head-text forgot" routerLink="/register">Nie masz konta?</a>
-        <input type="submit" name="" value="Zaloguj" >
+        <a class="head-text forgot" routerLink="/register">Don't have account?</a>
+        <input type="submit" value="Login" >
         <div class="col-md-12 d-flex justify-content-center">
-          <a  class="bi bi-discord icoDiscord" title="Zaloguj za pomocą konta Discord">
+          <a  class="icoDiscord" title="Zaloguj za pomocą konta Discord">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fff" class="bi bi-discord" viewBox="0 0 16 16">
               <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0
                0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658

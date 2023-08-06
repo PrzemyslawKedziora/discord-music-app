@@ -3,12 +3,12 @@
     <div class="col">
       <div class="card">
         <form [formGroup]="registerForm" class="box" (ngSubmit)="onSubmit()">
-          <h1>Rejestracja</h1>
-          <p class="head-text"> Wprowadź dane nowego użytkownika</p>
+          <h1>Register</h1>
+          <p class="head-text"> Register new user</p>
           <input
             type="text"
             class="input"
-            placeholder="Adres e-mail"
+            placeholder="Email adress"
             formControlName="email"
             [class.invalid]="registerForm.get('email')?.invalid &&
         (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)"
@@ -16,12 +16,12 @@
           <div *ngIf="registerForm.get('email')?.hasError('required') &&
         (registerForm.get('email')?.touched || registerForm.get('email')?.dirty || isSubmitted)"
                class="error">
-            Adres e-mail jest wymagany
+            Email adress is mandatory
           </div>
           <input
             type="text"
             class="input"
-            placeholder="Nazwa użytkownika"
+            placeholder="Username"
             formControlName="username"
             [class.invalid]="registerForm.get('username')?.invalid &&
         (registerForm.get('username')?.touched || registerForm.get('username')?.dirty)"
@@ -29,34 +29,34 @@
           <div *ngIf="registerForm.get('username')?.hasError('required') &&
         (registerForm.get('username')?.touched || registerForm.get('username')?.dirty || isSubmitted)"
                class="error">
-            Nazwa użytkownika jest wymagana
+            Username is mandatory
           </div>
-          <div *ngIf="(registerForm.get('username')?.value?.length<3 && registerForm.get('username')?.value?.touched)"
+          <div *ngIf="registerForm.get('username')?.invalid && (registerForm.get('username')?.errors?.['minlength'])"
                class="error">
-            Nazwa użytkownika powinna być dłuższa niż 3 znaki
+            Username is too short
           </div>
           <div *ngIf="
-        (registerForm.get('username')?.value?.length>32|| isSubmitted)"
+        (registerForm.get('username')?.value?.length>16|| isSubmitted)"
                class="error">
-            Nazwa użytkownika powinna być krótsza niż 32 znaki
+            Username is too long
           </div>
-          <input type="password" placeholder="Hasło" formControlName="password">
+          <input type="password" placeholder="Password" formControlName="password">
           <div *ngIf="registerForm.get('password')?.invalid &&
         (registerForm.get('password')?.touched || registerForm.get('password')?.dirty || isSubmitted)"
                class="error">
-            Hasło jest wymagane
+            Password is mandatory
           </div>
-          <input type="password" placeholder="Powtórz hasło" formControlName="confirmPassword">
+          <input type="password" placeholder="Repeat password" formControlName="confirmPassword">
           <div *ngIf="registerForm.get('confirmPassword')?.invalid &&
         (registerForm.get('confirmPassword')?.touched || registerForm.get('confirmPassword')?.dirty || isSubmitted)"
                class="error">
-            Powtórz hasło
+            Repeat password
           </div>
           <div *ngIf="passwordsNotConfirmed" class="error">
-            Hasła różnią się od siebie
+            passwords differ from each other
           </div>
-          <a class="head-text forgot" routerLink="/login">Mam już konto</a>
-          <input type="submit" value="Zarejestruj" >
+          <a class="head-text forgot" routerLink="/login">Already have an account</a>
+          <input type="submit" value="Register" >
         </form>
       </div>
     </div>
