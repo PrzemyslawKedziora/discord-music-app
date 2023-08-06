@@ -1,0 +1,35 @@
+<mat-dialog-content class="d-flex justify-content-center align-items-center flex-column">
+  <h3>Add new song to list</h3>
+  <form [formGroup]="newSongForm">
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>URL</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Paste url to song you want to add"
+            formControlName="url"
+          >
+          <mat-error *ngIf="newSongForm.get('url')?.hasError('required')">How do you want to add song?</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Song type</mat-label>
+          <mat-select formControlName="category">
+            <mat-option *ngFor="let listName of lists" [value]="listName">{{listName}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="newSongForm.get('category')?.hasError('required')">Select proper category</mat-error>
+
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+<div class="button-group">
+  <button mat-raised-button class="buttonText" color="primary" (click)="addSong()">Add song</button>
+  <button mat-raised-button class="buttonText" (click)="closeDialog()">Close</button>
+</div>
+</mat-dialog-content>
