@@ -1,6 +1,5 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {DashboardComponent} from "../dashboard.component";
-import {SongFormComponent} from "./song-form/song-form.component";
 
 
 @Component({
