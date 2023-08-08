@@ -12,11 +12,7 @@
         <div class="song-author-name my-auto data">{{songData.authorID.name}}</div>
       </div>
       <div class="song-categories my-auto data">
-        <span
-          *ngFor="let category of songData.categories; index as index"
-        >
-        {{ category.toString() }}
-      </span>
+        {{songData.categories }}
       </div>
       <div class="my-auto data like-group" (click)="like()">
         <i style="margin-right: 5px" class="bi {{isLiked ? 'bi-heart-fill' : 'bi-heart'}}"></i>

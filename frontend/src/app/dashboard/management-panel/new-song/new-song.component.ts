@@ -18,18 +18,19 @@ export class NewSongComponent {
               @Inject(MAT_DIALOG_DATA) public data: CategoryModel[]) {
 
   }
-  lists:string[]=['trap','rap','hip=hop']
   newSongForm = this.fb.group({
     ytURL: ['',Validators.required],
     author: ['',Validators.required],
-    categories: [['64bee77c53db54c122723e84'],Validators.required],
+    categories: [[],Validators.required],
     authorID: '64bdc37f3f27bb6025aaa4ed', //temp
     createdAt: (new Date).toISOString(), //temp
     updatedAt: (new Date).toISOString() //temp
 
   });
-
-
+  getCategoryNameById(categoryId: string): string {
+    const category = this.data.find(cat => cat._id === categoryId);
+    return category ? category.name : '';
+  }
   closeDialog(){
     this.dialogRef.close();
   }

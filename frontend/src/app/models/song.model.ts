@@ -4,7 +4,10 @@ export interface SongModel{
     name:string,
   },
   thumbnail:string,
-  categories:string[],
+  categories:{
+    _id:string,
+    name:string
+  },
   likes:any[],
   name:string, //song name
   userID:{

@@ -1,6 +1,6 @@
 <app-header></app-header>
 <app-management-panel *ngIf="isLoggedIn" [categories]="categories"></app-management-panel>
-<div class="description-list d-flex justify-content-between list-group-horizontalalign-baseline">
+<div class="description-list d-flex justify-content-between list-group-horizontal align-baseline">
   <div class="number">#</div>
   <div class="thumbnail">YouTube thumbnail</div>
   <div class="title">Title</div>
@@ -10,5 +10,5 @@
 </div>
 <div *ngFor="let song of songs; index as index"
 class="d-flex justify-content-center align-items-center mb-3 flex-column">
-  <song-list-item [songData]="song" [songIndex]="index" [categories]="categoryMapTemp"></song-list-item>
+  <song-list-item [songData]="song" [songIndex]="index" [categoriesMap]="categoryMapTemp"></song-list-item>
 </div>

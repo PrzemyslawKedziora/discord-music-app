@@ -11,7 +11,8 @@ export class ListItemComponent implements OnInit{
 
 @Input() songData!:SongModel;
 @Input() songIndex!:number;
-@Input() categories!: Map<string,string>;
+@Input() categoriesMap!: Map<string,string>;
+@Input() categories2!: Array<string>;
   constructor(public dashboard: DashboardComponent) {}
   isLiked: boolean=false;
 
@@ -30,8 +31,8 @@ export class ListItemComponent implements OnInit{
     window.open(url,'_blank');
   }
   getCategoryNameById(categoryId: string): string {
-    if (this.categories.has(categoryId)) {
-      return this.categories.get(categoryId) || '';
+    if (this.categoriesMap.has(categoryId)) {
+      return this.categoriesMap.get(categoryId) || '';
     } else {
       return 'Category not found';
     }

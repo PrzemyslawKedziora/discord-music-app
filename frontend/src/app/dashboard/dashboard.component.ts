@@ -32,6 +32,7 @@ export class DashboardComponent implements AfterViewInit{
         console.log(categoryMap);
         this.categories = ar;
         this.categoryMapTemp = categoryMap; //mapa wszystkich kategorii
+
       }
     );
   }
