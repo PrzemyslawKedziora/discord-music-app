@@ -18,13 +18,21 @@ const addSong = asyncHandler(async (req, res) => {
   // <---- Checking if user with given YouTube URL exists ---->
   const existingSong = await Song.findOne({ ytURL });
   if (existingSong) {
-    res.status(400);
+    res
+      .status(400)
+      .json({ message: "Song with this YouTube URL already exists!" });
     throw new Error("Song with this YouTube URL already exists!");
   }
 
+  // <---- Checking if user send any categories ---->
   let newCategories;
   if (categories && categories.length > 0) {
     newCategories = categories;
+    
+    // <---- Mapping expected array of objects to array of strings(id) ---->
+    if ("_id" in newCategories[0]) {
+      newCategories = newCategories.map((category) => category._id);
+    }
   } else {
     newCategories = [];
   }
@@ -205,7 +213,6 @@ const likeSong = asyncHandler(async (req, res) => {
     );
   }
 
-  // <---- Placing/taking like (current user ID) into/from song's likes array ---->
   // <---- Placing/taking like (current user ID) into/from song's likes array ---->
   const userLiked = song.likes.includes(req.user.id);
 
