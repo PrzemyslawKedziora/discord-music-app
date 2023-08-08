@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, Component, Input} from '@angular/core';
 import {DashboardComponent} from "../dashboard.component";
+import {CategoryModel} from "../../models/category.model";
 
 
 @Component({
@@ -8,10 +9,15 @@ import {DashboardComponent} from "../dashboard.component";
   styleUrls: ['./management-panel.component.scss']
 })
 
-export class ManagementPanelComponent {
+export class ManagementPanelComponent implements AfterViewInit{
 
 
   constructor(public dashboard: DashboardComponent) {
+  }
+  @Input() categories!:CategoryModel[];
+
+  ngAfterViewInit(): void {
+    // console.log(this.categories,'  kategorie')
   }
 
 

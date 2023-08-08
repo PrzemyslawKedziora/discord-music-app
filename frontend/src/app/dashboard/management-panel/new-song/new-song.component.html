@@ -9,9 +9,23 @@
             type="text"
             matInput
             placeholder="Paste url to song you want to add"
-            formControlName="url"
+            formControlName="ytURL"
           >
-          <mat-error *ngIf="newSongForm.get('url')?.hasError('required')">How do you want to add song?</mat-error>
+          <mat-error *ngIf="newSongForm.get('ytURL')?.hasError('required')">How do you want to add song?</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Author</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Inser author of song"
+            formControlName="author"
+          >
+          <mat-error *ngIf="newSongForm.get('author')?.hasError('required')">Write author name</mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -19,11 +33,10 @@
       <div class="col">
         <mat-form-field>
           <mat-label>Song type</mat-label>
-          <mat-select formControlName="category">
-            <mat-option *ngFor="let listName of lists" [value]="listName">{{listName}}</mat-option>
+          <mat-select formControlName="categories" multiple>
+            <mat-option *ngFor="let listName of  data" [value]="listName">{{listName.name}}</mat-option>
           </mat-select>
-          <mat-error *ngIf="newSongForm.get('category')?.hasError('required')">Select proper category</mat-error>
-
+          <mat-error *ngIf="newSongForm.get('categories')?.hasError('required')">Select proper genre</mat-error>
         </mat-form-field>
       </div>
     </div>

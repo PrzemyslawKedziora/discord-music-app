@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { MatDialogRef} from "@angular/material/dialog";
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import axios from "axios";
 import {FormBuilder, Validators} from "@angular/forms";
+import {CategoryModel} from "../../../models/category.model";
 
 @Component({
   selector: 'app-new-song',
@@ -10,14 +11,22 @@ import {FormBuilder, Validators} from "@angular/forms";
 })
 export class NewSongComponent {
 
-  private apiUrl = 'http://localhost:4100/api/songs'; //inny raczej trzeba
+
+  private apiUrl = 'http://localhost:4100/api/songs/add';
   constructor(public dialogRef: MatDialogRef<NewSongComponent>,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: CategoryModel[]) {
+
   }
   lists:string[]=['trap','rap','hip=hop']
   newSongForm = this.fb.group({
-    url: ['',Validators.required],
-    category: ['',Validators.required]
+    ytURL: ['',Validators.required],
+    author: ['',Validators.required],
+    categories: [['64bee77c53db54c122723e84'],Validators.required],
+    authorID: '64bdc37f3f27bb6025aaa4ed', //temp
+    createdAt: (new Date).toISOString(), //temp
+    updatedAt: (new Date).toISOString() //temp
+
   });
 
 
@@ -25,7 +34,19 @@ export class NewSongComponent {
     this.dialogRef.close();
   }
   addSong(){
-    axios.post(`${this.apiUrl}`,this.newSongForm.get('url')?.value);
-    console.log(this.newSongForm.get('url')?.value);
+    axios.post('http://localhost:4100/api/users/login',{email:'Wiktorek@gmail.com',password: 'Wiktorek'})
+      .then((res) => {
+        const accessToken = res.data.accessToken;
+        const headers = {
+          Authorization: 'Bearer ' + accessToken,
+        };
+        axios.post(this.apiUrl,this.newSongForm.value,{headers})
+          .then((res) => {
+        console.log(res);
+      });
+      console.log('zalogowano ',res)
+      })
+
+    console.log(this.newSongForm.value);
   }
 }

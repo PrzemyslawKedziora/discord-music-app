@@ -1,6 +1,14 @@
 <app-header></app-header>
-<app-management-panel *ngIf="isLoggedIn"></app-management-panel>
+<app-management-panel *ngIf="isLoggedIn" [categories]="categories"></app-management-panel>
+<div class="description-list d-flex justify-content-between list-group-horizontalalign-baseline">
+  <div class="number">#</div>
+  <div class="thumbnail">YouTube thumbnail</div>
+  <div class="title">Title</div>
+  <div class="genre">Genre</div>
+  <div class="like-group">Likes</div>
+  <div class="like-group" *ngIf="isLoggedIn">Delete</div>
+</div>
 <div *ngFor="let song of songs; index as index"
 class="d-flex justify-content-center align-items-center mb-3 flex-column">
-  <song-list-item [songData]="song" [songIndex]="index"></song-list-item>
+  <song-list-item [songData]="song" [songIndex]="index" [categories]="categoryMapTemp"></song-list-item>
 </div>

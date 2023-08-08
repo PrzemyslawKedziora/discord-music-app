@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SongModel} from "../../../models/song.model";
 import {DashboardComponent} from "../../dashboard.component";
 
@@ -7,15 +7,17 @@ import {DashboardComponent} from "../../dashboard.component";
   templateUrl: './list-item.component.html',
   styleUrls: ['./list-item.component.scss']
 })
-export class ListItemComponent {
+export class ListItemComponent implements OnInit{
 
 @Input() songData!:SongModel;
 @Input() songIndex!:number;
-
+@Input() categories!: Map<string,string>;
   constructor(public dashboard: DashboardComponent) {}
-
-  imgPath:string = 'frontend/src/assets/pepe-the-frog-dance.gif';
   isLiked: boolean=false;
+
+  ngOnInit(): void {
+    console.log('Categories:', this.songData.categories);
+  }
 
   like(){
   this.isLiked= !this.isLiked;
@@ -23,9 +25,16 @@ export class ListItemComponent {
   else this.songData.likes.length--;
   }
   deleteSong(){
-
   }
   openInYT(url:string){
     window.open(url,'_blank');
   }
+  getCategoryNameById(categoryId: string): string {
+    if (this.categories.has(categoryId)) {
+      return this.categories.get(categoryId) || '';
+    } else {
+      return 'Category not found';
+    }
+  }
+
 }

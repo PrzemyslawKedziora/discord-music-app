@@ -11,7 +11,13 @@
         <div class="song-name data">{{songData.name}}</div>
         <div class="song-author-name my-auto data">{{songData.authorID.name}}</div>
       </div>
-      <div class="song-categories my-auto data">{{songData.categories}}trap rap</div>
+      <div class="song-categories my-auto data">
+        <span
+          *ngFor="let category of songData.categories; index as index"
+        >
+        {{ category.toString() }}
+      </span>
+      </div>
       <div class="my-auto data like-group" (click)="like()">
         <i style="margin-right: 5px" class="bi {{isLiked ? 'bi-heart-fill' : 'bi-heart'}}"></i>
         <span class="song-like-number my-auto">{{songData.likes.length ? songData.likes.length : 0}}</span>
@@ -23,3 +29,4 @@
     </div>
   </div>
 </div>
+
