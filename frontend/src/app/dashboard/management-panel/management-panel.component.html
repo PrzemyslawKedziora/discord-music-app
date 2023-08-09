@@ -1,8 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col col-sm-4 d-flex justify-content-between management-list">
-      <button class="add-song management-list-item" (click)="dashboard.addSong()" mat-raised-button color="warn">Add song</button>
-      <div class="add-song management-list-item button-10" (click)="dashboard.addArtist()" mat-button>Add artist</div>
+      <button class="add-song management-list-item"
+              (click)="dashboard.addSong()"
+              mat-raised-button
+              color="warn"
+              *ngIf="loginStatus"
+              >Add song</button>
+      <div class="add-song management-list-item button-10"
+           (click)="dashboard.addArtist()"
+           mat-button
+           *ngIf="loginStatus"
+      >Add artist</div>
       <div class="song-lists management-list-item">Sort by</div>
 
       <div class="logIn management-list-item d-flex align-content-end" routerLink="/login">Log in</div>

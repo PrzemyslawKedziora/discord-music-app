@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, Input} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {DashboardComponent} from "../dashboard.component";
 import {CategoryModel} from "../../models/category.model";
+import {SharedService} from "../../services/shared/shared.service";
 
 
 @Component({
@@ -9,16 +10,19 @@ import {CategoryModel} from "../../models/category.model";
   styleUrls: ['./management-panel.component.scss']
 })
 
-export class ManagementPanelComponent implements AfterViewInit{
+export class ManagementPanelComponent{
 
 
-  constructor(public dashboard: DashboardComponent) {
+  constructor(public dashboard: DashboardComponent,
+              private sharedService: SharedService)
+  {
+    this.loginStatus=this.sharedService.isLoggedInStatus;
   }
+
+
   @Input() categories!:CategoryModel[];
+  loginStatus!:boolean;
 
-  ngAfterViewInit(): void {
-    // console.log(this.categories,'  kategorie')
-  }
 
 
 }

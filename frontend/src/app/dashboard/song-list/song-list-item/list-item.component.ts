@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {SongModel} from "../../../models/song.model";
 import {DashboardComponent} from "../../dashboard.component";
 
@@ -11,8 +11,8 @@ export class ListItemComponent implements OnInit{
 
 @Input() songData!:SongModel;
 @Input() songIndex!:number;
-@Input() categoriesMap!: Map<string,string>;
-@Input() categories2!: Array<string>;
+
+@ViewChild('likeElement', {static: true}) likeElement!: ElementRef;
   constructor(public dashboard: DashboardComponent) {}
   isLiked: boolean=false;
 
@@ -21,10 +21,13 @@ export class ListItemComponent implements OnInit{
   }
 
   like(){
-  this.isLiked= !this.isLiked;
-  if (this.isLiked) this.songData.likes.length++;
-  else this.songData.likes.length--;
+  if (this.dashboard.isLoggedIn){
+    this.isLiked= !this.isLiked;
+    if (this.isLiked) this.songData.likes.length++;
+    else this.songData.likes.length--
   }
+  }
+
   deleteSong(){
   }
   openInYT(url:string){

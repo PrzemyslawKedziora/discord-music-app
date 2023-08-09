@@ -1,17 +1,19 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import { SongModel} from "../models/song.model";
 import axios from "axios";
 import {MatDialog} from "@angular/material/dialog";
 import {NewSongComponent} from "./management-panel/new-song/new-song.component";
 import {CategoryModel} from "../models/category.model";
+import {SharedService} from "../services/shared/shared.service";
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements AfterViewInit{
+export class DashboardComponent{
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,
+              private sharedService: SharedService) {
 
     axios.get('http://localhost:4100/api/songs/all').then((response)=> {
       for (let i=0;i<response.data.length;i++){
@@ -31,10 +33,12 @@ export class DashboardComponent implements AfterViewInit{
 
       }
     );
+
+    this.sharedService.isLoggedInStatus=this.isLoggedIn;
+
   }
 
-  ngAfterViewInit(): void {
-  }
+
   categories!: CategoryModel[];
   songs: SongModel[]=[];
   isMuted:boolean=true;
