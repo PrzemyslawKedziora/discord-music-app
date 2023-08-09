@@ -30,12 +30,6 @@ export class ListItemComponent implements OnInit{
   openInYT(url:string){
     window.open(url,'_blank');
   }
-  getCategoryNameById(categoryId: string): string {
-    if (this.categoriesMap.has(categoryId)) {
-      return this.categoriesMap.get(categoryId) || '';
-    } else {
-      return 'Category not found';
-    }
-  }
+
 
 }

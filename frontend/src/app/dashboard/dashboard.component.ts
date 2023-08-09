@@ -16,7 +16,6 @@ export class DashboardComponent implements AfterViewInit{
     axios.get('http://localhost:4100/api/songs/all').then((response)=> {
       for (let i=0;i<response.data.length;i++){
         this.songs.push(response.data[i]);
-        console.log(this.songs);
       }
     });
     axios.get('http://localhost:4100/api/categories/all').then(
@@ -25,13 +24,10 @@ export class DashboardComponent implements AfterViewInit{
         let categoryMap = new Map();
         for (let i = 0; i < res.data.length; i++) {
           ar.push(res.data[i]);
-          console.log(ar);
           categoryMap.set(ar[i]._id,ar[i].name)
-          console.log('//////');
         }
         console.log(categoryMap);
         this.categories = ar;
-        this.categoryMapTemp = categoryMap; //mapa wszystkich kategorii
 
       }
     );
@@ -39,7 +35,6 @@ export class DashboardComponent implements AfterViewInit{
 
   ngAfterViewInit(): void {
   }
-  categoryMapTemp = new Map();
   categories!: CategoryModel[];
   songs: SongModel[]=[];
   isMuted:boolean=true;

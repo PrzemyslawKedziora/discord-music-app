@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5690a0d4-e400-4399-a4f4-5a0b259792b9" name="Changes" comment="BugFix: Removed redundant files">
+    <list default="true" id="5690a0d4-e400-4399-a4f4-5a0b259792b9" name="Changes" comment="Feature: adding songs to app">
       <change afterPath="$PROJECT_DIR$/.idea/discord-music-app.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/controllers/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/userController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/management-panel.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/management-panel.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new-song/new-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new-song/new-song.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new-song/new-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new-song/new-song.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/song-list/song-list-item/list-item.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song-list/song-list-item/list-item.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/song-list/song-list-item/list-item.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song-list/song-list-item/list-item.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/landing-page/landing-page.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/landing-page/landing-page.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +75,11 @@
       <workItem from="1691269329570" duration="6983000" />
       <workItem from="1691336361297" duration="13424000" />
       <workItem from="1691421758476" duration="290000" />
-      <workItem from="1691428098950" duration="14943000" />
+      <workItem from="1691428098950" duration="15601000" />
+      <workItem from="1691482791800" duration="2901000" />
+      <workItem from="1691492452337" duration="143000" />
+      <workItem from="1691530227770" duration="155000" />
+      <workItem from="1691557489579" duration="2323000" />
     </task>
     <task id="LOCAL-00001" summary="added routing to login and register components">
       <created>1690285246354</created>
@@ -235,7 +228,21 @@
       <option name="project" value="LOCAL" />
       <updated>1691421889203</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Feature: adding songs to app">
+      <created>1691482199827</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1691482199827</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Feature: adding songs to app">
+      <created>1691485734966</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1691485734966</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,6 +280,7 @@
     <MESSAGE value="Fix: module imports (Dialog,Angular Material)" />
     <MESSAGE value="Feature: Implemented adding song form and its validation" />
     <MESSAGE value="BugFix: Removed redundant files" />
-    <option name="LAST_COMMIT_MESSAGE" value="BugFix: Removed redundant files" />
+    <MESSAGE value="Feature: adding songs to app" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feature: adding songs to app" />
   </component>
 </project>
