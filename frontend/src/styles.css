@@ -7,3 +7,17 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.success-snackBar {
+  background: #198754;
+   --mdc-snackbar-container-color: #198754;
+  color: wheat;
+ }
+.failed-snackBar {
+  background: #FA113D;
+   --mdc-snackbar-container-color: #FA113D;
+  color: wheat;
+ }
