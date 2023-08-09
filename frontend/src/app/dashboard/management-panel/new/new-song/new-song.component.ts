@@ -26,9 +26,9 @@ export class NewSongComponent {
   ) {}
   newSongForm = this.fb.group({
     ytURL: ['', Validators.required],
-    author: ['', Validators.required],
+    authorID: ['', Validators.required],
     categories: [[], Validators.required],
-    authorID: '64bdc37f3f27bb6025aaa4ed', //temp
+    userID: '64bdc37f3f27bb6025aaa4ed', //temp
     createdAt: (new Date).toISOString(),
     updatedAt: (new Date).toISOString()
 

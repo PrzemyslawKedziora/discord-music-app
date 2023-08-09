@@ -17,7 +17,7 @@ export class ListItemComponent implements OnInit{
   isLiked: boolean=false;
 
   ngOnInit(): void {
-    console.log('Categories:', this.songData.categories);
+    console.log(this.songData)
   }
 
   like(){

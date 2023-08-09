@@ -48,9 +48,9 @@ export class NewAuthorComponent {
               duration: duration,
               panelClass: ['success-snackBar']
             });
-            // setTimeout(()=>{
-            //   location.reload()
-            // },duration)
+            setTimeout(()=>{
+              location.reload()
+            },duration)
             console.log('Author has been succesfully added!\n', res);
           }).catch((e) => {
           handleError(e)

@@ -19,7 +19,7 @@
       <div class="col">
         <mat-form-field>
           <mat-label>Author</mat-label>
-          <mat-select formControlName="author" multiple>
+          <mat-select formControlName="authorID">
             <mat-option *ngFor="let author of  data.author" [value]="author"><p>{{author.name}}</p>
               <img [src]="author.pictureURL" *ngIf="author.pictureURL" style="height: 100px" alt="author's img">
               {{author.pictureURL}}
@@ -33,7 +33,7 @@
       <div class="col">
         <mat-form-field>
           <mat-label>Song type</mat-label>
-          <mat-select formControlName="categories" multiple>
+          <mat-select formControlName="categories" multiple >
             <mat-option *ngFor="let listName of  data.category" [value]="listName">{{listName.name}}</mat-option>
           </mat-select>
           <mat-error *ngIf="newSongForm.get('categories')?.hasError('required')">Select proper genre</mat-error>

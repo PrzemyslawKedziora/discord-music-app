@@ -2,7 +2,7 @@ export interface SongModel{
   authorID: {
     _id:string,
     name:string,
-  },
+  },//artist
   thumbnail:string,
   categories:Array<{
     _id: string;
