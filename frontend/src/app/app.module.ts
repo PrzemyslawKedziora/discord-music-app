@@ -13,15 +13,17 @@ import {HttpClientModule} from "@angular/common/http";
 import { ListItemComponent } from './dashboard/song-list/song-list-item/list-item.component';
 import { ManagementPanelComponent } from './dashboard/management-panel/management-panel.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NewSongComponent } from './dashboard/management-panel/new-song/new-song.component';
+import { NewSongComponent } from './dashboard/management-panel/new/new-song/new-song.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatLegacyCardModule} from "@angular/material/legacy-card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
-import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
+import { SnackBarComponent } from './components/snack-bar/song/snack-bar.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { NewAuthorComponent } from './dashboard/management-panel/new/new-author/new-author.component';
+import {AuthorSnackBarComponent} from "./components/snack-bar/author/author-snack-bar.component";
 
 
 @NgModule({
@@ -36,6 +38,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     ManagementPanelComponent,
     NewSongComponent,
     SnackBarComponent,
+    NewAuthorComponent,
+    AuthorSnackBarComponent
 
   ],
   imports: [

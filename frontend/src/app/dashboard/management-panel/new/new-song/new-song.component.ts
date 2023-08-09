@@ -2,10 +2,10 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import axios from "axios";
 import {FormBuilder, Validators} from "@angular/forms";
-import {CategoryModel} from "../../../models/category.model";
+import {CategoryModel} from "../../../../models/category.model";
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {SnackBarComponent} from "../../../components/snack-bar/snack-bar.component";
-import {SharedService} from "../../../services/shared/shared.service";
+import {SnackBarComponent} from "../../../../components/snack-bar/song/snack-bar.component";
+import {SharedService} from "../../../../services/shared/shared.service";
 
 @Component({
   selector: 'app-new-song',
@@ -30,11 +30,12 @@ export class NewSongComponent {
     author: ['', Validators.required],
     categories: [[], Validators.required],
     authorID: '64bdc37f3f27bb6025aaa4ed', //temp
-    createdAt: (new Date).toISOString(), //temp
-    updatedAt: (new Date).toISOString() //temp
+    createdAt: (new Date).toISOString(),
+    updatedAt: (new Date).toISOString()
 
   });
-  addStatus!: boolean;
+  addSongStatus!: boolean;
+  srcJAM:string='./assets/pepe-the-frog-dance.gif';
 
   getCategoryNameById(categoryId: string): string {
     const category = this.data.find(cat => cat._id === categoryId);
@@ -55,8 +56,8 @@ export class NewSongComponent {
         };
         axios.post(this.apiUrl, this.newSongForm.value, {headers})
           .then((res) => {
-            this.addStatus = true;
-            this.sharedService.sharedAddingSongStatus = this.addStatus;
+            this.addSongStatus = true;
+            this.sharedService.sharedAddingSongStatus = this.addSongStatus;
             this.sb.openFromComponent(SnackBarComponent, {
               duration: duration,
               panelClass: ['success-snackBar']
@@ -73,8 +74,8 @@ export class NewSongComponent {
     })
 
      let handleError = (error: any): void => {
-      this.addStatus = false;
-      this.sharedService.sharedAddingSongStatus = this.addStatus;
+      this.addSongStatus = false;
+      this.sharedService.sharedAddingSongStatus = this.addSongStatus;
       console.log(error);
        this.sb.openFromComponent(SnackBarComponent, {
          duration: 3000,

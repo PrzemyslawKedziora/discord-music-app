@@ -9,6 +9,7 @@ export class SharedService {
 
   private _sharedAddingSongStatus!: boolean;
   private _isLoggedInStatus!:boolean;
+  private _sharedAddingAuthorStatus!: boolean;
 
 
   set sharedAddingSongStatus(value: boolean) {
@@ -27,5 +28,14 @@ export class SharedService {
 
   set isLoggedInStatus(value: boolean) {
     this._isLoggedInStatus = value;
+  }
+
+
+  get sharedAddingAuthorStatus(): boolean {
+    return this._sharedAddingAuthorStatus;
+  }
+
+  set sharedAddingAuthorStatus(value: boolean) {
+    this._sharedAddingAuthorStatus = value;
   }
 }

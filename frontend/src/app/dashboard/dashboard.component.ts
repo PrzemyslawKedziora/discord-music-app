@@ -2,9 +2,11 @@ import {Component} from '@angular/core';
 import { SongModel} from "../models/song.model";
 import axios from "axios";
 import {MatDialog} from "@angular/material/dialog";
-import {NewSongComponent} from "./management-panel/new-song/new-song.component";
+import {NewSongComponent} from "./management-panel/new/new-song/new-song.component";
 import {CategoryModel} from "../models/category.model";
 import {SharedService} from "../services/shared/shared.service";
+import {AuthorModel} from "../models/author.model";
+import {NewAuthorComponent} from "./management-panel/new/new-author/new-author.component";
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
@@ -41,7 +43,7 @@ export class DashboardComponent{
 
   categories!: CategoryModel[];
   songs: SongModel[]=[];
-  isMuted:boolean=true;
+  artists!: AuthorModel[];
   isLoggedIn: boolean=true;
 
   addSong(){
@@ -58,6 +60,14 @@ export class DashboardComponent{
   }
 
   addArtist(){
+    const dialogRef = this.dialog.open(NewAuthorComponent, {
+      disableClose: true,
+      width:'100vw',
+      data: this.artists
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+    });
   }
 }
