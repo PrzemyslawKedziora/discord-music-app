@@ -2,10 +2,10 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import axios from "axios";
 import {FormBuilder, Validators} from "@angular/forms";
-import {CategoryModel} from "../../../../models/category.model";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SnackBarComponent} from "../../../../components/snack-bar/song/snack-bar.component";
 import {SharedService} from "../../../../services/shared/shared.service";
+import {AddDialogModel} from "../../../../models/add-dialog.model";
 
 @Component({
   selector: 'app-new-song',
@@ -21,7 +21,9 @@ export class NewSongComponent {
               private fb: FormBuilder,
               private sb: MatSnackBar,
               private sharedService: SharedService,
-              @Inject(MAT_DIALOG_DATA) public data: CategoryModel[]) {
+              @Inject(MAT_DIALOG_DATA) public data: AddDialogModel,
+
+  ) {
 
   }
 
@@ -38,7 +40,7 @@ export class NewSongComponent {
   srcJAM:string='./assets/pepe-the-frog-dance.gif';
 
   getCategoryNameById(categoryId: string): string {
-    const category = this.data.find(cat => cat._id === categoryId);
+    const category = this.data.category.find(cat => cat._id === categoryId);
     return category ? category.name : 'none';
   }
 

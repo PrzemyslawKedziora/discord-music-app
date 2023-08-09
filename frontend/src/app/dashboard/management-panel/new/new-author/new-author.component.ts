@@ -25,7 +25,7 @@ export class NewAuthorComponent {
   }
 
   newAuthorForm = this.fb.group({
-    name: ['',Validators.required,Validators.maxLength(50)],
+    name: ['',Validators.required],
     pictureURL: [''],
     userID: ['64bdc37f3f27bb6025aaa4ed',Validators.required] //temp
   })
