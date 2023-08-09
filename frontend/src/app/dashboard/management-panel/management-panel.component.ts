@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {DashboardComponent} from "../dashboard.component";
 import {CategoryModel} from "../../models/category.model";
 import {SharedService} from "../../services/shared/shared.service";
+import {AuthorModel} from "../../models/author.model";
 
 
 @Component({
@@ -21,6 +22,7 @@ export class ManagementPanelComponent{
 
 
   @Input() categories!:CategoryModel[];
+  @Input() authors!: AuthorModel[];
   loginStatus!:boolean;
 
 

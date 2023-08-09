@@ -23,10 +23,7 @@ export class NewSongComponent {
               private sharedService: SharedService,
               @Inject(MAT_DIALOG_DATA) public data: AddDialogModel,
 
-  ) {
-
-  }
-
+  ) {}
   newSongForm = this.fb.group({
     ytURL: ['', Validators.required],
     author: ['', Validators.required],
@@ -37,7 +34,6 @@ export class NewSongComponent {
 
   });
   addSongStatus!: boolean;
-  srcJAM:string='./assets/pepe-the-frog-dance.gif';
 
   getCategoryNameById(categoryId: string): string {
     const category = this.data.category.find(cat => cat._id === categoryId);

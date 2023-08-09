@@ -21,14 +21,14 @@ export class NewAuthorComponent {
               private fb: FormBuilder,
               private sb: MatSnackBar,
               private sharedService: SharedService,
-              @Inject(MAT_DIALOG_DATA) public data: AuthorModel[]) {
+              @Inject(MAT_DIALOG_DATA) public data: AuthorModel) {
   }
 
-  newAuthorForm = this.fb.group({
-    name: ['',Validators.required],
-    pictureURL: [''],
-    userID: ['64bdc37f3f27bb6025aaa4ed',Validators.required] //temp
-  })
+  authorForm = this.fb.group({
+    name: ['', Validators.required],
+    pictureURL: '',
+    userID: '64bdc37f3f27bb6025aaa4ed'
+  });
 
   addAuthorStatus!: boolean;
 
@@ -40,7 +40,7 @@ export class NewAuthorComponent {
         const headers = {
           Authorization: 'Bearer ' + accessToken,
         };
-        axios.post(this.apiUrl, this.newAuthorForm.value, {headers})
+        axios.post(this.apiUrl, this.authorForm.value, {headers})
           .then((res) => {
             this.addAuthorStatus = true;
             this.sharedService.sharedAddingAuthorStatus = this.addAuthorStatus;
@@ -48,9 +48,9 @@ export class NewAuthorComponent {
               duration: duration,
               panelClass: ['success-snackBar']
             });
-            setTimeout(()=>{
-              location.reload()
-            },duration)
+            // setTimeout(()=>{
+            //   location.reload()
+            // },duration)
             console.log('Author has been succesfully added!\n', res);
           }).catch((e) => {
           handleError(e)

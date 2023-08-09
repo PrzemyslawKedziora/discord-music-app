@@ -1,6 +1,6 @@
 <mat-dialog-content class="d-flex justify-content-center align-items-center flex-column">
   <h3>Add new author</h3>
-  <form [formGroup]="newAuthorForm">
+  <form [formGroup]="authorForm">
     <div class="row">
       <div class="col">
         <mat-form-field>
@@ -11,8 +11,7 @@
             placeholder="Insert name of author"
             formControlName="name"
           >
-          <mat-error *ngIf="newAuthorForm.get('name')?.hasError('required')">Enter name of an artist</mat-error>
-          <mat-error *ngIf="newAuthorForm.get('name')?.hasError('maxLength')">This name is too long</mat-error>
+          <mat-error *ngIf="authorForm.get('name')?.hasError('required')">Enter name of an artist</mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -21,7 +20,6 @@
         <mat-form-field>
           <mat-label>URL</mat-label>
           <input
-            type="text"
             matInput
             placeholder="Paste URL adress to image of author"
             formControlName="pictureURL"
@@ -31,7 +29,7 @@
     </div>
   </form>
   <div class="button-group">
-    <button mat-raised-button class="buttonText" color="primary" (click)="addAuthor()">Add song</button>
+    <button mat-raised-button class="buttonText" color="primary" (click)="addAuthor()">Add author</button>
     <button mat-raised-button class="buttonText" (click)="closeDialog()">Close</button>
   </div>
 </mat-dialog-content>

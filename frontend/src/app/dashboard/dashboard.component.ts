@@ -18,10 +18,6 @@ export class DashboardComponent{
   constructor(public dialog: MatDialog,
               private sharedService: SharedService) {
 
-    this.dialogData = {
-      category: [],
-      author: []
-    };
 
     axios.get('http://localhost:4100/api/songs/all').then((response)=> {
       for (let i=0;i<response.data.length;i++){
@@ -57,7 +53,7 @@ export class DashboardComponent{
   categories!: CategoryModel[];
   artists!: AuthorModel[];
   songs: SongModel[]=[];
-  dialogData!: AddDialogModel;
+  dialogData: AddDialogModel={category:[],author:[]};
   isLoggedIn: boolean=true;
 
   addSong(){
