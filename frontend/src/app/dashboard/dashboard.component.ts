@@ -47,9 +47,10 @@ export class DashboardComponent{
       }
     );
     this.sharedService.isLoggedInStatus=this.isLoggedIn;
+    this.sharedService.sharedSongsArray = this.songs;
   }
 
-
+  tablica:string[]=['2','3'];
   categories!: CategoryModel[];
   artists!: AuthorModel[];
   songs: SongModel[]=[];
@@ -80,4 +81,5 @@ export class DashboardComponent{
       console.log('The dialog was closed', result);
     });
   }
+
 }

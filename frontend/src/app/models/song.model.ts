@@ -9,6 +9,7 @@ export interface SongModel{
     name: string;
   }>,
   likes:any[],
+  isLiked: boolean,
   name:string, //song name
   userID:{
     _id:string,

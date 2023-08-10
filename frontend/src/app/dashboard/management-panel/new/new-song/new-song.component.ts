@@ -6,6 +6,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {SnackBarComponent} from "../../../../components/snack-bar/song/snack-bar.component";
 import {SharedService} from "../../../../services/shared/shared.service";
 import {AddDialogModel} from "../../../../models/add-dialog.model";
+import {SongModel} from "../../../../models/song.model";
 
 @Component({
   selector: 'app-new-song',
@@ -23,7 +24,9 @@ export class NewSongComponent {
               private sharedService: SharedService,
               @Inject(MAT_DIALOG_DATA) public data: AddDialogModel,
 
-  ) {}
+  ) {
+    this.songData=this.sharedService.sharedSongsArray;
+  }
   newSongForm = this.fb.group({
     ytURL: ['', Validators.required],
     authorID: ['', Validators.required],
@@ -34,7 +37,7 @@ export class NewSongComponent {
 
   });
   addSongStatus!: boolean;
-
+  songData!: SongModel[];
   getCategoryNameById(categoryId: string): string {
     const category = this.data.category.find(cat => cat._id === categoryId);
     return category ? category.name : 'none';
@@ -56,13 +59,12 @@ export class NewSongComponent {
           .then((res) => {
             this.addSongStatus = true;
             this.sharedService.sharedAddingSongStatus = this.addSongStatus;
+            this.songData.push(new Record(res.data.authorID,res.data.thumbnail,res.data.categories,
+              res.data.likes,res.data.name,res.data.userID,res.data.ytURL))
             this.sb.openFromComponent(SnackBarComponent, {
               duration: duration,
               panelClass: ['success-snackBar']
             });
-            setTimeout(()=>{
-              location.reload()
-            },duration)
             console.log('Song has been succesfully added!\n', res);
           }).catch((e) => {
           handleError(e)
@@ -81,4 +83,26 @@ export class NewSongComponent {
        })
     }
   }
+}
+class Record implements SongModel{
+    authorID: { _id: string; name: string; };
+    thumbnail: string;
+    categories: { _id: string; name: string; }[];
+    likes: any[];
+    name: string;
+    userID: { _id: string; username: string; };
+    ytURL: string;
+
+
+  constructor(authorID: { _id: string; name: string }, thumbnail: string, categories: { _id: string; name: string }[], likes: any[], name: string, userID: { _id: string; username: string }, ytURL: string) {
+    this.authorID = authorID;
+    this.thumbnail = thumbnail;
+    this.categories = categories;
+    this.likes = likes;
+    this.name = name;
+    this.userID = userID;
+    this.ytURL = ytURL;
+  }
+
+  isLiked: boolean = false;
 }

@@ -9,7 +9,8 @@ import {DashboardComponent} from "../../dashboard.component";
 })
 export class ListItemComponent implements OnInit{
 
-@Input() songData!:SongModel;
+@Input() songData!:SongModel[];
+@Input() songRecord!:SongModel;
 @Input() songIndex!:number;
 
 @ViewChild('likeElement', {static: true}) likeElement!: ElementRef;
@@ -20,12 +21,13 @@ export class ListItemComponent implements OnInit{
     console.log(this.songData)
   }
 
-  like(){
-  if (this.dashboard.isLoggedIn){
-    this.isLiked= !this.isLiked;
-    if (this.isLiked) this.songData.likes.length++;
-    else this.songData.likes.length--
-  }
+  like(song: SongModel) {
+    song.isLiked=false;
+    if (this.dashboard.isLoggedIn) {
+      song.isLiked = !song.isLiked;
+      if (song.isLiked) song.likes.length++;
+      else song.likes.length--;
+    }
   }
 
   deleteSong(){
