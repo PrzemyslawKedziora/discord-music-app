@@ -3,7 +3,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SharedService} from "../../../../services/shared/shared.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {AuthorModel} from "../../../../models/author.model";
+import {AuthorModel, AuthorRecord} from "../../../../models/author.model";
 import axios from "axios";
 import {SnackBarComponent} from "../../../../components/snack-bar/song/snack-bar.component";
 import {AuthorSnackBarComponent} from "../../../../components/snack-bar/author/author-snack-bar.component";
@@ -13,7 +13,7 @@ import {AuthorSnackBarComponent} from "../../../../components/snack-bar/author/a
   templateUrl: './new-author.component.html',
   styleUrls: ['./new-author.component.scss']
 })
-export class NewAuthorComponent {
+export class NewAuthorComponent{
 
   private apiUrl = 'http://localhost:4100/api/authors/add';
 
@@ -24,6 +24,9 @@ export class NewAuthorComponent {
               @Inject(MAT_DIALOG_DATA) public data: AuthorModel) {
   }
 
+
+
+
   authorForm = this.fb.group({
     name: ['', Validators.required],
     pictureURL: '',
@@ -31,6 +34,7 @@ export class NewAuthorComponent {
   });
 
   addAuthorStatus!: boolean;
+  authors: AuthorModel[] =[];
 
   addAuthor(){
     let duration:number=3000; //3sec
@@ -44,13 +48,14 @@ export class NewAuthorComponent {
           .then((res) => {
             this.addAuthorStatus = true;
             this.sharedService.sharedAddingAuthorStatus = this.addAuthorStatus;
+            const newAuthor = new AuthorRecord(res.data.name,res.data.pictureURL,res.data.userID)
+            this.authors.push(newAuthor);
+            this.sharedService.addNewAuthor(newAuthor);
             this.sb.openFromComponent(AuthorSnackBarComponent, {
               duration: duration,
               panelClass: ['success-snackBar']
             });
-            setTimeout(()=>{
-              location.reload()
-            },duration)
+
             console.log('Author has been succesfully added!\n', res);
           }).catch((e) => {
           handleError(e)
@@ -70,7 +75,7 @@ export class NewAuthorComponent {
     }
   }
 
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close();
   }
 }

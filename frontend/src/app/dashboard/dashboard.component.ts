@@ -42,15 +42,21 @@ export class DashboardComponent{
         }
         this.artists = arTemp;
         this.dialogData.author = this.artists;
+        this.sharedService.sharedArtistsArray = this.artists;
+
 
 
       }
     );
     this.sharedService.isLoggedInStatus=this.isLoggedIn;
     this.sharedService.sharedSongsArray = this.songs;
+    this.sharedService.getNewAuthor().subscribe((newAuthor) => {
+      if (newAuthor) {
+        this.artists.push(newAuthor);
+      }
+    });
   }
 
-  tablica:string[]=['2','3'];
   categories!: CategoryModel[];
   artists!: AuthorModel[];
   songs: SongModel[]=[];
