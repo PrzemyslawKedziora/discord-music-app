@@ -48,20 +48,22 @@ export class DashboardComponent{
 
       }
     );
-    this.sharedService.isLoggedInStatus=this.isLoggedIn;
     this.sharedService.sharedSongsArray = this.songs;
     this.sharedService.getNewAuthor().subscribe((newAuthor) => {
       if (newAuthor) {
         this.artists.push(newAuthor);
       }
     });
+    this.sharedService.isLoggedInStatus = this.isLoggedIn;
+    this.isLoggedIn = !!sessionStorage.getItem('accessToken');
+
   }
 
   categories!: CategoryModel[];
   artists!: AuthorModel[];
   songs: SongModel[]=[];
   dialogData: AddDialogModel={category:[],author:[]};
-  isLoggedIn: boolean=true;
+  isLoggedIn!: boolean;
 
   addSong(){
     const dialogRef = this.dialog.open(NewSongComponent, {

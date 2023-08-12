@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5690a0d4-e400-4399-a4f4-5a0b259792b9" name="Changes" comment="Feature: adding songs to app">
-      <change afterPath="$PROJECT_DIR$/.idea/discord-music-app.iml" afterDir="false" />
+    <list default="true" id="5690a0d4-e400-4399-a4f4-5a0b259792b9" name="Changes" comment="Feature: Dynamic author list display">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/song-list/song-list-item/list-item.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song-list/song-list-item/list-item.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/snack-bar/author/author-snack-bar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/snack-bar/author/author-snack-bar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-author/new-author.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-author/new-author.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-song/new-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-song/new-song.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-song/new-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-song/new-song.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/song-list/song-list-item/list-item.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song-list/song-list-item/list-item.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/models/song.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/models/song.model.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +22,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="SCSS File" />
+        <option value="HTTP Request" />
         <option value="TypeScript File" />
       </list>
     </option>
@@ -40,7 +46,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Projekty/discord-music-app&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projekty/discord-music-app/frontend/src/app/components/snack-bar/author&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;ts.external.directory.path&quot;: &quot;D:\\Projekty\\discord-music-app\\frontend\\node_modules\\typescript\\lib&quot;,
@@ -48,11 +54,15 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projekty\discord-music-app\frontend\src\app\components\snack-bar\author" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projekty\discord-music-app\frontend\src\app\components\snack-bar\song" />
+      <recent name="D:\Projekty\discord-music-app\frontend\src\app\dashboard\management-panel\new" />
+      <recent name="D:\Projekty\discord-music-app\frontend\src\app\services\shared" />
       <recent name="D:\Projekty\discord-music-app\frontend\src\app\dashboard\management-panel" />
       <recent name="D:\Projekty\discord-music-app\frontend\src\app\dashboard\song-list" />
-      <recent name="D:\Projekty\discord-music-app\frontend\src\app\dashboard" />
-      <recent name="D:\Projekty\discord-music-app\frontend\src\app" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -79,7 +89,12 @@
       <workItem from="1691482791800" duration="2901000" />
       <workItem from="1691492452337" duration="143000" />
       <workItem from="1691530227770" duration="155000" />
-      <workItem from="1691557489579" duration="2323000" />
+      <workItem from="1691557489579" duration="21392000" />
+      <workItem from="1691628530220" duration="2337000" />
+      <workItem from="1691781985476" duration="3436000" />
+      <workItem from="1691785525295" duration="238000" />
+      <workItem from="1691789530834" duration="2872000" />
+      <workItem from="1691848512339" duration="2424000" />
     </task>
     <task id="LOCAL-00001" summary="added routing to login and register components">
       <created>1690285246354</created>
@@ -242,7 +257,91 @@
       <option name="project" value="LOCAL" />
       <updated>1691485734966</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="BugFix: display of song categories">
+      <created>1691560595691</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1691560595691</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Feature: Added sharing data service">
+      <created>1691576592996</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1691576592996</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Fix: Improved responsiveness of records">
+      <created>1691576631832</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1691576631832</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Feature: Implemented snackbar to adding song function">
+      <created>1691576710727</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1691576710727</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Fix: Management bar accesibility fix">
+      <created>1691578087513</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1691578087513</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Feature: Adding new author to DB">
+      <created>1691589047937</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1691589047937</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Fix: Refactorisation of app structure &amp; its components names">
+      <created>1691589090726</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1691589090726</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Fix: Bound of author &amp; song add component">
+      <created>1691591821621</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1691591821621</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Fix: AuthorModel data binding">
+      <created>1691594416701</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1691594416701</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Fix: SongModel data binding">
+      <created>1691603756467</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1691603756467</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Fix: Changed the way of displaying records to dynamic">
+      <created>1691630789850</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1691630789850</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Feature: Dynamic author list display">
+      <created>1691784883450</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1691784883450</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,14 +359,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added routing to login and register components" />
-    <MESSAGE value="created register component and its validation" />
-    <MESSAGE value="register component structure update" />
-    <MESSAGE value="css updates" />
-    <MESSAGE value="improved code quality" />
-    <MESSAGE value="refactorisation of app structure" />
-    <MESSAGE value="CORS policy" />
-    <MESSAGE value="implementation of songlist" />
     <MESSAGE value="implemented songModel interface" />
     <MESSAGE value="list-item component &amp; bootstrap icons" />
     <MESSAGE value="Fix: correct syntax" />
@@ -281,6 +372,18 @@
     <MESSAGE value="Feature: Implemented adding song form and its validation" />
     <MESSAGE value="BugFix: Removed redundant files" />
     <MESSAGE value="Feature: adding songs to app" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feature: adding songs to app" />
+    <MESSAGE value="BugFix: display of song categories" />
+    <MESSAGE value="Feature: Added sharing data service" />
+    <MESSAGE value="Fix: Improved responsiveness of records" />
+    <MESSAGE value="Feature: Implemented snackbar to adding song function" />
+    <MESSAGE value="Fix: Management bar accesibility fix" />
+    <MESSAGE value="Feature: Adding new author to DB" />
+    <MESSAGE value="Fix: Refactorisation of app structure &amp; its components names" />
+    <MESSAGE value="Fix: Bound of author &amp; song add component" />
+    <MESSAGE value="Fix: AuthorModel data binding" />
+    <MESSAGE value="Fix: SongModel data binding" />
+    <MESSAGE value="Fix: Changed the way of displaying records to dynamic" />
+    <MESSAGE value="Featture: Dynamic author list display" />
+    <option name="LAST_COMMIT_MESSAGE" value="Featture: Dynamic author list display" />
   </component>
 </project>

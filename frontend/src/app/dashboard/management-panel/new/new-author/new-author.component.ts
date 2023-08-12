@@ -38,9 +38,7 @@ export class NewAuthorComponent{
 
   addAuthor(){
     let duration:number=3000; //3sec
-    axios.post('http://localhost:4100/api/users/login', {email: 'Wiktorek@gmail.com', password: 'Wiktorek'})
-      .then((res) => {
-        const accessToken = res.data.accessToken;
+        const accessToken = sessionStorage.getItem('accessToken');
         const headers = {
           Authorization: 'Bearer ' + accessToken,
         };
@@ -48,7 +46,7 @@ export class NewAuthorComponent{
           .then((res) => {
             this.addAuthorStatus = true;
             this.sharedService.sharedAddingAuthorStatus = this.addAuthorStatus;
-            const newAuthor = new AuthorRecord(res.data.name,res.data.pictureURL,res.data.userID)
+            const newAuthor = new AuthorRecord(res.data.name,res.data.pictureURL,(res.data.userID).toString())
             this.authors.push(newAuthor);
             this.sharedService.addNewAuthor(newAuthor);
             this.sb.openFromComponent(AuthorSnackBarComponent, {
@@ -60,9 +58,6 @@ export class NewAuthorComponent{
           }).catch((e) => {
           handleError(e)
         });
-      }).catch((e) => {
-      handleError(e)
-    })
 
     let handleError = (error: any): void => {
       this.addAuthorStatus = false;

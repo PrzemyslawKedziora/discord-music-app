@@ -24,14 +24,17 @@ export class ListItemComponent implements OnInit{
   like(song: SongModel) {
     song.isLiked=false;
     if (this.dashboard.isLoggedIn) {
-      song.isLiked = !song.isLiked;
-      if (song.isLiked) song.likes.length++;
-      else song.likes.length--;
+      this.isLiked = !this.isLiked;
+      const changeAmount = this.isLiked ? 1 : -1;
+
+     song.likes.length += changeAmount;
     }
   }
 
   deleteSong(){
   }
+
+
   openInYT(url:string){
     window.open(url,'_blank');
   }

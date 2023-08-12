@@ -53,9 +53,7 @@ export class NewSongComponent{
 
   addSong() {
     let duration:number=3000; //3sec
-    axios.post('http://localhost:4100/api/users/login', {email: 'Wiktorek@gmail.com', password: 'Wiktorek'})
-      .then((res) => {
-        const accessToken = res.data.accessToken;
+        const accessToken = sessionStorage.getItem('accessToken');
         const headers = {
           Authorization: 'Bearer ' + accessToken,
         };
@@ -73,9 +71,6 @@ export class NewSongComponent{
           }).catch((e) => {
           handleError(e)
         });
-      }).catch((e) => {
-      handleError(e)
-    })
 
      let handleError = (error: any): void => {
       this.addSongStatus = false;
