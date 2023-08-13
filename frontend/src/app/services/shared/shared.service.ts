@@ -16,6 +16,8 @@ export class SharedService {
   private _sharedSongsArray!: SongModel[];
   private _sharedArtistsArray!: AuthorModel[];
   private newAuthorSubject = new Subject<AuthorModel>();
+  private _loginUserStatus!:boolean;
+  private _registerUserStatus!:boolean;
 
 
 
@@ -71,5 +73,23 @@ export class SharedService {
 
   addNewAuthor(newAuthor: AuthorModel) {
     this.newAuthorSubject.next(newAuthor);
+  }
+
+
+  get loginUserStatus(): boolean {
+    return this._loginUserStatus;
+  }
+
+  set loginUserStatus(value: boolean) {
+    this._loginUserStatus = value;
+  }
+
+
+  get registerUserStatus(): boolean {
+    return this._registerUserStatus;
+  }
+
+  set registerUserStatus(value: boolean) {
+    this._registerUserStatus = value;
   }
 }

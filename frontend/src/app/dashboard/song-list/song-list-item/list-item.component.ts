@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {SongModel} from "../../../models/song.model";
 import {DashboardComponent} from "../../dashboard.component";
 
@@ -7,7 +7,7 @@ import {DashboardComponent} from "../../dashboard.component";
   templateUrl: './list-item.component.html',
   styleUrls: ['./list-item.component.scss']
 })
-export class ListItemComponent implements OnInit{
+export class ListItemComponent{
 
 @Input() songData!:SongModel[];
 @Input() songRecord!:SongModel;
@@ -17,9 +17,6 @@ export class ListItemComponent implements OnInit{
   constructor(public dashboard: DashboardComponent) {}
   isLiked: boolean=false;
 
-  ngOnInit(): void {
-    console.log(this.songData)
-  }
 
   like(song: SongModel) {
     song.isLiked=false;

@@ -16,8 +16,6 @@ export interface SongModel{
     username:string
   }, //id of person who added this song
   ytURL:string,
-
-
 }
 export class SongRecord implements SongModel{
   authorID: { _id: string; name: string; };

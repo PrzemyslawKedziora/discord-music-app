@@ -24,6 +24,8 @@ import { SnackBarComponent } from './components/snack-bar/song/snack-bar.compone
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { NewAuthorComponent } from './dashboard/management-panel/new/new-author/new-author.component';
 import {AuthorSnackBarComponent} from "./components/snack-bar/author/author-snack-bar.component";
+import {LoginSnackBarComponent} from "./components/snack-bar/login/login-snack-bar.component";
+import { RegisterSnackBarComponent } from './components/snack-bar/register-snack-bar/register-snack-bar.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import {AuthorSnackBarComponent} from "./components/snack-bar/author/author-snac
     NewSongComponent,
     SnackBarComponent,
     NewAuthorComponent,
-    AuthorSnackBarComponent
+    AuthorSnackBarComponent,
+    LoginSnackBarComponent,
+    RegisterSnackBarComponent
 
   ],
   imports: [
