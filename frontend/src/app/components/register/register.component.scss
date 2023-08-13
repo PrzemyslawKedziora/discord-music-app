@@ -54,6 +54,9 @@ body {
 }
 .box input[type="submit"]:hover {
   background: #2ecc71
+}.box input[type="submit"]:disabled:hover,
+ input[type="submit"]:disabled:focus{
+  background: none
 }
 .box h1 {
   color: white;

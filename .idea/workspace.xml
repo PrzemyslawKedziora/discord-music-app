@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5690a0d4-e400-4399-a4f4-5a0b259792b9" name="Changes" comment="Feature: Dynamic author list display">
+    <list default="true" id="5690a0d4-e400-4399-a4f4-5a0b259792b9" name="Changes" comment="Feature: Login form is finally usable">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/snack-bar/author/author-snack-bar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/snack-bar/author/author-snack-bar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-author/new-author.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-author/new-author.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-song/new-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-song/new-song.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-song/new-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-song/new-song.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/song-list/song-list-item/list-item.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song-list/song-list-item/list-item.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/register/register.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/register/register.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/register/register.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/register/register.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/models/song.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/models/song.model.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +90,8 @@
       <workItem from="1691781985476" duration="3436000" />
       <workItem from="1691785525295" duration="238000" />
       <workItem from="1691789530834" duration="2872000" />
-      <workItem from="1691848512339" duration="2424000" />
+      <workItem from="1691848512339" duration="3644000" />
+      <workItem from="1691922727439" duration="4128000" />
     </task>
     <task id="LOCAL-00001" summary="added routing to login and register components">
       <created>1690285246354</created>
@@ -341,7 +338,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691784883450</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Feature: Login form is finally usable">
+      <created>1691866480664</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1691866480665</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -359,7 +363,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="implemented songModel interface" />
     <MESSAGE value="list-item component &amp; bootstrap icons" />
     <MESSAGE value="Fix: correct syntax" />
     <MESSAGE value="Feature: added Song model" />
@@ -384,6 +387,7 @@
     <MESSAGE value="Fix: SongModel data binding" />
     <MESSAGE value="Fix: Changed the way of displaying records to dynamic" />
     <MESSAGE value="Featture: Dynamic author list display" />
-    <option name="LAST_COMMIT_MESSAGE" value="Featture: Dynamic author list display" />
+    <MESSAGE value="Feature: Login form is finally usable" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feature: Login form is finally usable" />
   </component>
 </project>
