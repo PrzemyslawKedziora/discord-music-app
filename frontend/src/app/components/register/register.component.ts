@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import axios from "axios";
+import {SharedService} from "../../services/shared/shared.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {SnackBarComponent} from "../snack-bar/song/snack-bar.component";
 
 @Component({
   selector: 'register',
@@ -9,7 +12,9 @@ import axios from "axios";
 })
 export class RegisterComponent{
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private sharedService: SharedService,
+              private sb: MatSnackBar) {
     this.registerForm = this.fb.group({
       email: ['',[Validators.required,Validators.email]],
       username: ['',[Validators.required,Validators.minLength(3)]],
@@ -23,18 +28,42 @@ export class RegisterComponent{
 
   isValidated!: boolean;
   passwordsNotConfirmed!: boolean;
+  registerStatus!:boolean;
   registerForm: FormGroup;
 
   onSubmit(): void {
     this.checkForm();
     if(this.isValidated){
-      throw new Error('niewypelniony formularz')
+      this.handleError(new Error('niewypelniony formularz'))
+      throw new Error('niewypelniony formularz');
     }
     else{
-      axios.post('http://localhost:4100/api/users/register',this.registerForm.value);
-      console.log('zarejestrowano uzytkownika', this.registerForm.value)
+      axios.post('http://localhost:4100/api/users/register',this.registerForm.value).then(()=> {
+        this.sb.openFromComponent(SnackBarComponent, {
+          duration: 2000,
+          panelClass: ['success-snackBar']
+        });
+        this.registerStatus = true;
+        this.sharedService.registerUserStatus = this.registerStatus;
+        console.log('zarejestrowano uzytkownika', this.registerForm.value)
+      }).catch((e)=> {
+        this.handleError(e);
+      });
+
     }
   }
+
+  handleError = (error: any): void => {
+    this.registerStatus = false;
+    this.sharedService.sharedAddingSongStatus = this.registerStatus;
+    console.log(error);
+    this.sb.openFromComponent(SnackBarComponent, {
+      duration: 3000,
+      panelClass: ['failed-snackBar']
+    })
+  }
+
+
 
    matchValuesValidator(controlName: string, matchingControlName: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {

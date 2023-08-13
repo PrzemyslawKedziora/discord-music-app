@@ -9,6 +9,9 @@ body {
 .card{
  @include card-configuration;
 }
+h1:hover{
+  cursor: pointer;
+}
 .box {
   width: 500px;
   padding: 40px;
