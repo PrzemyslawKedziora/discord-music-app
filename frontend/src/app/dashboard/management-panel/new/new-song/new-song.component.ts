@@ -30,6 +30,8 @@ export class NewSongComponent{
     this.artists = this.sharedService.sharedArtistsArray;
   }
 
+
+
   newSongForm = this.fb.group({
     ytURL: ['', Validators.required],
     authorID: ['', Validators.required],
@@ -53,7 +55,7 @@ export class NewSongComponent{
 
   addSong() {
     let duration:number=3000; //3sec
-        const accessToken = sessionStorage.getItem('accessToken');
+        const accessToken = sessionStorage.getItem('token');
         const headers = {
           Authorization: 'Bearer ' + accessToken,
         };
@@ -71,7 +73,6 @@ export class NewSongComponent{
           }).catch((e) => {
           handleError(e)
         });
-
      let handleError = (error: any): void => {
       this.addSongStatus = false;
       this.sharedService.sharedAddingSongStatus = this.addSongStatus;

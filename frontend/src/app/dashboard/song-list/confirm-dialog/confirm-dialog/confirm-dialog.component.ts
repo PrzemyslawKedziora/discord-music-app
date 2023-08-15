@@ -20,7 +20,7 @@ export class ConfirmDialogComponent {
 
   deleteSong(){
     const requestString = 'http://localhost:4100/api/songs/'+this.data.songID+'/delete';
-    const accessToken = sessionStorage.getItem('accessToken');
+    const accessToken = sessionStorage.getItem('token');
     const headers = {
       Authorization: 'Bearer ' + accessToken,
     };
@@ -31,7 +31,7 @@ export class ConfirmDialogComponent {
         panelClass: ['success-snackBar']
       })
     }).catch((e) => {
-      this.sb.open(e.response.data.message,'',{
+      this.sb.open(e || 'blad','',{
         duration: 2000,
         panelClass: ['failed-snackBar']
       })

@@ -22,7 +22,7 @@ export class ManagementPanelComponent implements OnInit{
   loginStatus!:boolean;
 
   ngOnInit(): void {
-    sessionStorage.getItem('user') ? this.loginStatus=true : this.loginStatus=false;
+    sessionStorage.getItem('token') ? this.loginStatus=true : this.loginStatus=false;
   }
 
 

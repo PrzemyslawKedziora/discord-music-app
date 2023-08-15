@@ -36,11 +36,14 @@ export class LoginComponent {
       axios.post('http://localhost:4100/api/users/login',{email: this.loginForm.get('email')?.value,password: this.loginForm.get('password')?.value})
         .then((res) => {
           const user = {
-            id: res.data.userID,
+            id: res.data.id,
             username: res.data.username,
             token: res.data.accessToken
           }
-          sessionStorage.setItem('user',JSON.stringify(user));
+          console.log(res.data)
+          sessionStorage.setItem('id',user.id);
+          sessionStorage.setItem('username',user.username);
+          sessionStorage.setItem('token',user.token);
           if (sessionStorage.getItem('user')){
             this.isLoggedIn = true;
             this.sharedService.loginUserStatus = this.isLoggedIn;

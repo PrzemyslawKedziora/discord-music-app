@@ -55,7 +55,7 @@ export class DashboardComponent{
       }
     });
     this.sharedService.isLoggedInStatus = this.isLoggedIn;
-    this.isLoggedIn = !!sessionStorage.getItem("user");
+    this.isLoggedIn = !!sessionStorage.getItem("token");
 
   }
 
@@ -73,7 +73,7 @@ export class DashboardComponent{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      console.log('The dialog was closed', result)
     });
 
   }

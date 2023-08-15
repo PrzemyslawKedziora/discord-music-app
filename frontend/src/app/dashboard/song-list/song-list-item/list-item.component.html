@@ -21,15 +21,14 @@
         <span class="song-like-number my-auto">{{songRecord.likes.length ? songRecord.likes.length : 0}}</span>
       </div>
       <div class="my-auto data like-group" (click)="openConfirmDeleteDialog(songRecord._id,songIndex)"
-           *ngIf="this.dashboard.isLoggedIn && this.songRecord.userID.username == user.username">
+           *ngIf="this.dashboard.isLoggedIn && this.songRecord.userID.username == user">
         <i style="margin-right: 5px" class="bi bi-x-circle remove-icon"></i>
       </div>
       <div class="my-auto data like-group"
-           *ngIf="!(this.dashboard.isLoggedIn && this.songRecord.userID.username == user.username)" (click)="wrongUser()">
+           *ngIf="!(this.dashboard.isLoggedIn && this.songRecord.userID.username == user)" (click)="wrongUser()">
         <i style="margin-right: 5px" class="bi bi-emoji-angry remove-icon"></i>
       </div>
     </div>
   </div>
-  <p>{{songRecord.userID.username}}</p>
 </div>
 

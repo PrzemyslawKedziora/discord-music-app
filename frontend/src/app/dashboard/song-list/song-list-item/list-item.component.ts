@@ -26,10 +26,9 @@ export class ListItemComponent implements OnInit{
 
   ngOnInit(): void {
 
-    const storedUser = sessionStorage.getItem('user');
-    if (storedUser !== null) {
-      this.user = JSON.parse(storedUser);
-      console.log(this.user)
+    const storedUsername = sessionStorage.getItem('username');
+    if (storedUsername !== null) {
+      this.user = storedUsername;
     } else {
       console.log('Brak zapisanego użytkownika w sesji.');
     }
