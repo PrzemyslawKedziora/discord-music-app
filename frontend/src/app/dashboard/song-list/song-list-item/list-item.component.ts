@@ -1,21 +1,40 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {SongModel} from "../../../models/song.model";
 import {DashboardComponent} from "../../dashboard.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'song-list-item',
   templateUrl: './list-item.component.html',
   styleUrls: ['./list-item.component.scss']
 })
-export class ListItemComponent{
+export class ListItemComponent implements OnInit{
 
 @Input() songData!:SongModel[];
 @Input() songRecord!:SongModel;
 @Input() songIndex!:number;
 
 @ViewChild('likeElement', {static: true}) likeElement!: ElementRef;
-  constructor(public dashboard: DashboardComponent) {}
+  constructor(public dashboard: DashboardComponent,
+              private sb: MatSnackBar,
+              private dialog: MatDialog) {
+  }
   isLiked: boolean=false;
+  user?: any;
+
+  ngOnInit(): void {
+
+    const storedUser = sessionStorage.getItem('user');
+    if (storedUser !== null) {
+      this.user = JSON.parse(storedUser);
+      console.log(this.user)
+    } else {
+      console.log('Brak zapisanego użytkownika w sesji.');
+    }
+  }
+
 
 
   like(song: SongModel) {
@@ -28,7 +47,14 @@ export class ListItemComponent{
     }
   }
 
-  deleteSong(){
+  openConfirmDeleteDialog(songID:string,index: number){
+
+      this.dialog.open(ConfirmDialogComponent, {
+        disableClose: true,
+        width: '50%',
+        data: {songs: this.songData, songID: songID, index: index}
+      })
+
   }
 
 
@@ -36,5 +62,18 @@ export class ListItemComponent{
     window.open(url,'_blank');
   }
 
+  onClick(){
+    this.sb.open('Song URL has been successfully copied to clipboard.','',{
+      duration: 2000,
+      panelClass: ['success-snackBar']
+    });
+  }
+
+  wrongUser(){
+    this.sb.open('You cannot delete song that was not added by you!','',{
+      duration: 2000,
+      panelClass: ['failed-snackBar']
+    });
+  }
 
 }

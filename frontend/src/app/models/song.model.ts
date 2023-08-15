@@ -1,4 +1,5 @@
 export interface SongModel{
+  _id:string | '',
   authorID: {
     _id:string,
     name:string,
@@ -18,6 +19,7 @@ export interface SongModel{
   ytURL:string,
 }
 export class SongRecord implements SongModel{
+  _id:string;
   authorID: { _id: string; name: string; };
   thumbnail: string;
   categories: { _id: string; name: string; }[];
@@ -27,8 +29,9 @@ export class SongRecord implements SongModel{
   ytURL: string;
 
 
-  constructor(authorID: { _id: string; name: string }, thumbnail: string, categories: { _id: string; name: string }[],
+  constructor(_id:string,authorID: { _id: string; name: string }, thumbnail: string, categories: { _id: string; name: string }[],
               likes: any[], name: string, userID: { _id: string; username: string }, ytURL: string) {
+    this._id=_id;
     this.authorID = authorID;
     this.thumbnail = thumbnail;
     this.categories = categories;

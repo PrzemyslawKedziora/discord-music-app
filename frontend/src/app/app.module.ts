@@ -26,6 +26,9 @@ import { NewAuthorComponent } from './dashboard/management-panel/new/new-author/
 import {AuthorSnackBarComponent} from "./components/snack-bar/author/author-snack-bar.component";
 import {LoginSnackBarComponent} from "./components/snack-bar/login/login-snack-bar.component";
 import { RegisterSnackBarComponent } from './components/snack-bar/register-snack-bar/register-snack-bar.component';
+import {ClipboardModule} from "@angular/cdk/clipboard";
+import { ConfirmDialogComponent } from './dashboard/song-list/confirm-dialog/confirm-dialog/confirm-dialog.component';
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -43,7 +46,8 @@ import { RegisterSnackBarComponent } from './components/snack-bar/register-snack
     NewAuthorComponent,
     AuthorSnackBarComponent,
     LoginSnackBarComponent,
-    RegisterSnackBarComponent
+    RegisterSnackBarComponent,
+    ConfirmDialogComponent
 
   ],
   imports: [
@@ -60,7 +64,9 @@ import { RegisterSnackBarComponent } from './components/snack-bar/register-snack
     MatInputModule,
     MatSelectModule,
     MatSnackBarModule,
-    FormsModule
+    FormsModule,
+    ClipboardModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
