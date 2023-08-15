@@ -34,7 +34,7 @@ export class NewSongComponent{
     ytURL: ['', Validators.required],
     authorID: ['', Validators.required],
     categories: [[], Validators.required],
-    userID: '64bdc37f3f27bb6025aaa4ed', //temp
+    userID: sessionStorage.getItem('userID'), //temp
     createdAt: (new Date).toISOString(),
     updatedAt: (new Date).toISOString()
 
@@ -61,7 +61,7 @@ export class NewSongComponent{
           .then((res) => {
             this.addSongStatus = true;
             this.sharedService.sharedAddingSongStatus = this.addSongStatus;
-            this.songData.push(new SongRecord(res.data.authorID,res.data.thumbnail,res.data.categories,
+            this.songData.push(new SongRecord(res.data._id,res.data.authorID,res.data.thumbnail,res.data.categories,
               res.data.likes,res.data.name,res.data.userID,res.data.ytURL))
             this.sb.openFromComponent(SnackBarComponent, {
               duration: duration,
