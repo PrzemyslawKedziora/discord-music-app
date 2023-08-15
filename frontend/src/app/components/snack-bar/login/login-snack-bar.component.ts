@@ -4,7 +4,7 @@ import {SharedService} from "../../../services/shared/shared.service";
 @Component({
   selector: 'app-login',
   templateUrl: './login-snack-bar.component.html',
-  styleUrls: ['./login-snack-bar.component.scss']
+  styleUrls: ['../song/snack-bar.component.scss']
 })
 export class LoginSnackBarComponent implements OnInit{
 

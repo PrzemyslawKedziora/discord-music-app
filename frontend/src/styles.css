@@ -1,6 +1,7 @@
-body{
-  color: white;
+body,html{
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
   background: #071e22;
+  color: white;
 }
 .container-img-background{
   background-image: url('src/assets/fire-background.jpg');
@@ -8,16 +9,16 @@ body{
   background-size: cover;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
 .success-snackBar {
   background: #198754;
-   --mdc-snackbar-container-color: #198754;
-  color: wheat;
+  --mdc-snackbar-container-color: #198754;
+  --mdc-snackbar-supporting-text-color: #efebd9;
+  border-radius: 25px;
  }
 .failed-snackBar {
   background: #FA113D;
    --mdc-snackbar-container-color: #FA113D;
+  --mdc-snackbar-supporting-text-color: #efebd9;
   color: wheat;
+  border-radius: 25px;
  }
