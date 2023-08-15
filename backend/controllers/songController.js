@@ -258,6 +258,7 @@ const deleteSong = asyncHandler(async (req, res) => {
   // <---- Checking if the current user is the song's creator ---->
   if (song.userID.toString() !== req.user.id) {
     res.status(403);
+    res.status(403).json({message: "You cannot delete song that was not added by you!"});
     throw new Error("You cannot delete song that was not added by you!");
   }
 
