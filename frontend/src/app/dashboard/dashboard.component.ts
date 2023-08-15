@@ -55,7 +55,7 @@ export class DashboardComponent{
       }
     });
     this.sharedService.isLoggedInStatus = this.isLoggedIn;
-    this.isLoggedIn = !!sessionStorage.getItem('accessToken');
+    this.isLoggedIn = !!sessionStorage.getItem("user");
 
   }
 

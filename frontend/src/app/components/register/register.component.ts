@@ -56,7 +56,6 @@ export class RegisterComponent{
   handleError = (error: any): void => {
     this.registerStatus = false;
     this.sharedService.sharedAddingSongStatus = this.registerStatus;
-    console.log(error);
     this.sb.openFromComponent(SnackBarComponent, {
       duration: 3000,
       panelClass: ['failed-snackBar']

@@ -35,18 +35,21 @@ export class LoginComponent {
       console.log('dane: ',this.loginForm.value);
       axios.post('http://localhost:4100/api/users/login',{email: this.loginForm.get('email')?.value,password: this.loginForm.get('password')?.value})
         .then((res) => {
-          const token = res.data.accessToken;
-          sessionStorage.setItem('accessToken',token);
-          setTimeout(() => {
-            this.router.navigate(['/dashboard'])
-          },2000);
-          if (sessionStorage.getItem('accessToken')){
+          const user = {
+            id: res.data.userID,
+            username: res.data.username,
+            token: res.data.accessToken
+          }
+          sessionStorage.setItem('user',JSON.stringify(user));
+          if (sessionStorage.getItem('user')){
             this.isLoggedIn = true;
             this.sharedService.loginUserStatus = this.isLoggedIn;
             console.log(this.isLoggedIn, 'w logine ');
             console.log(this.sharedService.loginUserStatus, 'w statusie ');
-
           }
+          setTimeout(() => {
+            this.router.navigate(['/dashboard'])
+          },2000);
           this.sb.openFromComponent(LoginSnackBarComponent,{
             duration: 500,
             panelClass: ['success-snackBar']
