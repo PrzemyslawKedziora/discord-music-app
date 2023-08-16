@@ -38,7 +38,7 @@ export class NewAuthorComponent{
 
   addAuthor(){
     let duration:number=3000; //3sec
-        const accessToken = sessionStorage.getItem('accessToken');
+        const accessToken = sessionStorage.getItem('token');
         const headers = {
           Authorization: 'Bearer ' + accessToken,
         };

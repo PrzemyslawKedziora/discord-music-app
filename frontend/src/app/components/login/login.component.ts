@@ -32,7 +32,6 @@ export class LoginComponent {
   onSubmit(): void {
     if (!this.loginForm.invalid) this.isSubmitted=true;
     if (this.isSubmitted){
-      console.log('dane: ',this.loginForm.value);
       axios.post('http://localhost:4100/api/users/login',{email: this.loginForm.get('email')?.value,password: this.loginForm.get('password')?.value})
         .then((res) => {
           const user = {
@@ -40,15 +39,12 @@ export class LoginComponent {
             username: res.data.username,
             token: res.data.accessToken
           }
-          console.log(res.data)
           sessionStorage.setItem('id',user.id);
           sessionStorage.setItem('username',user.username);
           sessionStorage.setItem('token',user.token);
           if (sessionStorage.getItem('user')){
             this.isLoggedIn = true;
             this.sharedService.loginUserStatus = this.isLoggedIn;
-            console.log(this.isLoggedIn, 'w logine ');
-            console.log(this.sharedService.loginUserStatus, 'w statusie ');
           }
           setTimeout(() => {
             this.router.navigate(['/dashboard'])

@@ -45,7 +45,6 @@ export class RegisterComponent{
         });
         this.registerStatus = true;
         this.sharedService.registerUserStatus = this.registerStatus;
-        console.log('zarejestrowano uzytkownika', this.registerForm.value)
       }).catch((e)=> {
         this.handleError(e);
       });

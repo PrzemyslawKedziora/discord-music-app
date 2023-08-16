@@ -7,7 +7,7 @@
         <img [src]="songRecord.thumbnail" class="data" alt="image" style="height: 80px; width: 140px"
         (click)="openInYT(songRecord.ytURL)">
       </div>
-      <div class=" my-auto song-description" (click)="onClick()" [cdkCopyToClipboard]="'!play ' + songRecord.ytURL">
+      <div class=" my-auto song-description" (click)="onClick()" [cdkCopyToClipboard]="'!play ' + songRecord.name">
         <div class="song-name data">{{songRecord.name}}</div>
         <div class="song-author-name my-auto data">{{songRecord.authorID.name || 'hmm...'}}</div>
       </div>
@@ -25,7 +25,7 @@
         <i style="margin-right: 5px" class="bi bi-x-circle remove-icon"></i>
       </div>
       <div class="my-auto data like-group"
-           *ngIf="!(this.dashboard.isLoggedIn && this.songRecord.userID.username == user)" (click)="wrongUser()">
+           *ngIf="(this.dashboard.isLoggedIn && this.songRecord.userID.username != user)" (click)="wrongUser()">
         <i style="margin-right: 5px" class="bi bi-emoji-angry remove-icon"></i>
       </div>
     </div>
