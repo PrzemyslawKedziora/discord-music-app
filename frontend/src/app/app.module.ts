@@ -29,6 +29,9 @@ import { RegisterSnackBarComponent } from './components/snack-bar/register-snack
 import {ClipboardModule} from "@angular/cdk/clipboard";
 import { ConfirmDialogComponent } from './dashboard/song-list/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
+import { FilterByComponent } from './components/filter-by/filter-by.component';
+
+import {MatRadioModule} from "@angular/material/radio";
 
 
 @NgModule({
@@ -47,27 +50,29 @@ import {MatIconModule} from "@angular/material/icon";
     AuthorSnackBarComponent,
     LoginSnackBarComponent,
     RegisterSnackBarComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    FilterByComponent
 
   ],
-  imports: [
-    BrowserModule,
-    NgbModule,
-    AdminRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    MatLegacyCardModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatSnackBarModule,
-    FormsModule,
-    ClipboardModule,
-    MatIconModule
-  ],
+    imports: [
+        BrowserModule,
+        NgbModule,
+        AdminRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        MatLegacyCardModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatSnackBarModule,
+        FormsModule,
+        ClipboardModule,
+        MatIconModule,
+        MatRadioModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

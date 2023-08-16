@@ -12,9 +12,10 @@
            mat-button
            *ngIf="loginStatus"
       >Add artist</div>
-      <div class="song-lists management-list-item">Sort by</div>
+      <div class="song-lists management-list-item" (click)="dashboard.openFilterByDialog()">Filter by</div>
 
-      <div class="logIn management-list-item d-flex align-content-end" routerLink="/login">Log in</div>
+      <div class="logIn management-list-item d-flex align-content-end" *ngIf="!loginStatus" routerLink="/login">Log in</div>
+      <div class="logIn management-list-item d-flex align-content-end" *ngIf="loginStatus" (click)="logOut()">Log out</div>
     </div>
   </div>
 </div>

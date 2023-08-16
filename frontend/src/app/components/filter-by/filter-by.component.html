@@ -1,0 +1,28 @@
+<mat-dialog-content class="d-flex justify-content-center align-items-center flex-column">
+  <h3>Filter song list</h3>
+    <div class="row">
+      <div class="col d-flex justify-content-center align-items-center">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Insert name of author"
+            [(ngModel)]="filterString"
+          >
+        </mat-form-field>
+      </div>
+      <label class="d-flex justify-content-center align-items-center">Filter by </label>
+      <div class="radio-group d-flex justify-content-center align-items-center">
+          <mat-radio-group [(ngModel)]="filterCategory">
+            <mat-radio-button value="author">Author</mat-radio-button>
+            <mat-radio-button value="genre">Genre</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+  <div class="button-group">
+    <button mat-raised-button class="buttonText" color="primary" (click)="filterBy(filterString,filterCategory)">Filter</button>
+    <button mat-raised-button class="buttonText" (click)="close()">Close</button>
+  </div>
+</mat-dialog-content>
+

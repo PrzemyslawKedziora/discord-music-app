@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { SongModel} from "../models/song.model";
+import {SongModel} from "../models/song.model";
 import axios from "axios";
 import {MatDialog} from "@angular/material/dialog";
 import {NewSongComponent} from "./management-panel/new/new-song/new-song.component";
@@ -8,6 +8,8 @@ import {SharedService} from "../services/shared/shared.service";
 import {AuthorModel} from "../models/author.model";
 import {NewAuthorComponent} from "./management-panel/new/new-author/new-author.component";
 import {AddDialogModel} from "../models/add-dialog.model";
+import {FilterByComponent} from "../components/filter-by/filter-by.component";
+
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
@@ -23,6 +25,7 @@ export class DashboardComponent{
       for (let i=0;i<response.data.length;i++){
         this.songs.push(response.data[i]);
       }
+      this.songsTemp = this.songs;
     });
     axios.get('http://localhost:4100/api/categories/all').then(
       (res) => {
@@ -40,10 +43,10 @@ export class DashboardComponent{
         for (let i = 0; i < res.data.length; i++) {
           arTemp.push(res.data[i]);
         }
+        arTemp=arTemp.sort((a,b)=> a.name.localeCompare(b.name));
         this.artists = arTemp;
         this.dialogData.author = this.artists;
         this.sharedService.sharedArtistsArray = this.artists;
-
 
 
       }
@@ -62,6 +65,7 @@ export class DashboardComponent{
   categories!: CategoryModel[];
   artists!: AuthorModel[];
   songs: SongModel[]=[];
+  songsTemp: SongModel[]=[];
   dialogData: AddDialogModel={category:[],author:[]};
   isLoggedIn!: boolean;
 
@@ -89,5 +93,20 @@ export class DashboardComponent{
       console.log('The dialog was closed', result);
     });
   }
+
+  openFilterByDialog() {
+    const dialogRef = this.dialog.open(FilterByComponent, {
+      disableClose: true,
+      width:'50vw',
+      data: this.songsTemp
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+      this.songs=res;
+      }
+    })
+  }
+
 
 }
