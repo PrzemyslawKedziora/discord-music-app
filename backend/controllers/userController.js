@@ -86,7 +86,7 @@ const loginUser = asyncHandler( async (req, res) => {
             process.env.JWT_PRIVATE_KEY,
             { expiresIn: "100m"}
         );
-        res.status(200).json({ accessToken });
+        res.status(200).json({ accessToken , username: user.username, id: user.id});
     } else {
         res.status(401).json({message: "Wrong password!" });
         throw new Error("Wrong password!")

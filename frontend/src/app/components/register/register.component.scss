@@ -1,4 +1,4 @@
-@import "src/variables";
+@import "../../../variables";
 body {
   margin: 0;
   padding: 0;
@@ -8,6 +8,9 @@ body {
 }
 .card{
  @include card-configuration;
+}
+h1:hover{
+  cursor: pointer;
 }
 .box {
   width: 500px;
@@ -54,6 +57,9 @@ body {
 }
 .box input[type="submit"]:hover {
   background: #2ecc71
+}.box input[type="submit"]:disabled:hover,
+ input[type="submit"]:disabled:focus{
+  background: none
 }
 .box h1 {
   color: white;

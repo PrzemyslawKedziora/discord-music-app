@@ -42,20 +42,28 @@ export class DashboardComponent{
         }
         this.artists = arTemp;
         this.dialogData.author = this.artists;
+        this.sharedService.sharedArtistsArray = this.artists;
+
 
 
       }
     );
-    this.sharedService.isLoggedInStatus=this.isLoggedIn;
     this.sharedService.sharedSongsArray = this.songs;
+    this.sharedService.getNewAuthor().subscribe((newAuthor) => {
+      if (newAuthor) {
+        this.artists.push(newAuthor);
+      }
+    });
+    this.sharedService.isLoggedInStatus = this.isLoggedIn;
+    this.isLoggedIn = !!sessionStorage.getItem("token");
+
   }
 
-  tablica:string[]=['2','3'];
   categories!: CategoryModel[];
   artists!: AuthorModel[];
   songs: SongModel[]=[];
   dialogData: AddDialogModel={category:[],author:[]};
-  isLoggedIn: boolean=true;
+  isLoggedIn!: boolean;
 
   addSong(){
     const dialogRef = this.dialog.open(NewSongComponent, {
@@ -65,7 +73,7 @@ export class DashboardComponent{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      console.log('The dialog was closed', result)
     });
 
   }

@@ -1,4 +1,4 @@
-@import "src/variables";
+@import "../../../../variables";
 .container{
   color: $main-clay-color;
 }
@@ -12,7 +12,7 @@
 .my-auto{
   max-width: 400px;
 }
-.song-description{
+.song-description {
   width: 400px;
 }
 .index{

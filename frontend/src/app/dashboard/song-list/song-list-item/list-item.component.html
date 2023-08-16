@@ -1,17 +1,17 @@
-<div class="container">
+<div class="container" [cdkCopyToClipboard]="'!play ' + songRecord.ytURL">
   <div class="row" *ngIf="songData" >
     <div
     class="d-flex align-baseline list-group-horizontal justify-content-between">
-      <div class="index d-flex align-items-center data">{{songIndex+1}}</div>
+      <div class="index d-flex align-items-center">{{songIndex+1}}</div>
       <div class="my-auto">
         <img [src]="songRecord.thumbnail" class="data" alt="image" style="height: 80px; width: 140px"
         (click)="openInYT(songRecord.ytURL)">
       </div>
-      <div class=" my-auto song-description">
+      <div class=" my-auto song-description" (click)="onClick()" [cdkCopyToClipboard]="'!play ' + songRecord.ytURL">
         <div class="song-name data">{{songRecord.name}}</div>
-        <div class="song-author-name my-auto data">{{songRecord.authorID.name}}</div>
+        <div class="song-author-name my-auto data">{{songRecord.authorID.name || 'hmm...'}}</div>
       </div>
-      <div class="song-categories my-auto data">
+      <div class="song-categories my-auto">
         <span *ngFor="let category of songRecord.categories; let last = last">
     {{ category.name }}{{ !last ? ', ' : '' }}
   </span>
@@ -20,9 +20,13 @@
         <i style="margin-right: 5px" class="bi {{isLiked ? 'bi-heart-fill' : 'bi-heart'}}"></i>
         <span class="song-like-number my-auto">{{songRecord.likes.length ? songRecord.likes.length : 0}}</span>
       </div>
-      <div class="my-auto data like-group" (click)="deleteSong()" *ngIf="this.dashboard.isLoggedIn">
-        <i style="margin-right: 5px" class="bi {{isLiked ? 'bi-heart-fill' : 'bi-heart'}}"></i>
-        <span class="song-like-number my-auto data">{{songRecord.likes.length ? songRecord.likes.length : 0}}</span>
+      <div class="my-auto data like-group" (click)="openConfirmDeleteDialog(songRecord._id,songIndex)"
+           *ngIf="this.dashboard.isLoggedIn && this.songRecord.userID.username == user">
+        <i style="margin-right: 5px" class="bi bi-x-circle remove-icon"></i>
+      </div>
+      <div class="my-auto data like-group"
+           *ngIf="!(this.dashboard.isLoggedIn && this.songRecord.userID.username == user)" (click)="wrongUser()">
+        <i style="margin-right: 5px" class="bi bi-emoji-angry remove-icon"></i>
       </div>
     </div>
   </div>

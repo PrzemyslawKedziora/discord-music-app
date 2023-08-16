@@ -1,7 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DashboardComponent} from "../dashboard.component";
 import {CategoryModel} from "../../models/category.model";
-import {SharedService} from "../../services/shared/shared.service";
 import {AuthorModel} from "../../models/author.model";
 
 
@@ -11,19 +10,20 @@ import {AuthorModel} from "../../models/author.model";
   styleUrls: ['./management-panel.component.scss']
 })
 
-export class ManagementPanelComponent{
+export class ManagementPanelComponent implements OnInit{
 
-
-  constructor(public dashboard: DashboardComponent,
-              private sharedService: SharedService)
+  constructor(public dashboard: DashboardComponent)
   {
-    this.loginStatus=this.sharedService.isLoggedInStatus;
   }
 
 
   @Input() categories!:CategoryModel[];
   @Input() authors!: AuthorModel[];
   loginStatus!:boolean;
+
+  ngOnInit(): void {
+    sessionStorage.getItem('token') ? this.loginStatus=true : this.loginStatus=false;
+  }
 
 
 

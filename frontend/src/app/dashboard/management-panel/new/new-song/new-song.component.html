@@ -20,12 +20,12 @@
         <mat-form-field>
           <mat-label>Author</mat-label>
           <mat-select formControlName="authorID">
-            <mat-option *ngFor="let author of  data.author" [value]="author"><p>{{author.name}}</p>
+            <mat-option *ngFor="let author of  artists" [value]="author"><p>{{author.name}}</p>
               <img [src]="author.pictureURL" *ngIf="author.pictureURL" style="height: 100px" alt="author's img">
               {{author.pictureURL}}
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="newSongForm.get('author')?.hasError('required')">Choose your author</mat-error>
+          <mat-error *ngIf="newSongForm.get('authorID')?.hasError('required')">Choose your author</mat-error>
         </mat-form-field>
       </div>
     </div>
