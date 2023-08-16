@@ -11,7 +11,7 @@ const addSong = asyncHandler(async (req, res) => {
 
   // <---- Checking if user sent all necessary fields ---->
   if (!ytURL || !authorID) {
-    res.status(400);
+    res.status(400).json({ message: "You need to fulfill all fields!" });
     throw new Error("You need to fulfill all fields!");
   }
 
@@ -56,7 +56,7 @@ const addSong = asyncHandler(async (req, res) => {
     console.log("New song created! ", song);
     res.status(201).json(song);
   } else {
-    res.status(400);
+    res.status(400).json({ message: "Song data was not valid!" });
     throw new Error("Song data was not valid!");
   }
 });
@@ -71,13 +71,13 @@ const editSong = asyncHandler(async (req, res) => {
   // <---- Finding a song with ID fiven i params ---->
   const song = await Song.findById(songID);
   if (!song) {
-    req.status(400);
+    req.status(400).json({ message: "There is no song with this ID!" });
     throw new Error("There is no song with this ID!");
   }
 
   // <---- Checking if user have permission to modify this song ---->
   if (!req.user.id == song.userID) {
-    req.status(401);
+    req.status(401).json({ message: "You don't have permission to edit this song!" });
     throw new Error("You don't have permission to edit this song!");
   }
 
@@ -108,7 +108,7 @@ const getAllSongs = asyncHandler(async (req, res) => {
     .populate("categories", "name");
 
   if (!songList) {
-    res.status(500);
+    res.status(500).json({ message: "There was a problem trying to get Songs from the database!" });
     throw new Error(
       "There was a problem trying to get Songs from the database!"
     );
@@ -125,7 +125,7 @@ const getSongsByAuthor = asyncHandler(async (req, res) => {
 
   // <---- Checking if the provided author id is valid ---->
   if (!mongoose.Types.ObjectId.isValid(authorID)) {
-    res.status(400);
+    res.status(400).json({ message: "Invalid author" });
     throw new Error("Invalid author");
   }
 
@@ -139,7 +139,7 @@ const getSongsByAuthor = asyncHandler(async (req, res) => {
   if (songs.length > 0) {
     res.status(200).json(songs);
   } else {
-    res.status(404);
+    res.status(404).json({ message: "No songs with this author found!" });
     throw new Error("No songs with this author found!");
   }
 });
@@ -152,7 +152,7 @@ const getSongsByCategory = asyncHandler(async (req, res) => {
 
   // <---- Checking if the provided category id is valid ---->
   if (!mongoose.Types.ObjectId.isValid(categoryID)) {
-    res.status(400);
+    res.status(400).json({ message: "Invalid category" });
     throw new Error("Invalid category");
   }
 
@@ -166,7 +166,7 @@ const getSongsByCategory = asyncHandler(async (req, res) => {
   if (songs.length > 0) {
     res.status(200).json(songs);
   } else {
-    res.status(404);
+    res.status(404).json({ message: "No songs with this author found!" });
     throw new Error("No songs with this author found!");
   }
 });
@@ -182,7 +182,7 @@ const getRandomSong = asyncHandler(async (req, res) => {
     .exec();
 
   if (!randomSong) {
-    res.status(500);
+    res.status(500).json({ message: "There was a problem trying to get a Song from the database!" });
     throw new Error(
       "There was a problem trying to get a Song from the database!"
     );
@@ -199,7 +199,7 @@ const likeSong = asyncHandler(async (req, res) => {
 
   // <---- Checking if the provided song id is valid ---->
   if (!mongoose.Types.ObjectId.isValid(songID)) {
-    res.status(400);
+    res.status(400).json({ message: "Invalid song id" });
     throw new Error("Invalid song");
   }
 
@@ -207,7 +207,7 @@ const likeSong = asyncHandler(async (req, res) => {
   const song = await Song.findById(songID);
 
   if (!song) {
-    res.status(500);
+    res.status(500).json({ message: "There was a problem trying to get a song object from the database!" });
     throw new Error(
       "There was a problem trying to get a song object from the database!"
     );
@@ -242,14 +242,14 @@ const deleteSong = asyncHandler(async (req, res) => {
 
   // <---- Checking if the provided song id is valid ---->
   if (!mongoose.Types.ObjectId.isValid(songID)) {
-    res.status(400);
+    res.status(400).json({ message: "Invalid song ID!" });
     throw new Error("Invalid song!");
   }
 
   // <---- Finding the song in the database ---->
   const song = await Song.findById(songID);
   if (!song) {
-    res.status(500);
+    res.status(500).json({ message: "There was a problem trying to get the song object from the database!" });
     throw new Error(
       "There was a problem trying to get the song object from the database!"
     );
@@ -257,7 +257,7 @@ const deleteSong = asyncHandler(async (req, res) => {
 
   // <---- Checking if the current user is the song's creator ---->
   if (song.userID.toString() !== req.user.id) {
-    res.status(403);
+    res.status(403).json({ message: "You cannot delete song that was not added by you!" });
     throw new Error("You cannot delete song that was not added by you!");
   }
 
@@ -277,14 +277,14 @@ const giveCategory = asyncHandler(async (req, res) => {
     !mongoose.Types.ObjectId.isValid(songID) ||
     !mongoose.Types.ObjectId.isValid(CategoryID)
   ) {
-    res.status(400);
+    res.status(400).json({ message: "Invalid or Category!!" });
     throw new Error("Invalid or Category!!");
   }
 
   // <---- Finding the song in the database ---->
   const song = await Song.findById(songID);
   if (!song) {
-    res.status(500);
+    res.status(500).json({ message:  "There was a problem trying to get the song object from the database!"});
     throw new Error(
       "There was a problem trying to get the song object from the database!"
     );
@@ -293,13 +293,13 @@ const giveCategory = asyncHandler(async (req, res) => {
   // <---- Finding the category in the database ---->
   const category = await Category.findById(categoryID);
   if (!category) {
-    res.status(400);
+    res.status(400).json({ message:  "Category not found!"});
     throw new Error("Category not found!");
   }
 
   // <---- Checking if user have permission to modify this song ---->
   if (!req.user.id == song.userID) {
-    req.status(401);
+    req.status(401).json({ message:  "You don't have permission to edit this song!"});
     throw new Error("You don't have permission to edit this song!");
   }
 

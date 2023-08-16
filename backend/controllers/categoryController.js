@@ -9,14 +9,14 @@ const addCategory = asyncHandler(async (req, res) => {
 
   // <---- Checking if user sent all necessary fields ---->
   if (!name) {
-    res.status(400);
+    res.status(400).json({message: "You need to provide category's name!"});
     throw new Error("You need to provide category's name!");
   }
 
   // <---- Checking if author with given name already exists ---->
   const existingCategory = await Category.findOne({ name });
   if (existingCategory) {
-    res.status(400);
+    res.status(400).json({message: "Category with this name already exists!"});
     throw new Error("Category with this name already exists!");
   }
 
@@ -30,7 +30,7 @@ const addCategory = asyncHandler(async (req, res) => {
   if (category) {
     res.status(200).json(category);
   } else {
-    res.status(400);
+    res.status(400).json({message: "category data was not valid!"});
     throw new Error("category data was not valid!");
   }
 });
@@ -42,7 +42,7 @@ const getAllCategories = asyncHandler(async (req, res) => {
   const categoryList = await Category.find();
 
   if (!categoryList) {
-    res.status(500);
+    res.status(500).json({message: "There was a problem trying to get categories from the database!"});
     throw new Error(
       "There was a problem trying to get categories from the database!"
     );
@@ -60,13 +60,13 @@ const editCategory = asyncHandler(async (req, res) => {
 
   // <---- Checking if the provided user id is valid ---->
   if (!mongoose.Types.ObjectId.isValid(categoryID)) {
-    res.status(400);
+    res.status(400).json({message: "Invalid category!"});
     throw new Error("Invalid category!");
   }
   // <---- Finding the user in the database ---->
   const category = await Category.findById(categoryID);
   if (!category) {
-    res.status(500);
+    res.status(500).json({message:  "There was a problem trying to get the category object from the database!"});
     throw new Error(
       "There was a problem trying to get the category object from the database!"
     );
@@ -74,7 +74,7 @@ const editCategory = asyncHandler(async (req, res) => {
 
   // <---- Checking if user have permission to modify this category ---->
   if (category.userID.toString() !== req.user.id) {
-    res.status(403);
+    res.status(403).json({message: "You cannot change other users' ids'!"});
     throw new Error("You cannot change other users' ids'!");
   }
 
@@ -96,14 +96,14 @@ const deleteCategory = asyncHandler(async (req, res) => {
   
     // <---- Checking if the provided category id is valid ---->
     if (!mongoose.Types.ObjectId.isValid(categoryID)) {
-      res.status(400);
+      res.status(400).json({message: "Invalid category!"});
       throw new Error("Invalid category!");
     }
   
     // <---- Finding the author in the database ---->
     const category = await Category.findById(categoryID);
     if (!category) {
-      res.status(500);
+      res.status(500).json({message: "There was a problem trying to get the category object from the database!"});
       throw new Error(
         "There was a problem trying to get the category object from the database!"
       );
@@ -111,7 +111,7 @@ const deleteCategory = asyncHandler(async (req, res) => {
   
     // <---- Checking if the current user is the category's creator ---->
     if (category.userID.toString() !== req.user.id) {
-      res.status(403);
+      res.status(403).json({message: "You cannot a category author that was not added by you!"});
       throw new Error("You cannot a category author that was not added by you!");
     }
   

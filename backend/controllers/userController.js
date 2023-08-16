@@ -15,20 +15,20 @@ const registerUser = asyncHandler( async (req, res) => {
 
     // <---- Checking if user sent all necessary fields ---->
     if (!username || !email || !password) {
-        res.status(400);
+        res.status(400).json({message: "You need to fulfil all fields!" });
         throw new Error("You need to fulfil all fields!");
     }
 
     // <---- Checking if user with given email already exists ---->
     let existingUser = await User.findOne({ email });
     if (existingUser) {
-        res.status(400);
+        res.status(400).json({message:"User with this email already exists!" });
         throw new Error("User with this email already exists!");
     }
     // <---- Checking if user with given username already exists ---->
     existingUser = await User.findOne({ username });
     if (existingUser) {
-        res.status(400);
+        res.status(400).json({message: "User with this username already exists!"});
         throw new Error("User with this username already exists!");
     }
 
@@ -47,7 +47,7 @@ const registerUser = asyncHandler( async (req, res) => {
     if (user) {
         res.status(201).json({ _id: user.id, email: user.email });
     } else {
-        res.status(400);
+        res.status(400).json({message: "User data was not valid!" });
         throw new Error("User data was not valid!");
     }
 });
@@ -61,7 +61,7 @@ const loginUser = asyncHandler( async (req, res) => {
 
     // <---- Checking if user sent all necessary fields ---->
     if (!email || !password) {
-        res.status(400);
+        res.status(400).json({message: "You need to fulfil all fields!" });
         throw new Error("You need to fulfil all fields!");
     };
 
@@ -69,7 +69,7 @@ const loginUser = asyncHandler( async (req, res) => {
 
     // <---- Checking if user with given email exists ---->
     if (!user) {
-        res.status(400);
+        res.status(400).json({message: "No user with this email!"});
         throw new Error("No user with this email!");
     };
 
@@ -88,7 +88,7 @@ const loginUser = asyncHandler( async (req, res) => {
         );
         res.status(200).json({ accessToken });
     } else {
-        res.status(401);
+        res.status(401).json({message: "Wrong password!" });
         throw new Error("Wrong password!")
     }
 });
@@ -110,13 +110,13 @@ const editUser = asyncHandler(async (req,res) => {
 
     // <---- Checking if the provided user id is valid ---->
     if (!mongoose.Types.ObjectId.isValid(userID)) {
-      res.status(400);
+      res.status(400).json({message: "Invalid user ID!" });
       throw new Error("Invalid user!");
     }
   // <---- Finding the user in the database ---->
     const user = await User.findById(userID);
     if (!user) {
-        res.status(500);
+        res.status(500).json({message: "There was a problem trying to get the user object from the database!"});
         throw new Error(
             "There was a problem trying to get the user object from the database!"
         );
@@ -124,7 +124,7 @@ const editUser = asyncHandler(async (req,res) => {
 
 // <---- Checking if the current user is the edited user ---->
   if (user._id.toString() !== req.user.id) {
-    res.status(403);
+    res.status(403).json({message:"You cannot change other users' ids'!" });
     throw new Error("You cannot change other users' ids'!");
   }
 
@@ -136,6 +136,7 @@ const editUser = asyncHandler(async (req,res) => {
 // <---- If exists, validating, hashing and setting new password ---->
   if (password) {
     if (password.length < 5) {
+        res.status(400).json({message: "Password not long enough"});
         throw new Error("Password not long enough");
     }
     const hashedPassword = await bcrypt.hash(password, 10);

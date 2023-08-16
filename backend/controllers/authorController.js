@@ -10,14 +10,14 @@ const addAuthor = asyncHandler (async (req, res) => {
 
     // <---- Checking if user sent all necessary fields ---->
     if (!name) {
-        res.status(400);
+        res.status(400).json({message: "You need to provide author's name!"});
         throw new Error("You need to provide author's name!");
     }
 
     // <---- Checking if author with given name already exists ---->
     const existingAuthor = await Author.findOne({ name });
     if (existingAuthor) {
-        res.status(400);
+        res.status(400).json({message: "Author with this name already exists!"});
         throw new Error("Author with this name already exists!");
     }
 
@@ -32,7 +32,7 @@ const addAuthor = asyncHandler (async (req, res) => {
     if(author) {
         res.status(200).json(author);
     } else {
-        res.status(400);
+        res.status(400).json({message: "author data was not valid!"});
         throw new Error("author data was not valid!");
     }
 });
@@ -44,7 +44,7 @@ const getAllAuthors = asyncHandler(async (req, res) => {
     const authorList = await Author.find();
 
     if (!authorList) {
-      res.status(500);
+      res.status(500).json({message: "There was a problem trying to get authors from the database!"});
       throw new Error(
         "There was a problem trying to get authors from the database!"
       );
@@ -62,13 +62,13 @@ const editAuthor = asyncHandler(async (req, res) => {
   
     // <---- Checking if the provided author id is valid ---->
     if (!mongoose.Types.ObjectId.isValid(authorID)) {
-      res.status(400);
-      throw new Error("Invalid author!");
+      res.status(400).json({message: "Invalid author ID"});
+      throw new Error("Invalid author ID!");
     }
     // <---- Finding the author in the database ---->
     const author = await Author.findById(authorID);
     if (!author) {
-      res.status(500);
+      res.status(500).json({message: "There was a problem trying to get the author object from the database!"});
       throw new Error(
         "There was a problem trying to get the author object from the database!"
       );
@@ -76,7 +76,7 @@ const editAuthor = asyncHandler(async (req, res) => {
   
     // <---- Checking if user have permission to modify this author ---->
     if (author.userID.toString() !== req.user.id) {
-      res.status(403);
+      res.status(403).json({message: "You cannot change other authors' ids'!"});
       throw new Error("You cannot change other authors' ids'!");
     }
   
@@ -99,14 +99,14 @@ const deleteAuthor = asyncHandler(async (req, res) => {
   
     // <---- Checking if the provided author id is valid ---->
     if (!mongoose.Types.ObjectId.isValid(authorID)) {
-      res.status(400);
+      res.status(400).json({ message: "Invalid author! ID"  });
       throw new Error("Invalid author!");
     }
   
     // <---- Finding the author in the database ---->
     const author = await Author.findById(authorID);
     if (!author) {
-      res.status(500);
+      res.status(500).json({ message: "There was a problem trying to get the author object from the database!"});
       throw new Error(
         "There was a problem trying to get the author object from the database!"
       );
@@ -114,7 +114,7 @@ const deleteAuthor = asyncHandler(async (req, res) => {
   
     // <---- Checking if the current user is the author's creator ---->
     if (author.userID.toString() !== req.user.id) {
-      res.status(403);
+      res.status(403).json({ message: "You cannot delete author that was not added by you!"});
       throw new Error("You cannot delete author that was not added by you!");
     }
   
