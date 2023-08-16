@@ -8,13 +8,24 @@ import {OnInit, Component, ElementRef, ViewChild} from '@angular/core';
 export class LandingPageComponent implements OnInit{
   @ViewChild('imageElement') animationElement!: ElementRef;
   isImageVisible:boolean = false;
-  imageSRC: string = './assets/pepe-pepejam-static.gif';
+
+  pepeBandGif: string = './assets/peepoband.gif';
+  pepeBandJpeg: string = './assets/peepoband.jpg';
+
+  nyanCatSRC: string = './assets/nyan-cat.gif';
+  pepeJamSRC: string = './assets/pepe-pepejam.gif';
+  pepeBandSRC: string = this.pepeBandJpeg;
+
+
+
+  backgroundImageSRC: string = './assets/main-background.jpeg';
+
   ngOnInit(): void {
     setTimeout(() => {
       this.isImageVisible=true
     },300);
     setTimeout(() => {
-      this.imageSRC='./assets/pepe-pepejam-tr.gif'
+      this.pepeBandSRC= this.pepeBandGif;
     },1500);
   }
 

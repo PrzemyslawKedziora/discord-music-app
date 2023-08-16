@@ -22,3 +22,12 @@ body,html{
   color: wheat;
   border-radius: 25px;
  }
+
+ @font-face {
+  font-family: 'karma_future';
+  src: url('./assets/karma_future.ttf');
+}
+ @font-face {
+  font-family: 'robotic_mono';
+  src: url('./assets/RobotoMono-VariableFont_wght.ttf');
+}
