@@ -3,7 +3,7 @@ import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, 
 import axios from "axios";
 import {SharedService} from "../../services/shared/shared.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {SnackBarComponent} from "../snack-bar/song/snack-bar.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'register',
@@ -14,7 +14,8 @@ export class RegisterComponent{
 
   constructor(private fb: FormBuilder,
               private sharedService: SharedService,
-              private sb: MatSnackBar) {
+              private sb: MatSnackBar,
+              private router: Router) {
     this.registerForm = this.fb.group({
       email: ['',[Validators.required,Validators.email]],
       username: ['',[Validators.required,Validators.minLength(3)]],
@@ -39,12 +40,15 @@ export class RegisterComponent{
     }
     else{
       axios.post('http://localhost:4100/api/users/register',this.registerForm.value).then(()=> {
-        this.sb.openFromComponent(SnackBarComponent, {
-          duration: 2000,
+        this.sb.open('User has been successfully registered!\n Please,log in.','', {
+          duration: 3000,
           panelClass: ['success-snackBar']
         });
         this.registerStatus = true;
         this.sharedService.registerUserStatus = this.registerStatus;
+        setTimeout(()=>{
+          this.router.navigate(['/login'])
+        },3000)
       }).catch((e)=> {
         this.handleError(e);
       });
@@ -55,7 +59,7 @@ export class RegisterComponent{
   handleError = (error: any): void => {
     this.registerStatus = false;
     this.sharedService.sharedAddingSongStatus = this.registerStatus;
-    this.sb.openFromComponent(SnackBarComponent, {
+    this.sb.open(error.response.data.message,'', {
       duration: 3000,
       panelClass: ['failed-snackBar']
     })
@@ -75,7 +79,6 @@ export class RegisterComponent{
       if (controlValue !== matchingControlValue) {
         return { matchValues: true };
       }
-
       return null;
     };
   }

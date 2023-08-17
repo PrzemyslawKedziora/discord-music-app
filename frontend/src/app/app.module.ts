@@ -20,12 +20,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
-import { SnackBarComponent } from './components/snack-bar/song/snack-bar.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { NewAuthorComponent } from './dashboard/management-panel/new/new-author/new-author.component';
-import {AuthorSnackBarComponent} from "./components/snack-bar/author/author-snack-bar.component";
-import {LoginSnackBarComponent} from "./components/snack-bar/login/login-snack-bar.component";
-import { RegisterSnackBarComponent } from './components/snack-bar/register-snack-bar/register-snack-bar.component';
 import {ClipboardModule} from "@angular/cdk/clipboard";
 import { ConfirmDialogComponent } from './dashboard/song-list/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
@@ -44,11 +40,7 @@ import {MatRadioModule} from "@angular/material/radio";
     ListItemComponent,
     ManagementPanelComponent,
     NewSongComponent,
-    SnackBarComponent,
     NewAuthorComponent,
-    AuthorSnackBarComponent,
-    LoginSnackBarComponent,
-    RegisterSnackBarComponent,
     ConfirmDialogComponent,
     FilterByComponent
 

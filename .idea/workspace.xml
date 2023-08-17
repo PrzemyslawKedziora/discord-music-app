@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5690a0d4-e400-4399-a4f4-5a0b259792b9" name="Changes" comment="Feature: Login form is finally usable">
+    <list default="true" id="5690a0d4-e400-4399-a4f4-5a0b259792b9" name="Changes" comment="Update: Improved code quality(cosmetic changes)">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/register/register.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/register/register.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/register/register.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/login/login.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/components/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/register/register.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/models/song.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/models/song.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/snack-bar/author/author-snack-bar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/snack-bar/author/author-snack-bar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/snack-bar/login/login-snack-bar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/snack-bar/login/login-snack-bar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/snack-bar/register-snack-bar/register-snack-bar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/snack-bar/register-snack-bar/register-snack-bar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/snack-bar/song/snack-bar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/snack-bar/song/snack-bar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/snack-bar/song/snack-bar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/snack-bar/song/snack-bar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/management-panel.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/management-panel.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-author/new-author.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-author/new-author.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-song/new-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-song/new-song.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/song-list/song-list-item/list-item.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song-list/song-list-item/list-item.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/landing-page/landing-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/landing-page/landing-page.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/landing-page/landing-page.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/landing-page/landing-page.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/landing-page/landing-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/landing-page/landing-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,11 +68,11 @@
       <recent name="D:\Projekty\discord-music-app\frontend\src\app\components\snack-bar\author" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projekty\discord-music-app\frontend\src\app\components" />
+      <recent name="D:\Projekty\discord-music-app\frontend\src\app\dashboard" />
+      <recent name="D:\Projekty\discord-music-app\frontend\src\app\dashboard\management-panel" />
       <recent name="D:\Projekty\discord-music-app\frontend\src\app\components\snack-bar\song" />
       <recent name="D:\Projekty\discord-music-app\frontend\src\app\dashboard\management-panel\new" />
-      <recent name="D:\Projekty\discord-music-app\frontend\src\app\services\shared" />
-      <recent name="D:\Projekty\discord-music-app\frontend\src\app\dashboard\management-panel" />
-      <recent name="D:\Projekty\discord-music-app\frontend\src\app\dashboard\song-list" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -91,7 +105,14 @@
       <workItem from="1691785525295" duration="238000" />
       <workItem from="1691789530834" duration="2872000" />
       <workItem from="1691848512339" duration="3644000" />
-      <workItem from="1691922727439" duration="4128000" />
+      <workItem from="1691922727439" duration="10457000" />
+      <workItem from="1692089900256" duration="11619000" />
+      <workItem from="1692115860302" duration="6099000" />
+      <workItem from="1692124909133" duration="36000" />
+      <workItem from="1692196737620" duration="56000" />
+      <workItem from="1692196889228" duration="2203000" />
+      <workItem from="1692209115870" duration="949000" />
+      <workItem from="1692219399212" duration="9709000" />
     </task>
     <task id="LOCAL-00001" summary="added routing to login and register components">
       <created>1690285246354</created>
@@ -345,7 +366,98 @@
       <option name="project" value="LOCAL" />
       <updated>1691866480665</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Feature: New user registration &amp; form validation">
+      <created>1691927013968</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1691927013968</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Feature: Added notifications to login component">
+      <created>1691945581282</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1691945581282</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Feature: Added notifications to register components">
+      <created>1691945616840</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1691945616840</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Feature: Added delete song method &amp; notifications">
+      <created>1692100127218</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1692100127218</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Fix: Changed storage user data method in WebStorage">
+      <created>1692100294391</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1692100294391</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Fix: Changed styling &amp; improved app structure">
+      <created>1692100404356</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1692100404356</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Fix: Changed ID of user who add song">
+      <created>1692100449599</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1692100449599</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Feature: Implemented request result message &amp; changed returned data structure">
+      <created>1692100570974</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1692100570974</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Fix: Changed logic style for data">
+      <created>1692121275547</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1692121275547</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Feature: LogOut button">
+      <created>1692225817941</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1692225817941</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Feature: Filtering data by author or genre">
+      <created>1692225911943</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1692225911943</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Update: Updated assets">
+      <created>1692225931622</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1692225931622</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Update: Improved code quality(cosmetic changes)">
+      <created>1692226017722</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1692226017722</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -363,19 +475,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="list-item component &amp; bootstrap icons" />
-    <MESSAGE value="Fix: correct syntax" />
-    <MESSAGE value="Feature: added Song model" />
-    <MESSAGE value="Fix: project syntax changes" />
-    <MESSAGE value="Feature: implemented management panel" />
-    <MESSAGE value="Feature: implemented song list item component" />
-    <MESSAGE value="Feature: management panel" />
-    <MESSAGE value="Feature: styling records" />
-    <MESSAGE value="Fix: module imports (Dialog,Angular Material)" />
-    <MESSAGE value="Feature: Implemented adding song form and its validation" />
-    <MESSAGE value="BugFix: Removed redundant files" />
-    <MESSAGE value="Feature: adding songs to app" />
-    <MESSAGE value="BugFix: display of song categories" />
     <MESSAGE value="Feature: Added sharing data service" />
     <MESSAGE value="Fix: Improved responsiveness of records" />
     <MESSAGE value="Feature: Implemented snackbar to adding song function" />
@@ -388,6 +487,19 @@
     <MESSAGE value="Fix: Changed the way of displaying records to dynamic" />
     <MESSAGE value="Featture: Dynamic author list display" />
     <MESSAGE value="Feature: Login form is finally usable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feature: Login form is finally usable" />
+    <MESSAGE value="Feature: New user registration &amp; form validation" />
+    <MESSAGE value="Feature: Added notifications to login components" />
+    <MESSAGE value="Feature: Added notifications to register components" />
+    <MESSAGE value="Feature: Added delete song method &amp; notifications" />
+    <MESSAGE value="Fix: Changed storage user data method in WebStorage" />
+    <MESSAGE value="Fix: Changed styling &amp; improved app structure" />
+    <MESSAGE value="Fix: Changed ID of user who add song" />
+    <MESSAGE value="Feature: Implemented request result message &amp; changed returned data structure" />
+    <MESSAGE value="Fix: Changed logic style for data" />
+    <MESSAGE value="Feature: LogOut button" />
+    <MESSAGE value="Feature: Filtering data by author or genre" />
+    <MESSAGE value="Update: Updated assets" />
+    <MESSAGE value="Update: Improved code quality(cosmetic changes)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update: Improved code quality(cosmetic changes)" />
   </component>
 </project>

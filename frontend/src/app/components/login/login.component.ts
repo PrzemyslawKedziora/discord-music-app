@@ -3,9 +3,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import axios from "axios";
 import {SharedService} from "../../services/shared/shared.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {LoginSnackBarComponent} from "../snack-bar/login/login-snack-bar.component";
 import {Router} from "@angular/router";
-import {SnackBarComponent} from "../snack-bar/song/snack-bar.component";
 
 @Component({
   selector: 'login',
@@ -49,8 +47,8 @@ export class LoginComponent {
           setTimeout(() => {
             this.router.navigate(['/dashboard'])
           },2000);
-          this.sb.openFromComponent(LoginSnackBarComponent,{
-            duration: 500,
+          this.sb.open('User has been successfully logged in!','',{
+            duration: 1000,
             panelClass: ['success-snackBar']
           });
         }).catch((e)=> {
@@ -62,12 +60,12 @@ export class LoginComponent {
         this.isLoggedIn = false;
         this.sharedService.loginUserStatus = this.isLoggedIn;
         console.log(error);
-        this.sb.openFromComponent(SnackBarComponent, {
+        this.sb.open(error.response.data.message,'', {
           duration: 2000,
           panelClass: ['failed-snackBar']
         })
       }
-      console.log('zalogowano!');
+      console.log('Logged in!');
     }
   }
 }

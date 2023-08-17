@@ -3,7 +3,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import axios from "axios";
 import {FormBuilder, Validators} from "@angular/forms";
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {SnackBarComponent} from "../../../../components/snack-bar/song/snack-bar.component";
 import {SharedService} from "../../../../services/shared/shared.service";
 import {AddDialogModel} from "../../../../models/add-dialog.model";
 import {SongRecord, SongModel} from "../../../../models/song.model";
@@ -65,7 +64,7 @@ export class NewSongComponent{
             this.sharedService.sharedAddingSongStatus = this.addSongStatus;
             this.songData.push(new SongRecord(res.data._id,res.data.authorID,res.data.thumbnail,res.data.categories,
               res.data.likes,res.data.name,res.data.userID,res.data.ytURL))
-            this.sb.openFromComponent(SnackBarComponent, {
+            this.sb.open('Song has been succesfully added!','', {
               duration: duration,
               panelClass: ['success-snackBar']
             });
@@ -76,8 +75,9 @@ export class NewSongComponent{
      let handleError = (error: any): void => {
       this.addSongStatus = false;
       this.sharedService.sharedAddingSongStatus = this.addSongStatus;
-      console.log(error);
-       this.sb.openFromComponent(SnackBarComponent, {
+      const errorMessage = error.response.data.message;
+      console.log(error.response.data.message);
+       this.sb.open(errorMessage || 'The URL has wrong format' ,'',{
          duration: 3000,
          panelClass: ['failed-snackBar']
        })

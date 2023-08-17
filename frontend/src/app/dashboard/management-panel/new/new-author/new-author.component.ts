@@ -5,8 +5,6 @@ import {SharedService} from "../../../../services/shared/shared.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {AuthorModel, AuthorRecord} from "../../../../models/author.model";
 import axios from "axios";
-import {SnackBarComponent} from "../../../../components/snack-bar/song/snack-bar.component";
-import {AuthorSnackBarComponent} from "../../../../components/snack-bar/author/author-snack-bar.component";
 
 @Component({
   selector: 'app-new-author',
@@ -25,12 +23,10 @@ export class NewAuthorComponent{
   }
 
 
-
-
   authorForm = this.fb.group({
     name: ['', Validators.required],
     pictureURL: '',
-    userID: '64bdc37f3f27bb6025aaa4ed'
+    userID: sessionStorage.getItem('id')
   });
 
   addAuthorStatus!: boolean;
@@ -49,7 +45,7 @@ export class NewAuthorComponent{
             const newAuthor = new AuthorRecord(res.data.name,res.data.pictureURL,(res.data.userID).toString())
             this.authors.push(newAuthor);
             this.sharedService.addNewAuthor(newAuthor);
-            this.sb.openFromComponent(AuthorSnackBarComponent, {
+            this.sb.open('Author has been successfully added!','', {
               duration: duration,
               panelClass: ['success-snackBar']
             });
@@ -63,7 +59,7 @@ export class NewAuthorComponent{
       this.addAuthorStatus = false;
       this.sharedService.sharedAddingAuthorStatus = this.addAuthorStatus;
       console.log(error);
-      this.sb.openFromComponent(SnackBarComponent, {
+      this.sb.open(error.response.data.message,'', {
         duration: 3000,
         panelClass: ['failed-snackBar']
       })
