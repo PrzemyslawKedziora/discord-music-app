@@ -18,7 +18,8 @@ import {FilterByComponent} from "../components/filter-by/filter-by.component";
 export class DashboardComponent{
 
   constructor(public dialog: MatDialog,
-              private sharedService: SharedService) {
+              public sharedService: SharedService) {
+    this.sharedService.filterStatus=false;
 
 
     axios.get('http://localhost:4100/api/songs/all').then((response)=> {
@@ -106,6 +107,10 @@ export class DashboardComponent{
       this.songs=res;
       }
     })
+  }
+  removeFilters(){
+    this.songs=this.songsTemp;
+    this.sharedService.filterStatus=false;
   }
 
 

@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {SongModel} from "../../models/song.model";
+import {SharedService} from "../../services/shared/shared.service";
 
 @Component({
   selector: 'app-filter-by',
@@ -12,6 +13,7 @@ export class FilterByComponent {
 
 
   constructor(private dialogRef: MatDialogRef<FilterByComponent>,
+              private sharedService: SharedService,
               @Inject(MAT_DIALOG_DATA) public data: SongModel[]) {
 
   }
@@ -28,8 +30,10 @@ export class FilterByComponent {
       }
     });
     if (this.filterCategory != '' && this.filterString != ''){
+      this.sharedService.filterStatus = true;
       this.dialogRef.close(this.data);
     }
+
   }
 
   close() {

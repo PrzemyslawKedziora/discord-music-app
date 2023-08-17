@@ -18,6 +18,7 @@ export class SharedService {
   private newAuthorSubject = new Subject<AuthorModel>();
   private _loginUserStatus!:boolean;
   private _registerUserStatus!:boolean;
+  public _filterStatus!:boolean;
 
 
 
@@ -91,5 +92,14 @@ export class SharedService {
 
   set registerUserStatus(value: boolean) {
     this._registerUserStatus = value;
+  }
+
+
+  get filterStatus(): boolean {
+    return this._filterStatus;
+  }
+
+  set filterStatus(value: boolean) {
+    this._filterStatus = value;
   }
 }
