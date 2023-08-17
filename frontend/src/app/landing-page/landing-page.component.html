@@ -1,18 +1,16 @@
-<img [src]="backgroundImageSRC" alt="backgroundImage" class="backgroundImage">
-<div class="container vh-100 d-flex flex-column align-items-center justify-content-center landing-container">
-  <div class="d-flex flex-column align-items-center justify-content-center content-group">
-    <p class="title-text">Diskont Apka</p>
-    <div class="d-flex flex-column button-group">
-      <button class="btn-login" routerLink="/dashboard">Log in</button>
-      <button class="btn-music" routerLink="/login">Music List</button>
+
+<img [src]="backgroundImageSRC" class="backgroundImage" alt="background_Image">
+<div class="container-fluid d-flex vh-100 z-index-5 justify-content-center">
+    <div class="elements-container z-index-5">
+        <img [src]="pepeBandSRC" alt="" class="pepeband-gif">
+        <div class="title-text">
+            Diskont Apka
+        </div>
+        <div class="buttons-container ">
+            <button class="btn-login btn" routerLink="/login">Log in</button>
+            <button class="btn-music btn">Music List</button>
+        </div>
     </div>
-  </div>
-  <img class="imageElement" #imageElement [src]="pepeBandSRC" alt="pepe" [ngStyle]="{ 
-    'opacity': isImageVisible ? 1 : 0,
-    'transform': isImageVisible ? 'translateY(-100%)' : 'translateY(50%)',
-    'transition': 'opacity 0.5s, transform 0.5s' 
-  }">
-  <img class="nyan-cat" [src]="nyanCatSRC" alt="nyanCat">
-  <img class="pepe-jam" [src]="pepeJamSRC" alt="pepeJam">
 </div>
-<router-outlet></router-outlet>
+<img [src]="nyanCatSRC" class="nyan-cat z-index-5" alt="nyanCat" (click)="playNyanCat()">
+<img [src]="pepeJamSRC" class="pepe-jam z-index-5" alt="nyanCat">

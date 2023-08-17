@@ -15,10 +15,14 @@ export class LandingPageComponent implements OnInit{
   nyanCatSRC: string = './assets/nyan-cat.gif';
   pepeJamSRC: string = './assets/pepe-pepejam.gif';
   pepeBandSRC: string = this.pepeBandJpeg;
-
-
-
   backgroundImageSRC: string = './assets/main-background.jpeg';
+
+  playNyanCat() {
+    let nyanCatAudio = new Audio();
+    nyanCatAudio.src = './assets/NyanCatSound.mp3';
+    nyanCatAudio.load();
+    nyanCatAudio.play();
+  }
 
   ngOnInit(): void {
     setTimeout(() => {
