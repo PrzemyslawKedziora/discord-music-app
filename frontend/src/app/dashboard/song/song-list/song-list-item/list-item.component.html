@@ -9,11 +9,11 @@
       </div>
       <div class=" my-auto song-description" (click)="onClick()" [cdkCopyToClipboard]="'!play ' + songRecord.name">
         <div class="song-name data">{{songRecord.name}}</div>
-        <div class="song-author-name my-auto data">{{songRecord.authorID.name || 'hmm...'}}</div>
+        <div class="song-author-name my-auto data">{{songRecord.authorID.name || 'loading...'}}</div>
       </div>
       <div class="song-categories my-auto">
         <span *ngFor="let category of songRecord.categories; let last = last">
-    {{ category.name }}{{ !last ? ', ' : '' }}
+    {{ category.name || 'loading...'}}{{ !last ? ', ' : '' }}
   </span>
       </div>
       <div class="my-auto data like-group" (click)="like(songRecord)" #likeElement>
