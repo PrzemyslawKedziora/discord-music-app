@@ -15,7 +15,6 @@ import {AuthorModel} from "../../../../models/author.model";
 })
 export class NewSongComponent{
 
-
   private apiUrl = 'http://localhost:4100/api/songs/add';
 
   constructor(public dialogRef: MatDialogRef<NewSongComponent>,
@@ -28,8 +27,6 @@ export class NewSongComponent{
     this.songData=this.sharedService.sharedSongsArray;
     this.artists = this.sharedService.sharedArtistsArray;
   }
-
-
 
   newSongForm = this.fb.group({
     ytURL: ['', Validators.required],

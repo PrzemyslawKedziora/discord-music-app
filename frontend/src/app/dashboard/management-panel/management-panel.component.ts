@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {DashboardComponent} from "../dashboard.component";
 import {CategoryModel} from "../../models/category.model";
 import {AuthorModel} from "../../models/author.model";
-import {Router} from "@angular/router";
+import {SongService} from "../song/song.service";
 
 
 @Component({
@@ -13,7 +13,8 @@ import {Router} from "@angular/router";
 
 export class ManagementPanelComponent implements OnInit{
 
-  constructor(public dashboard: DashboardComponent)
+  constructor(public dashboard: DashboardComponent,
+              public songService: SongService)
   {
   }
 

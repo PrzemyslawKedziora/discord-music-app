@@ -10,7 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import { ListItemComponent } from './dashboard/song-list/song-list-item/list-item.component';
+import { ListItemComponent } from './dashboard/song/song-list/song-list-item/list-item.component';
 import { ManagementPanelComponent } from './dashboard/management-panel/management-panel.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewSongComponent } from './dashboard/management-panel/new/new-song/new-song.component';
@@ -23,9 +23,9 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { NewAuthorComponent } from './dashboard/management-panel/new/new-author/new-author.component';
 import {ClipboardModule} from "@angular/cdk/clipboard";
-import { ConfirmDialogComponent } from './dashboard/song-list/confirm-dialog/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from './dashboard/song/confirm-dialog/confirm-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
-import { FilterByComponent } from './components/filter-by/filter-by.component';
+import { FilterByComponent } from './dashboard/song/filter-by/filter-by.component';
 import {MatRadioModule} from "@angular/material/radio";
 
 

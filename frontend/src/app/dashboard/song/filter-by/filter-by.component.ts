@@ -1,8 +1,8 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {SongModel} from "../../models/song.model";
-import {SharedService} from "../../services/shared/shared.service";
+import {SongModel} from "../../../models/song.model";
+import {SharedService} from "../../../services/shared/shared.service";
 
 @Component({
   selector: 'app-filter-by',
@@ -17,7 +17,6 @@ export class FilterByComponent {
               @Inject(MAT_DIALOG_DATA) public data: SongModel[]) {
 
   }
-
   filterCategory:string='';
   filterString:string='';
 
