@@ -1,16 +1,17 @@
-
-<img [src]="backgroundImageSRC" class="backgroundImage" alt="background_Image">
-<div class="container-fluid d-flex vh-100 z-index-5 justify-content-center">
+<div class="container">
+  <img [src]="backgroundImageSRC" class="backgroundImage" alt="background_Image">
+  <div class="container-fluid d-flex vh-100 z-index-5 justify-content-center">
     <div class="elements-container z-index-5">
-        <img [src]="pepeBandSRC" alt="" class="pepeband-gif">
-        <div class="title-text">
-            Diskont Apka
-        </div>
-        <div class="buttons-container ">
-            <button class="btn-login btn" routerLink="/login">Log in</button>
-            <button class="btn-music btn" routerLink="/login">Music List</button>
-        </div>
+      <img [src]="pepeBandSRC" alt="" class="pepeband-gif">
+      <div class="title-text">
+        Diskont Apka
+      </div>
+      <div class="buttons-container ">
+        <button class="btn-login btn" routerLink="/login">Log in</button>
+        <button class="btn-music btn">Music List</button>
+      </div>
     </div>
+  </div>
+  <img [src]="nyanCatSRC" class="nyan-cat z-index-5" alt="nyanCat" (click)="playNyanCat()">
+  <img [src]="pepeJamSRC" class="pepe-jam z-index-5" alt="nyanCat">
 </div>
-<img [src]="nyanCatSRC" class="nyan-cat z-index-5" alt="nyanCat" (click)="playNyanCat()">
-<img [src]="pepeJamSRC" class="pepe-jam z-index-5" alt="nyanCat">

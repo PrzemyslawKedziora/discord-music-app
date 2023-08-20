@@ -16,12 +16,17 @@ export class LandingPageComponent implements OnInit{
   pepeJamSRC: string = './assets/pepe-pepejam.gif';
   pepeBandSRC: string = this.pepeBandJpeg;
   backgroundImageSRC: string = './assets/main-background.jpeg';
-
+  isPlaying:boolean=false;
+  nyanCatAudio = new Audio('./assets/NyanCatSound.mp3');
   playNyanCat() {
-    let nyanCatAudio = new Audio();
-    nyanCatAudio.src = './assets/NyanCatSound.mp3';
-    nyanCatAudio.load();
-    nyanCatAudio.play();
+    this.isPlaying = !this.isPlaying;
+    if (this.isPlaying){
+      this.nyanCatAudio.play();
+    }
+    else {
+      this.nyanCatAudio.pause();
+      this.nyanCatAudio.currentTime=0;
+    }
   }
 
   ngOnInit(): void {
