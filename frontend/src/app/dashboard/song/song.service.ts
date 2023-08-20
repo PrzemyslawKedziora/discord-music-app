@@ -6,7 +6,7 @@ import {SongModel} from "../../models/song.model";
 import {AddDialogModel} from "../../models/add-dialog.model";
 import {MatDialog} from "@angular/material/dialog";
 import {SharedService} from "../../services/shared/shared.service";
-import {NewSongComponent} from "../management-panel/new/new-song/new-song.component";
+import {NewSongComponent} from "./new-song/new-song.component";
 
 @Injectable({
   providedIn: 'root'

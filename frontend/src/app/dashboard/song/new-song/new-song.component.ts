@@ -3,10 +3,10 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import axios from "axios";
 import {FormBuilder, Validators} from "@angular/forms";
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {SharedService} from "../../../../services/shared/shared.service";
-import {AddDialogModel} from "../../../../models/add-dialog.model";
-import {SongRecord, SongModel} from "../../../../models/song.model";
-import {AuthorModel} from "../../../../models/author.model";
+import {SharedService} from "../../../services/shared/shared.service";
+import {AddDialogModel} from "../../../models/add-dialog.model";
+import {SongRecord, SongModel} from "../../../models/song.model";
+import {AuthorModel} from "../../../models/author.model";
 
 @Component({
   selector: 'app-new-song',
