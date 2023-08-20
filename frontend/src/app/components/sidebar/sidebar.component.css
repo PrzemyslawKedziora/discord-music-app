@@ -1,0 +1,8 @@
+.sidebar{
+    border: 1px red solid;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 20%;
+    height: 100vh;
+}

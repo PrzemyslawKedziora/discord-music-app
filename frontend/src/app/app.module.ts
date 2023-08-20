@@ -27,6 +27,7 @@ import { ConfirmDialogComponent } from './dashboard/song-list/confirm-dialog/con
 import {MatIconModule} from "@angular/material/icon";
 import { FilterByComponent } from './components/filter-by/filter-by.component';
 import {MatRadioModule} from "@angular/material/radio";
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import {MatRadioModule} from "@angular/material/radio";
     NewSongComponent,
     NewAuthorComponent,
     ConfirmDialogComponent,
-    FilterByComponent
+    FilterByComponent,
+    SidebarComponent
 
   ],
     imports: [
