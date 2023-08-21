@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5690a0d4-e400-4399-a4f4-5a0b259792b9" name="Changes" comment="Fix: landing page music service">
+    <list default="true" id="5690a0d4-e400-4399-a4f4-5a0b259792b9" name="Changes" comment="Feature: added authors component">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/header/header.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/header/header.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/header/header.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/sidebar/sidebar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/sidebar/sidebar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/sidebar/sidebar.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/top-bar/top-bar.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/top-bar/top-bar.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/top-bar/top-bar.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/top-bar/top-bar.component.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/management-panel.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/management-panel.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/management-panel.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/management-panel.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-song/new-song.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song/new-song/new-song.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-song/new-song.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song/new-song/new-song.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-song/new-song.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song/new-song/new-song.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/management-panel/new/new-song/new-song.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song/new-song/new-song.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/song/song-list/song-list-item/list-item.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song/song-list/song-list-item/list-item.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/song/song.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song/song.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/landing-page/landing-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/landing-page/landing-page.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/landing-page/landing-page.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/landing-page/landing-page.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/song/confirm-dialog/confirm-dialog.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song/delete-confirm-dialog/confirm-dialog.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/song/confirm-dialog/confirm-dialog.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song/delete-confirm-dialog/confirm-dialog.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/song/confirm-dialog/confirm-dialog.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song/delete-confirm-dialog/confirm-dialog.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/song/confirm-dialog/confirm-dialog.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song/delete-confirm-dialog/confirm-dialog.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/song/song-list/song-list-item/list-item.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song/song-list/song-list-item/list-item.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -3,7 +3,7 @@ import {SongModel} from "../../../../models/song.model";
 import {DashboardComponent} from "../../../dashboard.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
-import {ConfirmDialogComponent} from "../../confirm-dialog/confirm-dialog.component";
+import {ConfirmDialogComponent} from "../../delete-confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'song-list-item',

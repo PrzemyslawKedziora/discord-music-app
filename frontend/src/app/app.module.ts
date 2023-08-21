@@ -23,12 +23,12 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { NewAuthorComponent } from './dashboard/management-panel/new/new-author/new-author.component';
 import {ClipboardModule} from "@angular/cdk/clipboard";
-import { ConfirmDialogComponent } from './dashboard/song/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from './dashboard/song/delete-confirm-dialog/confirm-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
 import { FilterByComponent } from './dashboard/song/filter-by/filter-by.component';
 import {MatRadioModule} from "@angular/material/radio";
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { AuthorsComponent } from './dashboard/authors/authors.component';
 
 
 @NgModule({
@@ -46,7 +46,7 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
     ConfirmDialogComponent,
     FilterByComponent,
     SidebarComponent,
-    TopBarComponent
+    AuthorsComponent
 
   ],
     imports: [
