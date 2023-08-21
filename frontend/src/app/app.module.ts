@@ -28,6 +28,7 @@ import {MatIconModule} from "@angular/material/icon";
 import { FilterByComponent } from './dashboard/song/filter-by/filter-by.component';
 import {MatRadioModule} from "@angular/material/radio";
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     NewAuthorComponent,
     ConfirmDialogComponent,
     FilterByComponent,
-    SidebarComponent
+    SidebarComponent,
+    TopBarComponent
 
   ],
     imports: [
