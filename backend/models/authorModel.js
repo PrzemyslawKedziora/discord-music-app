@@ -7,7 +7,7 @@ const authorSchema = mongoose.Schema(
             required: [true, "Please add the artist name!"],
             max: 50,
         },
-        pictureURl: {
+        pictureURL: {
             type: String,
             required: false,
         },
@@ -15,7 +15,7 @@ const authorSchema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
             required: true,
-        }
+        },
     },
     { timestamps: true }
 );
