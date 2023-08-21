@@ -30,6 +30,7 @@ import {MatRadioModule} from "@angular/material/radio";
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AuthorsComponent } from './dashboard/authors/authors.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
     FilterByComponent,
     SidebarComponent,
     AuthorsComponent,
-    TopBarComponent
+    TopBarComponent,
+    HomeComponent
 
 
   ],
