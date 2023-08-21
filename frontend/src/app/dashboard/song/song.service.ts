@@ -22,14 +22,18 @@ export class SongService {
   songsTemp: SongModel[]=[];
   dialogData: AddDialogModel={category:[],author:[]};
 
-  getSongs(){
-    axios.get('http://localhost:4100/api/songs/all').then((response)=> {
-      for (let i=0;i<response.data.length;i++){
-        this.songs.push(response.data[i]);
-      }
+  getSongs(): Promise<void>{
+    return axios.get('http://localhost:4100/api/songs/all').then((response) => {
+     if (this.songs.length ==0){
+       for (let i = 0; i < response.data.length; i++) {
+         this.songs.push(response.data[i]);
+       }
+     }
       this.songsTemp = this.songs;
+      this.sharedService.sharedSongsArray = this.songs;
+
     });
-    this.sharedService.sharedSongsArray = this.songs;
+
   }
 
   getCategories(){
@@ -45,14 +49,14 @@ export class SongService {
     );
   }
 
-  getAuthors(){
-    axios.get('http://localhost:4100/api/authors/all').then(
+  getAuthors(): Promise<void> {
+    return axios.get('http://localhost:4100/api/authors/all').then(
       (res) => {
-        let arTemp:AuthorModel[]=[];
+        let arTemp: AuthorModel[] = [];
         for (let i = 0; i < res.data.length; i++) {
           arTemp.push(res.data[i]);
         }
-        arTemp=arTemp.sort((a,b)=> a.name.localeCompare(b.name));
+        arTemp = arTemp.sort((a, b) => a.name.localeCompare(b.name));
         this.artists = arTemp;
         this.dialogData.author = this.artists;
         this.sharedService.sharedArtistsArray = this.artists;

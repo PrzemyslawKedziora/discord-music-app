@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {SharedService} from "../../services/shared/shared.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 
+
+  constructor(public sharedService: SharedService) {
+  }
 }

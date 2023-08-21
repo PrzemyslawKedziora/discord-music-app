@@ -16,16 +16,27 @@ import {SongService} from "./song/song.service";
 })
 export class DashboardComponent{
 
+  categories!: CategoryModel[];
+  artists!: AuthorModel[];
+  songs: SongModel[]=[];
+  songsTemp: SongModel[]=[];
+  dialogData: AddDialogModel={category:[],author:[]};
+  isLoggedIn!: boolean;
+
   constructor(public dialog: MatDialog,
               public sharedService: SharedService,
               private songService: SongService) {
     this.sharedService.filterStatus=false;
 
 
-   songService.getSongs();
-   songService.getCategories();
-   songService.getAuthors();
-    this.songs = this.sharedService.sharedSongsArray;
+   if (this.songs.length < 1){
+     songService.getSongs().then(()=> {
+       this.songs = this.sharedService.sharedSongsArray;
+     });
+     songService.getCategories();
+     songService.getAuthors();
+   }
+
     this.sharedService.getNewAuthor().subscribe((newAuthor) => {
       if (newAuthor) {
         this.artists.push(newAuthor);
@@ -35,13 +46,6 @@ export class DashboardComponent{
     this.isLoggedIn = !!sessionStorage.getItem("token");
 
   }
-
-  categories!: CategoryModel[];
-  artists!: AuthorModel[];
-  songs: SongModel[]=[];
-  songsTemp: SongModel[]=[];
-  dialogData: AddDialogModel={category:[],author:[]};
-  isLoggedIn!: boolean;
 
   addArtist(){
     const dialogRef = this.dialog.open(NewAuthorComponent, {

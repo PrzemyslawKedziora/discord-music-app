@@ -1,0 +1,8 @@
+app-sidebar{
+  position: sticky;
+  top: 20px;
+  background-color: #222;
+  padding: 10px;
+  width: 20%;
+  text-align: center;
+}

@@ -48,6 +48,7 @@ import { AuthorsComponent } from './dashboard/authors/authors.component';
     SidebarComponent,
     AuthorsComponent
 
+
   ],
     imports: [
         BrowserModule,
