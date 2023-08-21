@@ -1,0 +1,15 @@
+.top-bar{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;   
+}
+
+.search-bar{
+    width: 35%;
+    height: 30%;
+    background: #424242;
+}
+
+i{
+    width: 10%;
+}

@@ -1,8 +1,15 @@
 <!--<app-header></app-header>-->
-<div class="cont1">
-   <app-sidebar></app-sidebar>
+<div class="main-container">
+  <app-sidebar></app-sidebar>
+  <div class="sidebar-fix"></div>
+
   <div class="content-container">
-    <app-management-panel [categories]="categories" [authors]="artists"></app-management-panel>
+    <app-top-bar></app-top-bar>
+  </div>
+</div>
+
+<!--
+  <app-management-panel [categories]="categories" [authors]="artists"></app-management-panel>
     <div class="container">
       <div class="row">
         <div class="col">
@@ -24,5 +31,4 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
+-->
