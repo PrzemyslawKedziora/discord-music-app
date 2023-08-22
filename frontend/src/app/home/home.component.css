@@ -15,7 +15,6 @@ app-sidebar,
   top: 0;
   left: 0;
 }
-
 .content-container{
   display: flex;
   width: 80%;
@@ -25,24 +24,4 @@ app-top-bar{
   width: 100%;
   height: 7.5%;
   border: 1px solid red;
-}
-song-list-item:hover{
-  background: #0f4841;
-}
-
-.number{
-  min-width: 20px;
-}
-.thumbnail{
-  width: 140px;
-}
-.title {
-  width: 400px;
-  float: left;
-}
-.genre{
-  width: 70px;
-}
-.like-group{
-  width: 40px;
 }

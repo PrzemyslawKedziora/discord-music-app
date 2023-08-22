@@ -38,6 +38,8 @@ export class NewAuthorComponent{
         const headers = {
           Authorization: 'Bearer ' + accessToken,
         };
+        console.log(this.authorForm.value);
+
         axios.post(this.apiUrl, this.authorForm.value, {headers})
           .then((res) => {
             this.addAuthorStatus = true;
