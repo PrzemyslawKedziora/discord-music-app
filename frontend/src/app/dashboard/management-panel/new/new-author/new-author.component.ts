@@ -42,15 +42,16 @@ export class NewAuthorComponent{
 
         axios.post(this.apiUrl, this.authorForm.value, {headers})
           .then((res) => {
-            this.addAuthorStatus = true;
-            this.sharedService.sharedAddingAuthorStatus = this.addAuthorStatus;
-            const newAuthor = new AuthorRecord(res.data.name,res.data.pictureURL,(res.data.userID).toString())
+            const newAuthor = new AuthorRecord(res.data.name,res.data.pictureURL,res.data.userID);
+            console.log(newAuthor)
             this.authors.push(newAuthor);
             this.sharedService.addNewAuthor(newAuthor);
             this.sb.open('Author has been successfully added!','', {
               duration: duration,
               panelClass: ['success-snackBar']
             });
+            this.addAuthorStatus = true;
+            this.sharedService.sharedAddingAuthorStatus = this.addAuthorStatus;
 
             console.log('Author has been succesfully added!\n', res);
           }).catch((e) => {

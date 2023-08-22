@@ -3,7 +3,8 @@
   <div class="authors">
     <p>authors works!</p>
     <div *ngFor="let author of authors">
-      {{author.name}}
+      {{author.name}} <span> <img [src]="author.pictureURL" [ngStyle]="{'width': '150px'}"></span>
+
     </div>
   </div>
 </div>

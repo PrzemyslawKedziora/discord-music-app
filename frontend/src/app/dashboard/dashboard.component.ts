@@ -36,12 +36,6 @@ export class DashboardComponent{
      songService.getCategories();
      songService.getAuthors();
    }
-
-    this.sharedService.getNewAuthor().subscribe((newAuthor) => {
-      if (newAuthor) {
-        this.artists.push(newAuthor);
-      }
-    });
     this.sharedService.isLoggedInStatus = this.isLoggedIn;
     this.isLoggedIn = !!sessionStorage.getItem("token");
 
