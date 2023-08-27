@@ -23,9 +23,9 @@ export class FilterByComponent {
   filterBy(filterData: string, filterCategory: string) {
     this.data = this.data.filter((song) => {
       if (filterCategory === 'author') {
-        return song.authorID.name === filterData;
+        return (song.authorID.name).toLowerCase() === filterData.toLowerCase();
       } else {
-        return song.categories.some((cat) => cat.name === filterData);
+        return song.categories.some((cat) => (cat.name).toLowerCase() === filterData.toLowerCase());
       }
     });
     if (this.filterCategory != '' && this.filterString != ''){
