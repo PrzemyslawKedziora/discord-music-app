@@ -1,3 +1,4 @@
+@import "src/variables";
 song-list-item:hover{
   background: #0f4841;
 }
@@ -26,7 +27,7 @@ footer{
 app-sidebar{
   position: sticky;
   top: 20px;
-  background-color: #222;
+  background-color: $background-main-color;
   padding: 10px;
   width: 20%;
   text-align: center;
