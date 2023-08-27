@@ -9,7 +9,6 @@ app-sidebar{
 }
 .authors-top-bar{
   width: available;
-  border: 2px solid red;
 }
 mat-form-field{
   padding-top: 20px;
@@ -22,4 +21,13 @@ mat-form-field{
   display: flex;
   justify-content: flex-end;
   width: 100%;
+}
+.button-add{
+  width: 50vw;
+}
+.btn-author-add{
+  background: $hover-blue-nav-color;
+}
+.container1{
+  background: $background-color;
 }

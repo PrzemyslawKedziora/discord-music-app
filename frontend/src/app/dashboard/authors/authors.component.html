@@ -15,13 +15,11 @@
                    [placeholder]="' search by authors\' name'"
             >
           </mat-form-field>
+          <div class="button-add">
+            <button class="btn btn-author-add" (click)="authorService.addArtist()"> Add artist</button>
+          </div>
         </div>
         </div>
-      <div class="row">
-        <div class="col">
-          <button class="btn btn-primary" (click)="authorService.addArtist()"> dodaj autor</button>
-        </div>
-      </div>
    <div class="row">
      <div class="col-md-3 col-sm-4 col" *ngFor="let author of filteredAuthors">
        <app-author-card [author]="author"></app-author-card>
