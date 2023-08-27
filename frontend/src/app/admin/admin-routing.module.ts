@@ -5,7 +5,7 @@ import {DashboardComponent} from "../dashboard/dashboard.component";
 import {LoginComponent} from "../components/login/login.component";
 import {RegisterComponent} from "../components/register/register.component";
 import {AuthorsComponent} from "../dashboard/authors/authors.component";
-import {HomeComponent} from "../home/home.component";
+import {HomeComponent} from "../dashboard/home/home.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/landing-page', pathMatch: 'full'},

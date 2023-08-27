@@ -21,7 +21,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import { NewAuthorComponent } from './dashboard/management-panel/new/new-author/new-author.component';
+import { NewAuthorComponent } from './dashboard/authors/new-author/new-author.component';
 import {ClipboardModule} from "@angular/cdk/clipboard";
 import { ConfirmDialogComponent } from './dashboard/song/delete-confirm-dialog/confirm-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
@@ -30,7 +30,8 @@ import {MatRadioModule} from "@angular/material/radio";
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AuthorsComponent } from './dashboard/authors/authors.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './dashboard/home/home.component';
+import { AuthorCardComponent } from './dashboard/authors/author-card/author-card.component';
 
 
 @NgModule({
@@ -50,29 +51,30 @@ import { HomeComponent } from './home/home.component';
     SidebarComponent,
     AuthorsComponent,
     TopBarComponent,
-    HomeComponent
+    HomeComponent,
+    AuthorCardComponent
 
 
   ],
-    imports: [
-        BrowserModule,
-        NgbModule,
-        AdminRoutingModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatDialogModule,
-        MatLegacyCardModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        MatSnackBarModule,
-        FormsModule,
-        ClipboardModule,
-        MatIconModule,
-        MatRadioModule
-    ],
+  imports: [
+    BrowserModule,
+    NgbModule,
+    AdminRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatLegacyCardModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    FormsModule,
+    ClipboardModule,
+    MatIconModule,
+    MatRadioModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
