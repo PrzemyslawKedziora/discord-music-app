@@ -1,10 +1,10 @@
 import {Component, Inject} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {SharedService} from "../../../../services/shared/shared.service";
+import {SharedService} from "../../../services/shared/shared.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {AuthorModel, AuthorRecord} from "../../../../models/author.model";
 import axios from "axios";
+import {AuthorModel, AuthorRecord} from "../../../models/author.model";
 
 @Component({
   selector: 'app-new-author',
