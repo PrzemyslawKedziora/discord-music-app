@@ -4,10 +4,11 @@ import {MatDialog} from "@angular/material/dialog";
 import {CategoryModel} from "../models/category.model";
 import {SharedService} from "../services/shared/shared.service";
 import {AuthorModel} from "../models/author.model";
-import {NewAuthorComponent} from "./management-panel/new/new-author/new-author.component";
+import {NewAuthorComponent} from "./authors/new-author/new-author.component";
 import {AddDialogModel} from "../models/add-dialog.model";
 import {FilterByComponent} from "./song/filter-by/filter-by.component";
 import {SongService} from "./song/song.service";
+import {AuthorService} from "./authors/author.service";
 
 @Component({
   selector: 'dashboard',
@@ -25,7 +26,8 @@ export class DashboardComponent{
 
   constructor(public dialog: MatDialog,
               public sharedService: SharedService,
-              private songService: SongService) {
+              private songService: SongService,
+              private authorService: AuthorService) {
     this.sharedService.filterStatus=false;
 
 
@@ -34,7 +36,7 @@ export class DashboardComponent{
        this.songs = this.sharedService.sharedSongsArray;
      });
      songService.getCategories();
-     songService.getAuthors();
+     authorService.getAuthors();
    }
     this.sharedService.isLoggedInStatus = this.isLoggedIn;
     this.isLoggedIn = !!sessionStorage.getItem("token");

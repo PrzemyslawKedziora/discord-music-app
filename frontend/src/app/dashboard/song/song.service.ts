@@ -49,20 +49,6 @@ export class SongService {
     );
   }
 
-  getAuthors(): Promise<void> {
-    return axios.get('http://localhost:4100/api/authors/all').then(
-      (res) => {
-        let arTemp: AuthorModel[] = [];
-        for (let i = 0; i < res.data.length; i++) {
-          arTemp.push(res.data[i]);
-        }
-        arTemp = arTemp.sort((a, b) => a.name.localeCompare(b.name));
-        this.artists = arTemp;
-        this.dialogData.author = this.artists;
-        this.sharedService.sharedArtistsArray = this.artists;
-      });
-  }
-
   addSong(){
     const dialogRef = this.dialog.open(NewSongComponent, {
       disableClose: true,

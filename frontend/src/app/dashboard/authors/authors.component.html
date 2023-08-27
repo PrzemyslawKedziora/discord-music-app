@@ -1,10 +1,33 @@
 <div class="container1 d-flex">
   <app-sidebar></app-sidebar>
   <div class="authors">
-    <p>authors works!</p>
-    <div *ngFor="let author of authors">
-      {{author.name}} <span> <img [src]="author.pictureURL" [ngStyle]="{'width': '150px'}"></span>
-
+    <div class="authors-top-bar d-flex justify-content-center">
+    <div class="container">
+      <div class="row">
+        <div class="col d-flex justify-content-center flex-column align-items-center">
+          <div class="button">
+            <button class="btn btn-success" *ngIf="!loginStatus" routerLink="/login">Log In</button>
+            <button class="btn btn-danger" *ngIf="loginStatus" (click)="userService.logOut()">Log Out</button>
+          </div>
+          <mat-form-field class="d-flex">
+            <input matInput type="text" (input)="filterNames()"
+                   [(ngModel)]="searchQuery"
+                   [placeholder]="' search by authors\' name'"
+            >
+          </mat-form-field>
+        </div>
+        </div>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-primary" (click)="authorService.addArtist()"> dodaj autor</button>
+        </div>
+      </div>
+   <div class="row">
+     <div class="col-md-3 col-sm-4 col" *ngFor="let author of filteredAuthors">
+       <app-author-card [author]="author"></app-author-card>
+     </div>
+   </div>
+    </div>
     </div>
   </div>
 </div>
