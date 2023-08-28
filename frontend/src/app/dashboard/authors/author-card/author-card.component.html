@@ -2,5 +2,11 @@
   <mat-card-content class="d-flex flex-column align-items-center">
     <img [src]="isImgValid()" alt="{{author.name}}">
     <p>{{author.name}}</p>
+    <div class="controls">
+      <button class="btn button-info" (click)="showAuthorSongs(author.name)">Show songs</button>
+      <button class="btn button-delete">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
   </mat-card-content>
 </mat-card>

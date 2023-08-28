@@ -39,14 +39,14 @@ export class NewAuthorComponent{
           Authorization: 'Bearer ' + accessToken,
         };
         console.log(this.authorForm.value);
-
+      try {
         axios.post(this.apiUrl, this.authorForm.value, {headers})
           .then((res) => {
-            const newAuthor = new AuthorRecord(res.data.name,res.data.pictureURL,res.data.userID);
+            const newAuthor = new AuthorRecord(res.data.name, res.data.pictureURL, res.data.userID);
             console.log(newAuthor)
             this.authors.push(newAuthor);
             this.sharedService.addNewAuthor(newAuthor);
-            this.sb.open('Author has been successfully added!','', {
+            this.sb.open('Author has been successfully added!', '', {
               duration: duration,
               panelClass: ['success-snackBar']
             });
@@ -58,14 +58,25 @@ export class NewAuthorComponent{
           handleError(e)
         });
 
-    let handleError = (error: any): void => {
-      this.addAuthorStatus = false;
-      this.sharedService.sharedAddingAuthorStatus = this.addAuthorStatus;
-      console.log(error);
-      this.sb.open(error.response.data.message,'', {
-        duration: 3000,
-        panelClass: ['failed-snackBar']
-      })
+
+        let handleError = (error: any): void => {
+          this.addAuthorStatus = false;
+          this.sharedService.sharedAddingAuthorStatus = this.addAuthorStatus;
+          console.log(error);
+          this.sb.open(error.response.data.message, '', {
+            duration: 3000,
+            panelClass: ['failed-snackBar']
+          })
+        }
+      }
+  catch (error){
+    this.addAuthorStatus = false;
+    this.sharedService.sharedAddingAuthorStatus = this.addAuthorStatus;
+    console.log(error);
+    this.sb.open('An error has occured.Please check console.', '', {
+      duration: 3000,
+      panelClass: ['failed-snackBar']
+    })
     }
   }
 

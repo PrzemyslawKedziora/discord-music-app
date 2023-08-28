@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SongModel} from "../models/song.model";
 import {MatDialog} from "@angular/material/dialog";
 import {CategoryModel} from "../models/category.model";
@@ -9,13 +9,14 @@ import {AddDialogModel} from "../models/add-dialog.model";
 import {FilterByComponent} from "./song/filter-by/filter-by.component";
 import {SongService} from "./song/song.service";
 import {AuthorService} from "./authors/author.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent{
+export class DashboardComponent implements OnInit{
 
   categories!: CategoryModel[];
   artists!: AuthorModel[];
@@ -23,24 +24,43 @@ export class DashboardComponent{
   songsTemp: SongModel[]=[];
   dialogData: AddDialogModel={category:[],author:[]};
   isLoggedIn!: boolean;
+  authorID!: string;
+  filteredSongs: SongModel[] = [];
+  author: AuthorModel | undefined;
 
   constructor(public dialog: MatDialog,
               public sharedService: SharedService,
               private songService: SongService,
-              private authorService: AuthorService) {
+              private authorService: AuthorService,
+              private route : ActivatedRoute) {
     this.sharedService.filterStatus=false;
 
 
-   if (this.songs.length < 1){
-     songService.getSongs().then(()=> {
-       this.songs = this.sharedService.sharedSongsArray;
-     });
-     songService.getCategories();
-     authorService.getAuthors();
-   }
+
     this.sharedService.isLoggedInStatus = this.isLoggedIn;
     this.isLoggedIn = !!sessionStorage.getItem("token");
 
+
+  }
+
+  ngOnInit() {
+    if (this.songs.length < 1){
+      this.songService.getSongs().then(()=> {
+        this.songs = this.sharedService.sharedSongsArray;
+      });
+      this.songService.getCategories();
+      this.authorService.getAuthors();
+    }
+
+    this.route.paramMap.subscribe(params => {
+      this.authorID = params.get('authorName') || '';
+      if (this.authorID == '') return;
+      else {
+        this.authorService.getAuthors().then(() => {
+          this.songs = this.songs.filter(song => song.authorID.name == this.authorID);
+        });
+      }
+    });
   }
 
   addArtist(){
@@ -72,6 +92,8 @@ export class DashboardComponent{
     this.songs=this.songService.songsTemp;
     this.sharedService.filterStatus=false;
   }
+
+
 
 
 }

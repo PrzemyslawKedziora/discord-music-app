@@ -11,6 +11,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/landing-page', pathMatch: 'full'},
   {path: 'landing-page', component: LandingPageComponent},
   {path: 'dashboard', component: DashboardComponent},
+  {path: 'dashboard/:authorName', component: DashboardComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'authors', component: AuthorsComponent},

@@ -25,3 +25,16 @@ p{
 img{
   border-radius: 10px;
 }
+.btn{
+  color: white;
+}
+.controls{
+  display: flex;
+  gap: 10px;
+}
+.button-info{
+  background-color: $hover-blue-nav-color;
+}
+.button-delete{
+  background-color: $main-red-color;
+}
