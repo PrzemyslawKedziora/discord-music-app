@@ -32,6 +32,8 @@ import { AuthorsComponent } from './dashboard/authors/authors.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { HomeComponent } from './dashboard/home/home.component';
 import { AuthorCardComponent } from './dashboard/authors/author-card/author-card.component';
+import { CategoriesComponent } from './dashboard/categories/categories.component';
+import { CategoryItemComponent } from './dashboard/categories/category-item/category-item.component';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { AuthorCardComponent } from './dashboard/authors/author-card/author-card
     AuthorsComponent,
     TopBarComponent,
     HomeComponent,
-    AuthorCardComponent
+    AuthorCardComponent,
+    CategoriesComponent,
+    CategoryItemComponent
 
 
   ],

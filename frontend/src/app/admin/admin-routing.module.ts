@@ -6,6 +6,7 @@ import {LoginComponent} from "../components/login/login.component";
 import {RegisterComponent} from "../components/register/register.component";
 import {AuthorsComponent} from "../dashboard/authors/authors.component";
 import {HomeComponent} from "../dashboard/home/home.component";
+import {CategoriesComponent} from "../dashboard/categories/categories.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/landing-page', pathMatch: 'full'},
@@ -15,6 +16,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'authors', component: AuthorsComponent},
+  {path: 'categories', component: CategoriesComponent},
+  {path: 'categories/:categoryName', component: CategoriesComponent},
   {path: 'home', component: HomeComponent}
 ];
 

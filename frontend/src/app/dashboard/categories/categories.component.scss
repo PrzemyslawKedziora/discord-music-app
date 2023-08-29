@@ -1,0 +1,27 @@
+@import "src/variables";
+app-sidebar{
+  position: sticky;
+  top: 20px;
+  background-color: $background-main-color;
+  padding: 10px;
+  width: 20%;
+  text-align: center;
+}
+.container1{
+  background: $background-color;
+}
+.categories-top-bar{
+  width: available;
+}
+mat-form-field{
+  padding-top: 20px;
+  width: 50vw;
+}
+.container{
+  min-width: 70vw;
+}
+.button{
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
