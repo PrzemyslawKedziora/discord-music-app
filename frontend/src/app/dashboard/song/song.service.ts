@@ -36,19 +36,6 @@ export class SongService {
 
   }
 
-  getCategories(){
-    axios.get('http://localhost:4100/api/categories/all').then(
-      (res) => {
-        let ar:CategoryModel[]=[];
-        for (let i = 0; i < res.data.length; i++) {
-          ar.push(res.data[i]);
-        }
-        this.categories = ar;
-        this.dialogData.category = this.categories;
-      }
-    );
-  }
-
   addSong(){
     const dialogRef = this.dialog.open(NewSongComponent, {
       disableClose: true,

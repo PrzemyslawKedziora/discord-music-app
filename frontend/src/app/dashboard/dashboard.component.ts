@@ -10,6 +10,7 @@ import {FilterByComponent} from "./song/filter-by/filter-by.component";
 import {SongService} from "./song/song.service";
 import {AuthorService} from "./authors/author.service";
 import {ActivatedRoute} from "@angular/router";
+import {CategoryService} from "./categories/category.service";
 
 @Component({
   selector: 'dashboard',
@@ -25,6 +26,7 @@ export class DashboardComponent implements OnInit{
   dialogData: AddDialogModel={category:[],author:[]};
   isLoggedIn!: boolean;
   authorID!: string;
+  catID!: string;
   filteredSongs: SongModel[] = [];
   author: AuthorModel | undefined;
 
@@ -32,34 +34,36 @@ export class DashboardComponent implements OnInit{
               public sharedService: SharedService,
               private songService: SongService,
               private authorService: AuthorService,
-              private route : ActivatedRoute) {
+              private route : ActivatedRoute,
+              private categoryService: CategoryService) {
     this.sharedService.filterStatus=false;
 
-
+    if (this.songs.length < 1){
+      songService.getSongs().then(()=> {
+        this.songs = this.sharedService.sharedSongsArray;
+      });
+      categoryService.getCategories();
+      authorService.getAuthors();
+    }
 
     this.sharedService.isLoggedInStatus = this.isLoggedIn;
     this.isLoggedIn = !!sessionStorage.getItem("token");
 
 
   }
-
   ngOnInit() {
-    if (this.songs.length < 1){
-      this.songService.getSongs().then(()=> {
-        this.songs = this.sharedService.sharedSongsArray;
-      });
-      this.songService.getCategories();
-      this.authorService.getAuthors();
-    }
-
     this.route.paramMap.subscribe(params => {
-      this.authorID = params.get('authorName') || '';
-      if (this.authorID == '') return;
-      else {
-        this.authorService.getAuthors().then(() => {
-          this.songs = this.songs.filter(song => song.authorID.name == this.authorID);
-        });
+      console.log(params, 'paramki');
+      if (params.get('authorName')) {
+        this.authorID = params.get('authorName') || '';
+        if (this.authorID) {
+          this.authorService.getAuthors().then(() => {
+            this.songs = this.songs.filter(song => song.authorID.name == this.authorID);
+          });
+        }
+      } else {
       }
+      console.log(this.songs)
     });
   }
 

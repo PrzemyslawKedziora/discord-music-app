@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthorModel} from "../../models/author.model";
 import {AuthorService} from "./author.service";
-import {SharedService} from "../../services/shared/shared.service";
 import {UserService} from "../../services/user.service";
 
 @Component({
@@ -9,7 +8,7 @@ import {UserService} from "../../services/user.service";
   templateUrl: './authors.component.html',
   styleUrls: ['./authors.component.scss']
 })
-export class AuthorsComponent implements OnInit{
+export class AuthorsComponent{
 
   authors: AuthorModel[] = [];
   searchQuery!:string;
@@ -17,7 +16,6 @@ export class AuthorsComponent implements OnInit{
   loginStatus!:boolean;
 
   constructor(public authorService: AuthorService,
-              public sharedService: SharedService,
               public userService: UserService) {
     this.authorService.getAuthors().then(() => {
       this.authors = this.authorService.artists;
@@ -27,10 +25,6 @@ export class AuthorsComponent implements OnInit{
 
     console.log(this.loginStatus, 'status')
   }
-
-  ngOnInit(): void {
-  }
-
 
   filterNames() {
     this.filteredAuthors = this.authors.filter(author =>
