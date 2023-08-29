@@ -22,11 +22,10 @@ const songSchema = mongoose.Schema(
       type: String,
       required: false,
     },
-    authorID: {
+    authors: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Author",
-      required: true,
-    },
+    }],
     categories: [{
       type: mongoose.Types.ObjectId,
       ref: "Category",

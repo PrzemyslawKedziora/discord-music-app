@@ -1,0 +1,13 @@
+
+<div class="song-container">
+
+    <img [src]="song.thumbnail" alt="song's thumbnail">
+    <div class="info-container">
+        <span>{{ song.name }}</span>
+        <div class="like-container">
+            <i style="margin-right: 5px" class="bi {{isLiked ? 'bi-heart-fill' : 'bi-heart'}}"></i>
+            {{ numberOfLikes }}
+        </div>
+    </div>
+
+</div>
