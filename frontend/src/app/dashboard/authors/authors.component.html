@@ -4,7 +4,7 @@
     <div class="authors-top-bar d-flex justify-content-center">
     <div class="container">
       <div class="row">
-        <div class="col d-flex justify-content-center flex-column align-items-center">
+        <div class="col d-flex justify-content-center flex-column align-items-center management-panel">
           <div class="button">
             <button class="btn btn-success" *ngIf="!loginStatus" routerLink="/login">Log In</button>
             <button class="btn btn-danger" *ngIf="loginStatus" (click)="userService.logOut()">Log Out</button>

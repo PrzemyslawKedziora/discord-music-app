@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {AuthorModel} from "../../../models/author.model";
 import {Router} from "@angular/router";
-import {SharedService} from "../../../services/shared/shared.service";
 
 @Component({
   selector: 'app-author-card',
@@ -11,9 +10,7 @@ import {SharedService} from "../../../services/shared/shared.service";
 export class AuthorCardComponent {
 
 
-  constructor(private router : Router,
-              private ss : SharedService) {
-    console.log(ss.sharedArtistsArray)
+  constructor(private router : Router) {
   }
 
   @Input() author!: AuthorModel;
@@ -30,5 +27,9 @@ export class AuthorCardComponent {
     this.router.navigate(
       ['/dashboard',authorName]
     )
+  }
+
+  deleteAuthor(author:string){
+
   }
 }
