@@ -4,7 +4,6 @@ import {CategoryModel} from "../../models/category.model";
 import {AuthorModel} from "../../models/author.model";
 import {SongService} from "../song/song.service";
 import {UserService} from "../../services/user.service";
-import {SharedService} from "../../services/shared/shared.service";
 
 
 @Component({
@@ -17,8 +16,7 @@ export class ManagementPanelComponent implements OnInit{
 
   constructor(public dashboard: DashboardComponent,
               public songService: SongService,
-              public userService: UserService,
-              private sharedService: SharedService)
+              public userService: UserService)
   {
   }
 
@@ -29,7 +27,7 @@ export class ManagementPanelComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.sharedService.isLoggedInStatus = this.loginStatus;
+    sessionStorage.getItem('id') ? this.loginStatus = true : this.loginStatus = false;
   }
 
 

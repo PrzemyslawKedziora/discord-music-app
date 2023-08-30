@@ -11,6 +11,7 @@ import {SongService} from "./song/song.service";
 import {AuthorService} from "./authors/author.service";
 import {ActivatedRoute} from "@angular/router";
 import {CategoryService} from "./categories/category.service";
+import {NewSongComponent} from "./song/new-song/new-song.component";
 
 @Component({
   selector: 'dashboard',
@@ -42,7 +43,10 @@ export class DashboardComponent implements OnInit{
       songService.getSongs().then(()=> {
         this.songs = this.sharedService.sharedSongsArray;
       });
-      categoryService.getCategories();
+      categoryService.getCategories().then(()=> {
+        this.categories = this.categoryService.categories;
+        this.dialogData.category = this.categoryService.categories;
+      });
       authorService.getAuthors();
     }
 
@@ -58,10 +62,13 @@ export class DashboardComponent implements OnInit{
         this.authorID = params.get('authorName') || '';
         if (this.authorID) {
           this.authorService.getAuthors().then(() => {
-            this.songs = this.songs.filter(song => song.authorID.name == this.authorID);
+            this.songs = this.songs.filter(song =>
+              song.authors.some(author => author.name === this.authorID)
+            );
           });
         }
       } else {
+        // this.filterByCategory();
       }
       console.log(this.songs)
     });
@@ -77,6 +84,19 @@ export class DashboardComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
     });
+  }
+
+  addSong(){
+    const dialogRef = this.dialog.open(NewSongComponent, {
+      disableClose: true,
+      width:'100vw',
+      data: this.categoryService.dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result)
+    });
+
   }
 
   openFilterByDialog() {

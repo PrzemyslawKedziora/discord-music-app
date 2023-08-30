@@ -10,7 +10,7 @@ const addSong = asyncHandler(async (req, res) => {
   const { name, ytURL, authors, categories } = req.body;
 
   // <---- Checking if user sent all necessary fields ---->
-  if (!ytURL || !name) {
+  if (!ytURL) {
     res.status(400).json({ message: "You need to fulfill all fields!" });
     throw new Error("You need to fulfill all fields!");
   }

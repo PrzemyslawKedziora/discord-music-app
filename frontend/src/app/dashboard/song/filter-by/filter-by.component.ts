@@ -23,16 +23,20 @@ export class FilterByComponent {
   filterBy(filterData: string, filterCategory: string) {
     this.data = this.data.filter((song) => {
       if (filterCategory === 'author') {
-        return (song.authorID.name).toLowerCase() === filterData.toLowerCase();
+        return song.authors.some((author) =>
+          author.name.toLowerCase() === filterData.toLowerCase()
+        );
       } else {
-        return song.categories.some((cat) => (cat.name).toLowerCase() === filterData.toLowerCase());
+        return song.categories.some((cat) =>
+          cat.name.toLowerCase() === filterData.toLowerCase()
+        );
       }
     });
-    if (this.filterCategory != '' && this.filterString != ''){
+
+    if (this.filterCategory !== '' && this.filterString !== '') {
       this.sharedService.filterStatus = true;
       this.dialogRef.close(this.data);
     }
-
   }
 
   close() {
