@@ -26,11 +26,12 @@ export class NewSongComponent{
   ) {
     this.songData=this.sharedService.sharedSongsArray;
     this.artists = this.sharedService.sharedArtistsArray;
+    console.log(data.category)
   }
 
   newSongForm = this.fb.group({
     ytURL: ['', Validators.required],
-    authorID: ['', Validators.required],
+    authors: [[], Validators.required],
     categories: [[], Validators.required],
     userID: sessionStorage.getItem('userID'), //temp
     createdAt: (new Date).toISOString(),
@@ -59,7 +60,7 @@ export class NewSongComponent{
           .then((res) => {
             this.addSongStatus = true;
             this.sharedService.sharedAddingSongStatus = this.addSongStatus;
-            this.songData.push(new SongRecord(res.data._id,res.data.authorID,res.data.thumbnail,res.data.categories,
+            this.songData.push(new SongRecord(res.data._id,res.data.authors,res.data.thumbnail,res.data.categories,
               res.data.likes,res.data.name,res.data.userID,res.data.ytURL))
             this.sb.open('Song has been succesfully added!','', {
               duration: duration,

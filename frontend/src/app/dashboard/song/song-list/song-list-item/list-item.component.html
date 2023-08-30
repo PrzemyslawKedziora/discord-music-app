@@ -9,7 +9,11 @@
       </div>
       <div class=" my-auto song-description" (click)="onClick()" [cdkCopyToClipboard]="'!play ' + songRecord.name">
         <div class="song-name data">{{songRecord.name}}</div>
-        <div class="song-author-name my-auto data">{{songRecord.authorID.name || 'loading...'}}</div>
+        <div class="song-author-name my-auto data">
+          <span *ngFor="let author of songRecord.authors; let last = last">
+            {{author.name || 'loading...'}}{{ !last ? ', ' : '' }}
+          </span>
+        </div>
       </div>
       <div class="song-categories my-auto">
         <span *ngFor="let category of songRecord.categories; let last = last">
