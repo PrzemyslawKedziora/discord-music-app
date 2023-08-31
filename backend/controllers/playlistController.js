@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
 const Playlist = require("../models/playlistModel");
+const { all } = require("axios");
 const ObjectId = mongoose.Types.ObjectId;
 
 //@desc Adds a new playlist
@@ -111,8 +112,23 @@ const deletPlaylist = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Playlist successfully deleted" });
 });
 
+//@desc sends every playlist
+//@route GET api/playlists/all
+//@access private
+const getAllPlaylists = asyncHandler(async (req, res) => {
+  const allPlaylists = await Playlist.find()
+  .populate("songs");
+
+  if(!allPlaylists) {
+    res.status(400).json({ message: "There was a problem trying to get playlists from the database" });
+  }
+
+  res.status(200).json(allPlaylists);
+});
+
 module.exports = {
   addPlaylist,
   editPlaylist,
   deletPlaylist,
+  getAllPlaylists,
 };

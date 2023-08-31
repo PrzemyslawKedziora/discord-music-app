@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const playlistSchema = mongoose.Schema(
     {
         name: {
-            type: Stringm,
+            type: String,
             required: [true, "Please provide the playlist's name!"],
             max: 200,
         },

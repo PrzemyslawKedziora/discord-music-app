@@ -23,6 +23,7 @@ app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/songs", require("./routes/songRoutes"));
 app.use("/api/authors", require("./routes/authorRoutes"));
 app.use("/api/categories", require("./routes/categoriesRoutes"));
+app.use("/api/playlists", require("./routes/playlistRoutes"));
 
 
 
