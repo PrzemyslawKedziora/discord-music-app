@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {SongModel} from "../models/song.model";
 import {MatDialog} from "@angular/material/dialog";
 import {CategoryModel} from "../models/category.model";
@@ -18,7 +18,7 @@ import {NewSongComponent} from "./song/new-song/new-song.component";
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent{
 
   categories!: CategoryModel[];
   artists!: AuthorModel[];
@@ -39,7 +39,6 @@ export class DashboardComponent implements OnInit{
               private categoryService: CategoryService) {
     this.sharedService.filterStatus=false;
 
-    if (this.songs.length < 1){
       songService.getSongs().then(()=> {
         this.songs = this.sharedService.sharedSongsArray;
       });
@@ -47,31 +46,35 @@ export class DashboardComponent implements OnInit{
         this.categories = this.categoryService.categories;
         this.dialogData.category = this.categoryService.categories;
       });
-      authorService.getAuthors();
-    }
+      authorService.getAuthors().then(()=>{
+        this.artists = this.sharedService.sharedArtistsArray;
+      });
+      this.initializeArtistsAsync().then(() => {
+        this.route.paramMap.subscribe(params => {
+          if (params.get('authorName')) {
+            this.authorID = params.get('authorName') || '';
+            if (this.authorService.artists.some(author => author.name === this.authorID)) {
+              this.authorService.getAuthors().then(() => {
+                this.songs = this.songs.filter(song =>
+                  song.authors.some(author => author.name === this.authorID)
+                );
+              });
+            }
+            else{
+              this.categoryService.getCategories().then(()=> {
+                this.songs = this.songs.filter(song => song.categories.some(category => category.name ===this.authorID))
+              })
+            }
+          } else {
+            console.error('error')
+          }
+        });
+
+      });
 
     this.sharedService.isLoggedInStatus = this.isLoggedIn;
     this.isLoggedIn = !!sessionStorage.getItem("token");
 
-
-  }
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      console.log(params, 'paramki');
-      if (params.get('authorName')) {
-        this.authorID = params.get('authorName') || '';
-        if (this.authorID) {
-          this.authorService.getAuthors().then(() => {
-            this.songs = this.songs.filter(song =>
-              song.authors.some(author => author.name === this.authorID)
-            );
-          });
-        }
-      } else {
-        // this.filterByCategory();
-      }
-      console.log(this.songs)
-    });
   }
 
   addArtist(){
@@ -117,7 +120,9 @@ export class DashboardComponent implements OnInit{
     this.sharedService.filterStatus=false;
   }
 
-
-
+  async initializeArtistsAsync() {
+    await this.authorService.getAuthors();
+    this.artists = this.sharedService.sharedArtistsArray;
+  }
 
 }
