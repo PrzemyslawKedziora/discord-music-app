@@ -32,11 +32,13 @@ export class AuthorCardComponent {
     )
   }
 
-  deleteAuthor(){
-    const dialogRef = this.dialog.open(DeleteAuthorDialogComponent,{
-      width: '50vw',
-      disableClose: true,
-      data: {author: this.author.name,id:this.author._id}
-    })
+  deleteAuthor(author: AuthorModel){
+    const dialogRef = this.dialog.open(DeleteAuthorDialogComponent, {
+        width: '50vw',
+        height: '20vh',
+        disableClose: true,
+        data: author
+      }
+    )
   }
 }

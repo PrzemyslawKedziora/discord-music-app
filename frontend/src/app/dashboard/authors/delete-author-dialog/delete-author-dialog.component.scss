@@ -1,0 +1,11 @@
+@import "src/variables";
+.btn-accept{
+  background-color: $main-red-color;
+}
+.button-group{
+  display: flex;
+  gap: 20px;
+}
+.container{
+  gap: 50%;
+}

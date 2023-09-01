@@ -1,8 +1,9 @@
 <div class="container d-flex justify-content-center">
-    <div class="col d-flex align-items-center flex-column">
-      <p>Do not you really need {{this.data.name}} in your team?</p>
-      {{this.data.id}}
-      <div class="btn btn-primary" (click)="deleteAuthor()"></div>
-      <div class="btn btn-primary" (click)="closeDialog()">I need him</div>
+    <div class="col d-flex align-items-center flex-column justify-content-between">
+      <p>{{titleString}}</p>
+      <div class="button-group">
+        <div class="btn btn-accept" (click)="deleteAuthor()">Delete Author</div>
+        <div class="btn btn-primary" (click)="closeDialog()">I need him!</div>
+      </div>
     </div>
 </div>

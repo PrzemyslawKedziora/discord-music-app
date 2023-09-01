@@ -1,6 +1,7 @@
 @import "src/variables";
 song-list-item:hover{
-  background: #0f4841;
+  background: $hover-blue-nav-color;
+  border-radius: 25px;
 }
 .number{
   min-width: 20px;
