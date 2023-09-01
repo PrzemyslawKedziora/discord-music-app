@@ -106,7 +106,6 @@ const getAllSongs = asyncHandler(async (req, res) => {
     .populate("userID", "username")
     .populate("authors", "name")
     .populate("categories", "name");
-
   if (!songList) {
     res.status(500).json({ message: "There was a problem trying to get Songs from the database!" });
     throw new Error(
