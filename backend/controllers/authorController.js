@@ -144,7 +144,7 @@ const deleteAuthor = asyncHandler(async (req, res) => {
     } catch (error) {
       res
         .status(400)
-        .json({ message: "Failed to delet author from all songs", error });
+        .json({ message: "Failed to deletE author from all songs", error });
     }
   };
 

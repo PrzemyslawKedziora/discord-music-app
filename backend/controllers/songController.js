@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
 const Song = require("../models/songModel");
+const Playlist = require("../models/playlistModel");
 const getVideoData = require("../APIs/getVideoData");
 
 //@desc Adds new song
@@ -28,7 +29,7 @@ const addSong = asyncHandler(async (req, res) => {
   let newCategories;
   if (categories && categories.length > 0) {
     newCategories = categories;
-    
+
     // <---- Mapping expected array of objects to array of strings(id) ---->
     if ("_id" in newCategories[0]) {
       newCategories = newCategories.map((category) => category._id);
@@ -77,7 +78,9 @@ const editSong = asyncHandler(async (req, res) => {
 
   // <---- Checking if user have permission to modify this song ---->
   if (req.user.id !== song.userID) {
-    req.status(401).json({ message: "You don't have permission to edit this song!" });
+    req
+      .status(401)
+      .json({ message: "You don't have permission to edit this song!" });
     throw new Error("You don't have permission to edit this song!");
   }
 
@@ -90,12 +93,11 @@ const editSong = asyncHandler(async (req, res) => {
   } else {
     song.categories = [];
   }
-    // <---- Saving the updated song in the database ---->
-    const updatedSong = await song.save();
+  // <---- Saving the updated song in the database ---->
+  const updatedSong = await song.save();
 
-    // <---- Sending the updated song as a response ---->
-    res.status(200).json(updatedSong);
-
+  // <---- Sending the updated song as a response ---->
+  res.status(200).json(updatedSong);
 });
 
 //@desc Sending list of all songs
@@ -107,7 +109,9 @@ const getAllSongs = asyncHandler(async (req, res) => {
     .populate("authors", "name")
     .populate("categories", "name");
   if (!songList) {
-    res.status(500).json({ message: "There was a problem trying to get Songs from the database!" });
+    res.status(500).json({
+      message: "There was a problem trying to get Songs from the database!",
+    });
     throw new Error(
       "There was a problem trying to get Songs from the database!"
     );
@@ -129,7 +133,7 @@ const getSongsByAuthor = asyncHandler(async (req, res) => {
   }
 
   // <---- Finding songs by the provided authorId ---->
-  const songs = await Song.find({ authors: {$in: [authorID] } })
+  const songs = await Song.find({ authors: { $in: [authorID] } })
     .populate("userID", "username")
     .populate("authors", "name")
     .populate("categories", "name")
@@ -181,7 +185,9 @@ const getRandomSong = asyncHandler(async (req, res) => {
     .exec();
 
   if (!randomSong) {
-    res.status(500).json({ message: "There was a problem trying to get a Song from the database!" });
+    res.status(500).json({
+      message: "There was a problem trying to get a Song from the database!",
+    });
     throw new Error(
       "There was a problem trying to get a Song from the database!"
     );
@@ -206,7 +212,10 @@ const likeSong = asyncHandler(async (req, res) => {
   const song = await Song.findById(songID);
 
   if (!song) {
-    res.status(500).json({ message: "There was a problem trying to get a song object from the database!" });
+    res.status(500).json({
+      message:
+        "There was a problem trying to get a song object from the database!",
+    });
     throw new Error(
       "There was a problem trying to get a song object from the database!"
     );
@@ -248,7 +257,10 @@ const deleteSong = asyncHandler(async (req, res) => {
   // <---- Finding the song in the database ---->
   const song = await Song.findById(songID);
   if (!song) {
-    res.status(500).json({ message: "There was a problem trying to get the song object from the database!" });
+    res.status(500).json({
+      message:
+        "There was a problem trying to get the song object from the database!",
+    });
     throw new Error(
       "There was a problem trying to get the song object from the database!"
     );
@@ -256,10 +268,31 @@ const deleteSong = asyncHandler(async (req, res) => {
 
   // <---- Checking if the current user is the song's creator ---->
   if (song.userID.toString() !== req.user.id) {
-    res.status(403).json({ message: "You cannot delete song that was not added by you!" });
-    res.status(403).json({message: "You cannot delete song that was not added by you!"});
+    res
+      .status(403)
+      .json({ message: "You cannot delete song that was not added by you!" });
+    res
+      .status(403)
+      .json({ message: "You cannot delete song that was not added by you!" });
     throw new Error("You cannot delete song that was not added by you!");
   }
+
+  // <---- Deleting this song from every playlist ---->
+  const deleteSongsFromPlaylists = async (songID) => {
+    const filter = { songs: { $in: [songID] } };
+    const update = { $pull: { songs: songID } };
+
+    try {
+      const response = await Playlist.updateMany(filter, update);
+      return response;
+    } catch (error) {
+      res
+        .status(400)
+        .json({ message: "failed to delete song from all playlists", error });
+    }
+  };
+
+  const response = await deleteSongsFromPlaylists(song._id);
 
   // <---- Deleting song and sending the response ---->
   await song.deleteOne();
@@ -284,7 +317,10 @@ const giveCategory = asyncHandler(async (req, res) => {
   // <---- Finding the song in the database ---->
   const song = await Song.findById(songID);
   if (!song) {
-    res.status(500).json({ message:  "There was a problem trying to get the song object from the database!"});
+    res.status(500).json({
+      message:
+        "There was a problem trying to get the song object from the database!",
+    });
     throw new Error(
       "There was a problem trying to get the song object from the database!"
     );
@@ -293,13 +329,15 @@ const giveCategory = asyncHandler(async (req, res) => {
   // <---- Finding the category in the database ---->
   const category = await Category.findById(categoryID);
   if (!category) {
-    res.status(400).json({ message:  "Category not found!"});
+    res.status(400).json({ message: "Category not found!" });
     throw new Error("Category not found!");
   }
 
   // <---- Checking if user have permission to modify this song ---->
   if (!req.user.id == song.userID) {
-    req.status(401).json({ message:  "You don't have permission to edit this song!"});
+    req
+      .status(401)
+      .json({ message: "You don't have permission to edit this song!" });
     throw new Error("You don't have permission to edit this song!");
   }
 
