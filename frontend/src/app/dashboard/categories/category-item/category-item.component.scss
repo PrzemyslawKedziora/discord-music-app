@@ -1,3 +1,12 @@
+@import "src/variables";
 .infos{
+  display: flex;
   gap: 40px;
+}
+.container{
+  margin: 1vh 0;
+}
+.container:hover{
+  background-color:$hover-blue-nav-color;
+  border-radius: 25px;
 }
