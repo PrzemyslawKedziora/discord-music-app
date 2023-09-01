@@ -1,6 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {AuthorModel} from "../../../models/author.model";
 import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {DeleteAuthorDialogComponent} from "../delete-author-dialog/delete-author-dialog.component";
 
 @Component({
   selector: 'app-author-card',
@@ -10,7 +12,8 @@ import {Router} from "@angular/router";
 export class AuthorCardComponent {
 
 
-  constructor(private router : Router) {
+  constructor(private router : Router,
+              public dialog: MatDialog) {
   }
 
   @Input() author!: AuthorModel;
@@ -29,7 +32,11 @@ export class AuthorCardComponent {
     )
   }
 
-  deleteAuthor(author:string){
-
+  deleteAuthor(){
+    const dialogRef = this.dialog.open(DeleteAuthorDialogComponent,{
+      width: '50vw',
+      disableClose: true,
+      data: {author: this.author.name,id:this.author._id}
+    })
   }
 }

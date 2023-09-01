@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {AuthorModel} from "../../models/author.model";
 import {AuthorService} from "./author.service";
 import {UserService} from "../../services/user.service";
+import {MatDialog} from "@angular/material/dialog";
+import {FilterByComponent} from "../song/filter-by/filter-by.component";
 
 @Component({
   selector: 'app-authors',
@@ -16,7 +18,8 @@ export class AuthorsComponent{
   loginStatus!:boolean;
 
   constructor(public authorService: AuthorService,
-              public userService: UserService) {
+              public userService: UserService,
+              private dialog: MatDialog) {
     this.authorService.getAuthors().then(() => {
       this.authors = this.authorService.artists;
       this.filteredAuthors = this.authorService.artists;
@@ -29,6 +32,9 @@ export class AuthorsComponent{
   filterNames() {
     this.filteredAuthors = this.authors.filter(author =>
       author.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+  }
+  deleteAuthor(){
+    this.dialog.open(FilterByComponent, { disableClose: true})
   }
 
 }
