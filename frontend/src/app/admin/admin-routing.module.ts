@@ -17,7 +17,6 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'authors', component: AuthorsComponent},
   {path: 'categories', component: CategoriesComponent},
-  {path: 'categories/:categoryName', component: CategoriesComponent},
   {path: 'home', component: HomeComponent}
 ];
 

@@ -42,7 +42,7 @@ export class NewAuthorComponent{
       try {
         axios.post(this.apiUrl, this.authorForm.value, {headers})
           .then((res) => {
-            const newAuthor = new AuthorRecord(res.data.name, res.data.pictureURL, res.data.userID);
+            const newAuthor = new AuthorRecord(res.data._id,res.data.name, res.data.pictureURL, res.data.userID);
             console.log(newAuthor)
             this.authors.push(newAuthor);
             this.sharedService.addNewAuthor(newAuthor);
