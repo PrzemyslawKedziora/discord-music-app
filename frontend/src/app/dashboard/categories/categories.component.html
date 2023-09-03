@@ -11,19 +11,23 @@
               </div>
               <mat-form-field class="d-flex">
                 <input matInput type="text"
-                       [(ngModel)]="loginStatus"
-                       [placeholder]="' search by authors\' name'"
+                       (input)="filterCategories()"
+                       [(ngModel)]="searchQuery"
+                       [placeholder]="' search by category\'s name'"
                 >
               </mat-form-field>
               <p>Categories</p>
             </div>
           </div>
-        <div class="row">
-          <div class="col col-sm-4 info-bar">
+        <div class="row d-flex justify-content-center">
+          <div class="col-8 d-flex justify-content-between border-bottom info-bar">
+                    <div class="infos">
+                      <p>#</p>
+                      <p>Name</p>
+                    </div>
+                    <p>Show category</p>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-12" *ngFor="let category of categories; index as index" >
+          <div class="col-8" *ngFor="let category of filteredCategories; index as index" >
             <app-category-item [category]="category" [index]="index"></app-category-item>
           </div>
         </div>

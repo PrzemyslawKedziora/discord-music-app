@@ -12,14 +12,21 @@ export class CategoriesComponent {
 
   loginStatus!:boolean;
 
-
   categories!: CategoryModel[];
+  filteredCategories: CategoryModel[]=[];
+  searchQuery!:string;
+
   constructor(public sharedService: SharedService,
               private categoryService: CategoryService) {
     sessionStorage.getItem('username') ? this.loginStatus = true : this.loginStatus = false;
     categoryService.getCategories().then(()=> {
       this.categories = categoryService.categories;
+      this.filteredCategories= categoryService.categories;
     });
 
+  }
+  filterCategories() {
+    this.filteredCategories = this.categories.filter(category =>
+      category.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
   }
 }

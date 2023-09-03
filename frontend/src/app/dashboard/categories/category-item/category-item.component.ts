@@ -12,14 +12,14 @@ export class CategoryItemComponent {
   @Input() category!: CategoryModel;
   @Input() index!: number;
 
-
   constructor(private router : Router) {
   }
 
   showCategorySongs(categoryName: string){
     this.router.navigate(['/dashboard',categoryName]);
     console.log(categoryName,'nazwa adfsad')
+  }
 
-}
+
 
 }
