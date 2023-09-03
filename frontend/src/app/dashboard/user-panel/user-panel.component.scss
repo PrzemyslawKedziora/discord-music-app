@@ -1,0 +1,24 @@
+@import "src/variables";
+app-sidebar{
+  position: sticky;
+  top: 20px;
+  background-color: $background-main-color;
+  padding: 10px;
+  width: 20%;
+
+  text-align: center;
+}
+.cont1{
+  background: $background-color;
+}
+.content-container{
+  width: 80%;
+}
+.user-container{
+  background-color: $background-hover-color;
+  width: 60%;
+}
+mat-form-field{
+  display: flex;
+  justify-content: center;
+}
