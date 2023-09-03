@@ -4,6 +4,7 @@ import axios from "axios";
 import {SharedService} from "../../services/shared/shared.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {UserModel} from "../../models/user.model";
 
 @Component({
   selector: 'login',
@@ -32,12 +33,17 @@ export class LoginComponent {
     if (this.isSubmitted){
       axios.post('http://localhost:4100/api/users/login',{email: this.loginForm.get('email')?.value,password: this.loginForm.get('password')?.value})
         .then((res) => {
-          const user = {
-            id: res.data.id,
+          const user: UserModel = {
+            _id: res.data.id,
             username: res.data.username,
+            email: res.data.email,
+            password: res.data.password,
+            profilePicture: res.data.profilePicture,
+            botCommand: res.data.botCommand,
             token: res.data.accessToken
           }
-          sessionStorage.setItem('id',user.id);
+          sessionStorage.setItem('user',JSON.stringify(user));
+          sessionStorage.setItem('id',user._id);
           sessionStorage.setItem('username',user.username);
           sessionStorage.setItem('token',user.token);
           if (sessionStorage.getItem('user')){

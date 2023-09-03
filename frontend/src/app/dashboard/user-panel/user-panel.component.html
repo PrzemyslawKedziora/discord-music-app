@@ -1,46 +1,98 @@
 <div class="cont1 d-flex">
   <app-sidebar></app-sidebar>
-  <div class="content-container d-flex flex-column justify-content-center align-items-center">
-        <div class="profile-picture">
-          <img src="assets/server-logo-static.png" alt="profka">
-        </div>
-    <div class="user-container container">
-      <div class="row">
-        <div class="col">
-          <label>Username</label>
-          <mat-form-field>
-            <mat-label>twr drip</mat-label>
-            <input matInput>
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <label>E-mail</label>
-          <mat-form-field>
-            <mat-label>email@example.com</mat-label>
-            <input matInput>
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <label>Password</label>
-          <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input matInput>
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <label>Bot Command</label>
-          <mat-form-field>
-            <mat-label>bot command</mat-label>
-            <input matInput>
-          </mat-form-field>
+  <div class="content container">
+    <div class="row">
+      <div class="col">
+        <div class="button">
+          <button class="btn btn-success" *ngIf="!loginStatus" routerLink="/login">Log In</button>
+          <button class="btn btn-danger" *ngIf="loginStatus" (click)="userService.logOut()">Log Out</button>
         </div>
       </div>
     </div>
-  </div>
+    <div class="row">
+      <div class="col">
+        <div class="content-container d-flex flex-column justify-content-center align-items-center">
+          <div class="profile-picture">
+            <img [src]="user.profilePicture != '' && user.profilePicture ? user.profilePicture : 'assets/unknown.png'" alt="{{user.username}}">
+          </div>
+          <div class="user-container" [formGroup]="userForm">
+            <div class="row">
+              <div class="col settings-row">
+                <div class="input-group">
+                  <label>Username</label>
+                  <mat-form-field>
+                    <input matInput  formControlName="username">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <button class="btn btn-primary" (click)="toggleInput('username')">edit</button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col settings-row">
+                <div class="input-group">
+                  <label>E-mail</label>
+                  <mat-form-field>
+                    <input matInput formControlName="email">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <button class="btn btn-primary" (click)="toggleInput('email')">edit</button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col settings-row">
+                <div class="input-group">
+                  <label>Password</label>
+                  <mat-form-field>
+                    <input matInput formControlName="password" [type]="inputType">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <button class="btn btn-primary" (click)="togglePasswordInput()">edit</button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col settings-row">
+                <div class="input-group">
+                  <label>Profile Picture URL</label>
+                  <mat-form-field>
+                    <input matInput formControlName="profilePicture">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <button class="btn btn-primary" (click)="toggleInput('profilePicture')">edit</button>
+                </div>
+              </div>
+            </div>
+            <div class="row last-row">
+              <div class="col settings-row">
+                <div class="input-group">
+                  <label>Bot Command</label>
+                  <mat-form-field>
+                    <input matInput formControlName="botCommand">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <button class="btn btn-primary" (click)="toggleInput('botCommand')">edit</button>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center"
+                 *ngIf="userForm.get('username')?.value !== user.username ||
+                  userForm.get('email')?.value !== user.email ||
+                  userForm.get('password')?.value !== user.password ||
+                  userForm.get('profilePicture')?.value !== user.profilePicture ||
+                  userForm.get('botCommand')?.value !== user.botCommand">
+              <button class="btn btn-success" (click)="updateUser()">Apply changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
 </div>

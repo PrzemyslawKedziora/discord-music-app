@@ -81,12 +81,17 @@ const loginUser = asyncHandler( async (req, res) => {
                     username: user.username,
                     email: user.email,
                     id: user.id,
+                    password,
+                    profilePicture: user.profilePicture,
+                    botCommand: user.botCommand
                 },
             },
             process.env.JWT_PRIVATE_KEY,
             { expiresIn: "100m"}
         );
-        res.status(200).json({ accessToken , username: user.username, id: user.id});
+        res.status(200).json({ accessToken , username: user.username, id: user.id,
+            email: user.email,
+            password, profilePicture: user.profilePicture, botCommand: user.botCommand});
     } else {
         res.status(401).json({message: "Wrong password!" });
         throw new Error("Wrong password!")
@@ -106,7 +111,7 @@ const currentUser = asyncHandler(async (req, res) => {
 //@access private
 const editUser = asyncHandler(async (req,res) => {
     const userID = req.params.userID;
-    const { username, email, password, profilePicture } = req.body;
+    const { username, email, password, profilePicture,botCommand } = req.body;
 
     // <---- Checking if the provided user id is valid ---->
     if (!mongoose.Types.ObjectId.isValid(userID)) {
@@ -132,6 +137,7 @@ const editUser = asyncHandler(async (req,res) => {
   user.username = username ? username : user.username;
   user.email = email ? email : user.email;
   user.profilePicture = profilePicture ? profilePicture : user.profilePicture;
+  user.botCommand = botCommand ? botCommand : user.botCommand;
 
 // <---- If exists, validating, hashing and setting new password ---->
   if (password) {

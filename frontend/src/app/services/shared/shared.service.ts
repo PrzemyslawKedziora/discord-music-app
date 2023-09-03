@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {SongModel} from "../../models/song.model";
 import {AuthorModel} from "../../models/author.model";
 import {Observable, Subject} from "rxjs";
+import {UserModel} from "../../models/user.model";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class SharedService {
   private _loginUserStatus!:boolean;
   private _registerUserStatus!:boolean;
   public _filterStatus!:boolean;
+  private _user!: UserModel;
 
 
 
@@ -101,5 +103,14 @@ export class SharedService {
 
   set filterStatus(value: boolean) {
     this._filterStatus = value;
+  }
+
+
+  get user(): UserModel {
+    return this._user;
+  }
+
+  set user(value: UserModel) {
+    this._user = value;
   }
 }

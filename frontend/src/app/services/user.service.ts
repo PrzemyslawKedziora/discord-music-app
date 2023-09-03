@@ -11,6 +11,7 @@ export class UserService {
     window.location.reload();
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('username');
+    sessionStorage.removeItem('user');
     sessionStorage.removeItem('id');
   }
 }

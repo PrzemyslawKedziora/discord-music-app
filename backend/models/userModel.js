@@ -25,7 +25,11 @@ const userSchema = mongoose.Schema(
       required: false,
       default: "",
     },
-    isAdmin: {
+    botCommand: {
+      type: String,
+      default: "",
+    },
+      isAdmin: {
       type: Boolean,
       default: false,
     },
