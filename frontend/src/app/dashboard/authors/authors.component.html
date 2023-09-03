@@ -10,13 +10,16 @@
             <button class="btn btn-danger" *ngIf="loginStatus" (click)="userService.logOut()">Log Out</button>
           </div>
           <mat-form-field class="d-flex">
-            <input matInput type="text" (input)="filterNames()"
+            <input matInput type="text"
+                   (input)="filterNames()"
                    [(ngModel)]="searchQuery"
                    [placeholder]="' search by authors\' name'"
             >
           </mat-form-field>
           <div class="button-add">
-            <button class="btn btn-author-add" (click)="authorService.addArtist()"> Add artist</button>
+            <button class="btn btn-author-add" (click)="authorService.addArtist()"> <span>Add artist</span>
+              <i class="bi bi-person-plus"></i>
+            </button>
           </div>
         </div>
         </div>

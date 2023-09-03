@@ -28,6 +28,9 @@ mat-form-field{
 .btn-author-add{
   background: $hover-blue-nav-color;
   width: 40%;
+  display: flex;
+  justify-content: center;
+  gap: 1vw;
 }
 .container1{
   background: $background-color;
