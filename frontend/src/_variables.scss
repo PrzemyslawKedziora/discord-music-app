@@ -1,10 +1,21 @@
+// $background-main-color: #313338;
+// $background-hover-color: #404040;
+// $background-color: #2B2D31;
+// $main-green-color: #1d7874;
+// $main-red-color: #FF6C6C;
+// $main-clay-color: #dec9b8;
+// $hover-blue-nav-color: #7289DA;
+
 $background-main-color: #313338;
 $background-hover-color: #404040;
+$font-color: #97A9B4;
 $background-color: #2B2D31;
+$background-second: #515151;
 $main-green-color: #1d7874;
 $main-red-color: #FF6C6C;
 $main-clay-color: #dec9b8;
 $hover-blue-nav-color: #7289DA;
+$blue-nav-color: #5774da;
 
 @mixin card-configuration{
   margin-bottom:20px;
