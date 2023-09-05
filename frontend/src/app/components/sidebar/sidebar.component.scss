@@ -1,11 +1,18 @@
 @import "src/variables";
+
+.content {
+  width: 80%;
+  float: left;
+  background-color: #f2f2f2;
+}
+
 .sidebar{
   display: flex;
   flex-direction: column;
   text-align: center;
   height: 96vh;
   width: 100%;
-  background: $background-main-color;
+  background: $background-color;
 }
 .server-logo{
   margin: 10% 0;

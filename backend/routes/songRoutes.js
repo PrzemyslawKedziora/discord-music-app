@@ -7,6 +7,7 @@ const {
   addSong,
   getAllSongs,
   getRandomSong,
+  getMostLikedSongs,
   getSongsByAuthor,
   getSongsByCategory,
   editSong,
@@ -26,6 +27,8 @@ router.get("/random", getRandomSong);
 router.get("/author/:authorID", getSongsByAuthor);
 
 router.get("/category/:categoryID", getSongsByCategory);
+
+router.get("/most-liked/:count", getMostLikedSongs)
 
 router.post("/:songID/like", validateToken, likeSong);
 

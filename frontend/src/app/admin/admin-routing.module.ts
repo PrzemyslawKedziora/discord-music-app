@@ -22,6 +22,7 @@ const routes: Routes = [
   {path: 'user-panel', component: UserPanelComponent}
 ];
 
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

@@ -1,7 +1,40 @@
 <div class="main-container">
+
   <app-sidebar></app-sidebar>
-  <div class="sidebar-fix"></div>
-  <div class="content-container">
-    <app-top-bar></app-top-bar>
+
+  <div class="content">
+
+    <div class="row ">
+      <section class="quick-add">
+        <span class="section-title">Quick Add</span>
+        <button class="btn add-button">Add song</button>
+        <button class="btn add-button">Add Author</button>
+      </section>
+    </div>
+
+    <div class="container">
+      <div class="row">
+
+          <span class="section-title">Most liked</span>
+
+          <section class="song-cards-container col">
+            <div *ngFor="let number of numbers">
+              <app-song-card></app-song-card>
+            </div>
+          </section>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+      <section class="most-liked">
+        <span class="section-title">Quick Add</span>
+        <button class="btn add-button">Add song</button>
+        <button class="btn add-button">Add Author</button>
+      </section>
+    </div>
+
   </div>
+
 </div>

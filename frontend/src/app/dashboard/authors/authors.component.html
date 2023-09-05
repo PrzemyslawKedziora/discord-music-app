@@ -1,4 +1,4 @@
-<div class="container1">
+<div class="main-container">
 
   <app-sidebar></app-sidebar>
 
@@ -39,13 +39,10 @@
       </div>
     </div>
 
-    <div class="row authors-container">
-      <div class="col-md-3 col-sm-4 col" *ngFor="let author of filteredAuthors">
+    <div class="row">
+      <div class="col-sm-3 author-container" *ngFor="let author of filteredAuthors">
         <app-author-card [author]="author"></app-author-card>
       </div>
-      <!-- <div class="col-md-3 col-sm-4 col" *ngFor="let author of filteredAuthors">
-            <app-author-card [author]="author"></app-author-card>
-          </div> -->
     </div>
 
   </div>

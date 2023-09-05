@@ -36,6 +36,7 @@ import { CategoriesComponent } from './dashboard/categories/categories.component
 import { CategoryItemComponent } from './dashboard/categories/category-item/category-item.component';
 import { DeleteAuthorDialogComponent } from './dashboard/authors/delete-author-dialog/delete-author-dialog.component';
 import { UserPanelComponent } from './dashboard/user-panel/user-panel.component';
+import { SongCardComponent } from './dashboard/home/song-card/song-card.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { UserPanelComponent } from './dashboard/user-panel/user-panel.component'
     CategoriesComponent,
     CategoryItemComponent,
     DeleteAuthorDialogComponent,
-    UserPanelComponent
+    UserPanelComponent,
+    SongCardComponent
 
 
   ],

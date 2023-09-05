@@ -174,6 +174,28 @@ const getSongsByCategory = asyncHandler(async (req, res) => {
   }
 });
 
+//@desc sending list of all song of given category
+//@route POST api/song/most-liked/:count
+//@access public
+const getMostLikedSongs = asyncHandler(async (req, res) => {
+  const count = parseInt(req.params.count);
+
+  // make sure count is a valid number
+  if (isNaN(count) || count <= 0) {
+    return res.status(400).json({ message: "Invalid count parameter" });
+  }
+
+  // Get all the songs and sort them by descending number of likes with the limit of 'count'
+  const songs = Song.find({}).sort({ "likes.length": -1 }).limit(count);
+  if (!songs) {
+    res.status(500).json({
+      message: "There was a problem trying to get Songs from the database!",
+    });
+  }
+
+  res.status(200).json(songs);
+});
+
 //@desc Sending a random song
 //@route GET api/songs/random
 //@access public
@@ -350,6 +372,7 @@ module.exports = {
   addSong,
   getAllSongs,
   getRandomSong,
+  getMostLikedSongs,
   getSongsByAuthor,
   getSongsByCategory,
   editSong,

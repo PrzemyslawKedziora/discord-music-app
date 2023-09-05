@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SongService} from "../song/song.service";
 import {SongModel} from "../../models/song.model";
 import {SharedService} from "../../services/shared/shared.service";
+import { SongCardComponent } from './song-card/song-card.component';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,8 @@ export class HomeComponent implements OnInit {
       console.log(this.songs);
     }
   }
+
+  numbers: Array<number> = [1, 2, 3];
 
   ngOnInit(): void {
     sessionStorage.getItem('token') ?

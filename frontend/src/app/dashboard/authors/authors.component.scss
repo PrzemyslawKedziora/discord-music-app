@@ -1,9 +1,19 @@
 @import "src/variables";
 
-.container1 {
+.row {
+  width: 90%;
+  min-width: 300px;
+}
+.col {
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  background: $background-color;
 }
 
 app-sidebar{
@@ -22,37 +32,15 @@ app-sidebar{
   align-items: center;
 }
 
-.row {
-  width: 90%;
-  min-width: 300px;
-}
-
-.col {
-  margin: 0;
-  padding: 0;
-}
-
 .management-panel{
-  padding: 2rem 0;
-}
+  padding: 2rem 1%;
 
-.authors-top-bar{
-  width: available;
 }
-
-// mat-form-field{
-//   padding-top: 20px;
-//   width: 50vw;
-// }
 
 .button-login-container {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-}
-
-.container1{
-  background: $background-color;
 }
 
 // input - searchbar
@@ -118,7 +106,6 @@ label:before {
   left: 0;
   background-color: $background-second;
   border-radius: 5px;
-
   width: $checkbox-size;
   height: $checkbox-size;
 }
@@ -150,20 +137,13 @@ input[type=checkbox]:checked + label:before {
   margin-left: -1rem;
   display: none;
 }
-
 .bi-music-note-list {
   margin: 0 1rem;
   color: white;
   font-size: 1.5rem;
 }
 
-.authors-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 3rem 0;
-}
-
-app-author-card {
-  width: 100%;
+// Authors-cards
+.author-container {
+  margin: 1rem 0;
 }

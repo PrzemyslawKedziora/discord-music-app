@@ -1,9 +1,8 @@
 @import "src/variables";
 mat-card{
   background: $background-main-color;
-  margin: 10px;
-  width: 15vw;
-  min-width: 150px;
+  width: 100%;
+  padding: 2rem 0;
 }
 mat-card:hover{
   background: $background-hover-color;
@@ -13,6 +12,7 @@ img{
   max-width: 8vw;
   min-width: 100px;
   padding-bottom: 25px;
+  border-radius: 10px;
 }
 p{
   text-align: center;
@@ -22,9 +22,7 @@ p{
   display: flex;
   justify-content: center;
 }
-img{
-  border-radius: 10px;
-}
+
 .btn{
   color: white;
 }
