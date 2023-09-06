@@ -10,7 +10,7 @@ export class LandingPageComponent implements OnInit{
   isImageVisible:boolean = false;
 
   pepeBandGif: string = './assets/peepoband.gif';
-  pepeBandJpeg: string = './assets/peepoband.jpg';
+  pepeBandJpeg: string = './assets/peepoband-s.gif';
 
   nyanCatSRC: string = './assets/nyan-cat.gif';
   pepeJamSRC: string = './assets/pepe-pepejam.gif';

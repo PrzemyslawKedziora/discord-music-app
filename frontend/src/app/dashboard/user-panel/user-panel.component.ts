@@ -3,7 +3,7 @@ import {UserModel} from "../../models/user.model";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import axios from "axios";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {UserService} from "../../services/user.service";
+import {UserService} from "../../services/user/user.service";
 
 @Component({
   selector: 'app-user-panel',

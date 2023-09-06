@@ -8,6 +8,7 @@ import {AuthorsComponent} from "../dashboard/authors/authors.component";
 import {HomeComponent} from "../dashboard/home/home.component";
 import {CategoriesComponent} from "../dashboard/categories/categories.component";
 import {UserPanelComponent} from "../dashboard/user-panel/user-panel.component";
+import {PlaylistsComponent} from "../dashboard/playlists/playlists.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/landing-page', pathMatch: 'full'},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'authors', component: AuthorsComponent},
   {path: 'categories', component: CategoriesComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'user-panel', component: UserPanelComponent}
+  {path: 'user-panel', component: UserPanelComponent},
+  {path: 'playlists', component: PlaylistsComponent}
 ];
 
 
