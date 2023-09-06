@@ -8,7 +8,8 @@ import {SharedService} from "../../services/shared/shared.service";
 })
 export class SidebarComponent {
 
-
+  loginStatus:boolean=false;
   constructor(public sharedService: SharedService) {
+    sessionStorage.getItem('user') ? this.loginStatus = true : this.loginStatus = false;
   }
 }
