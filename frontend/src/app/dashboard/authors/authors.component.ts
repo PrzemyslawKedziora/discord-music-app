@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {AuthorModel} from "../../models/author.model";
 import {AuthorService} from "./author.service";
-import {UserService} from "../../services/user.service";
+import {UserService} from "../../services/user/user.service";
 import {MatDialog} from "@angular/material/dialog";
 import {FilterByComponent} from "../song/filter-by/filter-by.component";
 

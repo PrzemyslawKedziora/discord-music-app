@@ -61,7 +61,7 @@ export class NewSongComponent{
             this.addSongStatus = true;
             this.sharedService.sharedAddingSongStatus = this.addSongStatus;
             this.songData.push(new SongRecord(res.data._id,res.data.authors,res.data.thumbnail,res.data.categories,
-              res.data.likes,res.data.name,res.data.userID,res.data.ytURL))
+              res.data.likes,res.data.name,res.data.userID,res.data.ytURL,res.data.createdAt))
             this.sb.open('Song has been succesfully added!','', {
               duration: duration,
               panelClass: ['success-snackBar']

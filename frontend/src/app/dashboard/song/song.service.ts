@@ -23,6 +23,7 @@ export class SongService {
     return axios.get('http://localhost:4100/api/songs/all').then((response) => {
      if (this.songs.length ==0){
        for (let i = 0; i < response.data.length; i++) {
+         response.data[i].createdAt = Date.parse(response.data[i].createdAt)
          this.songs.push(response.data[i]);
        }
      }
