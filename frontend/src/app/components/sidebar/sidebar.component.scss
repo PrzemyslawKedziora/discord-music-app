@@ -44,6 +44,10 @@ li{
 li i{
   margin-right: 0.8vw;
 }
+.small-li{
+  display: flex;
+  justify-content: center;
+}
 li:hover{
   cursor: pointer;
   color: $hover-blue-nav-color;

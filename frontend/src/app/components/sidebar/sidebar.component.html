@@ -1,25 +1,25 @@
 <div class="sidebar">
   <div class="server-logo  d-flex justify-content-center align-items-center">
-    <img class="server-logo-img" src="assets/server-logo-static.png" routerLink="/landing-page">
+    <img class="server-logo-img" src="assets/server-logo-static.png" routerLink="/landing-page" alt="server logo">
   </div>
-  <ul class="list-unstyled">
-    <li routerLink="/home">
-      <i class="bi bi-house-door"></i> Home
+  <ul class="list-unstyled" >
+    <li routerLink="/home" [ngClass]="windowWidth < 295 ? 'small-li':{}">
+      <i class="bi bi-house-door"></i> <span [textContent]="windowWidth< 295 ? '' : 'Home'"></span>
     </li>
-    <li routerLink="/dashboard">
-      <i class="bi bi-music-note-beamed"></i> Music
+    <li routerLink="/dashboard" [ngClass]="windowWidth < 295 ? 'small-li':{}">
+      <i class="bi bi-music-note-beamed"></i> <span [textContent]="windowWidth< 295 ? '' : 'Music'"></span>
     </li>
-    <li routerLink="/authors" >
-      <i class="bi bi-person-fill"></i> Artists
+    <li routerLink="/authors" [ngClass]="windowWidth < 295 ? 'small-li':{}">
+      <i class="bi bi-person-fill"></i> <span [textContent]="windowWidth< 295 ? '' : 'Authors'"></span>
     </li>
-    <li routerLink="/categories" >
-      <i class="bi bi-filter"></i>Categories
+    <li routerLink="/categories" #element [ngClass]="windowWidth < 295 ? 'small-li':{}">
+      <i class="bi bi-filter"></i><span [textContent]="windowWidth< 295 ? '' : 'Categories'"></span>
     </li>
-    <li routerLink="/favourites" *ngIf="loginStatus">
-      <i class="bi bi-fire"></i> Favourites
+    <li routerLink="/playlists" *ngIf="loginStatus" [ngClass]="windowWidth < 295 ? 'small-li':{}">
+      <i class="bi bi-fire"></i> <span [textContent]="windowWidth< 300 ? '' : 'Playlists'"></span>
     </li>
-    <li routerLink="/user-panel" *ngIf="loginStatus">
-      <i class="bi bi-gear"></i> Settings
+    <li routerLink="/user-panel" *ngIf="loginStatus" [ngClass]="windowWidth < 295 ? 'small-li':{}">
+      <i class="bi bi-gear"></i> <span [textContent]="windowWidth< 300 ? '' : 'Settings'"></span>
     </li>
   </ul>
 </div>
