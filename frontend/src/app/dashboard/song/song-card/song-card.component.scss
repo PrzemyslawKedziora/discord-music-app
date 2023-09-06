@@ -1,0 +1,21 @@
+@import "../../../../variables";
+$text-size: 0.9rem;
+.card {
+  border-radius: 0.3rem;
+  padding: 1rem;
+  background-color: $background-color;
+}
+.song-info {
+  padding: 0 10px;
+}
+.title {
+  color: white;
+  font-size: $text-size;
+}
+.author {
+  font-size: 0.9 * $text-size;
+}
+.author, i, .date, .like-number {
+  color: $font-color;
+  font-size: 0.9 * $text-size;
+}

@@ -8,14 +8,12 @@
   margin: 0;
   padding: 0;
 }
-
 .main-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background: $background-color;
 }
-
 app-sidebar{
   position: sticky;
   background-color: $background-main-color;
@@ -23,7 +21,6 @@ app-sidebar{
   width: 20%;
   text-align: center;
 }
-
 .authors {
   width: 80%;
   min-width: 70vw;
@@ -31,26 +28,21 @@ app-sidebar{
   flex-direction: column;
   align-items: center;
 }
-
 .management-panel{
   padding: 2rem 1%;
-
 }
-
 .button-login-container {
   display: flex;
   justify-content: flex-end;
   width: 100%;
 }
-
 // input - searchbar
 $icon-width: 3rem;
 .input-container{
   position: relative;
   width: 100%;
   min-width: 200px;
-  height: 3.5rem;  
-  align-items: start;
+  height: 3.5rem;
   margin: 0.5rem 0;
   display: flex;
   align-items: center;
@@ -71,35 +63,28 @@ $icon-width: 3rem;
 .search-bar::placeholder {
   color: $font-color;
 }
-
 .bi-search {
   position: absolute;
   top: 0;
   left: 0;
-
   display: flex;
   justify-content: center;
   align-items: center;
   width: $icon-width;
   height: 100%;
-
   color: $font-color;
   font-size: 1.5rem;
 }
-
 // input - checkbox
 $checkbox-size: 1.5rem;
 label {
   display: inline-block;
   cursor: pointer;
-
   line-height: $checkbox-size;
-
   padding-left: 2.5rem;
   font-size: 1.3rem;
   color: $font-color;
 }
-
 label:before {
   content: "";
   position: absolute;
@@ -109,7 +94,6 @@ label:before {
   width: $checkbox-size;
   height: $checkbox-size;
 }
-
 input[type=checkbox] {
   display: none;
 }
@@ -118,7 +102,6 @@ input[type=checkbox]:checked + label:before {
   color: $font-color;
   text-align: center;
 }
-
 // Add button
 .add-button {
   height: 100%;
@@ -142,7 +125,6 @@ input[type=checkbox]:checked + label:before {
   color: white;
   font-size: 1.5rem;
 }
-
 // Authors-cards
 .author-container {
   margin: 1rem 0;

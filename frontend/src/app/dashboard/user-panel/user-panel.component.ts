@@ -78,7 +78,7 @@ export class UserPanelComponent {
     let handleError = (error: any): void => {
       const errorMessage = error.response.data.message;
       console.log(error.response.data.message);
-      this.sb.open(errorMessage || 'The URL has wrong format' ,'',{
+      this.sb.open(errorMessage || 'The error has occurred' ,'',{
         duration: 3000,
         panelClass: ['failed-snackBar']
       })

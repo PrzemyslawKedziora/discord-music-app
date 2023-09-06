@@ -1,50 +1,33 @@
 <div class="main-container">
-
   <app-sidebar></app-sidebar>
-
   <div class="authors">
-
     <div class="row">
       <div class="col d-flex justify-content-center flex-column align-items-center management-panel">
-
         <div class="button-login-container">
           <button class="btn btn-success" *ngIf="!loginStatus" routerLink="/login">Log In</button>
           <button class="btn btn-danger" *ngIf="loginStatus" (click)="userService.logOut()">Log Out</button>
         </div>
-
         <div class="input-container">
           <input type="text" class="search-bar" (input)="filterNames()" [(ngModel)]="searchQuery"
             [placeholder]="' search by authors\' name'">
           <i class="bi bi-search icon"></i>
         </div>
-        <!-- <mat-form-field class="d-flex search-bar">
-            <input matInput type="text" (input)="filterNames()"
-                   [(ngModel)]="searchQuery"
-                   [placeholder]="' search by authors\' name'"
-            >
-          </mat-form-field> -->
         <div class="input-container">
           <input type="checkbox" id="show-owned">
           <label for="show-owned">Show only authors added by you</label>
         </div>
-
         <div class="input-container">
-          <button class="btn btn-author-add add-button" (click)="authorService.addArtist()"> 
+          <button class="btn btn-author-add add-button" (click)="authorService.addArtist()">
             <span>Add artist</span>
             <i class="bi bi-music-note-list"></i>
           </button>
-          
         </div>
-
       </div>
     </div>
-
     <div class="row">
       <div class="col-sm-3 author-container" *ngFor="let author of filteredAuthors">
         <app-author-card [author]="author"></app-author-card>
       </div>
     </div>
-
   </div>
-
 </div>
