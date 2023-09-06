@@ -15,27 +15,27 @@
         <button class="btn add-button">Add Author</button>
         <div class="border-bottom"></div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
          <div class="col">
            <p class="section-title">Most liked</p>
          </div>
       </div>
-      <div class="row song-cards-container">
-        <div *ngFor="let song of songs" class="col-sm-4">
+      <div class="row">
+        <div *ngFor="let song of songs" class="col-lg-4">
           <app-song-card [song]="song"></app-song-card>
         </div>
       </div>
     </div>
     <div class="border-bottom"></div>
-    <div class="container sorted-by-date-container">
+    <div class="container-fluid sorted-by-date-container">
       <div class="row">
         <div class="col">
           <p class="section-title">Recently Added</p>
         </div>
       </div>
-        <div class="row song-cards-container">
-          <div *ngFor="let sortedSong of songsSortedByDate" class="col-sm-4">
+        <div class="row">
+          <div *ngFor="let sortedSong of songsSortedByDate" class="col-lg-4">
             <app-song-card [song]="sortedSong"></app-song-card>
           </div>
         </div>
