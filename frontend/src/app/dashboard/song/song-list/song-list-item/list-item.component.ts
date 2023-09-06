@@ -15,6 +15,7 @@ export class ListItemComponent implements OnInit{
 @Input() songData!:SongModel[];
 @Input() songRecord!:SongModel;
 @Input() songIndex!:number;
+@Input('botCommand') botCommand!:string;
 
 @ViewChild('likeElement', {static: true}) likeElement!: ElementRef;
   constructor(public dashboard: DashboardComponent,
@@ -62,7 +63,7 @@ export class ListItemComponent implements OnInit{
   }
 
   onClick(){
-    this.sb.open('Song URL has been successfully copied to clipboard.','',{
+    this.sb.open('Song has been successfully copied to clipboard.','',{
       duration: 2000,
       panelClass: ['success-snackBar']
     });

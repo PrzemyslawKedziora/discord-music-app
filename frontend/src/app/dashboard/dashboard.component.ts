@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SongModel} from "../models/song.model";
 import {MatDialog} from "@angular/material/dialog";
 import {CategoryModel} from "../models/category.model";
@@ -12,13 +12,14 @@ import {AuthorService} from "./authors/author.service";
 import {ActivatedRoute} from "@angular/router";
 import {CategoryService} from "./categories/category.service";
 import {NewSongComponent} from "./song/new-song/new-song.component";
+import {UserModel} from "../models/user.model";
 
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent{
+export class DashboardComponent implements OnInit{
 
   categories!: CategoryModel[];
   artists!: AuthorModel[];
@@ -30,6 +31,7 @@ export class DashboardComponent{
   catID!: string;
   filteredSongs: SongModel[] = [];
   author: AuthorModel | undefined;
+  botCommand:string='';
 
   constructor(public dialog: MatDialog,
               public sharedService: SharedService,
@@ -76,6 +78,13 @@ export class DashboardComponent{
     this.isLoggedIn = !!sessionStorage.getItem("token");
 
   }
+
+  ngOnInit(): void {
+    const user:UserModel = JSON.parse(sessionStorage.getItem('user') || '');
+    this.botCommand = user.botCommand;
+  }
+
+
 
   addArtist(){
     const dialogRef = this.dialog.open(NewAuthorComponent, {

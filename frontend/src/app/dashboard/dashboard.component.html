@@ -1,5 +1,5 @@
 <div class="cont1">
-  <app-sidebar></app-sidebar>
+   <app-sidebar></app-sidebar>
   <div class="content-container">
     <app-management-panel [categories]="categories" [authors]="artists"></app-management-panel>
     <div class="container">
@@ -17,7 +17,7 @@
         <div class="col">
           <div *ngFor="let song of songs; index as index"
                class="d-flex justify-content-center align-items-center mb-3 flex-column">
-            <song-list-item [songData]="songs" [songRecord]="song" [songIndex]="index"></song-list-item>
+            <song-list-item [songData]="songs" [songRecord]="song" [songIndex]="index" [botCommand]="botCommand"></song-list-item>
           </div>
           ababa
         </div>
