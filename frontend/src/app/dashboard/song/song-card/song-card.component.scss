@@ -3,6 +3,7 @@ $text-size: 0.9rem;
 .card {
   border-radius: 0.3rem;
   padding: 1rem;
+  margin: 1vh 0;
   background-color: $background-color;
 }
 .song-info {
@@ -14,8 +15,18 @@ $text-size: 0.9rem;
 }
 .author {
   font-size: 0.9 * $text-size;
+  display: flex;
+  align-content: flex-end;
 }
 .author, i, .date, .like-number {
   color: $font-color;
   font-size: 0.9 * $text-size;
+}
+.song-main-info{
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+}
+.stats{
+  width: 11vw;
 }

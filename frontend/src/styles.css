@@ -14,6 +14,7 @@ body,html{
   --mdc-snackbar-container-color: #198754;
   --mdc-snackbar-supporting-text-color: #efebd9;
   border-radius: 25px;
+  text-align: center;
  }
 .failed-snackBar {
   background: #FA113D;
