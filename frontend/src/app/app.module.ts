@@ -37,6 +37,7 @@ import { DeleteAuthorDialogComponent } from './dashboard/authors/delete-author-d
 import { UserPanelComponent } from './dashboard/user-panel/user-panel.component';
 import { SongCardComponent } from './dashboard/song/song-card/song-card.component';
 import { PlaylistsComponent } from './dashboard/playlists/playlists.component';
+import { SongComponent } from './dashboard/song/component/song.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { PlaylistsComponent } from './dashboard/playlists/playlists.component';
     DeleteAuthorDialogComponent,
     UserPanelComponent,
     SongCardComponent,
-    PlaylistsComponent
+    PlaylistsComponent,
+    SongComponent
 
 
   ],

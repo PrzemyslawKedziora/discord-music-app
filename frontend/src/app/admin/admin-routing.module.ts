@@ -9,19 +9,24 @@ import {HomeComponent} from "../dashboard/home/home.component";
 import {CategoriesComponent} from "../dashboard/categories/categories.component";
 import {UserPanelComponent} from "../dashboard/user-panel/user-panel.component";
 import {PlaylistsComponent} from "../dashboard/playlists/playlists.component";
+import {SongComponent} from "../dashboard/song/component/song.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/landing-page', pathMatch: 'full'},
   {path: 'landing-page', component: LandingPageComponent},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'dashboard/:authorName', component: DashboardComponent},
+  {path: 'dashboard', component: DashboardComponent,
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
+      { path: 'authors', component: AuthorsComponent },
+      { path: 'categories', component: CategoriesComponent },
+      { path: 'user-panel', component: UserPanelComponent },
+      { path: 'playlists', component: PlaylistsComponent },
+      { path: ':authorName', component: SongComponent },
+    ],},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'authors', component: AuthorsComponent},
-  {path: 'categories', component: CategoriesComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'user-panel', component: UserPanelComponent},
-  {path: 'playlists', component: PlaylistsComponent}
+
 ];
 
 

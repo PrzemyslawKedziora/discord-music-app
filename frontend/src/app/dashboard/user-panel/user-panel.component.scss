@@ -1,16 +1,4 @@
 @import "src/variables";
-app-sidebar{
-  position: sticky;
-  top: 20px;
-  background-color: $background-main-color;
-  padding: 10px;
-  width: 20%;
-  text-align: center;
-}
-.cont1{
-  background: $background-color;
-  height: 100%;
-}
 .profile-picture{
   position: relative;
   top: 50px;
@@ -46,4 +34,7 @@ mat-form-field{
   padding: 10px 0;
   position: absolute;
   left: 85.7%;
+}
+.container{
+  width: 100vw;
 }

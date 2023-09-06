@@ -1,24 +1,24 @@
 <div class="sidebar">
   <div class="server-logo  d-flex justify-content-center align-items-center">
-    <img class="server-logo-img" src="assets/server-logo-static.png" routerLink="/landing-page">
+    <img class="server-logo-img" src="assets/server-logo-static.png" routerLink="/landing-page" alt="server logo">
   </div>
   <ul class="list-unstyled">
-    <li routerLink="/home">
+    <li routerLink="/dashboard/home">
       <i class="bi bi-house-door"></i> Home
     </li>
-    <li routerLink="/dashboard">
+    <li routerLink="/dashboard/music">
       <i class="bi bi-music-note-beamed"></i> Music
     </li>
-    <li routerLink="/authors" >
+    <li routerLink="/dashboard/authors" >
       <i class="bi bi-person-fill"></i> Artists
     </li>
-    <li routerLink="/categories" >
+    <li routerLink="/dashboard/categories" >
       <i class="bi bi-filter"></i>Categories
     </li>
-    <li routerLink="/favourites" *ngIf="loginStatus">
+    <li routerLink="/dashboard/playlists" *ngIf="loginStatus">
       <i class="bi bi-fire"></i> Favourites
     </li>
-    <li routerLink="/user-panel" *ngIf="loginStatus">
+    <li routerLink="/dashboard/user-panel" *ngIf="loginStatus">
       <i class="bi bi-gear"></i> Settings
     </li>
   </ul>

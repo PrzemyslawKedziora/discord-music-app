@@ -1,9 +1,9 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {SongModel} from "../../../../models/song.model";
-import {DashboardComponent} from "../../../dashboard.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "../../delete-confirm-dialog/confirm-dialog.component";
+import {SongComponent} from "../../component/song.component";
 
 @Component({
   selector: 'song-list-item',
@@ -18,7 +18,7 @@ export class ListItemComponent implements OnInit{
 @Input('botCommand') botCommand!:string;
 
 @ViewChild('likeElement', {static: true}) likeElement!: ElementRef;
-  constructor(public dashboard: DashboardComponent,
+  constructor(public sc: SongComponent,
               private sb: MatSnackBar,
               private dialog: MatDialog) {
   }
@@ -39,7 +39,7 @@ export class ListItemComponent implements OnInit{
 
   like(song: SongModel) {
     song.isLiked=false;
-    if (this.dashboard.isLoggedIn) {
+    if (this.sc.isLoggedIn) {
       this.isLiked = !this.isLiked;
       const changeAmount = this.isLiked ? 1 : -1;
 

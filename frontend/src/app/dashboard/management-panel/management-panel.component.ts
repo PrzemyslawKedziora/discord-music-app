@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DashboardComponent} from "../dashboard.component";
 import {CategoryModel} from "../../models/category.model";
 import {AuthorModel} from "../../models/author.model";
 import {SongService} from "../song/song.service";
 import {UserService} from "../../services/user/user.service";
+import {SongComponent} from "../song/component/song.component";
 
 
 @Component({
@@ -14,7 +14,7 @@ import {UserService} from "../../services/user/user.service";
 
 export class ManagementPanelComponent implements OnInit{
 
-  constructor(public dashboard: DashboardComponent,
+  constructor(public dashboard: SongComponent,
               public songService: SongService,
               public userService: UserService)
   {

@@ -51,7 +51,7 @@ export class LoginComponent {
             this.sharedService.loginUserStatus = this.isLoggedIn;
           }
           setTimeout(() => {
-            this.router.navigate(['/home'])
+            this.router.navigate(['/dashboard/home'])
           },2000);
           this.sb.open('User has been successfully logged in!','',{
             duration: 1000,

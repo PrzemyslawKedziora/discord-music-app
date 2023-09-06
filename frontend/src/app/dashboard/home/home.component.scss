@@ -1,17 +1,4 @@
 @import "src/variables";
-.main-container {
-  display: flex;
-  background: $background-main-color;
-  justify-content: space-between;
-}
-app-sidebar{
-  position: sticky;
-  top: 20px;
-  background-color: $background-color;
-  padding: 10px;
-  width: 20%;
-  text-align: center;
-}
 .quick-add{
   margin: 0 0 2vh 0;
 }
@@ -33,7 +20,6 @@ app-sidebar{
   background-color: $blue-nav-color;
 }
 .content{
-  width: 100%;
   margin-left: 10px;
 }
 .button-login-container{
