@@ -29,7 +29,6 @@ import { FilterByComponent } from './dashboard/song/filter-by/filter-by.componen
 import {MatRadioModule} from "@angular/material/radio";
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AuthorsComponent } from './dashboard/authors/authors.component';
-import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { HomeComponent } from './dashboard/home/home.component';
 import { AuthorCardComponent } from './dashboard/authors/author-card/author-card.component';
 import { CategoriesComponent } from './dashboard/categories/categories.component';
@@ -37,6 +36,7 @@ import { CategoryItemComponent } from './dashboard/categories/category-item/cate
 import { DeleteAuthorDialogComponent } from './dashboard/authors/delete-author-dialog/delete-author-dialog.component';
 import { UserPanelComponent } from './dashboard/user-panel/user-panel.component';
 import { SongCardComponent } from './dashboard/song/song-card/song-card.component';
+import { PlaylistsComponent } from './dashboard/playlists/playlists.component';
 
 
 @NgModule({
@@ -55,14 +55,14 @@ import { SongCardComponent } from './dashboard/song/song-card/song-card.componen
     FilterByComponent,
     SidebarComponent,
     AuthorsComponent,
-    TopBarComponent,
     HomeComponent,
     AuthorCardComponent,
     CategoriesComponent,
     CategoryItemComponent,
     DeleteAuthorDialogComponent,
     UserPanelComponent,
-    SongCardComponent
+    SongCardComponent,
+    PlaylistsComponent
 
 
   ],
