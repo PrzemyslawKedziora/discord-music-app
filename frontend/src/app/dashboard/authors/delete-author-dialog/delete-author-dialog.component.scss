@@ -7,5 +7,13 @@
   gap: 20px;
 }
 .container{
-  gap: 50%;
+  height: 20vh;
+  font-size: 1.3vw;
+}
+.info-container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }

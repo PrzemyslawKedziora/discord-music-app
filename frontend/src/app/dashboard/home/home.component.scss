@@ -5,6 +5,7 @@
 .section-title {
   font-weight: bold;
   font-size: 2rem;
+  color: $font-color;
 }
 // Add button
 .add-button {
@@ -32,6 +33,9 @@
 }
 .sorted-by-date-container{
   margin-top: 2vh;
+}
+.border-bottom{
+  border-bottom: var(--bs-border-width) var(--bs-border-style) $font-color!important;
 }
 
 

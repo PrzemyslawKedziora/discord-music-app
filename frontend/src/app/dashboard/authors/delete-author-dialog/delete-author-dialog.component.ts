@@ -1,6 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {DialogRef} from "@angular/cdk/dialog";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import axios from "axios";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthorModel} from "../../../models/author.model";
@@ -13,10 +12,9 @@ import {AuthorModel} from "../../../models/author.model";
 export class DeleteAuthorDialogComponent {
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: AuthorModel,
-              private dialogRef: DialogRef,
+  constructor(private dialogRef: MatDialogRef<DeleteAuthorDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: AuthorModel,
               private sb: MatSnackBar) {
-    console.log(this.data.name)
     this.titleString = 'Do not you really need '+this.data.name+' in your team?';
   }
 
