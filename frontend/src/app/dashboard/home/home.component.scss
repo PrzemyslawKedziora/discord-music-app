@@ -1,6 +1,19 @@
 @import "src/variables";
+
+section {
+padding: 1.5rem;
+padding-bottom: 1rem;
+}
+.content{
+  padding: 0.5rem 2rem;
+}
+// .bottom-border {
+//   border-bottom: 2.5px solid $font-color;
+//   width: 80vw;
+//   margin-left: -2rem;
+// }
 .quick-add{
-  margin: 0 0 2vh 0;
+  padding-bottom: 1rem;
 }
 .section-title {
   font-weight: bold;
@@ -20,9 +33,6 @@
   cursor: pointer;
   background-color: $blue-nav-color;
 }
-.content{
-  margin-left: 10px;
-}
 .button-login-container{
   display: flex;
   justify-content: flex-end;
@@ -31,9 +41,9 @@
 .row{
   width: 95%;
 }
-.sorted-by-date-container{
-  margin-top: 2vh;
-}
+// .sorted-by-date-container{
+//   margin-top: 2vh;
+// }
 .border-bottom{
   border-bottom: var(--bs-border-width) var(--bs-border-style) $font-color!important;
 }

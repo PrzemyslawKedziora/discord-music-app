@@ -10,6 +10,8 @@ export class SongCardComponent {
 
   @Input() song!: SongModel;
 
+  maxTitleLength:number = 50;
+
   calcAuthorsLength(authors: {_id:string,name:string}[]){
     let length = 0;
     for (let author of authors){
