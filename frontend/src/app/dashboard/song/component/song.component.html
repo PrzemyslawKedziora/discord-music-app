@@ -1,8 +1,12 @@
-<div class="cont1">
-  <div class="content-container">
+
+  <div class="container">
+
     <app-management-panel [categories]="categories" [authors]="artists"></app-management-panel>
+
     <div class="container">
+
       <div class="row">
+
         <div class="col">
           <div class="description-list d-flex justify-content-between mb-3 list-group-horizontal align-baseline">
             <div class="number">#</div>
@@ -13,14 +17,18 @@
             <div class="like-group" *ngIf="isLoggedIn">Delete</div>
           </div>
         </div>
+
         <div class="col">
           <div *ngFor="let song of songs; index as index"
-               class="d-flex justify-content-center align-items-center mb-3 flex-column">
-            <song-list-item [songData]="songs" [songRecord]="song" [songIndex]="index" [botCommand]="botCommand"></song-list-item>
+            class="d-flex justify-content-center align-items-center mb-3 flex-column">
+            <song-list-item [songData]="songs" [songRecord]="song" [songIndex]="index"
+              [botCommand]="botCommand"></song-list-item>
           </div>
           ababa
         </div>
+
       </div>
+
     </div>
+
   </div>
-</div>

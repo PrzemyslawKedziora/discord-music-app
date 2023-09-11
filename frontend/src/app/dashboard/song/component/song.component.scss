@@ -1,4 +1,5 @@
 @import "src/variables";
+
 song-list-item:hover{
   background: $hover-blue-nav-color;
   border-radius: 25px;
@@ -21,10 +22,6 @@ song-list-item:hover{
 }
 footer{
   margin-top: 80px;
-}
-.cont1{
-  display: flex;
-  background: $background-color;
 }
 app-sidebar{
   position: sticky;

@@ -1,27 +1,76 @@
 @import "src/variables";
+.categories {
+  width: 80vw;
+}
 .container1{
   background: $background-color;
+}
+.list-item {
+  width: 80%;
+  color: white;
+  margin: 15px 0;
+  font-size: 1.3vw;
+  min-height: 2.5rem;
+  padding-left: 10%;
+}
+.first {
+  color: $font-color;
+}
+.bottom-border {
+  border-bottom: 2px solid $font-color;
+  width: 90%;
+  margin: 1rem 0;
+
+}
+.hash {
+  width: 5%;
+}
+.name {
+  width: 50%;
+  vertical-align: middle;
+}
+.show {
+  width: 45%;
+}
+.hash,
+.name,
+.show {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: 2rem;
+  width: 100%;
+  text-align: left;
+  color: $font-color;
+  margin: 1.5rem 0;
+  padding: 0 5%;
+}
+.list-container {
+  padding: 2rem 0;
 }
 .categories-top-bar{
   width: available;
 }
 mat-form-field{
   padding-top: 20px;
-  width: 50vw;
+  width: 90%;
 }
 .container{
-  min-width: 70vw;
+  min-width: 80vw;
 }
-.button{
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
+.show-songs-btn{
+  width: 30%;
+  font-size: 1vw;
+  background-color: $hover-blue-nav-color;
+  color: white;
+  border-radius: 7px;
+  border: 0;
+  transition: ease-in-out 100ms;
 }
-.infos{
-  display: flex;
-  gap: 40px;
-  width: 120px;
-}
-.info-bar{
-  width: 65%;
+
+.show-songs-btn:hover {
+  transform: scale(1.05);
+  background-color: $blue-nav-color;
 }

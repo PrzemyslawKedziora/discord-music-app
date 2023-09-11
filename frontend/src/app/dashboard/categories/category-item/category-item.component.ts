@@ -20,6 +20,4 @@ export class CategoryItemComponent {
     console.log(categoryName,'nazwa adfsad')
   }
 
-
-
 }

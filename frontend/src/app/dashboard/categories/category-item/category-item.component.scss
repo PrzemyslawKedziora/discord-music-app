@@ -1,11 +1,19 @@
 @import "src/variables";
 .infos{
   display: flex;
-  gap: 40px;
+  gap: 30px;
+  width: 120px;
+}
+.info-bar {
+  width: 100%;
+}
+.row {
+  width: 100%;
 }
 .container{
   margin: 1vh 0;
   height: 110%;
+  padding: 0 4rem;
 }
 .container:hover{
   background-color:$hover-blue-nav-color;
@@ -13,4 +21,13 @@
 }
 .index{
   min-width: 25px;
+}
+.show-songs-btn {
+  width: 30%;
+  height: 60%;
+  background-color: $hover-blue-nav-color;
+  border: 0;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1.2rem;
 }

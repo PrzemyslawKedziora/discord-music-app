@@ -1,7 +1,16 @@
-<div class="container d-flex justify-content-between align-items-center">
+<!-- <div class="container d-flex justify-content-between align-items-center">
+  <div class="infos">
+    <span class="col index">{{index+1}}</span>
+    <p>{{category.name}}</p>
+  </div>
+  <button class="show-songs-btn" (click)="showCategorySongs(category.name)">Show songs</button>
+</div> -->
+
+
+  <div class="col-8 d-flex justify-content-between info-bar">
     <div class="infos">
-      <span class="col index">{{index+1}}</span>
-      <span>{{category.name}}</span>
+      <div class="col index">{{index+1}}</div>
+      <div>{{category.name}}</div>
     </div>
-  <button class="btn btn-primary" (click)="showCategorySongs(category.name)">Show songs</button>
-</div>
+    <button class="show-songs-btn" (click)="showCategorySongs(category.name)">Show songs</button>
+  </div>
