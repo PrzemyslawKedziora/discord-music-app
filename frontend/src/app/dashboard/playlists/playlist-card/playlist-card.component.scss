@@ -1,0 +1,23 @@
+@import 'src/variables';
+img{
+  border-radius: 25px;
+}
+mat-card{
+  background: $background-main-color;
+  border: 2px solid red;
+}
+.playlist-img{
+  width: 40%;
+}
+.info-1{
+  width: 15%;
+}
+.playlist-main-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 1vw;
+  padding-top: 1vh;
+  width: 10vw;
+  height: 15vh;
+}

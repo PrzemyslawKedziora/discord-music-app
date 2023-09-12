@@ -10,15 +10,12 @@ import {CategoryModel} from "../../models/category.model";
 })
 export class CategoriesComponent {
 
-  loginStatus!:boolean;
-
   categories!: CategoryModel[];
   filteredCategories: CategoryModel[]=[];
   searchQuery!:string;
 
   constructor(public sharedService: SharedService,
               private categoryService: CategoryService) {
-    sessionStorage.getItem('username') ? this.loginStatus = true : this.loginStatus = false;
     categoryService.getCategories().then(()=> {
       this.categories = categoryService.categories;
       this.filteredCategories= categoryService.categories;

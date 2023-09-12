@@ -13,7 +13,6 @@ export class AuthorsComponent{
   authors: AuthorModel[] = [];
   searchQuery!:string;
   filteredAuthors: AuthorModel[]=[];
-  loginStatus!:boolean;
 
   constructor(public authorService: AuthorService,
               public userService: UserService) {
@@ -21,9 +20,6 @@ export class AuthorsComponent{
       this.authors = this.authorService.artists;
       this.filteredAuthors = this.authorService.artists;
     });
-    sessionStorage.getItem('username') ? this.loginStatus = true : this.loginStatus = false;
-
-    console.log(this.loginStatus, 'status')
   }
 
   filterNames() {

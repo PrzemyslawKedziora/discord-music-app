@@ -16,7 +16,7 @@ export class UserService {
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('id');
     this.router.navigate(['/landing-page']);
-    this.sb.open('User has been succefully loggen out!','',{
+    this.sb.open('User has been succefully logged out!','',{
       duration:3000,
       panelClass: ['success-snackBar']
     })

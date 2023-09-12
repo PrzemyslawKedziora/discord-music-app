@@ -6,46 +6,46 @@
         <img class="server-logo-img" src="assets/server-logo-static.png" routerLink="/landing-page" alt="server logo">
       </div>
     </div>
-  
+
     <ul class="list-unstyled">
-  
+
       <div class="row">
         <li routerLink="/dashboard/home">
           <i class="bi bi-house-door"></i>
           <span>Home</span>
         </li>
       </div>
-  
+
       <div class="row">
         <li routerLink="/dashboard/music">
           <i class="bi bi-music-note-beamed"></i> Music
         </li>
       </div>
-  
+
       <div class="row">
         <li routerLink="/dashboard/authors">
           <i class="bi bi-person-fill"></i> Artists
         </li>
       </div>
-  
+
       <div class="row">
         <li routerLink="/dashboard/categories">
           <i class="bi bi-filter"></i>Categories
         </li>
       </div>
-  
+
       <div class="row">
-        <li routerLink="/dashboard/playlists" *ngIf="loginStatus">
-          <i class="bi bi-fire"></i> Favourites
+        <li routerLink="/dashboard/playlists">
+          <i class="bi bi-collection-play"></i> Playlists
         </li>
       </div>
-  
+
       <div class="row">
         <li routerLink="/dashboard/user-panel" *ngIf="loginStatus">
           <i class="bi bi-gear"></i> Settings
         </li>
       </div>
-  
+
     </ul>
 
   </div>

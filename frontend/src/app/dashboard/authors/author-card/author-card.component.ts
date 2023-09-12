@@ -14,10 +14,12 @@ export class AuthorCardComponent {
 
   constructor(private router : Router,
               public dialog: MatDialog) {
+    sessionStorage.getItem('user') ? this.loginStatus = true : this.loginStatus = false;
+
   }
 
   @Input() author!: AuthorModel;
-
+  loginStatus!:boolean;
 
   isImgValid():string{
     if (!(this.author.pictureURL)){
