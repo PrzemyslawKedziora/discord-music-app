@@ -1,1 +1,17 @@
-<p>show-playlist works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      {{data.name}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      {{data.authorID.username}}
+    </div>
+  </div><div class="row">
+    <div class="col" *ngFor="let song of data.songs">
+      {{song.name}}
+    </div>
+  </div>
+</div>
+<div class="btn btn-primary" (click)="close()"> close</div>

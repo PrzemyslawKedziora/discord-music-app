@@ -24,10 +24,11 @@ export class PlaylistsComponent{
     sessionStorage.getItem('username') ? this.loginStatus = true : this.loginStatus = false;
   }
 
-  showPlaylist(){
+  showPlaylist(playlist: PlaylistModel){
     this.dialog.open(ShowPlaylistComponent,{
-        disableClose:true,
-        width:'70vw'
+      disableClose:true,
+      width:'70vw',
+      data: playlist
       }
 
 

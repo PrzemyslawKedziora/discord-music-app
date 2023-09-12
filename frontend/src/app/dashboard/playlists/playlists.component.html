@@ -24,7 +24,7 @@
   </div>
   <div class="row row-group">
     <div class="col-lg-4" *ngFor="let playlist of playlists">
-      <app-playlist-card [playlist]="playlist" (click)="showPlaylist()"></app-playlist-card>
+      <app-playlist-card [playlist]="playlist" (click)="showPlaylist(playlist)"></app-playlist-card>
     </div>
   </div>
 </div>
