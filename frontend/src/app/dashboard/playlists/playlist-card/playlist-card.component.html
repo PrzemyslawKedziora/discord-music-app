@@ -1,4 +1,4 @@
-<mat-card class="d-flex align-items-center">
+<mat-card class="d-flex align-items-center justify-content-around">
   <div class="d-flex gap-2 info-1">
     <i class="bi bi-collection-play-fill"></i>
     <p>{{playlist.songs.length}}</p>
@@ -10,7 +10,7 @@
     <div class="playlist-main-info">
       <div class="playlist-name">
         <p>{{playlist.name.slice(0,20)}}</p>
-        <p>{{playlist.authorID}}</p>
+        <p>{{playlist.authorID.username}}</p>
       </div>
       <div>
         <i class="bi bi-fire"></i>

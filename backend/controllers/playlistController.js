@@ -117,7 +117,7 @@ const deletPlaylist = asyncHandler(async (req, res) => {
 //@access private
 const getAllPlaylists = asyncHandler(async (req, res) => {
   const allPlaylists = await Playlist.find()
-  .populate("authorID", "name");
+  .populate("authorID",'username');
 
   if(!allPlaylists) {
     res.status(400).json({ message: "There was a problem trying to get playlists from the database" });

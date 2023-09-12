@@ -3,21 +3,15 @@ img{
   border-radius: 25px;
 }
 mat-card{
-  background: $background-main-color;
-  border: 2px solid red;
+  background: $background-color;
+  margin: 1vh 0;
 }
 .playlist-img{
-  width: 40%;
-}
-.info-1{
-  width: 15%;
+  margin: 0;
 }
 .playlist-main-info{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-left: 1vw;
   padding-top: 1vh;
-  width: 10vw;
+  padding-left: 1vw;
   height: 15vh;
+  min-width: 8vw;
 }
