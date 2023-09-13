@@ -11,7 +11,7 @@ import { RegisterComponent } from './components/register/register.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { ListItemComponent } from './dashboard/song/song-list/song-list-item/list-item.component';
-import { ManagementPanelComponent } from './dashboard/management-panel/management-panel.component';
+import { ManagementPanelComponent } from './dashboard/song/management-panel/management-panel.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewSongComponent } from './dashboard/song/new-song/new-song.component';
 import {MatDialogModule} from "@angular/material/dialog";
@@ -38,6 +38,9 @@ import { UserPanelComponent } from './dashboard/user-panel/user-panel.component'
 import { SongCardComponent } from './dashboard/song/song-card/song-card.component';
 import { PlaylistsComponent } from './dashboard/playlists/playlists.component';
 import { SongComponent } from './dashboard/song/component/song.component';
+import { ShowPlaylistComponent } from './dashboard/playlists/show-playlist/show-playlist.component';
+import { PlaylistCardComponent } from './dashboard/playlists/playlist-card/playlist-card.component';
+import { AddPlaylistDialogComponent } from './dashboard/playlists/add-playlist-dialog/add-playlist-dialog.component';
 
 
 @NgModule({
@@ -64,7 +67,10 @@ import { SongComponent } from './dashboard/song/component/song.component';
     UserPanelComponent,
     SongCardComponent,
     PlaylistsComponent,
-    SongComponent
+    SongComponent,
+    ShowPlaylistComponent,
+    PlaylistCardComponent,
+    AddPlaylistDialogComponent
 
 
   ],

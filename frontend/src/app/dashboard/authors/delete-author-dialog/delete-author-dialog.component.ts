@@ -32,6 +32,7 @@ export class DeleteAuthorDialogComponent {
            panelClass: ['success-snackBar']
          }
        );
+      this.closeDialog();
      }).catch((e)=> {
        handleError(e);
 

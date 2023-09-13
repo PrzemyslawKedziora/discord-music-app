@@ -12,3 +12,20 @@ app-sidebar{
   min-height: 100vh;
   text-align: center;
 }
+.login-bar{
+  margin: 10px 20px;
+}
+
+.btn {
+  width: 8rem;
+  transition: ease-in-out 200ms;
+}
+.btn:hover {
+  transform: scale(1.05);
+}
+.btn-danger {
+  background-color: $main-red-color;
+}
+.btn-success {
+  background-color: $main-green-color;
+}

@@ -1,10 +1,6 @@
 <div class="authors">
     <div class="row">
       <div class="col d-flex justify-content-center flex-column align-items-center management-panel">
-        <div class="button-login-container">
-          <button class="btn btn-success" *ngIf="!loginStatus" routerLink="/login">Log In</button>
-          <button class="btn btn-danger" *ngIf="loginStatus" (click)="userService.logOut()">Log Out</button>
-        </div>
         <div class="input-container">
           <input type="text" class="search-bar" (input)="filterNames()" [(ngModel)]="searchQuery"
             [placeholder]="' search by authors\' name'">

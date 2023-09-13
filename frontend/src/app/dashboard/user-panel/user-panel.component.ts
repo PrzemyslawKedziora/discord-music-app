@@ -68,6 +68,7 @@ export class UserPanelComponent {
       email: res.data.email,password:this.userForm.get('password')?.value,
         profilePicture: res.data.profilePicture,botCommand: res.data.botCommand,
         token:res.data.token}));
+      localStorage.setItem('botCommand',res.data.botCommand);
       this.sb.open('User has been succesfully updated!','',{
         duration: 3000,
         panelClass: ['success-snackBar']

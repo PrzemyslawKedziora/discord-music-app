@@ -11,8 +11,6 @@ import {Router} from "@angular/router";
 })
 export class CategoriesComponent {
 
-  loginStatus!:boolean;
-
   categories!: CategoryModel[];
   filteredCategories: CategoryModel[]=[];
   searchQuery!:string;
@@ -20,7 +18,6 @@ export class CategoriesComponent {
   constructor(public sharedService: SharedService,
               private categoryService: CategoryService,
               private router : Router) {
-    sessionStorage.getItem('username') ? this.loginStatus = true : this.loginStatus = false;
     categoryService.getCategories().then(()=> {
       this.categories = categoryService.categories;
       this.filteredCategories= categoryService.categories;

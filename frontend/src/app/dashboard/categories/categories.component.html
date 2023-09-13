@@ -6,11 +6,6 @@
       <div class="row">
         <div class="col d-flex justify-content-center flex-column align-items-center management-panel">
 
-          <div class="button">
-            <button class="btn btn-success" *ngIf="!loginStatus" routerLink="/login">Log In</button>
-            <button class="btn btn-danger" *ngIf="loginStatus" (click)="loginStatus">Log Out</button>
-          </div>
-
           <mat-form-field class="d-flex">
             <input matInput type="text" (input)="filterCategories()" [(ngModel)]="searchQuery"
               [placeholder]="' search by category\'s name'">
@@ -54,7 +49,6 @@
         </div>
 
       </div> -->
-
 
     </div>
   </div>

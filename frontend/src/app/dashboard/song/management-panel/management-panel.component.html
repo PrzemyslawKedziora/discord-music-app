@@ -16,8 +16,6 @@
       <button class="btn btn-outline-danger song-lists management-list-item" (click)="dashboard.removeFilters()"
               [ngStyle]="{'visibility': dashboard.sharedService.filterStatus ? 'visible':'hidden'}"
       >Remove filters</button>
-      <div class="btn btn-success logIn management-list-item d-flex align-content-end" *ngIf="!loginStatus" routerLink="/login">Log in</div>
-      <div class="btn btn-danger logIn management-list-item d-flex align-content-end" *ngIf="loginStatus" (click)="userService.logOut()">Log out</div>
     </div>
   </div>
 </div>

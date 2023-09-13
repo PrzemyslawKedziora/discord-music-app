@@ -9,7 +9,6 @@ import {SongService} from "../song.service";
 import {AuthorService} from "../../authors/author.service";
 import {ActivatedRoute} from "@angular/router";
 import {CategoryService} from "../../categories/category.service";
-import {UserModel} from "../../../models/user.model";
 import {NewAuthorComponent} from "../../authors/new-author/new-author.component";
 import {NewSongComponent} from "../new-song/new-song.component";
 import {FilterByComponent} from "../filter-by/filter-by.component";
@@ -80,8 +79,8 @@ export class SongComponent {
   }
 
   ngOnInit(): void {
-    const user:UserModel = JSON.parse(sessionStorage.getItem('user') || '');
-    this.botCommand = user.botCommand;
+    // const user:UserModel = JSON.parse(sessionStorage.getItem('user') || '');
+    this.botCommand = localStorage.getItem('botCommand') || '';
   }
 
 

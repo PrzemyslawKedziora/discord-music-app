@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
   songs: SongModel[]=[];
   songsTemp: SongModel[]=[];
   songsSortedByDate: SongModel[]=[];
-  loginStatus:boolean = false;
   constructor(public ss: SongService,
               private sharedService : SharedService,
               public userService: UserService) {
@@ -27,7 +26,6 @@ export class HomeComponent implements OnInit {
         this.songs = this.songs.sort((song1,song2)=> song2.likes.length - song1.likes.length).slice(0,6);
       });
     }
-    sessionStorage.getItem('user') ? this.loginStatus = true : this.loginStatus = false;
   }
 
   ngOnInit(): void {

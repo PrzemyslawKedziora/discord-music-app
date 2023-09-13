@@ -1,4 +1,15 @@
 <div class="cont1">
    <app-sidebar></app-sidebar>
+  <div class="vw-100">
+    <div class="login-bar d-flex justify-content-end">
+      <div>
+        <button class="btn btn-success" *ngIf="!loginStatus; else LogOut" routerLink="/login">Log In</button>
+      </div>
+      <ng-template #LogOut>
+        <button class="btn btn-danger" (click)="user.logOut()">Log Out</button>
+      </ng-template>
+    </div>
     <router-outlet></router-outlet>
+  </div>
+
 </div>
