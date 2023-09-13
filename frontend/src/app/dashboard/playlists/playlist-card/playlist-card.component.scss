@@ -3,7 +3,7 @@
 mat-card{
   background: $background-color;
   margin: 1vh 0;
-  padding: 1rem 3rem;
+  padding: 1rem 5rem;
   height: 10rem;
   border-radius: 8px;
 }
@@ -20,7 +20,9 @@ $content-height: 8rem;
   height: $content-height;
   min-width: 8vw;;
 }
-.info-length  p,
+
+// Colors and font-sizes
+.info-length,
 .name {
   color: white;
 }
@@ -29,8 +31,9 @@ $content-height: 8rem;
 .info-likes {
   color: $font-color;
 }
-
-.info-length,
+.info-length {
+  font-size: 1.5rem;
+}
 .info-likes,
 .name {
   font-size: 1.1rem;
