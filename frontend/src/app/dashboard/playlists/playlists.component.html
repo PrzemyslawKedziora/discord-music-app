@@ -1,30 +1,41 @@
 <div class="playlists">
+
   <div class="row">
     <div class="col d-flex justify-content-center flex-column align-items-center management-panel">
+
       <div class="input-container">
         <input type="text" class="search-bar"
                [placeholder]="' search by playlist\'s name'">
         <i class="bi bi-search icon"></i>
       </div>
+
       <div class="input-container">
         <input type="checkbox" id="show-owned">
         <label for="show-owned">Show only playlists added by you</label>
       </div>
+
       <div class="input-container">
         <input type="checkbox" id="label2">
         <label for="label2">Show only liked playlists</label>
       </div>
+
       <div class="input-container">
         <button class="btn btn-add add-button">
           <span>Create playlist</span>
           <i class="bi bi-collection-play-fill"></i>
         </button>
       </div>
+
+      <div class="title">Categories</div>
+
     </div>
   </div>
+
+
   <div class="row row-group">
     <div class="col-lg-4" *ngFor="let playlist of playlists">
       <app-playlist-card [playlist]="playlist" (click)="showPlaylist(playlist)"></app-playlist-card>
     </div>
   </div>
+
 </div>

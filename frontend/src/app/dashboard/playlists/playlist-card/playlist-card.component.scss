@@ -1,17 +1,40 @@
 @import 'src/variables';
-img{
-  border-radius: 25px;
-}
+
 mat-card{
   background: $background-color;
   margin: 1vh 0;
+  padding: 1rem 3rem;
+  height: 10rem;
+  border-radius: 8px;
 }
-.playlist-img{
-  margin: 0;
+img{
+  border-radius: 8px;
+  padding: 0 1rem;
+  height: 100%;
+}
+$content-height: 8rem;
+.playlist-img {
+  height: $content-height;
 }
 .playlist-main-info{
-  padding-top: 1vh;
-  padding-left: 1vw;
-  height: 15vh;
-  min-width: 8vw;
+  height: $content-height;
+  min-width: 8vw;;
+}
+.info-length  p,
+.name {
+  color: white;
+}
+.author,
+.info-length,
+.info-likes {
+  color: $font-color;
+}
+
+.info-length,
+.info-likes,
+.name {
+  font-size: 1.1rem;
+}
+.author {
+  font-size: 0.8rem;
 }
