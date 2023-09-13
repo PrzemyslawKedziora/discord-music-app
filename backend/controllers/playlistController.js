@@ -83,8 +83,7 @@ editPlaylist = asyncHandler(async (req, res) => {
 const deletPlaylist = asyncHandler(async (req, res) => {
   const playlistID = req.params.playlistID;
 
-  if (!ObjectId.isValid(playlistID))
-  {
+  if (!ObjectId.isValid(playlistID)) {
     res.status(400).json({ message: "Not valid playlistID" });
   }
 
@@ -116,14 +115,57 @@ const deletPlaylist = asyncHandler(async (req, res) => {
 //@route GET api/playlists/all
 //@access private
 const getAllPlaylists = asyncHandler(async (req, res) => {
-  const allPlaylists = await Playlist.find()
-  .populate("authorID",'username');
+  const allPlaylists = await Playlist.find().populate("authorID", "username");
 
-  if(!allPlaylists) {
-    res.status(400).json({ message: "There was a problem trying to get playlists from the database" });
+  if (!allPlaylists) {
+    res.status(400).json({
+      message: "There was a problem trying to get playlists from the database",
+    });
   }
 
   res.status(200).json(allPlaylists);
+});
+
+//@desc sends a playlist whole data
+//@route GET api/playlists/:playlistID/info
+//@access private
+const getPlaylist = asyncHandler(async (req, res) => {
+  const playlistID = req.params.playlistID;
+
+  // <---- Checking if the provided playlist id is valid ---->
+  if (!mongoose.Types.ObjectId.isValid(playlistID)) {
+    res.status(400).json({ message: "Invalid playlist ID!" });
+  }
+
+  const playlist = await Playlist.findById(playlistID)
+  .populate("songs")
+  .populate("authorID", "name")
+  .populate({
+    path: 'songs',
+    populate: [
+      {
+        path: 'authors',
+        model: 'Author',
+        select: 'name'
+      },
+      {
+        path: 'categories',
+        model: 'Category',
+        select: 'name'
+      }
+    ]
+  });
+
+  if (!playlist) {
+    res
+      .status(500)
+      .json({
+        message:
+          "There was a problem trying to get the playlist object from the database!",
+      });
+  }
+
+  res.status(200).json(playlist);
 });
 
 module.exports = {
@@ -131,4 +173,5 @@ module.exports = {
   editPlaylist,
   deletPlaylist,
   getAllPlaylists,
+  getPlaylist
 };
