@@ -1,22 +1,25 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PlaylistModel} from "../../../models/playlist.model";
+import {SongService} from "../../song/song.service";
 
 @Component({
   selector: 'app-show-playlist',
   templateUrl: './show-playlist.component.html',
-  styleUrls: ['./show-playlist.component.scss']
+  styleUrls: ['../../song/song-list/song-list-item/list-item.component.scss']
 })
 export class ShowPlaylistComponent {
 
-  urlString='http://localhost:4100/api/playlists/'+this.data._id
-
+  isLiked: boolean=false;
+  botCommand!:string;
   constructor(@Inject(MAT_DIALOG_DATA) public data: PlaylistModel,
-              private dialogRef: MatDialogRef<ShowPlaylistComponent>) {
+              private dialogRef: MatDialogRef<ShowPlaylistComponent>,
+              public ss:SongService) {
+    this.botCommand = localStorage.getItem('botCommand') || ''
   }
 
-  close(){
+  close() {
     this.dialogRef.close();
   }
-
+  onDeleteFromPlaylist(){}
 }

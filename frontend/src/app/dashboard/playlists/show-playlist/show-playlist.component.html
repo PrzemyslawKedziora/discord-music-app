@@ -1,17 +1,41 @@
-<div class="container">
+<div mat-dialog-content class="container">
   <div class="row">
-    <div class="col">
-      {{data.name}}
+    <div class="col playlist-name border-bottom text-center">
+      <p>{{data.name}}</p>
     </div>
   </div>
   <div class="row">
     <div class="col">
       {{data.authorID.username}}
     </div>
-  </div><div class="row">
-    <div class="col" *ngFor="let song of data.songs">
-      {{song.name}}
-    </div>
   </div>
+  <div class="row" *ngFor="let song of data.songs; index as index">
+    <div
+      class="d-flex align-baseline list-group-horizontal justify-content-between col-sm-5">
+      <div class="index d-flex align-items-center">{{index+1}}</div>
+      <div class="my-auto">
+        <img [src]="song.thumbnail" class="data" alt="image" style="height: 80px; width: 140px"
+             (click)="ss.openInYT(song.ytURL)"
+        >
+      </div>
+      <div class=" my-auto song-description" (click)="ss.onClick()" [cdkCopyToClipboard]="this.botCommand +' '+ song.name">
+        <div class="song-name data">{{song.name}}</div>
+        <div class="song-author-name my-auto data">
+          <span *ngFor="let author of song.authors; let last = last">
+            {{author.name || 'loading...'}}{{ !last ? ', ' : '' }}
+          </span>
+        </div>
+      </div>
+      <div class="song-categories my-auto">
+        <span *ngFor="let category of song.categories; let last = last">
+    {{ category.name || 'loading...'}}{{ !last ? ', ' : '' }}
+  </span>
+      </div>
+      <div class="my-auto data like-group" (click)="ss.like(song)">
+        <i style="margin-right: 5px" class="bi {{isLiked ? 'bi-heart-fill' : 'bi-heart'}}"></i>
+        <span class="song-like-number my-auto">{{song.likes.length ? song.likes.length : 0}}</span>
+      </div>
+    </div>
 </div>
-<div class="btn btn-primary" (click)="close()"> close</div>
+  <div class="btn btn-primary d-flex justify-content-center vw-10" (click)="close()">close</div>
+</div>

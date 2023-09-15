@@ -4,6 +4,7 @@ import {UserService} from "../../services/user/user.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ShowPlaylistComponent} from "./show-playlist/show-playlist.component";
 import {PlaylistModel} from "../../models/playlist.model";
+import axios from "axios";
 
 @Component({
   selector: 'app-playlists',
@@ -14,6 +15,7 @@ export class PlaylistsComponent{
 
   playlists:PlaylistModel[]=[];
   loginStatus:boolean=false;
+  dialogContent!:PlaylistModel[];
   constructor(private http: HttpClient,
               public userService: UserService,
               public dialog: MatDialog) {
@@ -25,14 +27,17 @@ export class PlaylistsComponent{
   }
 
   showPlaylist(playlist: PlaylistModel){
-    this.dialog.open(ShowPlaylistComponent,{
-      disableClose:true,
-      width:'70vw',
-      data: playlist
-      }
+    const APIurl = 'http://localhost:4100/api/playlists/'+playlist._id+'/info';
+    axios.get(APIurl).then(res => {
+      this.dialogContent = res.data;
+    }).then(()=> {
+      this.dialog.open(ShowPlaylistComponent,{
+        disableClose:true,
+        width:'70vw',
+        data: this.dialogContent
+      })
+    })
 
-
-    )
   }
 
 

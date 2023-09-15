@@ -131,3 +131,6 @@ input[type=checkbox]:checked + label:before {
 .btn span{
   margin-right: 10px;
 }
+app-playlist-card:hover{
+  cursor: pointer;
+}

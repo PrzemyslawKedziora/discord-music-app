@@ -5,9 +5,9 @@
       <div class="index d-flex align-items-center">{{songIndex+1}}</div>
       <div class="my-auto">
         <img [src]="songRecord.thumbnail" class="data" alt="image" style="height: 80px; width: 140px"
-        (click)="openInYT(songRecord.ytURL)">
+        (click)="ss.openInYT(songRecord.ytURL)">
       </div>
-      <div class=" my-auto song-description" (click)="onClick()" [cdkCopyToClipboard]="this.botCommand +' '+ songRecord.name">
+      <div class=" my-auto song-description" (click)="ss.onClick()" [cdkCopyToClipboard]="this.botCommand +' '+ songRecord.name">
         <div class="song-name data">{{songRecord.name}}</div>
         <div class="song-author-name my-auto data">
           <span *ngFor="let author of songRecord.authors; let last = last">
@@ -20,9 +20,8 @@
     {{ category.name || 'loading...'}}{{ !last ? ', ' : '' }}
   </span>
       </div>
-      <div class="my-auto data like-group" (click)="like(songRecord)" #likeElement>
+      <div class="my-auto data like-group" (click)="ss.like(songRecord)" #likeElement>
         <i style="margin-right: 5px" class="bi {{isLiked ? 'bi-heart-fill' : 'bi-heart'}}"></i>
-        <span class="song-like-number my-auto">{{songRecord.likes.length ? songRecord.likes.length : 0}}</span>
       </div>
       <div class="my-auto data like-group" (click)="openConfirmDeleteDialog(songRecord._id,songIndex)"
            *ngIf="this.sc.isLoggedIn && this.songRecord.userID.username == user">

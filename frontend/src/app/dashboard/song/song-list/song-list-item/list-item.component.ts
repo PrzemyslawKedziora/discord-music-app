@@ -4,6 +4,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "../../delete-confirm-dialog/confirm-dialog.component";
 import {SongComponent} from "../../component/song.component";
+import {SongService} from "../../song.service";
 
 @Component({
   selector: 'song-list-item',
@@ -20,7 +21,8 @@ export class ListItemComponent implements OnInit{
 @ViewChild('likeElement', {static: true}) likeElement!: ElementRef;
   constructor(public sc: SongComponent,
               private sb: MatSnackBar,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              public ss: SongService) {
   }
   isLiked: boolean=false;
   user?: any;
@@ -35,18 +37,6 @@ export class ListItemComponent implements OnInit{
     }
   }
 
-
-
-  like(song: SongModel) {
-    song.isLiked=false;
-    if (this.sc.isLoggedIn) {
-      this.isLiked = !this.isLiked;
-      const changeAmount = this.isLiked ? 1 : -1;
-
-     song.likes.length += changeAmount;
-    }
-  }
-
   openConfirmDeleteDialog(songID:string,index: number){
 
       this.dialog.open(ConfirmDialogComponent, {
@@ -55,18 +45,6 @@ export class ListItemComponent implements OnInit{
         data: {songs: this.songData, songID: songID, index: index}
       })
 
-  }
-
-
-  openInYT(url:string){
-    window.open(url,'_blank');
-  }
-
-  onClick(){
-    this.sb.open('Song has been successfully copied to clipboard.','',{
-      duration: 2000,
-      panelClass: ['success-snackBar']
-    });
   }
 
   wrongUser(){

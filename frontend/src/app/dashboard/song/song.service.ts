@@ -5,6 +5,7 @@ import {SongModel} from "../../models/song.model";
 import {AddDialogModel} from "../../models/add-dialog.model";
 import {MatDialog} from "@angular/material/dialog";
 import {SharedService} from "../../services/shared/shared.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,14 @@ import {SharedService} from "../../services/shared/shared.service";
 export class SongService {
 
   constructor(public dialog: MatDialog,
-              public sharedService: SharedService) { }
+              public sharedService: SharedService,
+              private sb: MatSnackBar,) { }
 
   categories: CategoryModel[]=[];
   songs: SongModel[]=[];
   songsTemp: SongModel[]=[];
   dialogData: AddDialogModel={category:[],author:[]};
+  isLiked: boolean=false;
 
   getSongs(): Promise<void>{
     return axios.get('http://localhost:4100/api/songs/all').then((response) => {
@@ -33,6 +36,25 @@ export class SongService {
     });
 
   }
+  onClick(){
+    this.sb.open('Song has been successfully copied to clipboard.','',{
+      duration: 2000,
+      panelClass: ['success-snackBar']
+    });
+  }
 
+  like(song: SongModel) {
+    song.isLiked=false;
+    if (song.isLiked) {
+      this.isLiked = !this.isLiked;
+      const changeAmount = this.isLiked ? 1 : -1;
+
+      song.likes.length += changeAmount;
+    }
+  }
+
+  openInYT(url:string){
+    window.open(url,'_blank');
+  }
 
 }
