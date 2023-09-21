@@ -1,12 +1,82 @@
 @import "src/variables";
-.categories {
+.main-container {
   width: 80vw;
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.container1{
-  background: $background-color;
+.management-panel{
+  padding: 2rem 1%;
+}
+.row {
+  width: 90%;
+  min-width: 300px;
+}
+.col {
+  margin: 0;
+  padding: 0;
+}
+.title {
+  font-size: 2rem;
+  width: 100%;
+  text-align: left;
+  color: $font-color;
+  margin: 1.5rem 0;
+}
+
+// input - searchbar
+$icon-width: 3rem;
+.input-container{
+  position: relative;
+  width: 100%;
+  min-width: 200px;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.search-bar {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  outline: 0;
+  border: 0;
+  background-color: $background-second;
+  padding: 0 1rem;
+  padding-left: $icon-width;
+  font-size: 1.3rem;
+  color: $font-color;
+}
+.search-bar::placeholder {
+  color: $font-color;
+}
+.bi-search {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $icon-width;
+  height: 100%;
+  color: $font-color;
+  font-size: 1.5rem;
+}
+
+.bottom-border {
+  border-bottom: 2px solid $font-color;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.list-container {
+  padding: 2rem 0;
 }
 .list-item {
-  width: 80%;
+  display: flex;
+  width: 100%;
   color: white;
   margin: 15px 0;
   font-size: 1.3vw;
@@ -15,12 +85,6 @@
 }
 .first {
   color: $font-color;
-}
-.bottom-border {
-  border-bottom: 2px solid $font-color;
-  width: 90%;
-  margin: 1rem 0;
-
 }
 .hash {
   width: 5%;
@@ -39,17 +103,6 @@
   align-items: center;
 }
 
-.title {
-  font-size: 2rem;
-  width: 100%;
-  text-align: left;
-  color: $font-color;
-  margin: 1.5rem 0;
-  padding: 0 5%;
-}
-.list-container {
-  padding: 2rem 0;
-}
 .categories-top-bar{
   width: available;
 }

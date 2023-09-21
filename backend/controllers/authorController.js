@@ -138,9 +138,8 @@ const deleteAuthor = asyncHandler(async (req, res) => {
     const update = { $pull: { authors: authorID } };
 
     try {
-    const response = await Song.updateMany(filter, update);
-    return response;
-
+      const response = await Song.updateMany(filter, update);
+      return response;
     } catch (error) {
       res
         .status(400)
@@ -152,12 +151,10 @@ const deleteAuthor = asyncHandler(async (req, res) => {
 
   // <---- Deleting author and sending the response ---->
   await author.deleteOne();
-  res
-    .status(200)
-    .json({
-      message: "Author deleted!",
-      songWithDeletedAuthor: response.modifiedCount, // number of songs that the author's ID have been deleted from
-    });
+  res.status(200).json({
+    message: "Author deleted!",
+    songWithDeletedAuthor: response.modifiedCount, // number of songs that the author's ID have been deleted from
+  });
 });
 
 module.exports = {
