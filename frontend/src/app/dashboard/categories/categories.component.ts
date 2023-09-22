@@ -30,6 +30,5 @@ export class CategoriesComponent {
   }
   showCategorySongs(categoryName: string){
     this.router.navigate(['/dashboard',categoryName]);
-    console.log(categoryName,'nazwa adfsad')
   }
 }

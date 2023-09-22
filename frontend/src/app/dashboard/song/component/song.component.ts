@@ -42,6 +42,7 @@ export class SongComponent {
 
     songService.getSongs().then(()=> {
       this.songs = this.sharedService.sharedSongsArray;
+      this.songsTemp = this.songs;
     });
     categoryService.getCategories().then(()=> {
       this.categories = this.categoryService.categories;
@@ -52,7 +53,7 @@ export class SongComponent {
     });
     this.initializeArtistsAsync().then(() => {
       this.route.paramMap.subscribe(params => {
-        if (params.get('authorName') != 'music') {
+        if (params.get('authorName') != 'music' && params.get('authorName')) {
           this.authorID = params.get('authorName') || '';
           if (this.authorService.artists.some(author => author.name === this.authorID)) {
             this.authorService.getAuthors().then(() => {
@@ -67,7 +68,7 @@ export class SongComponent {
             })
           }
         } else {
-          console.error('error')
+          this.songs = this.songsTemp;
         }
       });
 
