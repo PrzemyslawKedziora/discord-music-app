@@ -1,20 +1,24 @@
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col text-center">
       <p>Playlist Creator</p>
     </div>
   </div>
   <form [formGroup]="playlistForm">
-      <mat-form-field>
-        <mat-label>Enter name of playlist</mat-label>
-        <input matInput formControlName="name">
-        <mat-error *ngIf="playlistForm.get('name')?.hasError('required')">Playlist name is required.</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Enter playlist icon</mat-label>
-        <input matInput formControlName="pictureURL">
-      </mat-form-field>
+     <div class="d-flex flex-column">
+       <mat-form-field>
+         <mat-label>Enter name of playlist</mat-label>
+         <input matInput formControlName="name">
+         <mat-error *ngIf="playlistForm.get('name')?.hasError('required')">Playlist name is required.</mat-error>
+       </mat-form-field>
+       <mat-form-field>
+         <mat-label>Enter playlist icon</mat-label>
+         <input matInput formControlName="pictureURL">
+       </mat-form-field>
+     </div>
   </form>
 </div>
-<div class="close-div btn btn-primary" (click)="createPlaylist()">Create playlist</div>
-<div class="close-div btn btn-primary" (click)="close()">close</div>
+<div class="d-flex justify-content-center gap-2 button-group">
+  <div class="close-div btn btn-success" (click)="createPlaylist()">Create playlist</div>
+  <div class="close-div btn btn-danger" (click)="close()">Close</div>
+</div>
