@@ -14,14 +14,17 @@ export class ShowPlaylistComponent{
 
   isLiked: boolean=false;
   botCommand!:string;
-  isYourPlaylist!:boolean;
+  isYourPlaylist:boolean=false;
   constructor(@Inject(MAT_DIALOG_DATA) public data: {dialog: PlaylistModel,index:number},
               private dialogRef: MatDialogRef<ShowPlaylistComponent>,
               public ss:SongService,
               public ps: PlaylistService) {
+    let loggedUser!:UserModel;
     this.botCommand = localStorage.getItem('botCommand') || '';
-    const loggedUser:UserModel = JSON.parse(sessionStorage.getItem('user') || '')
-    this.data.dialog.authorID._id == loggedUser._id ? this.isYourPlaylist = true : this.isYourPlaylist = false;
+    if (sessionStorage.getItem('user')){
+      loggedUser = JSON.parse(sessionStorage.getItem('user') || '');
+      this.data.dialog.authorID._id == loggedUser._id ? this.isYourPlaylist = true : this.isYourPlaylist = false;
+    }
   }
 
   close() {
@@ -29,4 +32,8 @@ export class ShowPlaylistComponent{
   }
 
   onDeleteFromPlaylist(){}
+
+  onPlaylistDelete(playlist: PlaylistModel,index:number){
+    this.ps.deletePlaylist(playlist,index)
+  }
 }
