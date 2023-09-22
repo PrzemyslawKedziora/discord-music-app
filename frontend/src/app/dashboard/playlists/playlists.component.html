@@ -33,8 +33,8 @@
 
 
   <div class="row row-group">
-    <div class="col-lg-4" *ngFor="let playlist of playlists">
-      <app-playlist-card [playlist]="playlist" (click)="showPlaylist(playlist)"></app-playlist-card>
+    <div class="col-lg-4" *ngFor="let playlist of playlists; index as index">
+      <app-playlist-card [playlist]="playlist" (click)="showPlaylist(playlist,index)"></app-playlist-card>
     </div>
   </div>
 

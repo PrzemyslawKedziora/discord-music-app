@@ -80,7 +80,7 @@ editPlaylist = asyncHandler(async (req, res) => {
 //@desc Adds a new playlist
 //@route POST api/playlists/:playlistID/delete
 //@access private
-const deletPlaylist = asyncHandler(async (req, res) => {
+const deletePlaylist = asyncHandler(async (req, res) => {
   const playlistID = req.params.playlistID;
 
   if (!ObjectId.isValid(playlistID)) {
@@ -107,8 +107,10 @@ const deletPlaylist = asyncHandler(async (req, res) => {
       .status(400)
       .json({ message: "Error while trying to delete playlist from dataBase" });
   }
-
+  await playlist.deleteOne();
   res.status(200).json({ message: "Playlist successfully deleted" });
+
+
 });
 
 //@desc sends every playlist
@@ -171,7 +173,7 @@ const getPlaylist = asyncHandler(async (req, res) => {
 module.exports = {
   addPlaylist,
   editPlaylist,
-  deletPlaylist,
+  deletePlaylist,
   getAllPlaylists,
   getPlaylist
 };

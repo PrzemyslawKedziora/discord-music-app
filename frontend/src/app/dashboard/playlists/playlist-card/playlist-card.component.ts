@@ -6,9 +6,10 @@ import {PlaylistModel} from "../../../models/playlist.model";
   templateUrl: './playlist-card.component.html',
   styleUrls: ['./playlist-card.component.scss']
 })
-export class PlaylistCardComponent {
+export class PlaylistCardComponent{
 
   @Input() playlist!:PlaylistModel;
+
 
   isImgValid():string{
     if (!(this.playlist.pictureURL)){
@@ -16,4 +17,8 @@ export class PlaylistCardComponent {
     }
     else return this.playlist.pictureURL
   }
+
+
+
+
 }

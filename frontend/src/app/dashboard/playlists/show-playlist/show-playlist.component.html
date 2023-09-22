@@ -1,15 +1,15 @@
-<div mat-dialog-content class="container" *ngIf="data.songs.length>0; else emptyPlaylist">
+<div mat-dialog-content class="container" *ngIf="data.dialog.songs.length>0; else emptyPlaylist">
   <div class="row">
     <div class="col playlist-name border-bottom text-center">
-      <p>{{data.name}}</p>
+      <p>{{data.dialog.name}}</p>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      {{data.authorID.username}}
+      {{data.dialog.authorID.username}}
     </div>
   </div>
-  <div class="row" *ngFor="let song of data.songs; index as index">
+  <div class="row" *ngFor="let song of data.dialog.songs; index as index">
     <div
       class="d-flex align-baseline list-group-horizontal justify-content-between col-sm-5">
       <div class="index d-flex align-items-center">{{index+1}}</div>
@@ -38,17 +38,18 @@
     </div>
 </div>
   <div class="btn btn-primary d-flex justify-content-center" (click)="close()">close</div>
+  <div class="btn btn-primary d-flex justify-content-center vw-10" *ngIf="isYourPlaylist">usun</div>
 </div>
 <ng-template #emptyPlaylist>
   <div class="d-flex flex-column container">
     <div class="row">
       <div class="col playlist-name border-bottom text-center">
-        <p>{{data.name}}</p>
+        <p>{{data.dialog.name}}</p>
       </div>
     </div>
     <div class="row">
       <div class="col">
-        {{data.authorID.username}}
+        {{data.dialog.authorID.username}}
       </div>
     </div>
     <div class="row">
@@ -59,5 +60,6 @@
       </div>
     </div>
     <div class="btn btn-primary d-flex justify-content-center vw-10" (click)="close()">close</div>
+    <div class="btn btn-primary d-flex justify-content-center vw-10" *ngIf="isYourPlaylist" (click)="ps.deletePlaylist(this.data.dialog,this.data.index)">usun</div>
   </div>
 </ng-template>

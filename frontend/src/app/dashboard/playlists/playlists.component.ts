@@ -28,7 +28,7 @@ export class PlaylistsComponent{
     sessionStorage.getItem('username') ? this.loginStatus = true : this.loginStatus = false;
   }
 
-  showPlaylist(playlist: PlaylistModel){
+  showPlaylist(playlist: PlaylistModel,index:number){
     const APIurl = 'http://localhost:4100/api/playlists/'+playlist._id+'/info';
     axios.get(APIurl).then(res => {
       this.dialogContent = res.data;
@@ -36,7 +36,7 @@ export class PlaylistsComponent{
       this.dialog.open(ShowPlaylistComponent,{
         disableClose:true,
         width:'70vw',
-        data: this.dialogContent
+        data: {dialog: this.dialogContent,index:index}
       })
     })
 
