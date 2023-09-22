@@ -1,1 +1,20 @@
-<p>add-playlist-dialog works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <p>Playlist Creator</p>
+    </div>
+  </div>
+  <form [formGroup]="playlistForm">
+      <mat-form-field>
+        <mat-label>Enter name of playlist</mat-label>
+        <input matInput formControlName="name">
+        <mat-error *ngIf="playlistForm.get('name')?.hasError('required')">Playlist name is required.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Enter playlist icon</mat-label>
+        <input matInput formControlName="pictureURL">
+      </mat-form-field>
+  </form>
+</div>
+<div class="close-div btn btn-primary" (click)="createPlaylist()">Create playlist</div>
+<div class="close-div btn btn-primary" (click)="close()">close</div>

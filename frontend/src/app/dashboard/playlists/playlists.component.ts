@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {UserService} from "../../services/user/user.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ShowPlaylistComponent} from "./show-playlist/show-playlist.component";
 import {PlaylistModel} from "../../models/playlist.model";
 import axios from "axios";
+import {AddPlaylistDialogComponent} from "./add-playlist-dialog/add-playlist-dialog.component";
+import {PlaylistService} from "./playlist.service";
 
 @Component({
   selector: 'app-playlists',
@@ -16,13 +17,14 @@ export class PlaylistsComponent{
   playlists:PlaylistModel[]=[];
   loginStatus:boolean=false;
   dialogContent!:PlaylistModel[];
-  constructor(private http: HttpClient,
+  constructor(
               public userService: UserService,
-              public dialog: MatDialog) {
-    this.http.get<PlaylistModel[]>('http://localhost:4100/api/playlists/all').subscribe(res=>{
-      this.playlists = res;
-      console.log(res)
+              public dialog: MatDialog,
+              private ps: PlaylistService) {
+    ps.getPlaylists().then(()=>{
+      this.playlists = ps.playlists;
     });
+
     sessionStorage.getItem('username') ? this.loginStatus = true : this.loginStatus = false;
   }
 
@@ -40,5 +42,12 @@ export class PlaylistsComponent{
 
   }
 
+  openAddPlaylistDialog(){
+    this.dialog.open(AddPlaylistDialogComponent,{
+      disableClose:true,
+      width:'70vw',
+      data: this.dialogContent
+    })
+  }
 
 }

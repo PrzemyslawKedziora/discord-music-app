@@ -25,7 +25,6 @@ export class LandingPageComponent implements OnInit{
     }
     else {
       this.nyanCatAudio.pause();
-      this.nyanCatAudio.currentTime=0;
     }
   }
 

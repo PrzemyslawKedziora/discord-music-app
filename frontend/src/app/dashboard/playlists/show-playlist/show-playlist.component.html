@@ -1,4 +1,4 @@
-<div mat-dialog-content class="container">
+<div mat-dialog-content class="container" *ngIf="data.songs.length>0; else emptyPlaylist">
   <div class="row">
     <div class="col playlist-name border-bottom text-center">
       <p>{{data.name}}</p>
@@ -37,5 +37,27 @@
       </div>
     </div>
 </div>
-  <div class="btn btn-primary d-flex justify-content-center vw-10" (click)="close()">close</div>
+  <div class="btn btn-primary d-flex justify-content-center" (click)="close()">close</div>
 </div>
+<ng-template #emptyPlaylist>
+  <div class="d-flex flex-column container">
+    <div class="row">
+      <div class="col playlist-name border-bottom text-center">
+        <p>{{data.name}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        {{data.authorID.username}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center playlist-empty">
+        <p>
+          This playlist is empty
+        </p>
+      </div>
+    </div>
+    <div class="btn btn-primary d-flex justify-content-center vw-10" (click)="close()">close</div>
+  </div>
+</ng-template>

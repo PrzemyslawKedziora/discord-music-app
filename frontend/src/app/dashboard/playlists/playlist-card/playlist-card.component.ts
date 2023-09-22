@@ -10,5 +10,10 @@ export class PlaylistCardComponent {
 
   @Input() playlist!:PlaylistModel;
 
-
+  isImgValid():string{
+    if (!(this.playlist.pictureURL)){
+      return this.playlist.pictureURL = '../../../assets/unknown.png'
+    }
+    else return this.playlist.pictureURL
+  }
 }
