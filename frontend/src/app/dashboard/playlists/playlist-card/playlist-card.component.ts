@@ -10,6 +10,8 @@ export class PlaylistCardComponent{
 
   @Input() playlist!:PlaylistModel;
 
+  constructor() {
+  }
 
   isImgValid():string{
     if (!(this.playlist.pictureURL)){

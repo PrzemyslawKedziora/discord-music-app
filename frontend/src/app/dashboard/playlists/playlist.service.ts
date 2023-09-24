@@ -40,4 +40,13 @@ export class PlaylistService {
      })
    })
   }
+
+  updatePlaylist(playlist: PlaylistModel){
+    const urlString = 'http://localhost:4100/api/playlists/edit/'+playlist._id;
+    const accessToken = sessionStorage.getItem('token');
+    const headers = {
+      Authorization: 'Bearer ' + accessToken,
+    };
+    axios.post(urlString,playlist,{headers});
+  }
 }
