@@ -4,17 +4,13 @@
     <div class="col d-flex justify-content-center flex-column align-items-center management-panel">
 
       <div class="input-container">
-        <input type="text" class="search-bar" [placeholder]="' search by playlist\'s name'">
+        <input type="text" class="search-bar"
+               [placeholder]="' search by playlist\'s name'"
+               [(ngModel)]="searchQuery"
+        (input)="filterCategories()">
         <i class="bi bi-search icon"></i>
       </div>
-
-      <!-- <mat-form-field class="d-flex">
-            <input matInput type="text" (input)="filterCategories()" [(ngModel)]="searchQuery"
-              [placeholder]="' search by category\'s name'">
-          </mat-form-field> -->
-
       <div class="title">Categories</div>
-
     </div>
   </div>
 

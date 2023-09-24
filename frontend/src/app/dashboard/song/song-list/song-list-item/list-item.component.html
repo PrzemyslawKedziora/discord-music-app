@@ -21,7 +21,7 @@
   </span>
       </div>
       <div class="my-auto data like-group" (click)="ss.like(songRecord)" #likeElement>
-        <i style="margin-right: 5px" class="bi {{isLiked ? 'bi-heart-fill' : 'bi-heart'}}"></i>
+        <i style="margin-right: 5px" class="bi {{isLiked ? 'bi-heart-fill' : 'bi-heart'}}">{{songRecord.likes.length}}</i>
       </div>
       <div class="my-auto data like-group" (click)="openConfirmDeleteDialog(songRecord._id,songIndex)"
            *ngIf="this.sc.isLoggedIn && this.songRecord.userID.username == user">
