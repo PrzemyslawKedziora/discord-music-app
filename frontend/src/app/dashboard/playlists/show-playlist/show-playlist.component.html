@@ -32,7 +32,7 @@
   </span>
       </div>
       <div class="my-auto data like-group" (click)="ss.like(song)">
-        <i style="margin-right: 5px" class="bi {{isLiked ? 'bi-heart-fill' : 'bi-heart'}}"></i>
+        <i style="margin-right: 5px" class="bi bi-fire" [ngStyle]="{'color': song.likes.includes(userID) ? '#FF6C6C' : 'white' }"></i>
         <span class="song-like-number my-auto">{{song.likes.length ? song.likes.length : 0}}</span>
       </div>
       <div class="my-auto data like-group" (click)="onDeleteFromPlaylist(data.dialog,index)" *ngIf="isYourPlaylist">

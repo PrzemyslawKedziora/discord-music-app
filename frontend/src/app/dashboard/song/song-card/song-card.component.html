@@ -4,7 +4,7 @@
   <div class="song-info d-flex flex-column justify-content-between">
 
     <div class="d-flex flex-column align-content-between song-main-info">
-      
+
       <span *ngIf="song.name.length < maxTitleLength; else shortenedText" class="title">{{song.name}}</span>
       <ng-template #shortenedText>
         <span [ngStyle]="{'color': 'white'}">{{song.name.slice(0,25)+'...'}}</span>
@@ -24,7 +24,8 @@
 
     <div class="stats d-flex justify-content-between">
       <div class="likes">
-        <i class="bi bi-fire"></i>
+        <i class="bi bi-fire"
+        [ngStyle]="{'color' : song.likes.includes(userID) ? '#FF6C6C' : 'white'}"></i>
         <span class="like-number"> {{song.likes.length}}</span>
       </div>
 
@@ -36,6 +37,6 @@
       </div>
 
     </div>
-    
+
   </div>
 </div>
