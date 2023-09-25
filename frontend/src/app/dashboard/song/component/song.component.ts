@@ -16,7 +16,7 @@ import {FilterByComponent} from "../filter-by/filter-by.component";
 @Component({
   selector: 'app-song',
   templateUrl: './song.component.html',
-  styleUrls: ['./song.component.scss']
+  styleUrls: ['./song.component.scss'],
 })
 export class SongComponent {
 

@@ -1,4 +1,4 @@
-
+<!-- 
   <div class="container">
 
     <app-management-panel [categories]="categories" [authors]="artists"></app-management-panel>
@@ -24,11 +24,64 @@
             <song-list-item [songData]="songs" [songRecord]="song" [songIndex]="index"
               [botCommand]="botCommand"></song-list-item>
           </div>
-          ababa
+
         </div>
 
       </div>
 
     </div>
 
+  </div> -->
+<div class="main-container">
+
+  <div class="row">
+    <div class="col d-flex justify-content-center flex-column align-items-center management-panel">
+
+      <div class="input-container">
+        <input type="text" class="search-bar" [placeholder]="' search by songs\'s name'">
+        <i class="bi bi-search icon"></i>
+      </div>
+
+      <div class="filters-container">
+        <div class="filters-inner-container">
+
+          <mat-form-field color="primary">
+            <mat-label>Artists</mat-label>
+            <mat-select multiple>
+              <mat-option *ngFor="let artist of artists" [value]="artist.name">{{artist.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Categories</mat-label>
+            <mat-select multiple>
+              <mat-option *ngFor="let category of categories" [value]="category.name">{{category.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+      <div class="input-container">
+        <input type="checkbox" id="show-owned">
+        <label for="show-owned">Show only songs added by you</label>
+      </div>
+
+      <div class="input-container">
+        <input type="checkbox" id="label2">
+        <label for="label2">Show only liked songs</label>
+      </div>
+
+      <div class="input-container">
+        <button class="btn btn-add add-button">
+          <span>Add song</span>
+          <i class="bi bi-music-note-list"></i>
+        </button>
+      </div>
+
+      <div class="title">Playlists</div>
+
+    </div>
   </div>
+  <span class="footer"> ababa</span>
+</div>
