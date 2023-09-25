@@ -11,6 +11,7 @@ export class SongCardComponent {
   @Input() song!: SongModel;
 
   maxTitleLength:number = 50;
+  userID = sessionStorage.getItem('id');
 
   calcAuthorsLength(authors: {_id:string,name:string}[]){
     let length = 0;

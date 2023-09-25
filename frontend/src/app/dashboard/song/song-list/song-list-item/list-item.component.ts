@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SongModel} from "../../../../models/song.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
@@ -18,17 +18,17 @@ export class ListItemComponent implements OnInit{
 @Input() songIndex!:number;
 @Input('botCommand') botCommand!:string;
 
-@ViewChild('likeElement', {static: true}) likeElement!: ElementRef;
   constructor(public sc: SongComponent,
               private sb: MatSnackBar,
               private dialog: MatDialog,
               public ss: SongService) {
+
   }
-  isLiked: boolean=false;
+  isLiked!: boolean;
   user?: any;
 
   ngOnInit(): void {
-
+    this.isLiked = this.ss.checkIsLiked(this.songRecord)
     const storedUsername = sessionStorage.getItem('username');
     if (storedUsername !== null) {
       this.user = storedUsername;
@@ -36,6 +36,7 @@ export class ListItemComponent implements OnInit{
       console.log('Brak zapisanego użytkownika w sesji.');
     }
   }
+
 
   openConfirmDeleteDialog(songID:string,index: number){
 

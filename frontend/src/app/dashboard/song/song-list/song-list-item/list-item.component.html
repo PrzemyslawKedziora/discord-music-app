@@ -20,8 +20,11 @@
     {{ category.name || 'loading...'}}{{ !last ? ', ' : '' }}
   </span>
       </div>
-      <div class="my-auto data like-group" (click)="ss.like(songRecord)" #likeElement>
-        <i style="margin-right: 5px" class="bi {{isLiked ? 'bi-heart-fill' : 'bi-heart'}}"></i>
+      <div class="my-auto data like-group" (click)="ss.like(songRecord)">
+        <i style="margin-right: 5px" class="bi bi-fire"
+           [ngStyle]="{'color' : isLiked ? '#FF6C6C' : 'white'}"
+        (click)="isLiked = !isLiked"
+        >{{songRecord.likes.length}}</i>
       </div>
       <div class="my-auto data like-group" (click)="openConfirmDeleteDialog(songRecord._id,songIndex)"
            *ngIf="this.sc.isLoggedIn && this.songRecord.userID.username == user">

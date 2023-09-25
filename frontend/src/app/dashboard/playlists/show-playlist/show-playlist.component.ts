@@ -12,9 +12,12 @@ import {PlaylistService} from "../playlist.service";
 })
 export class ShowPlaylistComponent{
 
-  isLiked: boolean=false;
+  isLiked!: boolean;
   botCommand!:string;
   isYourPlaylist:boolean=false;
+  isPlaylistChanged:boolean=false;
+  userID = sessionStorage.getItem('id');
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: {dialog: PlaylistModel,index:number},
               private dialogRef: MatDialogRef<ShowPlaylistComponent>,
               public ss:SongService,
@@ -29,11 +32,19 @@ export class ShowPlaylistComponent{
 
   close() {
     this.dialogRef.close();
+    if (this.isYourPlaylist && this.isPlaylistChanged){
+      this.ps.updatePlaylist(this.data.dialog);
+      console.log(this.data.dialog);
+    }
   }
 
-  onDeleteFromPlaylist(){}
+  onDeleteFromPlaylist(song:PlaylistModel,index: number){
+    this.data.dialog.songs.splice(index,1);
+    this.isPlaylistChanged = true;
+  }
 
   onPlaylistDelete(playlist: PlaylistModel,index:number){
     this.ps.deletePlaylist(playlist,index)
   }
+
 }

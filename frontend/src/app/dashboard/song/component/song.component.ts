@@ -31,6 +31,7 @@ export class SongComponent {
   filteredSongs: SongModel[] = [];
   author: AuthorModel | undefined;
   botCommand:string='';
+  isLiked!:boolean;
 
   constructor(public dialog: MatDialog,
               public sharedService: SharedService,
@@ -43,6 +44,7 @@ export class SongComponent {
     songService.getSongs().then(()=> {
       this.songs = this.sharedService.sharedSongsArray;
       this.songsTemp = this.songs;
+
     });
     categoryService.getCategories().then(()=> {
       this.categories = this.categoryService.categories;
