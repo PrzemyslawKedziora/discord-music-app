@@ -6,12 +6,12 @@ song-list-item:hover{
   border-radius: 25px;
 }
 .number{
-  min-width: 20px;
+  width: 25px;
 }
 .thumbnail{
   width: 140px;
 }
-.title {
+.title2 {
   width: 20vw;
   float: left;
 }
@@ -19,7 +19,7 @@ song-list-item:hover{
   width: 70px;
 }
 .like-group{
-  width: 40px;
+  width: 45px;
 }
 footer{
   margin-top: 80px;
@@ -35,6 +35,11 @@ app-sidebar{
 .cont1{
   background: $background-main-color;
 }
+.description-list:first-child, .description-list:last-child{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10px;
+}
 // =============================================================
 
 .main-container {
@@ -47,10 +52,6 @@ app-sidebar{
 }
 .management-panel{
   padding: 2rem 1%;
-}
-.row {
-  width: 90%;
-  min-width: 300px;
 }
 .col {
   margin: 0;
