@@ -15,14 +15,19 @@ import {PlaylistService} from "./playlist.service";
 export class PlaylistsComponent{
 
   playlists:PlaylistModel[]=[];
+  playlistsTemp:PlaylistModel[]=[];
   loginStatus:boolean=false;
   dialogContent!:PlaylistModel[];
+  searchQuery!:string;
+  firstCheck:boolean = true;
   constructor(
               public userService: UserService,
               public dialog: MatDialog,
               private ps: PlaylistService) {
     ps.getPlaylists().then(()=>{
       this.playlists = ps.playlists;
+      this.playlistsTemp = ps.playlists;
+      console.log(this.playlistsTemp)
     });
 
     sessionStorage.getItem('username') ? this.loginStatus = true : this.loginStatus = false;
@@ -48,6 +53,29 @@ export class PlaylistsComponent{
       width:'70vw',
       data: this.dialogContent
     })
+  }
+
+  filterNames() {
+    this.playlistsTemp = this.playlists.filter(playlist =>
+      playlist.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+  }
+
+  filterPlaylists(filterQuery: string){
+    const owned = <HTMLInputElement> document.getElementById('show-owned');
+    const liked = <HTMLInputElement> document.getElementById('show-liked');
+    const userID = sessionStorage.getItem('id');
+    if (filterQuery =='owned' && owned.checked) {
+      this.playlistsTemp = this.playlists.filter(playlist => playlist.authorID._id == userID);
+      this.firstCheck = false;
+    }
+    else if (filterQuery =='liked' && liked.checked) {
+      // this.playlistsTemp = this.playlists.filter(playlist => playlist.likes.includes(userID));
+      this.firstCheck = false;
+    }
+    else if (!this.firstCheck){
+      this.playlistsTemp = this.playlists;
+    }
+    else this.filterNames();
   }
 
 }

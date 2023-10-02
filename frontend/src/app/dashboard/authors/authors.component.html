@@ -9,13 +9,8 @@
       </div>
 
       <div class="input-container">
-        <input type="checkbox" id="show-owned">
-        <label for="show-owned">Show only playlists added by you</label>
-      </div>
-
-      <div class="input-container">
-        <input type="checkbox" id="label2">
-        <label for="label2">Show only liked playlists</label>
+        <input type="checkbox" id="show-owned" (click)="filterArtists('owned')">
+        <label for="show-owned">Show only artists added by you</label>
       </div>
 
       <div class="input-container">
@@ -25,7 +20,7 @@
         </button>
       </div>
 
-      <div class="title">Playlists</div>
+      <div class="title">Artists</div>
 
     </div>
   </div>

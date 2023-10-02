@@ -13,18 +13,33 @@ export class AuthorsComponent{
   authors: AuthorModel[] = [];
   searchQuery!:string;
   filteredAuthors: AuthorModel[]=[];
+  firstCheck:boolean=true;
 
   constructor(public authorService: AuthorService,
               public userService: UserService) {
     this.authorService.getAuthors().then(() => {
       this.authors = this.authorService.artists;
       this.filteredAuthors = this.authorService.artists;
+      console.log(this.filteredAuthors)
     });
   }
 
   filterNames() {
     this.filteredAuthors = this.authors.filter(author =>
       author.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+  }
+
+  filterArtists(filterQuery: string){
+    const owned = <HTMLInputElement> document.getElementById('show-owned');
+    const userID = sessionStorage.getItem('id')
+    if (filterQuery =='owned' && owned.checked) {
+      this.filteredAuthors = this.authors.filter(author => author.userID == userID)
+      this.firstCheck = false;
+    }
+    else if (!this.firstCheck) {
+      this.filteredAuthors = this.authors;
+    }
+    else this.filterNames()
   }
 
 }

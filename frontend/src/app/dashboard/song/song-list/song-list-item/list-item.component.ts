@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "../../delete-confirm-dialog/confirm-dialog.component";
 import {SongComponent} from "../../component/song.component";
 import {SongService} from "../../song.service";
+import {SharedService} from "../../../../services/shared/shared.service";
 
 @Component({
   selector: 'song-list-item',
@@ -21,13 +22,16 @@ export class ListItemComponent implements OnInit{
   constructor(public sc: SongComponent,
               private sb: MatSnackBar,
               private dialog: MatDialog,
-              public ss: SongService) {
+              public ss: SongService,
+              private sharedService: SharedService) {
 
   }
   isLiked!: boolean;
+  isLoggedIn!:boolean;
   user?: any;
 
   ngOnInit(): void {
+    this.isLoggedIn = this.sharedService.isLoggedInStatus;
     this.isLiked = this.ss.checkIsLiked(this.songRecord)
     const storedUsername = sessionStorage.getItem('username');
     if (storedUsername !== null) {

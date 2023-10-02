@@ -5,18 +5,18 @@
 
       <div class="input-container">
         <input type="text" class="search-bar"
-               [placeholder]="' search by playlist\'s name'">
+               [placeholder]="' search by playlist\'s name'" [(ngModel)]="searchQuery" (input)="filterNames()">
         <i class="bi bi-search icon"></i>
       </div>
 
       <div class="input-container">
-        <input type="checkbox" id="show-owned">
+        <input type="checkbox" id="show-owned" (click)="filterPlaylists('owned')">
         <label for="show-owned">Show only playlists added by you</label>
       </div>
 
       <div class="input-container">
-        <input type="checkbox" id="label2">
-        <label for="label2">Show only liked playlists</label>
+        <input type="checkbox" id="show-liked" (click)="filterPlaylists('liked')">
+        <label for="show-liked">Show only liked playlists</label>
       </div>
 
       <div class="input-container">
@@ -33,7 +33,7 @@
 
 
   <div class="row row-group">
-    <div class="col-lg-4" *ngFor="let playlist of playlists; index as index">
+    <div class="col-lg-4" *ngFor="let playlist of playlistsTemp; index as index">
       <app-playlist-card [playlist]="playlist" (click)="showPlaylist(playlist,index)"></app-playlist-card>
     </div>
   </div>

@@ -28,10 +28,11 @@ export class SongComponent {
   isLoggedIn!: boolean;
   authorID!: string;
   catID!: string;
-  filteredSongs: SongModel[] = [];
   author: AuthorModel | undefined;
   botCommand:string='';
   isLiked!:boolean;
+  searchQuery!:string;
+  firstCheck:boolean=true;
 
   constructor(public dialog: MatDialog,
               public sharedService: SharedService,
@@ -82,11 +83,8 @@ export class SongComponent {
   }
 
   ngOnInit(): void {
-    // const user:UserModel = JSON.parse(sessionStorage.getItem('user') || '');
     this.botCommand = localStorage.getItem('botCommand') || '';
   }
-
-
 
   addArtist(){
     const dialogRef = this.dialog.open(NewAuthorComponent, {
@@ -134,6 +132,29 @@ export class SongComponent {
   async initializeArtistsAsync() {
     await this.authorService.getAuthors();
     this.artists = this.sharedService.sharedArtistsArray;
+  }
+
+  searchSong(){
+    this.songsTemp = this.songs.filter(song =>
+      song.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+  }
+
+  filterSongs(filterQuery: string){
+    const owned = <HTMLInputElement> document.getElementById('show-owned');
+    const liked = <HTMLInputElement> document.getElementById('show-liked');
+    const userID = sessionStorage.getItem('id')
+    if (filterQuery =='owned' && owned.checked) {
+      this.songsTemp = this.songs.filter(song => song.userID._id == userID);
+      this.firstCheck = false;
+    }
+    else if (filterQuery =='liked' && liked.checked) {
+      this.songsTemp = this.songs.filter(song => song.likes.includes(userID));
+      this.firstCheck = false;
+    }
+    else if (!this.firstCheck){
+      this.songsTemp = this.songs;
+    }
+    else this.searchSong();
   }
 
 }
