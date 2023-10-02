@@ -20,7 +20,7 @@
     {{ category.name || 'loading...'}}{{ !last ? ', ' : '' }}
   </span>
       </div>
-      <div class="my-auto data like-group" (click)="isLoggedIn ? ss.like(songRecord) : ''">
+      <div class="my-auto data like-group" (click)="ss.like(songRecord)">
         <i style="margin-right: 5px" class="bi bi-fire"
            [ngStyle]="{'color' : isLiked ? '#FF6C6C' : 'white'}"
         (click)="isLiked = !isLiked"
