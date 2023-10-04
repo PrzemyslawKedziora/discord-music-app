@@ -203,8 +203,6 @@ const addSongToPlaylist = asyncHandler(async (req, res) => {
       .json({ message: "Song with this ID not found in the dataBase" });
   }
 
-  console.log(req.user)
-  console.log(playlist)
   // <---- Checking if user have permission to modify this playlist ---->
   if (req.user.id.toString() !== playlist.authorID.toString()) {
     res
@@ -219,6 +217,42 @@ const addSongToPlaylist = asyncHandler(async (req, res) => {
 
 });
 
+
+//@desc sends a playlist whole data
+//@route GET api/playlists/:playlistID/remove-song
+//@access private
+const removeSongFromPlaylist = asyncHandler(async(req, res) => {
+  const { songID } = req.body;
+  const { playlistID } = req.params;
+
+  // <---- Checking if playlist with provided playlist ID exists ---->
+  const playlist = await Playlist.findById(playlistID);
+  if (!playlist) {
+    res
+      .status(400)
+      .json({ message: "Playlist with this ID not found in the dataBase" });
+  }
+
+  if(!playlist.songs.includes(songID)) {
+    res.status(400)
+    .json({ message: "The playlist does not have a song with this ID"})
+  };
+
+  // <---- Checking if user have permission to modify this playlist ---->
+  if (req.user.id.toString() !== playlist.authorID.toString()) {
+    res
+      .status(401)
+      .json({ message: "You don't have permission to edit this playlist!" });
+    throw new Error("You don't have permission to edit this song!");
+  }
+
+  // Removing the id from songs array
+  playlist.songs = playlist.songs.filter(el => el != songID);
+  const saved = await playlist.save();
+
+  res.status(200).json({message: "Successfully deletef song from this playlist"})
+}); 
+
 module.exports = {
   addPlaylist,
   editPlaylist,
@@ -226,4 +260,5 @@ module.exports = {
   getAllPlaylists,
   getPlaylist,
   addSongToPlaylist,
+  removeSongFromPlaylist
 };
