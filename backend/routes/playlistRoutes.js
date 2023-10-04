@@ -8,6 +8,7 @@ const {
     deletePlaylist,
     getAllPlaylists,
     getPlaylist,
+    addSongToPlaylist,
 } = require('../controllers/playlistController');
 
 router.get("/all", getAllPlaylists);
@@ -20,5 +21,6 @@ router.delete("/:playlistID/delete", validateToken, deletePlaylist);
 
 router.get("/:playlistID/info", getPlaylist);
 
+router.post("/:playlistID/add-song", validateToken, addSongToPlaylist); 
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
 const Playlist = require("../models/playlistModel");
+const Song = require("../models/songModel");
 const { all } = require("axios");
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -35,7 +36,7 @@ const addPlaylist = asyncHandler(async (req, res) => {
   const newPlaylist = {
     name,
     newSongs,
-    authorID: req.user.id,
+    authorID: new mongoose.Types.ObjectId(req.user.id),
     pictureURL,
   };
 
@@ -109,8 +110,6 @@ const deletePlaylist = asyncHandler(async (req, res) => {
   }
   await playlist.deleteOne();
   res.status(200).json({ message: "Playlist successfully deleted" });
-
-
 });
 
 //@desc sends every playlist
@@ -140,34 +139,84 @@ const getPlaylist = asyncHandler(async (req, res) => {
   }
 
   const playlist = await Playlist.findById(playlistID)
-  .populate("songs")
-  .populate("authorID", "name")
-  .populate({
-    path: 'songs',
-    populate: [
-      {
-        path: 'authors',
-        model: 'Author',
-        select: 'name'
-      },
-      {
-        path: 'categories',
-        model: 'Category',
-        select: 'name'
-      }
-    ]
-  });
+    .populate("songs")
+    .populate("authorID", "name")
+    .populate({
+      path: "songs",
+      populate: [
+        {
+          path: "authors",
+          model: "Author",
+          select: "name",
+        },
+        {
+          path: "categories",
+          model: "Category",
+          select: "name",
+        },
+      ],
+    });
 
   if (!playlist) {
-    res
-      .status(500)
-      .json({
-        message:
-          "There was a problem trying to get the playlist object from the database!",
-      });
+    res.status(500).json({
+      message:
+        "There was a problem trying to get the playlist object from the database!",
+    });
   }
 
   res.status(200).json(playlist);
+});
+
+//@desc sends a playlist whole data
+//@route GET api/playlists/:playlistID/add-song
+//@access private
+const addSongToPlaylist = asyncHandler(async (req, res) => {
+  const { songID } = req.body;
+  const { playlistID } = req.params;
+
+  // <---- Checking if the provided playlist id is valid ---->
+  if (!mongoose.Types.ObjectId.isValid(playlistID)) {
+    res.status(400).json({ message: "Invalid playlist ID!" });
+  }
+  // <---- Checking if the provided song id is valid ---->
+  if (!mongoose.Types.ObjectId.isValid(songID)) {
+    res.status(400).json({ message: "Invalid song ID!" });
+  }
+  // <---- Checking if playlist with provided playlist ID exists ---->
+  const playlist = await Playlist.findById(playlistID);
+  if (!playlist) {
+    res
+      .status(400)
+      .json({ message: "Playlist with this ID not found in the dataBase" });
+  }
+
+  if(playlist.songs.includes(songID)) {
+    res.status(400)
+    .json({ message: "The playlist already contains this song!"})
+  };
+
+  // <---- Checking if song with provided song ID exists ---->
+  const song = await Song.findById(songID);
+  if (!song) {
+    res
+      .status(400)
+      .json({ message: "Song with this ID not found in the dataBase" });
+  }
+
+  console.log(req.user)
+  console.log(playlist)
+  // <---- Checking if user have permission to modify this playlist ---->
+  if (req.user.id.toString() !== playlist.authorID.toString()) {
+    res
+      .status(401)
+      .json({ message: "You don't have permission to edit this playlist!" });
+    throw new Error("You don't have permission to edit this song!");
+  }
+
+  playlist.songs.push(songID.toString())
+  const saved = await playlist.save();
+  res.status(200).json({ message: "Succesfully added song to a playlist"})
+
 });
 
 module.exports = {
@@ -175,5 +224,6 @@ module.exports = {
   editPlaylist,
   deletePlaylist,
   getAllPlaylists,
-  getPlaylist
+  getPlaylist,
+  addSongToPlaylist,
 };
