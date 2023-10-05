@@ -28,17 +28,17 @@
         </div>
       </div>
 
-      <div class="input-container">
+      <div class="input-container" *ngIf="isLoggedIn">
         <input type="checkbox" id="show-owned" (click)="filterSongs('owned')">
         <label for="show-owned">Show only songs added by you</label>
       </div>
 
-      <div class="input-container">
+      <div class="input-container" *ngIf="isLoggedIn">
         <input type="checkbox" id="show-liked" (click)="filterSongs('liked')">
         <label for="show-liked">Show only liked songs</label>
       </div>
 
-      <div class="input-container">
+      <div class="input-container" *ngIf="isLoggedIn">
         <button class="btn btn-add add-button" (click)="addSong()">
           <span>Add song</span>
           <i class="bi bi-music-note-list"></i>

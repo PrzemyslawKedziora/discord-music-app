@@ -14,9 +14,12 @@ export class AuthorsComponent{
   searchQuery!:string;
   filteredAuthors: AuthorModel[]=[];
   firstCheck:boolean=true;
+  loginStatus!:boolean;
 
   constructor(public authorService: AuthorService,
               public userService: UserService) {
+    sessionStorage.getItem('username') ? this.loginStatus = true : this.loginStatus = false;
+
     this.authorService.getAuthors().then(() => {
       this.authors = this.authorService.artists;
       this.filteredAuthors = this.authorService.artists;

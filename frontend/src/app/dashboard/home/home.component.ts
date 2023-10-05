@@ -14,9 +14,12 @@ export class HomeComponent implements OnInit {
   songs: SongModel[]=[];
   songsTemp: SongModel[]=[];
   songsSortedByDate: SongModel[]=[];
+  isLoggedIn!:boolean;
   constructor(public ss: SongService,
               private sharedService : SharedService,
               public userService: UserService) {
+    sessionStorage.getItem('username') ? this.isLoggedIn = true : this.isLoggedIn = false;
+
     if (this.songs.length == 0) {
       ss.getSongs().then(()=> {
         this.songs = ss.songs;

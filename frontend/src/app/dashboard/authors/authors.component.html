@@ -8,12 +8,12 @@
         <i class="bi bi-search icon"></i>
       </div>
 
-      <div class="input-container">
+      <div class="input-container" *ngIf="loginStatus">
         <input type="checkbox" id="show-owned" (click)="filterArtists('owned')">
         <label for="show-owned">Show only artists added by you</label>
       </div>
 
-      <div class="input-container">
+      <div class="input-container" *ngIf="loginStatus">
         <button class="btn btn-add add-button" (click)="authorService.addArtist()">
           <span>Add artist</span>
           <i class="bi bi-music-note-list"></i>
