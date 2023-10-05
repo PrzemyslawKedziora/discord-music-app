@@ -6,6 +6,7 @@ import {ConfirmDialogComponent} from "../../delete-confirm-dialog/confirm-dialog
 import {SongComponent} from "../../component/song.component";
 import {SongService} from "../../song.service";
 import {SharedService} from "../../../../services/shared/shared.service";
+import {AddSongToPlaylistComponent} from "../../../playlists/add-song-to-playlist/add-song-to-playlist.component";
 
 @Component({
   selector: 'song-list-item',
@@ -57,6 +58,14 @@ export class ListItemComponent implements OnInit{
       duration: 2000,
       panelClass: ['failed-snackBar']
     });
+  }
+
+  openAddToPlaylistDialog(songID:string){
+    this.dialog.open(AddSongToPlaylistComponent,{
+      width: '50%',
+      data: {songID: songID}
+    })
+
   }
 
 }

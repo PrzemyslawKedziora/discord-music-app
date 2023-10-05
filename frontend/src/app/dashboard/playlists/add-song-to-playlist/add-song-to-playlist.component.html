@@ -1,0 +1,20 @@
+<p>add-song-to-playlist works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <p>Select playlist you want add song to:</p>
+    </div>
+    <mat-form-field>
+      <mat-select [(ngModel)]="playlistID">
+        <mat-option *ngFor="let playlist of playlists" [value]="playlist._id" (click)="showID()">
+          {{playlist.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="btn btn-success" (click)="addToPlaylist(data.songID)">Add to playlist</div>
+    </div>
+  </div>
+</div>

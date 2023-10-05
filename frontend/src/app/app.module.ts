@@ -41,6 +41,8 @@ import { SongComponent } from './dashboard/song/component/song.component';
 import { ShowPlaylistComponent } from './dashboard/playlists/show-playlist/show-playlist.component';
 import { PlaylistCardComponent } from './dashboard/playlists/playlist-card/playlist-card.component';
 import { AddPlaylistDialogComponent } from './dashboard/playlists/add-playlist-dialog/add-playlist-dialog.component';
+import {MatListModule} from "@angular/material/list";
+import { AddSongToPlaylistComponent } from './dashboard/playlists/add-song-to-playlist/add-song-to-playlist.component';
 
 
 @NgModule({
@@ -70,29 +72,31 @@ import { AddPlaylistDialogComponent } from './dashboard/playlists/add-playlist-d
     SongComponent,
     ShowPlaylistComponent,
     PlaylistCardComponent,
-    AddPlaylistDialogComponent
+    AddPlaylistDialogComponent,
+    AddSongToPlaylistComponent
 
 
   ],
-  imports: [
-    BrowserModule,
-    NgbModule,
-    AdminRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    MatLegacyCardModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatSnackBarModule,
-    FormsModule,
-    ClipboardModule,
-    MatIconModule,
-    MatRadioModule
-  ],
+    imports: [
+        BrowserModule,
+        NgbModule,
+        AdminRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        MatLegacyCardModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatSnackBarModule,
+        FormsModule,
+        ClipboardModule,
+        MatIconModule,
+        MatRadioModule,
+        MatListModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

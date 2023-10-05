@@ -199,8 +199,8 @@ const addSongToPlaylist = asyncHandler(async (req, res) => {
   const song = await Song.findById(songID);
   if (!song) {
     res
-      .status(400)
-      .json({ message: "Song with this ID not found in the dataBase" });
+
+        .json({ message: "Song with this ID not found in the dataBase" });
   }
 
   // <---- Checking if user have permission to modify this playlist ---->

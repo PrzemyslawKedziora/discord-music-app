@@ -4,6 +4,8 @@ import {PlaylistModel} from "../../../models/playlist.model";
 import {SongService} from "../../song/song.service";
 import {UserModel} from "../../../models/user.model";
 import {PlaylistService} from "../playlist.service";
+import {SongModel} from "../../../models/song.model";
+import axios from "axios";
 
 @Component({
   selector: 'app-show-playlist',
@@ -18,7 +20,7 @@ export class ShowPlaylistComponent{
   isPlaylistChanged:boolean=false;
   userID = sessionStorage.getItem('id');
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {dialog: PlaylistModel,index:number},
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {dialog: PlaylistModel,index:number,song:SongModel},
               private dialogRef: MatDialogRef<ShowPlaylistComponent>,
               public ss:SongService,
               public ps: PlaylistService) {
@@ -38,9 +40,18 @@ export class ShowPlaylistComponent{
     }
   }
 
-  onDeleteFromPlaylist(song:PlaylistModel,index: number){
-    this.data.dialog.songs.splice(index,1);
-    this.isPlaylistChanged = true;
+  onDeleteFromPlaylist(playlist:PlaylistModel,index: number,song:SongModel){
+    const url = 'http://localhost:4100/api/playlists/'+playlist._id
+    +'/remove-song';
+    const accessToken = sessionStorage.getItem('token');
+    const headers = {
+      Authorization: 'Bearer ' + accessToken,
+    };
+    axios.post(url,{songID: song._id},{headers}).then(()=>{
+      this.data.dialog.songs.splice(index,1);
+      this.isPlaylistChanged = true;
+      console.log('usunieto');
+    })
   }
 
   onPlaylistDelete(playlist: PlaylistModel,index:number){

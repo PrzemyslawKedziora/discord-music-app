@@ -34,6 +34,10 @@
            *ngIf="(this.sc.isLoggedIn && this.songRecord.userID.username != user)" (click)="wrongUser()">
         <i style="margin-right: 5px" class="bi bi-emoji-angry remove-icon"></i>
       </div>
+      <mat-nav-list>
+        <mat-list-item (click)="openAddToPlaylistDialog(songRecord._id)">Add to playlist</mat-list-item>
+        <mat-list-item *ngIf="this.songRecord.userID.username == user">Remove</mat-list-item>
+      </mat-nav-list>
     </div>
   </div>
 </div>
