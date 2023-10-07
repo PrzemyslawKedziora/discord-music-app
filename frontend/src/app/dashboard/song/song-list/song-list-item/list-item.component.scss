@@ -39,3 +39,20 @@
 .bi-fire{
   color: #FF6C6C;
 }
+.action-first{
+  //width: 8vw;
+  display: flex;
+  align-items: center;
+}
+.action-first:hover{
+  cursor: pointer;
+}
+.hidden-list{
+  position: relative;
+  top: 4vh;
+  right: 85%;
+  border-radius: 5%;
+  background: $background-main-color;
+}
+
+

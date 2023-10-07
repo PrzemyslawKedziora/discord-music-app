@@ -5,7 +5,6 @@ import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "../../delete-confirm-dialog/confirm-dialog.component";
 import {SongComponent} from "../../component/song.component";
 import {SongService} from "../../song.service";
-import {SharedService} from "../../../../services/shared/shared.service";
 import {AddSongToPlaylistComponent} from "../../../playlists/add-song-to-playlist/add-song-to-playlist.component";
 
 @Component({
@@ -13,26 +12,27 @@ import {AddSongToPlaylistComponent} from "../../../playlists/add-song-to-playlis
   templateUrl: './list-item.component.html',
   styleUrls: ['./list-item.component.scss']
 })
-export class ListItemComponent implements OnInit{
+export class ListItemComponent implements OnInit {
 
-@Input() songData!:SongModel[];
-@Input() songRecord!:SongModel;
-@Input() songIndex!:number;
-@Input('botCommand') botCommand!:string;
+  @Input() songData!: SongModel[];
+  @Input() songRecord!: SongModel;
+  @Input() songIndex!: number;
+  @Input('botCommand') botCommand!: string;
 
   constructor(public sc: SongComponent,
               private sb: MatSnackBar,
               private dialog: MatDialog,
-              public ss: SongService,
-              private sharedService: SharedService) {
+              public ss: SongService) {
 
   }
+
   isLiked!: boolean;
-  isLoggedIn!:boolean;
+  isLoggedIn!: boolean;
   user?: any;
+  expanded=false;
 
   ngOnInit(): void {
-    this.isLoggedIn = this.sharedService.isLoggedInStatus;
+    sessionStorage.getItem('user') ? this.isLoggedIn=true : this.isLoggedIn=false;
     this.isLiked = this.ss.checkIsLiked(this.songRecord)
     const storedUsername = sessionStorage.getItem('username');
     if (storedUsername !== null) {
@@ -43,29 +43,45 @@ export class ListItemComponent implements OnInit{
   }
 
 
-  openConfirmDeleteDialog(songID:string,index: number){
+  openConfirmDeleteDialog(songID: string, index: number) {
 
-      this.dialog.open(ConfirmDialogComponent, {
-        disableClose: true,
-        width: '50%',
-        data: {songs: this.songData, songID: songID, index: index}
-      })
+    this.dialog.open(ConfirmDialogComponent, {
+      disableClose: true,
+      width: '50%',
+      data: {songs: this.songData, songID: songID, index: index}
+    })
 
   }
 
-  wrongUser(){
-    this.sb.open('You cannot delete song that was not added by you!','',{
+  wrongUser() {
+    this.sb.open('You cannot delete song that was not added by you!', '', {
       duration: 2000,
       panelClass: ['failed-snackBar']
     });
   }
 
-  openAddToPlaylistDialog(songID:string){
-    this.dialog.open(AddSongToPlaylistComponent,{
+  openAddToPlaylistDialog(songID: string) {
+    this.dialog.open(AddSongToPlaylistComponent, {
       width: '50%',
       data: {songID: songID}
     })
 
   }
 
+  showList() {
+    const clickableElements = document.querySelectorAll('.clickable');
+    const hiddenList = document.querySelector('.hidden-list') as HTMLElement;
+
+// Dodaj nasłuchiwanie na kliknięcie dla każdego elementu
+    clickableElements.forEach((element) => {
+      element.addEventListener('click', () => {
+        // Pokaż lub ukryj listę w zależności od jej aktualnego stanu
+        if (hiddenList!.style.display === 'none' || hiddenList!.style.display === '') {
+          hiddenList!.style.display = 'block';
+        } else {
+          hiddenList!.style.display = 'none';
+        }
+      });
+    });
+  }
 }

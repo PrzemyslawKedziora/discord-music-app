@@ -26,18 +26,17 @@
         (click)="isLiked = !isLiked"
         >{{songRecord.likes.length}}</i>
       </div>
-      <div class="my-auto data like-group" (click)="openConfirmDeleteDialog(songRecord._id,songIndex)"
-           *ngIf="this.sc.isLoggedIn && this.songRecord.userID.username == user">
-        <i style="margin-right: 5px" class="bi bi-x-circle remove-icon"></i>
+      <div class="action-first clickable data like-group my-auto" (click)="expanded = !expanded" *ngIf="isLoggedIn">
+        Action
+      <div class="hidden-list" *ngIf="expanded">
+        <mat-nav-list>
+          <mat-list-item (click)="openAddToPlaylistDialog(songRecord._id)">Add to playlist</mat-list-item>
+          <mat-list-item *ngIf="this.sc.isLoggedIn && this.songRecord.userID.username == user"
+                         (click)="openConfirmDeleteDialog(songRecord._id,songIndex)"
+          >Remove</mat-list-item>
+        </mat-nav-list>
       </div>
-      <div class="my-auto data like-group"
-           *ngIf="(this.sc.isLoggedIn && this.songRecord.userID.username != user)" (click)="wrongUser()">
-        <i style="margin-right: 5px" class="bi bi-emoji-angry remove-icon"></i>
       </div>
-      <mat-nav-list>
-        <mat-list-item (click)="openAddToPlaylistDialog(songRecord._id)">Add to playlist</mat-list-item>
-        <mat-list-item *ngIf="this.songRecord.userID.username == user">Remove</mat-list-item>
-      </mat-nav-list>
     </div>
   </div>
 </div>
