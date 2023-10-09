@@ -69,7 +69,6 @@ export class PlaylistsComponent{
       this.firstCheck = false;
     }
     else if (filterQuery =='liked' && liked.checked) {
-      // this.playlistsTemp = this.playlists.filter(playlist => playlist.likes.includes(userID));
       this.firstCheck = false;
     }
     else if (!this.firstCheck){

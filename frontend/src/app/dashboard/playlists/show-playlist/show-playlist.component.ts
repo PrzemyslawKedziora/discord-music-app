@@ -36,7 +36,6 @@ export class ShowPlaylistComponent{
     this.dialogRef.close();
     if (this.isYourPlaylist && this.isPlaylistChanged){
       this.ps.updatePlaylist(this.data.dialog);
-      console.log(this.data.dialog);
     }
   }
 

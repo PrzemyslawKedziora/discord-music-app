@@ -11,7 +11,6 @@ import { RegisterComponent } from './components/register/register.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { ListItemComponent } from './dashboard/song/song-list/song-list-item/list-item.component';
-import { ManagementPanelComponent } from './dashboard/song/management-panel/management-panel.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewSongComponent } from './dashboard/song/new-song/new-song.component';
 import {MatDialogModule} from "@angular/material/dialog";
@@ -25,7 +24,6 @@ import { NewAuthorComponent } from './dashboard/authors/new-author/new-author.co
 import {ClipboardModule} from "@angular/cdk/clipboard";
 import { ConfirmDialogComponent } from './dashboard/song/delete-confirm-dialog/confirm-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
-import { FilterByComponent } from './dashboard/song/filter-by/filter-by.component';
 import {MatRadioModule} from "@angular/material/radio";
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AuthorsComponent } from './dashboard/authors/authors.component';
@@ -54,11 +52,9 @@ import { AddSongToPlaylistComponent } from './dashboard/playlists/add-song-to-pl
     LoginComponent,
     RegisterComponent,
     ListItemComponent,
-    ManagementPanelComponent,
     NewSongComponent,
     NewAuthorComponent,
     ConfirmDialogComponent,
-    FilterByComponent,
     SidebarComponent,
     AuthorsComponent,
     HomeComponent,

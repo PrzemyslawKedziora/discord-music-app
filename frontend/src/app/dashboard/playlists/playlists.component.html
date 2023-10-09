@@ -30,8 +30,6 @@
 
     </div>
   </div>
-
-
   <div class="row row-group">
     <div class="col-lg-4" *ngFor="let playlist of playlistsTemp; index as index">
       <app-playlist-card [playlist]="playlist" (click)="showPlaylist(playlist,index)"></app-playlist-card>
