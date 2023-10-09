@@ -13,15 +13,15 @@
 
           <mat-form-field color="primary">
             <mat-label>Artists</mat-label>
-            <mat-select multiple>
-              <mat-option *ngFor="let artist of artists" [value]="artist.name">{{artist.name}}</mat-option>
+            <mat-select multiple [(ngModel)]="selectedAuthors" (ngModelChange)="filterSongsByAuthors()">
+              <mat-option *ngFor="let artist of artists" [value]="artist">{{artist.name}}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Categories</mat-label>
-            <mat-select multiple>
-              <mat-option *ngFor="let category of categories" [value]="category.name">{{category.name}}</mat-option>
+            <mat-select multiple [(ngModel)]="selectedCategories" (ngModelChange)="filterSongsByCategories()">
+              <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}</mat-option>
             </mat-select>
           </mat-form-field>
 
@@ -54,7 +54,7 @@
             <div class="title2">Title</div>
             <div class="genre">Genre</div>
             <div class="like-group">Likes</div>
-            <div class="like-group" *ngIf="isLoggedIn">Delete</div>
+            <div class="like-group" *ngIf="isLoggedIn">Action</div>
           </div>
 
           <div class="col">

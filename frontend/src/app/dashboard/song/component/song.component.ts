@@ -11,7 +11,6 @@ import {ActivatedRoute} from "@angular/router";
 import {CategoryService} from "../../categories/category.service";
 import {NewAuthorComponent} from "../../authors/new-author/new-author.component";
 import {NewSongComponent} from "../new-song/new-song.component";
-import {FilterByComponent} from "../filter-by/filter-by.component";
 
 @Component({
   selector: 'app-song',
@@ -33,6 +32,8 @@ export class SongComponent {
   isLiked!:boolean;
   searchQuery!:string;
   firstCheck:boolean=true;
+  selectedAuthors:AuthorModel[]=[];
+  selectedCategories:CategoryModel[]=[];
 
   constructor(public dialog: MatDialog,
               public sharedService: SharedService,
@@ -110,25 +111,6 @@ export class SongComponent {
     });
 
   }
-
-  openFilterByDialog() {
-    const dialogRef = this.dialog.open(FilterByComponent, {
-      disableClose: true,
-      width:'50vw',
-      data: this.songs
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      if (res) {
-        this.songs=res;
-      }
-    })
-  }
-  removeFilters(){
-    this.songs=this.songService.songsTemp;
-    this.sharedService.filterStatus=false;
-  }
-
   async initializeArtistsAsync() {
     await this.authorService.getAuthors();
     this.artists = this.sharedService.sharedArtistsArray;
@@ -156,5 +138,30 @@ export class SongComponent {
     }
     else this.searchSong();
   }
+
+  filterSongsByAuthors() {
+    if (this.selectedAuthors.length === 0) {
+      this.songsTemp = this.songs;
+    } else {
+      this.songsTemp = this.songs.filter((song) =>
+        this.selectedAuthors.some((author) =>
+          song.authors.some((songAuthor) => songAuthor._id === author._id)
+        )
+      );
+    }
+  }
+
+  filterSongsByCategories() {
+    if (this.selectedCategories.length === 0) {
+      this.songsTemp = this.songs;
+    } else {
+      this.songsTemp = this.songs.filter((song) =>
+        this.selectedCategories.some((category) =>
+          song.categories.some((cat) => cat._id === category._id)
+        )
+      );
+    }
+  }
+
 
 }

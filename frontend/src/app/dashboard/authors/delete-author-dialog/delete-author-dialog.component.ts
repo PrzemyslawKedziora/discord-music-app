@@ -13,12 +13,12 @@ export class DeleteAuthorDialogComponent {
 
 
   constructor(private dialogRef: MatDialogRef<DeleteAuthorDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: AuthorModel,
+    @Inject(MAT_DIALOG_DATA) public data: {author: AuthorModel, authors:AuthorModel[],index:number},
               private sb: MatSnackBar) {
-    this.titleString = 'Do not you really need '+this.data.name+' in your team?';
+    this.titleString = 'Do not you really need '+this.data.author.name+' in your team?';
   }
 
-  private apiUrl = 'http://localhost:4100/api/authors/'+this.data._id+'/delete';
+  private apiUrl = 'http://localhost:4100/api/authors/'+this.data.author._id+'/delete';
   titleString!:string;
 
   deleteAuthor(){
@@ -26,6 +26,7 @@ export class DeleteAuthorDialogComponent {
     const headers = {
       Authorization: 'Bearer ' + accessToken,
     };
+    this.data.authors.splice(this.data.index,1);
      axios.delete(this.apiUrl, {headers}).then(()=> {
        this.sb.open('Artist has been succesfully removed.','', {
            duration: 3000,
@@ -39,7 +40,6 @@ export class DeleteAuthorDialogComponent {
      });
     let handleError = (error: any): void => {
       const errorMessage = error.response.data.message;
-      console.log(error.response.data.message);
       this.sb.open(errorMessage ,'',{
         duration: 3000,
         panelClass: ['failed-snackBar']

@@ -12,6 +12,7 @@ import {DeleteAuthorDialogComponent} from "../delete-author-dialog/delete-author
 export class AuthorCardComponent {
 
 
+
   constructor(private router : Router,
               public dialog: MatDialog) {
     sessionStorage.getItem('user') ? this.loginStatus = true : this.loginStatus = false;
@@ -19,7 +20,10 @@ export class AuthorCardComponent {
   }
 
   @Input() author!: AuthorModel;
+  @Input() authors!:AuthorModel[];
+  @Input() index!:number;
   loginStatus!:boolean;
+
 
   isImgValid():string{
     if (!(this.author.pictureURL)){
@@ -38,7 +42,7 @@ export class AuthorCardComponent {
     this.dialog.open(DeleteAuthorDialogComponent, {
         width: '30vw',
         disableClose: true,
-        data: author
+        data: {author: author, authors: this.authors, index: this.index}
       }
     )
   }
