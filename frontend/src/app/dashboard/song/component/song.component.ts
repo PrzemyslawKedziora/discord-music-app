@@ -9,7 +9,6 @@ import {SongService} from "../song.service";
 import {AuthorService} from "../../authors/author.service";
 import {ActivatedRoute} from "@angular/router";
 import {CategoryService} from "../../categories/category.service";
-import {NewAuthorComponent} from "../../authors/new-author/new-author.component";
 import {NewSongComponent} from "../new-song/new-song.component";
 
 @Component({
@@ -69,7 +68,7 @@ export class SongComponent {
           }
           else{
             this.categoryService.getCategories().then(()=> {
-              this.songsTemp = this.songs.filter(song => song.categories.some(category => category.name ===this.authorID))
+              this.songsTemp = this.songs.filter(song => song.categories.some(category => category.name ===criteria))
             })
           }
         } else {
@@ -86,18 +85,6 @@ export class SongComponent {
 
   ngOnInit(): void {
     this.botCommand = localStorage.getItem('botCommand') || '';
-  }
-
-  addArtist(){
-    const dialogRef = this.dialog.open(NewAuthorComponent, {
-      disableClose: true,
-      width:'100vw',
-      data: this.artists
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
-    });
   }
 
   addSong(){

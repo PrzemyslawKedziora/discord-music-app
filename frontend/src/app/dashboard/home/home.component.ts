@@ -3,6 +3,11 @@ import {SongService} from "../song/song.service";
 import {SongModel} from "../../models/song.model";
 import {SharedService} from "../../services/shared/shared.service";
 import {UserService} from "../../services/user/user.service";
+import {NewSongComponent} from "../song/new-song/new-song.component";
+import {MatDialog} from "@angular/material/dialog";
+import {CategoryService} from "../categories/category.service";
+import {AddPlaylistDialogComponent} from "../playlists/add-playlist-dialog/add-playlist-dialog.component";
+import {PlaylistModel} from "../../models/playlist.model";
 
 @Component({
   selector: 'app-home',
@@ -15,9 +20,13 @@ export class HomeComponent implements OnInit {
   songsTemp: SongModel[]=[];
   songsSortedByDate: SongModel[]=[];
   isLoggedIn!:boolean;
+  dialogContent!:PlaylistModel[];
+
   constructor(public ss: SongService,
               private sharedService : SharedService,
-              public userService: UserService) {
+              public userService: UserService,
+              private dialog: MatDialog,
+              private cs: CategoryService) {
     sessionStorage.getItem('username') ? this.isLoggedIn = true : this.isLoggedIn = false;
 
     if (this.songs.length == 0) {
@@ -37,6 +46,27 @@ export class HomeComponent implements OnInit {
 
   }
 
+
+  addSong(){
+    const dialogRef = this.dialog.open(NewSongComponent, {
+      disableClose: true,
+      width:'100vw',
+      data: this.cs.dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result)
+    });
+
+  }
+
+  openAddPlaylistDialog(){
+    this.dialog.open(AddPlaylistDialogComponent,{
+      disableClose:true,
+      width:'70vw',
+      data: this.dialogContent
+    })
+  }
 
 
 }
