@@ -16,7 +16,6 @@ export class PlaylistService {
   getPlaylists(): Promise<void>{
    return axios.get('http://localhost:4100/api/playlists/all').then(res=>{
       this.playlists = res.data;
-      console.log(res)
     });
   }
 

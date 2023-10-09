@@ -1,14 +1,33 @@
 # discord-music-app
-<<<<<<< HEAD
 
-Hi guys, today we are making application to keep up our music we play while gaming B) on discord.
+This application was projected to store music.Technologies we used to build this project is Angular 15.1.0 for 
+frontend and Express.js 4.18.2 for backend of application.
 
-Ryan Gosling
-<3
-=======
-Hello, we are Ryans Goslings
+## Features:
 
-Goodbye world 🪓😮‍💨
->>>>>>> origin/main
+### Songs:
+- Adding song using YoutubeAPI
+- Filtering songs by name,author or category
+- Removing songs
 
-#27.07.2023 15:46 F
+### Artists
+- Artist management
+- Filtering songs by specific author
+
+### Categories:
+-Filtering songs by specific category
+
+### Playlists:
+- Creating playlist
+- Adding songs to playlist
+- Removing one specific song from playlist
+- Removing whole playlist
+
+### User Panel
+- Create user
+- Update every user field
+- User Login/Registration system
+
+# How To Use:
+To use that application,you need to click this link or just go to the website linked in this repository.
+

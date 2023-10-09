@@ -23,7 +23,6 @@ export class AuthorsComponent{
     this.authorService.getAuthors().then(() => {
       this.authors = this.authorService.artists;
       this.filteredAuthors = this.authorService.artists;
-      console.log(this.filteredAuthors)
     });
   }
 

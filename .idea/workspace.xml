@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5690a0d4-e400-4399-a4f4-5a0b259792b9" name="Changes" comment="Merge: pull changes">
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/authors/authors.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/authors/authors.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/authors/authors.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/authors/authors.component.ts" afterDir="false" />
+    <list default="true" id="5690a0d4-e400-4399-a4f4-5a0b259792b9" name="Changes" comment="Fix: language fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/admin/admin-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/admin/admin-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/sidebar/sidebar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/sidebar/sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/sidebar/sidebar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/dashboard.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/dashboard/song/song.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/song/song.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,10 +51,10 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projekty\discord-music-app\frontend\src\app\dashboard\song" />
+      <recent name="D:\Projekty\discord-music-app\frontend\src\app\dashboard\song\component" />
       <recent name="D:\Projekty\discord-music-app\frontend\src\app\dashboard\song\song-list" />
       <recent name="D:\Projekty\discord-music-app\frontend\src\app\dashboard" />
       <recent name="D:\Projekty\discord-music-app\frontend\src\app\services" />
-      <recent name="D:\Projekty\discord-music-app\frontend\src\app\components" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -107,216 +98,17 @@
       <workItem from="1692485088967" duration="1391000" />
       <workItem from="1692553921135" duration="3147000" />
       <workItem from="1692635865612" duration="1643000" />
-    </task>
-    <task id="LOCAL-00004" summary="css updates">
-      <created>1690711249229</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1690711249230</updated>
-    </task>
-    <task id="LOCAL-00005" summary="improved code quality">
-      <created>1690712232129</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1690712232129</updated>
-    </task>
-    <task id="LOCAL-00006" summary="refactorisation of app structure">
-      <created>1690712286386</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1690712286386</updated>
-    </task>
-    <task id="LOCAL-00007" summary="refactorisation of app structure">
-      <created>1690719281114</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1690719281115</updated>
-    </task>
-    <task id="LOCAL-00008" summary="CORS policy">
-      <created>1690719357776</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1690719357776</updated>
-    </task>
-    <task id="LOCAL-00009" summary="implementation of songlist">
-      <created>1690719406373</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1690719406373</updated>
-    </task>
-    <task id="LOCAL-00010" summary="implemented songModel interface">
-      <created>1690743739300</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1690743739301</updated>
-    </task>
-    <task id="LOCAL-00011" summary="list-item component &amp; bootstrap icons">
-      <created>1690743804177</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1690743804177</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Fix: correct syntax">
-      <created>1691337639024</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1691337639024</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Feature: added Song model">
-      <created>1691343083882</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1691343083882</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Fix: project syntax changes">
-      <created>1691343214078</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1691343214078</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Feature: implemented management panel">
-      <created>1691343295025</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1691343295025</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Feature: implemented song list item component">
-      <created>1691343340276</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1691343340276</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Feature: management panel">
-      <created>1691354920415</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1691354920415</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Feature: styling records">
-      <created>1691354984480</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1691354984480</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Fix: module imports (Dialog,Angular Material)">
-      <created>1691355133681</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1691355133681</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Feature: Implemented adding song form and its validation">
-      <created>1691355200214</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1691355200214</updated>
-    </task>
-    <task id="LOCAL-00021" summary="BugFix: Removed redundant files">
-      <created>1691421889203</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1691421889203</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Feature: adding songs to app">
-      <created>1691482199827</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1691482199827</updated>
-    </task>
-    <task id="LOCAL-00023" summary="Feature: adding songs to app">
-      <created>1691485734966</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1691485734966</updated>
-    </task>
-    <task id="LOCAL-00024" summary="BugFix: display of song categories">
-      <created>1691560595691</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1691560595691</updated>
-    </task>
-    <task id="LOCAL-00025" summary="Feature: Added sharing data service">
-      <created>1691576592996</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1691576592996</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Fix: Improved responsiveness of records">
-      <created>1691576631832</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1691576631832</updated>
-    </task>
-    <task id="LOCAL-00027" summary="Feature: Implemented snackbar to adding song function">
-      <created>1691576710727</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1691576710727</updated>
-    </task>
-    <task id="LOCAL-00028" summary="Fix: Management bar accesibility fix">
-      <created>1691578087513</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1691578087513</updated>
-    </task>
-    <task id="LOCAL-00029" summary="Feature: Adding new author to DB">
-      <created>1691589047937</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1691589047937</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Fix: Refactorisation of app structure &amp; its components names">
-      <created>1691589090726</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1691589090726</updated>
-    </task>
-    <task id="LOCAL-00031" summary="Fix: Bound of author &amp; song add component">
-      <created>1691591821621</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1691591821621</updated>
-    </task>
-    <task id="LOCAL-00032" summary="Fix: AuthorModel data binding">
-      <created>1691594416701</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1691594416701</updated>
-    </task>
-    <task id="LOCAL-00033" summary="Fix: SongModel data binding">
-      <created>1691603756467</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1691603756467</updated>
+      <workItem from="1694298481140" duration="7273000" />
+      <workItem from="1694363488233" duration="6513000" />
+      <workItem from="1694528598160" duration="8081000" />
+      <workItem from="1694809347086" duration="7209000" />
+      <workItem from="1695330637302" duration="38581000" />
+      <workItem from="1695672790886" duration="2325000" />
+      <workItem from="1696250891046" duration="6929000" />
+      <workItem from="1696501513799" duration="6596000" />
+      <workItem from="1696515735865" duration="3577000" />
+      <workItem from="1696696799759" duration="6709000" />
+      <workItem from="1696850843453" duration="6666000" />
     </task>
     <task id="LOCAL-00034" summary="Fix: Changed the way of displaying records to dynamic">
       <created>1691630789850</created>
@@ -451,7 +243,217 @@
       <option name="project" value="LOCAL" />
       <updated>1692636019636</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Refactor: App restructurisation">
+      <created>1694026275179</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1694026275179</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Feature: Sidebar responsiveness">
+      <created>1694298877919</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1694298877919</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Feature: Added playlists' components">
+      <created>1694371682546</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1694371682546</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Feature: Added playlist model">
+      <created>1694371700483</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1694371700483</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Fix: Code fix">
+      <created>1694371758461</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1694371758461</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Feature: Added alpha version of playlist component">
+      <created>1694371838573</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1694371838573</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Restore: Code restore">
+      <created>1694532375731</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1694532375731</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Fix: Playlist display fix">
+      <created>1694539151582</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1694539151582</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Feature: Playlist display v0.1">
+      <created>1694540406047</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1694540406047</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Feature: Playlist content display">
+      <created>1694815988218</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1694815988218</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Feature: Adding playlist dynamically">
+      <created>1695341134549</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1695341134554</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Fix: Return from queried song filtering">
+      <created>1695397988095</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1695397988095</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Feature: Playlist remove">
+      <created>1695398060867</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1695398060867</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Fix: Add playlist form styling &amp; Create author button fix">
+      <created>1695398113076</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1695398113076</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Fix: Add playlist form styling &amp; Create author button fix">
+      <created>1695398120392</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1695398120392</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Fix: user parse to json">
+      <created>1695407417845</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1695407417845</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Fix: Filter usage">
+      <created>1695577587405</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1695577587405</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Feature: Add update of playlists &amp; delete songs">
+      <created>1695577689755</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1695577689755</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Feature: Like system">
+      <created>1695594422811</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1695594422812</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Fix: Song CSS fix">
+      <created>1695674902002</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1695674902003</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Feature: Search engines for songs,artists and playlists">
+      <created>1696256879179</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1696256879180</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Fix: like system">
+      <created>1696257358911</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1696257358912</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Feature: Add &amp; remove songs from playlist">
+      <created>1696518857947</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1696518857947</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Feature: conditional display of buttons">
+      <created>1696519236351</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1696519236351</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Fix: action list display">
+      <created>1696703925700</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1696703925700</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Fix: Song filtering by author &amp; category">
+      <created>1696857059523</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1696857059523</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Fix: Code cleaning">
+      <created>1696857078756</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1696857078756</updated>
+    </task>
+    <task id="LOCAL-00080" summary="Fix: conditional song display">
+      <created>1696858677037</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1696858677037</updated>
+    </task>
+    <task id="LOCAL-00081" summary="Feature: Home action shortcuts">
+      <created>1696859214538</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1696859214538</updated>
+    </task>
+    <task id="LOCAL-00082" summary="Fix: language fix">
+      <created>1696859434730</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1696859434730</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -469,31 +471,31 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix: Management bar accesibility fix" />
-    <MESSAGE value="Feature: Adding new author to DB" />
-    <MESSAGE value="Fix: Refactorisation of app structure &amp; its components names" />
-    <MESSAGE value="Fix: Bound of author &amp; song add component" />
-    <MESSAGE value="Fix: AuthorModel data binding" />
-    <MESSAGE value="Fix: SongModel data binding" />
-    <MESSAGE value="Fix: Changed the way of displaying records to dynamic" />
-    <MESSAGE value="Featture: Dynamic author list display" />
-    <MESSAGE value="Feature: Login form is finally usable" />
-    <MESSAGE value="Feature: New user registration &amp; form validation" />
-    <MESSAGE value="Feature: Added notifications to login components" />
-    <MESSAGE value="Feature: Added notifications to register components" />
-    <MESSAGE value="Feature: Added delete song method &amp; notifications" />
-    <MESSAGE value="Fix: Changed storage user data method in WebStorage" />
-    <MESSAGE value="Fix: Changed styling &amp; improved app structure" />
-    <MESSAGE value="Fix: Changed ID of user who add song" />
-    <MESSAGE value="Feature: Implemented request result message &amp; changed returned data structure" />
-    <MESSAGE value="Fix: Changed logic style for data" />
-    <MESSAGE value="Feature: LogOut button" />
-    <MESSAGE value="Feature: Filtering data by author or genre" />
-    <MESSAGE value="Update: Updated assets" />
-    <MESSAGE value="Update: Improved code quality(cosmetic changes)" />
-    <MESSAGE value="Fix: Changed app structure (added song service)" />
-    <MESSAGE value="Fix: landing page music service" />
-    <MESSAGE value="Merge: pull changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge: pull changes" />
+    <MESSAGE value="Fix: Code fix" />
+    <MESSAGE value="Feature: Added alpha version of playlist component" />
+    <MESSAGE value="Restore: Code restore" />
+    <MESSAGE value="Fix: Playlist display fix" />
+    <MESSAGE value="Feature: Playlist display v0.1" />
+    <MESSAGE value="Feature: Playlist content display" />
+    <MESSAGE value="Feature: Adding playlist dynamically" />
+    <MESSAGE value="Fix: Return from queried song filtering" />
+    <MESSAGE value="Feature: Playlist remove" />
+    <MESSAGE value="Fix: Add playlist form styling &amp; Create author button fix" />
+    <MESSAGE value="Fix: user parse to json" />
+    <MESSAGE value="Fix: Filter usage" />
+    <MESSAGE value="Feature: Add update of playlists &amp; delete songs" />
+    <MESSAGE value="Feature: Like system" />
+    <MESSAGE value="Fix: Song CSS fix" />
+    <MESSAGE value="Feature: Search engines for songs,artists and playlists" />
+    <MESSAGE value="Fix: like system" />
+    <MESSAGE value="Feature: Add &amp; remove songs from playlist" />
+    <MESSAGE value="Feature: conditional display of buttons" />
+    <MESSAGE value="Fix: action list display" />
+    <MESSAGE value="Fix: Song filtering by author &amp; category" />
+    <MESSAGE value="Fix: Code cleaning" />
+    <MESSAGE value="Fix: conditional song display" />
+    <MESSAGE value="Feature: Home action shortcuts" />
+    <MESSAGE value="Fix: language fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: language fix" />
   </component>
 </project>

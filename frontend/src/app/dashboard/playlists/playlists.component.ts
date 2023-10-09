@@ -27,7 +27,6 @@ export class PlaylistsComponent{
     ps.getPlaylists().then(()=>{
       this.playlists = ps.playlists;
       this.playlistsTemp = ps.playlists;
-      console.log(this.playlistsTemp)
     });
 
     sessionStorage.getItem('username') ? this.loginStatus = true : this.loginStatus = false;
