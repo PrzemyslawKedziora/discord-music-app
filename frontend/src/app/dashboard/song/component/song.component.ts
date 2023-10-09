@@ -56,23 +56,24 @@ export class SongComponent {
       this.artists = this.sharedService.sharedArtistsArray;
     });
     this.initializeArtistsAsync().then(() => {
-      this.route.paramMap.subscribe(params => {
-        if (params.get('authorName') != 'music' && params.get('authorName')) {
-          this.authorID = params.get('authorName') || '';
-          if (this.authorService.artists.some(author => author.name === this.authorID)) {
+      this.route.params.subscribe(params => {
+        console.log(params['authorName']);
+        const criteria = params['authorName'];
+        if (criteria != 'music') {
+          if (this.authorService.artists.some(author => author.name === criteria)) {
             this.authorService.getAuthors().then(() => {
-              this.songs = this.songs.filter(song =>
-                song.authors.some(author => author.name === this.authorID)
+              this.songsTemp = this.songs.filter(song =>
+                song.authors.some(author => author.name === criteria)
               );
             });
           }
           else{
             this.categoryService.getCategories().then(()=> {
-              this.songs = this.songs.filter(song => song.categories.some(category => category.name ===this.authorID))
+              this.songsTemp = this.songs.filter(song => song.categories.some(category => category.name ===this.authorID))
             })
           }
         } else {
-          this.songs = this.songsTemp;
+          this.songsTemp = this.songs;
         }
       });
 
@@ -111,9 +112,11 @@ export class SongComponent {
     });
 
   }
+
   async initializeArtistsAsync() {
-    await this.authorService.getAuthors();
-    this.artists = this.sharedService.sharedArtistsArray;
+    return this.authorService.getAuthors().then(() => {
+      this.artists = this.sharedService.sharedArtistsArray;
+    });
   }
 
   searchSong(){
