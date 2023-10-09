@@ -56,7 +56,6 @@ export class SongComponent {
     });
     this.initializeArtistsAsync().then(() => {
       this.route.params.subscribe(params => {
-        console.log(params['authorName']);
         const criteria = params['authorName'];
         if (criteria != 'music') {
           if (this.authorService.artists.some(author => author.name === criteria)) {
