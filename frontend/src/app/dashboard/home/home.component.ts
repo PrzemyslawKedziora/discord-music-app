@@ -8,6 +8,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {CategoryService} from "../categories/category.service";
 import {AddPlaylistDialogComponent} from "../playlists/add-playlist-dialog/add-playlist-dialog.component";
 import {PlaylistModel} from "../../models/playlist.model";
+import {AuthorService} from "../authors/author.service";
+import {AddDialogModel} from "../../models/add-dialog.model";
 
 @Component({
   selector: 'app-home',
@@ -21,12 +23,14 @@ export class HomeComponent implements OnInit {
   songsSortedByDate: SongModel[]=[];
   isLoggedIn!:boolean;
   dialogContent!:PlaylistModel[];
+  dialogData: AddDialogModel={category:[],author:[]};
 
   constructor(public ss: SongService,
               private sharedService : SharedService,
               public userService: UserService,
               private dialog: MatDialog,
-              private cs: CategoryService) {
+              private cs: CategoryService,
+              private as: AuthorService) {
     sessionStorage.getItem('username') ? this.isLoggedIn = true : this.isLoggedIn = false;
 
     if (this.songs.length == 0) {
@@ -37,6 +41,12 @@ export class HomeComponent implements OnInit {
           .slice(0,6);
         this.songs = this.songs.sort((song1,song2)=> song2.likes.length - song1.likes.length).slice(0,6);
       });
+      as.getAuthors().then(()=> {
+        this.dialogData.author = as.artists;
+      });
+      cs.getCategories().then(()=> {
+        this.dialogData.category = cs.categories;
+      })
     }
   }
 
@@ -51,7 +61,7 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(NewSongComponent, {
       disableClose: true,
       width:'100vw',
-      data: this.cs.dialogData
+      data: this.dialogData
     });
 
     dialogRef.afterClosed().subscribe(result => {
