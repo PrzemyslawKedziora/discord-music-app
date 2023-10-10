@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 //  <----------- reading environment variables from the .env file ----------->
 require("dotenv").config();
@@ -19,6 +20,13 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
+app.use(cors(
+    {
+        origin: ["https://discord-music-app-server.vercel.app"],
+        methods: ["POST","GET","DELETE"],
+        credentials: true
+    }
+));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/songs", require("./routes/songRoutes"));
 app.use("/api/authors", require("./routes/authorRoutes"));
