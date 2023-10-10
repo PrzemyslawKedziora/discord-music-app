@@ -15,18 +15,27 @@ app.use(express.json());
 
 //  <----------- Middlewares ----------->
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://discord-music-app-frontend.vercel.app');
+    const allowedOrigins = [
+        'http://localhost:4200',
+        'https://discord-music-app-frontend.vercel.app'
+    ];
+    const origin = req.headers.origin;
+
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
-});
-app.use(cors(
-    {
-        origin: ["https://discord-music-app-server.vercel.app"],
-        methods: ["POST","GET","DELETE"],
-        credentials: true
+
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200);
+    } else {
+        next();
     }
-));
+});
+
+app.use(cors());
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/songs", require("./routes/songRoutes"));
 app.use("/api/authors", require("./routes/authorRoutes"));
