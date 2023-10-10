@@ -31,7 +31,7 @@ export class LoginComponent {
   onSubmit(): void {
     if (!this.loginForm.invalid) this.isSubmitted=true;
     if (this.isSubmitted){
-      axios.post('http://localhost:4100/api/users/login',{email: this.loginForm.get('email')?.value,password: this.loginForm.get('password')?.value})
+      axios.post('https://discord-music-app-backend.vercel.app/api/users/login',{email: this.loginForm.get('email')?.value,password: this.loginForm.get('password')?.value})
         .then((res) => {
           const user: UserModel = {
             _id: res.data.id,

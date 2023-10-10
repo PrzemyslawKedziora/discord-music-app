@@ -39,7 +39,7 @@ export class RegisterComponent{
       throw new Error('niewypelniony formularz');
     }
     else{
-      axios.post('http://localhost:4100/api/users/register',this.registerForm.value).then(()=> {
+      axios.post('https://discord-music-app-backend.vercel.app/api/users/register',this.registerForm.value).then(()=> {
         this.sb.open('User has been successfully registered!\n Please,log in.','', {
           duration: 3000,
           panelClass: ['success-snackBar']

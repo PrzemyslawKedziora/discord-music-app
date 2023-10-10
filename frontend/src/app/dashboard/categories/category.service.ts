@@ -14,7 +14,7 @@ export class CategoryService {
   dialogData: AddDialogModel={category:[],author:[]};
 
   getCategories(): Promise<void>{
-    return axios.get('http://localhost:4100/api/categories/all').then(
+    return axios.get('https://discord-music-app-backend.vercel.app/api/categories/all').then(
       (res) => {
         let ar:CategoryModel[]=[];
         for (let i = 0; i < res.data.length; i++) {

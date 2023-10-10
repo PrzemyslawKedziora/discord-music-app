@@ -18,7 +18,7 @@ export class DeleteAuthorDialogComponent {
     this.titleString = 'Do not you really need '+this.data.author.name+' in your team?';
   }
 
-  private apiUrl = 'http://localhost:4100/api/authors/'+this.data.author._id+'/delete';
+  private apiUrl = 'https://discord-music-app-backend.vercel.app/api/authors/'+this.data.author._id+'/delete';
   titleString!:string;
 
   deleteAuthor(){

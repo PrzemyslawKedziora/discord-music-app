@@ -40,7 +40,7 @@ export class ShowPlaylistComponent{
   }
 
   onDeleteFromPlaylist(playlist:PlaylistModel,index: number,song:SongModel){
-    const url = 'http://localhost:4100/api/playlists/'+playlist._id
+    const url = 'https://discord-music-app-backend.vercel.app/api/playlists/'+playlist._id
     +'/remove-song';
     const accessToken = sessionStorage.getItem('token');
     const headers = {

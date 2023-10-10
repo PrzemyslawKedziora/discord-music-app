@@ -33,7 +33,7 @@ export class PlaylistsComponent{
   }
 
   showPlaylist(playlist: PlaylistModel,index:number){
-    const APIurl = 'http://localhost:4100/api/playlists/'+playlist._id+'/info';
+    const APIurl = 'https://discord-music-app-backend.vercel.app/api/playlists/'+playlist._id+'/info';
     axios.get(APIurl).then(res => {
       this.dialogContent = res.data;
     }).then(()=> {

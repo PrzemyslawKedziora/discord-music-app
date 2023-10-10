@@ -19,7 +19,7 @@ export class ConfirmDialogComponent {
   }
 
   deleteSong(){
-    const requestString = 'http://localhost:4100/api/songs/'+this.data.songID+'/delete';
+    const requestString = 'https://discord-music-app-backend.vercel.app/api/songs/'+this.data.songID+'/delete';
     const accessToken = sessionStorage.getItem('token');
     const headers = {
       Authorization: 'Bearer ' + accessToken,

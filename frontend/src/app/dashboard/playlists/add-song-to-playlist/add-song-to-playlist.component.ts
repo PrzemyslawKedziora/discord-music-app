@@ -31,7 +31,7 @@ export class AddSongToPlaylistComponent{
     songID = this.data.songID;
     console.log(songID,'piosenki');
     console.log(this.playlistID,'plejka');
-    const url = 'http://localhost:4100/api/playlists/'+this.playlistID+'/add-song';
+    const url = 'https://discord-music-app-backend.vercel.app/api/playlists/'+this.playlistID+'/add-song';
     const accessToken = sessionStorage.getItem('token');
     const headers = {
       Authorization: 'Bearer ' + accessToken,

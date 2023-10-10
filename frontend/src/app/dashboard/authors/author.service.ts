@@ -21,7 +21,7 @@ export class AuthorService {
   dialogData: AddDialogModel={category:[],author:[]};
 
   getAuthors(): Promise<void> {
-    return axios.get('http://localhost:4100/api/authors/all').then(
+    return axios.get('https://discord-music-app-backend.vercel.app/api/authors/all').then(
       (res) => {
         let arTemp: AuthorModel[] = [];
         for (let i = 0; i < res.data.length; i++) {

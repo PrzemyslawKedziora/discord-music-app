@@ -15,7 +15,7 @@ import {AuthorModel} from "../../../models/author.model";
 })
 export class NewSongComponent{
 
-  private apiUrl = 'http://localhost:4100/api/songs/add';
+  private apiUrl = 'https://discord-music-app-backend.vercel.app/api/songs/add';
 
   constructor(public dialogRef: MatDialogRef<NewSongComponent>,
               private fb: FormBuilder,

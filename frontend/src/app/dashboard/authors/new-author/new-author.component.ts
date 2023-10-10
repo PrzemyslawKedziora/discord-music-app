@@ -13,7 +13,7 @@ import {AuthorModel, AuthorRecord} from "../../../models/author.model";
 })
 export class NewAuthorComponent{
 
-  private apiUrl = 'http://localhost:4100/api/authors/add';
+  private apiUrl = 'https://discord-music-app-backend.vercel.app/api/authors/add';
 
   constructor(public dialogRef: MatDialogRef<NewAuthorComponent>,
               private fb: FormBuilder,

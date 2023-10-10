@@ -31,7 +31,7 @@ export class AddPlaylistDialogComponent {
   playlists:PlaylistModel[]=[];
 
   createPlaylist(){
-    const apiURL = 'http://localhost:4100/api/playlists/add';
+    const apiURL = 'https://discord-music-app-backend.vercel.app/api/playlists/add';
     const accessToken = sessionStorage.getItem('token');
     const headers = {
       Authorization: 'Bearer ' + accessToken,

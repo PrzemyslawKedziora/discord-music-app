@@ -71,11 +71,8 @@ export class ListItemComponent implements OnInit {
   showList() {
     const clickableElements = document.querySelectorAll('.clickable');
     const hiddenList = document.querySelector('.hidden-list') as HTMLElement;
-
-// Dodaj nasłuchiwanie na kliknięcie dla każdego elementu
     clickableElements.forEach((element) => {
       element.addEventListener('click', () => {
-        // Pokaż lub ukryj listę w zależności od jej aktualnego stanu
         if (hiddenList!.style.display === 'none' || hiddenList!.style.display === '') {
           hiddenList!.style.display = 'block';
         } else {

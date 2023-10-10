@@ -57,7 +57,7 @@ export class UserPanelComponent {
   }
 
   updateUser(){
-    let urlString ='http://localhost:4100/api/users/'+this.user._id+'/edit';
+    let urlString ='https://discord-music-app-backend.vercel.app/api/users/'+this.user._id+'/edit';
     const accessToken = sessionStorage.getItem('token');
     const headers = {
       Authorization: 'Bearer ' + accessToken,

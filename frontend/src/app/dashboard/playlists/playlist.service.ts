@@ -14,13 +14,13 @@ export class PlaylistService {
   playlists:PlaylistModel[]=[];
 
   getPlaylists(): Promise<void>{
-   return axios.get('http://localhost:4100/api/playlists/all').then(res=>{
+   return axios.get('https://discord-music-app-backend.vercel.app/api/playlists/all').then(res=>{
       this.playlists = res.data;
     });
   }
 
   deletePlaylist(playlist:PlaylistModel,index:number){
-   const urlString = 'http://localhost:4100/api/playlists/'+playlist._id+'/delete';
+   const urlString = 'https://discord-music-app-backend.vercel.app/api/playlists/'+playlist._id+'/delete';
     const accessToken = sessionStorage.getItem('token');
     const headers = {
       Authorization: 'Bearer ' + accessToken,
@@ -41,7 +41,7 @@ export class PlaylistService {
   }
 
   updatePlaylist(playlist: PlaylistModel){
-    const urlString = 'http://localhost:4100/api/playlists/edit/'+playlist._id;
+    const urlString = 'https://discord-music-app-backend.vercel.app/api/playlists/edit/'+playlist._id;
     const accessToken = sessionStorage.getItem('token');
     const headers = {
       Authorization: 'Bearer ' + accessToken,
