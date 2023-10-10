@@ -23,7 +23,7 @@ export class SongService {
   isLiked!:boolean;
 
   getSongs(): Promise<void>{
-    return axios.get('http://localhost:4100/api/songs/all').then((response) => {
+    return axios.get('https://discord-music-app-server.vercel.app/api/songs/all').then((response) => {
      if (this.songs.length ==0){
        for (let i = 0; i < response.data.length; i++) {
          response.data[i].createdAt = Date.parse(response.data[i].createdAt)
