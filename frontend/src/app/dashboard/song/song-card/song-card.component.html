@@ -1,4 +1,4 @@
-<div class="card d-flex flex-row">
+<div class="card d-flex flex-row" [ngClass]="{'card-on-small' : !isBigScreen}">
 
   <img class="song-card-img" [src]="song.thumbnail" alt="">
   <div class="song-info d-flex flex-column justify-content-between">

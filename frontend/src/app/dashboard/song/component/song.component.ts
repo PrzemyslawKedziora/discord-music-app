@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {CategoryModel} from "../../../models/category.model";
 import {AuthorModel} from "../../../models/author.model";
 import {SongModel} from "../../../models/song.model";
@@ -33,6 +33,8 @@ export class SongComponent {
   firstCheck:boolean=true;
   selectedAuthors:AuthorModel[]=[];
   selectedCategories:CategoryModel[]=[];
+
+  isBigScreen=true;
 
   constructor(public dialog: MatDialog,
               public sharedService: SharedService,
@@ -82,8 +84,14 @@ export class SongComponent {
 
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.checkScreenSize();
+  }
+
   ngOnInit(): void {
     this.botCommand = localStorage.getItem('botCommand') || '';
+    this.checkScreenSize();
   }
 
   addSong(){
@@ -152,5 +160,8 @@ export class SongComponent {
     }
   }
 
+  checkScreenSize(){
+    this.isBigScreen = window.innerWidth > 1000;
+  }
 
 }

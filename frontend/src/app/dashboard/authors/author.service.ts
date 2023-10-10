@@ -41,6 +41,4 @@ export class AuthorService {
       data: this.artists
     });
   }
-
-
 }

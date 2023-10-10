@@ -20,6 +20,7 @@
 }
 .title {
   font-size: 2rem;
+  min-font-size: 10px;
   width: 100%;
   text-align: left;
   color: $font-color;
@@ -47,6 +48,7 @@ $icon-width: 3rem;
   padding: 0 1rem;
   padding-left: $icon-width;
   font-size: 1.3rem;
+  min-font-size: 10px;
   color: $font-color;
 }
 .search-bar::placeholder {
@@ -79,7 +81,7 @@ $icon-width: 3rem;
   width: 100%;
   color: white;
   margin: 15px 0;
-  font-size: 1.3vw;
+  font-size: 16px;
   min-height: 2.5rem;
   padding-left: 10%;
 }
@@ -115,7 +117,7 @@ mat-form-field{
 }
 .show-songs-btn{
   width: 30%;
-  font-size: 1vw;
+  font-size: 16px;
   background-color: $hover-blue-nav-color;
   color: white;
   border-radius: 7px;

@@ -3,12 +3,12 @@
   <div class="row main-row">
     <div class="col d-flex justify-content-center flex-column align-items-center management-panel">
 
-      <div class="input-container">
+      <div class="input-container" *ngIf="isBigScreen">
         <input type="text" class="search-bar" [(ngModel)]="searchQuery" [placeholder]="' search by song\'s name'" (input)="searchSong()">
         <i class="bi bi-search icon"></i>
       </div>
 
-      <div class="filters-container">
+      <div class="filters-container" *ngIf="isBigScreen">
         <div class="filters-inner-container">
 
           <mat-form-field color="primary">
@@ -47,8 +47,8 @@
 
       <div class="title">Songs</div>
       <div class="container">
-        <div class="row">
-          <div class="col description-list">
+        <div class="row" >
+          <div class="col description-list" *ngIf="isBigScreen">
             <div class="number">#</div>
             <div class="thumbnail">YouTube thumbnail</div>
             <div class="title2">Title</div>
@@ -57,13 +57,19 @@
             <div class="like-group" *ngIf="isLoggedIn">Action</div>
           </div>
 
-          <div class="col">
+          <div class="col" *ngIf="isBigScreen; else smallScreen">
             <div *ngFor="let song of songsTemp; index as index"
                  class="d-flex justify-content-center align-items-center mb-3 flex-column">
               <song-list-item [songData]="songs" [songRecord]="song" [songIndex]="index"
-                              [botCommand]="botCommand"></song-list-item>
+                              [botCommand]="botCommand" ></song-list-item>
             </div>
           </div>
+          <ng-template #smallScreen>
+              <div *ngFor="let song of songsTemp; index as index">
+                <app-song-card [songData]="songs" [song]="song" [songIndex]="index"
+                                [botCommand]="botCommand" [isBigScreen]="isBigScreen"></app-song-card>
+            </div>
+          </ng-template>
         </div>
       </div>
 

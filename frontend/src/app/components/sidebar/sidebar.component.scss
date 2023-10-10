@@ -2,6 +2,7 @@
 
 .sidebar{
   width: 20vw;
+  min-width: 100px;
   margin: 0 auto;
 }
 .content-container {
@@ -30,7 +31,7 @@ ul{
 }
 li{
   text-align: left;
-  font-size: 1.3vw;
+  font-size: 16px;
   color: $font-color;
   width: 100%;
   border-radius: 10px;

@@ -7,11 +7,14 @@ $text-size: 0.9rem;
   margin: 1vh 0;
   background-color: $background-color;
 }
+.card-on-small{
+  max-width: 300px;
+}
 .song-card-img{
   border-radius: 0.5rem;
   width: 120px;
   aspect-ratio: 13/9;
-  
+
 }
 .song-info {
   padding: 0 10px;

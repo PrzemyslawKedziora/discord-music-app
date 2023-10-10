@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {UserService} from "../services/user/user.service";
 
 @Component({
@@ -13,5 +13,20 @@ export class DashboardComponent{
 
   constructor(public user: UserService) {
     sessionStorage.getItem('user') ? this.loginStatus = true : this.loginStatus = false;
+  }
+
+  isSmallScreen = false;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.checkScreenSize();
+  }
+
+  ngOnInit(): void {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize(): void {
+    this.isSmallScreen = window.innerWidth < 1000;
   }
 }

@@ -1,7 +1,7 @@
 <div class="cont1">
    <app-sidebar></app-sidebar>
-  <div class="vw-100">
-    <div class="login-bar d-flex justify-content-end">
+  <div>
+    <div class="login-bar d-flex" [ngClass]="{ 'justify-content-end' : !isSmallScreen}">
       <div>
         <button class="btn btn-success" *ngIf="!loginStatus; else LogOut" routerLink="/login">Log In</button>
       </div>
