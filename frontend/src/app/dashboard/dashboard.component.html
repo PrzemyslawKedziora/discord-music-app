@@ -1,7 +1,19 @@
 <div class="cont1">
-   <app-sidebar></app-sidebar>
+   <app-sidebar *ngIf="!sharedService.isSmallScreen; else smallSidebar"></app-sidebar>
+
   <div>
-    <div class="login-bar d-flex" [ngClass]="{ 'justify-content-end' : !isSmallScreen}">
+    <ng-template #smallSidebar>
+      <span class="btn-hover" [ngStyle]="isHidden ? {'background-color': '2B2D31'}: {}">
+        <i class="bi bi-list icon"
+           [ngStyle]="!isHidden ? {'position': 'fixed'}: {}"
+           (click)="changeVisibility()"></i>
+       <span class="sidebar" [ngStyle]="isHidden ?  {'left': '-100vw'} : {'left': '0'}">
+          <app-sidebar (sideBarEvent)="isHiddenFun($event)" (click)="changeVisibility()"></app-sidebar>
+       </span>
+      </span>
+    </ng-template>
+    <div class="login-bar d-flex justify-content-end"
+         [ngStyle]="!isHidden ? {'position': 'fixed', 'right': '0', 'z-index': '1'}: {}">
       <div>
         <button class="btn btn-success" *ngIf="!loginStatus; else LogOut" routerLink="/login">Log In</button>
       </div>

@@ -1,10 +1,9 @@
 <div class="card d-flex flex-row" [ngClass]="{'card-on-small' : !isBigScreen}">
 
-  <img class="song-card-img" [src]="song.thumbnail" alt="">
+  <img class="song-card-img" [src]="song.thumbnail" alt="{{song.name}}">
   <div class="song-info d-flex flex-column justify-content-between">
 
     <div class="d-flex flex-column align-content-between song-main-info">
-
       <span *ngIf="song.name.length < maxTitleLength; else shortenedText" class="title">{{song.name}}</span>
       <ng-template #shortenedText>
         <span [ngStyle]="{'color': 'white'}">{{song.name.slice(0,25)+'...'}}</span>

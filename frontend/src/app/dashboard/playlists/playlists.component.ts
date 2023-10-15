@@ -6,6 +6,7 @@ import {PlaylistModel} from "../../models/playlist.model";
 import axios from "axios";
 import {AddPlaylistDialogComponent} from "./add-playlist-dialog/add-playlist-dialog.component";
 import {PlaylistService} from "./playlist.service";
+import {SharedService} from "../../services/shared/shared.service";
 
 @Component({
   selector: 'app-playlists',
@@ -23,7 +24,8 @@ export class PlaylistsComponent{
   constructor(
               public userService: UserService,
               public dialog: MatDialog,
-              private ps: PlaylistService) {
+              private ps: PlaylistService,
+              public sharedService : SharedService) {
     ps.getPlaylists().then(()=>{
       this.playlists = ps.playlists;
       this.playlistsTemp = ps.playlists;

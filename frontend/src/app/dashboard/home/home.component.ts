@@ -46,6 +46,7 @@ export class HomeComponent implements OnInit {
       });
       cs.getCategories().then(()=> {
         this.dialogData.category = cs.categories;
+
       })
     }
   }

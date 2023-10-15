@@ -21,6 +21,7 @@ export class SharedService {
   private _registerUserStatus!:boolean;
   public _filterStatus!:boolean;
   private _user!: UserModel;
+  private _isSmallScreen=false;
 
 
 
@@ -112,5 +113,18 @@ export class SharedService {
 
   set user(value: UserModel) {
     this._user = value;
+  }
+
+  checkScreenSize(): void {
+    this._isSmallScreen = window.innerWidth < 1000;
+  }
+
+
+  get isSmallScreen(): boolean {
+    return this._isSmallScreen;
+  }
+
+  set isSmallScreen(value: boolean) {
+    this._isSmallScreen = value;
   }
 }

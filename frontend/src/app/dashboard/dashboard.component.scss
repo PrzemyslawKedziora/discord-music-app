@@ -1,5 +1,10 @@
 @import "src/variables";
-
+.btn-hover{
+  position: relative;
+  z-index: 1;
+  left: 8vw;
+  top: 2vh;
+}
 .cont1{
   width: 100%;
   display: flex;
@@ -13,7 +18,7 @@ app-sidebar{
   text-align: center;
 }
 .login-bar{
-  margin: 10px 20px;
+  margin: 14px 20px;
 }
 
 .btn {
@@ -29,3 +34,30 @@ app-sidebar{
 .btn-success {
   background-color: $main-green-color;
 }
+
+//small display sidebar
+.sidebar{
+  position: fixed;
+  z-index: 1;
+  top: 6.8vh;
+  width: 100vw;
+  background: #eaeaea;
+  transition: all 1s ease;
+  font-size: 22px;
+  color: black;
+  line-height: 70px;
+  text-align: center;
+  user-select: none;
+}
+
+.icon{
+  font-size: 28px;
+}
+.sidebar{
+  background-color: $background-color;
+  height: 100vh;
+}
+.btn-hover:hover{
+  cursor: pointer;
+}
+

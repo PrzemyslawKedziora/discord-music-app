@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {AuthorModel} from "../../models/author.model";
 import {AuthorService} from "./author.service";
 import {UserService} from "../../services/user/user.service";
+import {SharedService} from "../../services/shared/shared.service";
 
 @Component({
   selector: 'app-authors',
@@ -17,7 +18,8 @@ export class AuthorsComponent{
   loginStatus!:boolean;
 
   constructor(public authorService: AuthorService,
-              public userService: UserService) {
+              public userService: UserService,
+              public sharedService: SharedService){
     sessionStorage.getItem('username') ? this.loginStatus = true : this.loginStatus = false;
 
     this.authorService.getAuthors().then(() => {

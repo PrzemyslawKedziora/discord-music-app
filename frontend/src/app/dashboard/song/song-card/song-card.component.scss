@@ -6,6 +6,7 @@ $text-size: 0.9rem;
   padding: 1rem;
   margin: 1vh 0;
   background-color: $background-color;
+  //aspect-ratio: 18/9;
 }
 .card-on-small{
   max-width: 300px;
@@ -14,7 +15,6 @@ $text-size: 0.9rem;
   border-radius: 0.5rem;
   width: 120px;
   aspect-ratio: 13/9;
-
 }
 .song-info {
   padding: 0 10px;

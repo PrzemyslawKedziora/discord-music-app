@@ -14,7 +14,8 @@ export class SongCardComponent{
   @Input() botCommand!: string;
   @Input() isBigScreen!:boolean;
 
-  maxTitleLength:number = 50;
+
+  maxTitleLength:number = 25;
   userID = sessionStorage.getItem('id');
 
 

@@ -38,3 +38,8 @@ mat-form-field{
 .container{
   width: 100vw;
 }
+@media screen and (width< 1000px){
+  mat-form-field{
+    max-width: 150px;
+  }
+}

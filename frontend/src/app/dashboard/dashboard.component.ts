@@ -1,5 +1,6 @@
 import {Component, HostListener} from '@angular/core';
 import {UserService} from "../services/user/user.service";
+import {SharedService} from "../services/shared/shared.service";
 
 @Component({
   selector: 'dashboard',
@@ -9,24 +10,32 @@ import {UserService} from "../services/user/user.service";
 export class DashboardComponent{
 
   loginStatus!:boolean;
+  isHidden:boolean=true;
 
 
-  constructor(public user: UserService) {
+  constructor(public user: UserService,
+              public sharedService: SharedService) {
     sessionStorage.getItem('user') ? this.loginStatus = true : this.loginStatus = false;
   }
 
-  isSmallScreen = false;
-
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
-    this.checkScreenSize();
+    this.sharedService.checkScreenSize();
+    this.isHidden = this.sharedService.isSmallScreen;
   }
 
   ngOnInit(): void {
-    this.checkScreenSize();
+    this.sharedService.checkScreenSize();
+    this.isHidden = this.sharedService.isSmallScreen;
+  }
+  isHiddenFun(value:boolean){
+    this.isHidden = value;
   }
 
-  checkScreenSize(): void {
-    this.isSmallScreen = window.innerWidth < 1000;
+  changeVisibility(){
+    this.isHidden = !this.isHidden;
+  }
+  tempFun(){
+
   }
 }

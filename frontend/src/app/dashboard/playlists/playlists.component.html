@@ -1,6 +1,6 @@
-<div class="main-container">
+<div class="main-container" [ngStyle]="sharedService.isSmallScreen ?{'width' : '90vw'} : {}">
 
-  <div class="row" *ngIf="loginStatus">
+  <div class="row">
     <div class="col d-flex justify-content-center flex-column align-items-center management-panel">
 
       <div class="input-container">
@@ -9,17 +9,17 @@
         <i class="bi bi-search icon"></i>
       </div>
 
-      <div class="input-container">
+      <div class="input-container" *ngIf="loginStatus">
         <input type="checkbox" id="show-owned" (click)="filterPlaylists('owned')">
         <label for="show-owned">Show only playlists added by you</label>
       </div>
 
-      <div class="input-container">
+      <div class="input-container" *ngIf="loginStatus">
         <input type="checkbox" id="show-liked" (click)="filterPlaylists('liked')">
         <label for="show-liked">Show only liked playlists</label>
       </div>
 
-      <div class="input-container">
+      <div class="input-container" *ngIf="loginStatus">
         <button class="btn btn-add add-button" (click)="openAddPlaylistDialog()">
           <span>Create playlist</span>
           <i class="bi bi-collection-play-fill"></i>

@@ -1,12 +1,17 @@
-<div class="content">
+<div class="content" >
 
   <section *ngIf="isLoggedIn">
     <div class="quick-add d-flex gap-4 flex-column">
       <div class="section-title">
         <p>Quick Add</p>
       </div>
-      <button class="btn add-button" (click)="addSong()">Add song   <i class="bi bi-music-note"></i></button>
-      <button class="btn add-button" (click)="openAddPlaylistDialog()">Create a playlist   <i class="bi bi-caret-right-square"></i></button>
+      <button class="btn add-button" (click)="addSong()"><span>
+        Add song
+      </span>  <i class="bi bi-music-note"></i></button>
+      <button class="btn add-button" (click)="openAddPlaylistDialog()">
+        <span>
+          Create a playlist
+        </span><i class="bi bi-caret-right-square"></i></button>
     </div>
   </section>
 
