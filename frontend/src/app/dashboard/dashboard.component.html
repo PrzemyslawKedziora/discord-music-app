@@ -13,7 +13,7 @@
       </span>
     </ng-template>
     <div class="login-bar d-flex justify-content-end"
-         [ngStyle]="!isHidden ? {'position': 'fixed', 'right': '0', 'z-index': '1'}: {}">
+         [ngStyle]="!isHidden && sharedService.isSmallScreen ? {'position': 'fixed', 'right': '0', 'z-index': '1'}: {}">
       <div>
         <button class="btn btn-success" *ngIf="!loginStatus; else LogOut" routerLink="/login">Log In</button>
       </div>
