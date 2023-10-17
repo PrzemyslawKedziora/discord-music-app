@@ -30,6 +30,7 @@ export class DashboardComponent{
   }
   isHiddenFun(value:boolean){
     this.isHidden = value;
+    this.changeVisibility();
   }
 
   changeVisibility(){

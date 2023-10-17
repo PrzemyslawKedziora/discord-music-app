@@ -14,7 +14,7 @@ import {NewSongComponent} from "../new-song/new-song.component";
 @Component({
   selector: 'app-song',
   templateUrl: './song.component.html',
-  styleUrls: ['./song.component.scss'],
+  styleUrls: ['./song.component.scss', '../song-card/song-card.component.scss'],
 })
 export class SongComponent {
 

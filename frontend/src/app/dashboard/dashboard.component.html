@@ -8,7 +8,7 @@
            [ngStyle]="!isHidden ? {'position': 'fixed'}: {}"
            (click)="changeVisibility()"></i>
        <span class="sidebar" [ngStyle]="isHidden ?  {'left': '-100vw'} : {'left': '0'}">
-          <app-sidebar (sideBarEvent)="isHiddenFun($event)" (click)="changeVisibility()"></app-sidebar>
+          <app-sidebar (sideBarEvent)="isHiddenFun($event)"></app-sidebar>
        </span>
       </span>
     </ng-template>

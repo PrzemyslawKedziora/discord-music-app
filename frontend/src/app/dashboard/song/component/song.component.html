@@ -58,7 +58,7 @@
             <div class="like-group" *ngIf="isLoggedIn">Action</div>
           </div>
 
-          <div class="col" *ngIf="isBigScreen; else smallScreen">
+          <div class="row" *ngIf="isBigScreen; else smallScreen">
             <div *ngFor="let song of songsTemp; index as index"
                  class="d-flex justify-content-center align-items-center mb-3 flex-column">
               <song-list-item [songData]="songs" [songRecord]="song" [songIndex]="index"
@@ -66,10 +66,14 @@
             </div>
           </div>
           <ng-template #smallScreen>
-              <div *ngFor="let song of songsTemp; index as index">
-                <app-song-card [songData]="songs" [song]="song" [songIndex]="index"
-                                [botCommand]="botCommand" [isBigScreen]="isBigScreen"></app-song-card>
-            </div>
+              <div class="container">
+                <div class="row">
+                  <div *ngFor="let song of songsTemp; index as index" class="col-md-12">
+                    <app-song-card [songData]="songs" [song]="song" [songIndex]="index"
+                                   [botCommand]="botCommand" [isBigScreen]="isBigScreen"></app-song-card>
+                  </div>
+                </div>
+              </div>
           </ng-template>
         </div>
       </div>
