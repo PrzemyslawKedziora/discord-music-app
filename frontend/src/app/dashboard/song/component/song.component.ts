@@ -78,7 +78,6 @@ export class SongComponent {
       });
 
     });
-
     this.sharedService.isLoggedInStatus = this.isLoggedIn;
     this.isLoggedIn = !!sessionStorage.getItem("token");
 

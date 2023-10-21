@@ -46,6 +46,7 @@ export class LoginComponent {
           sessionStorage.setItem('id',user._id);
           sessionStorage.setItem('username',user.username);
           sessionStorage.setItem('token',user.token);
+          localStorage.setItem('botCommand',user.botCommand);
           if (sessionStorage.getItem('user')){
             this.isLoggedIn = true;
             this.sharedService.loginUserStatus = this.isLoggedIn;

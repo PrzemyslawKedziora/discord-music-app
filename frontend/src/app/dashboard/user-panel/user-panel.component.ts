@@ -13,6 +13,7 @@ import {UserService} from "../../services/user/user.service";
 export class UserPanelComponent {
 
   user!: UserModel;
+  botCommand!:string;
   isEditable: boolean = false;
   userForm: FormGroup;
   inputType:string = 'password';
@@ -23,6 +24,7 @@ export class UserPanelComponent {
               public userService: UserService) {
     const sessionUser = sessionStorage.getItem('user');
     this.user = JSON.parse(sessionUser!) as UserModel;
+    this.botCommand = localStorage.getItem('botCommand') || ' ';
     sessionStorage.getItem('username') ? this.loginStatus = true : this.loginStatus = false;
     this.userForm = this.fb.group({
       username: new FormControl({value: this.user.username,disabled: true}),
