@@ -37,6 +37,8 @@ app-sidebar{
 
 //small display sidebar
 .sidebar{
+  display: flex;
+  justify-content: space-around;
   position: fixed;
   z-index: 1;
   top: 6.8vh;
@@ -60,4 +62,3 @@ app-sidebar{
 .btn-hover:hover{
   cursor: pointer;
 }
-

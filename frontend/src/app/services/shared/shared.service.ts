@@ -116,7 +116,7 @@ export class SharedService {
   }
 
   checkScreenSize(): void {
-    this._isSmallScreen = window.innerWidth < 1000;
+    this._isSmallScreen = window.innerWidth < 1400;
   }
 
 

@@ -1,5 +1,5 @@
 @import "src/variables";
-
+$icon-width: 3rem;
 // ----------------------------------------------------------------
 song-list-item:hover{
   background: $hover-blue-nav-color;
@@ -46,7 +46,7 @@ app-sidebar{
   width: 80vw;
   height: 100%;
   min-height: 100vh;
-  min-width: 80vh;
+  min-width: 80vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,7 +73,7 @@ app-sidebar{
   margin-top: 1rem;
 }
 .filters-inner-container{
-  width: 90%;
+  width: 100%;
   min-width: 200px;
   display: flex;
   justify-content: space-between;
@@ -107,19 +107,16 @@ mat-form-field {
   color: white;
   font-size: 1.5rem;
 }
-
-$icon-width: 3rem;
 .input-container{
   position: relative;
   width: 100%;
-  min-width: 200px;
   height: 3.5rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 .search-bar {
-  width: 90%;
+  width: 100%;
   height: 100%;
   border-radius: 0.5rem;
   outline: 0;

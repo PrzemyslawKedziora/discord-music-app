@@ -1,10 +1,4 @@
 @import "src/variables";
-
-.sidebar{
-  width: 20vw;
-  min-width: 100px;
-  margin: 0 auto;
-}
 .content-container {
   width: 70%;
   margin: 0 auto;
@@ -12,7 +6,6 @@
 
 .server-logo{
   margin: 10% 0;
-  min-height: 120px;
 }
 .server-logo-img{
   width: 100%;
@@ -28,7 +21,6 @@ ul{
   width: 100%;
 }
 li{
-  text-align: left;
   font-size: 16px;
   color: $font-color;
   width: 100%;
