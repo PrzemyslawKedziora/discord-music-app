@@ -48,5 +48,24 @@ export class PlaylistService {
     };
     axios.post(urlString,playlist,{headers});
   }
+  likePlaylist(playlist: PlaylistModel){
+    const url ='https://discord-music-app-backend.vercel.app/api/songs/'+playlist._id+'/like';
+    const accessToken = sessionStorage.getItem('token');
+    const userID = sessionStorage.getItem('id');
+    const headers = {
+      Authorization: 'Bearer ' + accessToken,
+    };
+    axios.post(url,playlist._id,{headers}).then(()=> {
+        if (playlist.likes.includes(userID)){
+          playlist.likes = playlist.likes.filter(id => id !== userID);
+          return false;
+        }
+        else {
+          playlist.likes.push(userID);
+          return true;
+        }
+      }
+    );
+  }
 
 }
