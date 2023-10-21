@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {PlaylistModel} from "../../../models/playlist.model";
+import {PlaylistService} from "../playlist.service";
 
 @Component({
   selector: 'app-playlist-card',
@@ -10,7 +11,7 @@ export class PlaylistCardComponent{
 
   @Input() playlist!:PlaylistModel;
 
-  constructor() {
+  constructor(public ps: PlaylistService) {
   }
 
   isImgValid():string{
@@ -19,8 +20,6 @@ export class PlaylistCardComponent{
     }
     else return this.playlist.pictureURL
   }
-
-
 
 
 }
