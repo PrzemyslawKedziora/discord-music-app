@@ -13,7 +13,7 @@
 }
 app-sidebar{
   background-color: $background-color;
-  width: 20vw;
+  min-width: 20vw;
   min-height: 100vh;
   text-align: center;
 }
