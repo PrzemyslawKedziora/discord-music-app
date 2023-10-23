@@ -5,16 +5,22 @@
 
       <div class="input-container">
         <input type="text" class="search-bar"
+               *ngIf="filteredCategories.length!=0"
                [placeholder]="' search by category\'s name'"
                [(ngModel)]="searchQuery"
         (input)="filterCategories()">
         <i class="bi bi-search icon"></i>
       </div>
       <div class="title">Categories</div>
+      <div *ngIf="filteredCategories.length==0" style="width: 80vw"
+           class="d-flex flex-column justify-content-center align-items-center gap-2">
+        <mat-spinner></mat-spinner>
+        <p style="color: #97A9B4;">Loading...</p>
+      </div>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="filteredCategories.length!=0">
     <div class="d-flex flex-column justify-content-center">
 
       <div class="d-flex list-item first">

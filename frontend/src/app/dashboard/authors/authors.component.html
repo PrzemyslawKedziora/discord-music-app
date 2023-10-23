@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col d-flex justify-content-center flex-column align-items-center management-panel">
 
-      <div class="input-container">
+      <div class="input-container" *ngIf="authors.length!=0">
         <input type="text" class="search-bar" [(ngModel)]="searchQuery" placeholder="search by author's name" (input)="filterNames()">
         <i class="bi bi-search icon"></i>
       </div>
@@ -21,6 +21,11 @@
       </div>
 
       <div class="title">Artists</div>
+      <div *ngIf="authors.length==0" style="width: 80vw"
+           class="d-flex flex-column justify-content-center align-items-center gap-2">
+        <mat-spinner></mat-spinner>
+        <p style="color: #97A9B4;">Loading...</p>
+      </div>
 
     </div>
   </div>

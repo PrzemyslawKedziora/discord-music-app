@@ -1,9 +1,10 @@
 <div class="main-container" [ngStyle]="sharedService.isSmallScreen ?{'width' : '90vw'} : {}">
 
+
   <div class="row">
     <div class="col d-flex justify-content-center flex-column align-items-center management-panel">
 
-      <div class="input-container">
+      <div class="input-container" *ngIf="playlists.length!=0">
         <input type="text" class="search-bar"
                [placeholder]="' search by playlist\'s name'" [(ngModel)]="searchQuery" (input)="filterNames()">
         <i class="bi bi-search icon"></i>
@@ -28,6 +29,11 @@
 
       <div class="title">Playlists</div>
 
+      <div *ngIf="playlists.length==0" style="width: 80vw"
+           class="d-flex flex-column justify-content-center align-items-center gap-2">
+        <mat-spinner></mat-spinner>
+        <p style="color: #97A9B4;">Loading...</p>
+      </div>
     </div>
   </div>
   <div class="row row-group">

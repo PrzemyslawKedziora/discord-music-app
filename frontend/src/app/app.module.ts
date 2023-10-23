@@ -41,6 +41,7 @@ import { PlaylistCardComponent } from './dashboard/playlists/playlist-card/playl
 import { AddPlaylistDialogComponent } from './dashboard/playlists/add-playlist-dialog/add-playlist-dialog.component';
 import {MatListModule} from "@angular/material/list";
 import { AddSongToPlaylistComponent } from './dashboard/playlists/add-song-to-playlist/add-song-to-playlist.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -91,7 +92,8 @@ import { AddSongToPlaylistComponent } from './dashboard/playlists/add-song-to-pl
         ClipboardModule,
         MatIconModule,
         MatRadioModule,
-        MatListModule
+        MatListModule,
+        MatProgressSpinnerModule
     ],
   providers: [],
   bootstrap: [AppComponent]
