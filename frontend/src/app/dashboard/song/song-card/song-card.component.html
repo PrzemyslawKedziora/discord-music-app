@@ -10,7 +10,7 @@
       </ng-template>
 
       <span class="author" *ngFor="let author of song.authors;last as last; first as first">
-        <span *ngIf="calcAuthorsLength(song.authors)< 20 else shortenedAuthors">
+        <span *ngIf="ss.calcAuthorsLength(song.authors)< 20 else shortenedAuthors">
           {{author.name}}{{!last ? ', ':''}}
         </span>
         <ng-template #shortenedAuthors>

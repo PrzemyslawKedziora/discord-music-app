@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {SongModel} from "../../../models/song.model";
+import {SongService} from "../song.service";
 
 @Component({
   selector: 'app-song-card',
@@ -14,16 +15,12 @@ export class SongCardComponent{
   @Input() botCommand!: string;
   @Input() isBigScreen!:boolean;
 
+  constructor(public ss: SongService) {
+  }
 
   maxTitleLength:number = 25;
   userID = sessionStorage.getItem('id');
 
 
-  calcAuthorsLength(authors: {_id:string,name:string}[]){
-    let length = 0;
-    for (let author of authors){
-        length+= author.name.length;
-    }
-    return length;
-  }
+
 }

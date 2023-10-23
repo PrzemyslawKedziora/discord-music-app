@@ -1,49 +1,91 @@
 <div mat-dialog-content class="container" *ngIf="data.dialog.songs.length>0; else emptyPlaylist">
-  <div class="row">
-    <div class="col playlist-name border-bottom text-center">
-      <p>{{data.dialog.name}}</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      {{data.dialog.authorID.username}}
-    </div>
-  </div>
-  <div class="row" *ngFor="let song of data.dialog.songs; index as index">
-    <div
-      class="d-flex align-baseline list-group-horizontal justify-content-between col-sm-5">
-      <div class="index d-flex align-items-center">{{index+1}}</div>
-      <div class="my-auto">
-        <img [src]="song.thumbnail" class="data" alt="image" style="height: 80px; width: 140px"
-             (click)="ss.openInYT(song.ytURL)"
-        >
+  <div *ngIf="!sharedService.isSmallScreen; else smallScreen">
+
+    <div class="row">
+      <div class="col">
+        {{data.dialog.authorID.username}}
       </div>
-      <div class=" my-auto song-description" (click)="ss.onClick()" [cdkCopyToClipboard]="this.botCommand +' '+ song.name">
-        <div class="song-name data">{{song.name}}</div>
-        <div class="song-author-name my-auto data">
+    </div>
+    <div class="row" *ngFor="let song of data.dialog.songs; index as index">
+      <div
+        class="d-flex align-baseline list-group-horizontal justify-content-between col-sm-5">
+        <div class="index d-flex align-items-center">{{index+1}}</div>
+        <div class="my-auto">
+          <img [src]="song.thumbnail" class="data" alt="image" style="height: 80px; width: 140px"
+               (click)="ss.openInYT(song.ytURL)"
+          >
+        </div>
+        <div class=" my-auto song-description" (click)="ss.onClick()" [cdkCopyToClipboard]="this.botCommand +' '+ song.name">
+          <div class="song-name data">{{song.name}}</div>
+          <div class="song-author-name my-auto data">
           <span *ngFor="let author of song.authors; let last = last">
             {{author.name || 'loading...'}}{{ !last ? ', ' : '' }}
           </span>
+          </div>
         </div>
-      </div>
-      <div class="song-categories my-auto">
+        <div class="song-categories my-auto">
         <span *ngFor="let category of song.categories; let last = last">
     {{ category.name || 'loading...'}}{{ !last ? ', ' : '' }}
   </span>
-      </div>
-      <div class="my-auto data like-group" (click)="ss.like(song)">
-        <i style="margin-right: 5px" class="bi bi-fire" [ngStyle]="{'color': song.likes.includes(userID) ? '#FF6C6C' : 'white' }"></i>
-        <span class="song-like-number my-auto">{{song.likes.length ? song.likes.length : 0}}</span>
-      </div>
-      <div class="my-auto data like-group" (click)="onDeleteFromPlaylist(data.dialog,index,this.song)" *ngIf="isYourPlaylist">
-        <i style="margin-right: 5px" class="bi bi-x-octagon"></i>
+        </div>
+        <div class="my-auto data like-group" (click)="ss.like(song)">
+          <i style="margin-right: 5px" class="bi bi-fire" [ngStyle]="{'color': song.likes.includes(userID) ? '#FF6C6C' : 'white' }"></i>
+          <span class="song-like-number my-auto">{{song.likes.length ? song.likes.length : 0}}</span>
+        </div>
+        <div class="my-auto data like-group" (click)="onDeleteFromPlaylist(data.dialog,index,this.song)" *ngIf="isYourPlaylist">
+          <i style="margin-right: 5px" class="bi bi-x-octagon"></i>
+        </div>
       </div>
     </div>
-</div>
-  <div class="d-flex gap-3 justify-content-center button-group">
-    <div class="btn btn-primary d-flex justify-content-center vw-10" *ngIf="isYourPlaylist" (click)="onPlaylistDelete(this.data.dialog,this.data.index)">Delete</div>
-    <div class="btn btn-primary d-flex justify-content-center vw-10" (click)="close()">Close</div>
   </div>
+
+  <ng-template #smallScreen>
+      <div class="col playlist-name border-bottom text-center">
+        <p>{{data.dialog.name}}</p>
+      </div>
+    <div class="card d-flex flex-row" *ngFor="let song of data.dialog.songs">
+
+      <img class="song-card-img" [src]="song.thumbnail" alt="{{song.name}}" style="width: 150px">
+      <div class="song-info d-flex flex-column justify-content-between">
+
+        <div class="d-flex flex-column align-content-between song-main-info">
+          <span *ngIf="song.name.length < 20; else shortenedText" class="title">{{song.name}}</span>
+          <ng-template #shortenedText>
+            <span [ngStyle]="{'color': 'white'}">{{song.name.slice(0,25)+'...'}}</span>
+          </ng-template>
+
+          <span class="author" *ngFor="let author of song.authors;last as last; first as first">
+        <span *ngIf="ss.calcAuthorsLength(song.authors)< 20 else shortenedAuthors">
+          {{author.name}}{{!last ? ', ':''}}
+        </span>
+        <ng-template #shortenedAuthors>
+          <span *ngIf="first">
+            {{song.authors[0].name+'... '}}
+          </span>
+        </ng-template>
+      </span>
+        </div>
+
+        <div class="stats d-flex justify-content-between">
+          <div class="likes">
+            <i class="bi bi-fire"
+               [ngStyle]="{'color' : song.likes.includes(userID) ? '#FF6C6C' : 'white'}"></i>
+            <span class="like-number"> {{song.likes.length}}</span>
+          </div>
+
+          <div>
+            <i class="bi bi-calendar "></i>
+            <span class="date">
+          {{song.createdAt | date: 'dd.MM.YYYY'}}
+        </span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </ng-template>
 </div>
 
 <ng-template #emptyPlaylist>
@@ -65,9 +107,9 @@
         </p>
       </div>
     </div>
-    <div class="d-flex gap-3 justify-content-center button-group">
-      <div class="btn btn-primary d-flex justify-content-center vw-10" *ngIf="isYourPlaylist" (click)="ps.deletePlaylist(this.data.dialog,this.data.index)">Delete</div>
-      <div class="btn btn-primary d-flex justify-content-center vw-10" (click)="close()">Close</div>
-    </div>
   </div>
 </ng-template>
+<div class="d-flex gap-3 justify-content-center button-group">
+  <div class="btn btn-primary d-flex justify-content-center vw-10" *ngIf="isYourPlaylist" (click)="ps.deletePlaylist(this.data.dialog,this.data.index)">Delete</div>
+  <div class="btn btn-primary d-flex justify-content-center vw-10" (click)="close()">Close</div>
+</div>

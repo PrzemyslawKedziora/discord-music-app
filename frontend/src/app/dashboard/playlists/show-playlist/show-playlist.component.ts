@@ -6,11 +6,12 @@ import {UserModel} from "../../../models/user.model";
 import {PlaylistService} from "../playlist.service";
 import {SongModel} from "../../../models/song.model";
 import axios from "axios";
+import {SharedService} from "../../../services/shared/shared.service";
 
 @Component({
   selector: 'app-show-playlist',
   templateUrl: './show-playlist.component.html',
-  styleUrls: ['../../song/song-list/song-list-item/list-item.component.scss']
+  styleUrls: ['../../song/song-list/song-list-item/list-item.component.scss', '../../song/song-card/song-card.component.scss']
 })
 export class ShowPlaylistComponent{
 
@@ -23,7 +24,8 @@ export class ShowPlaylistComponent{
   constructor(@Inject(MAT_DIALOG_DATA) public data: {dialog: PlaylistModel,index:number,song:SongModel},
               private dialogRef: MatDialogRef<ShowPlaylistComponent>,
               public ss:SongService,
-              public ps: PlaylistService) {
+              public ps: PlaylistService,
+              public sharedService: SharedService) {
     let loggedUser!:UserModel;
     this.botCommand = localStorage.getItem('botCommand') || '';
     if (sessionStorage.getItem('user')){

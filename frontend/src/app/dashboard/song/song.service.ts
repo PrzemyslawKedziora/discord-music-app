@@ -72,6 +72,12 @@ export class SongService {
     return song.likes.includes(userID || '');
   }
 
-
+  calcAuthorsLength(authors: {_id:string,name:string}[]){
+    let length = 0;
+    for (let author of authors){
+      length+= author.name.length;
+    }
+    return length;
+  }
 
 }

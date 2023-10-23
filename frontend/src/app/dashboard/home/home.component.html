@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="row">
-        <div *ngFor="let sortedSong of songsSortedByDate" class="col col-md-12 col-xl-4">
+        <div *ngFor="let sortedSong of songsSortedByDate" class="col col-lg-6 col-xl-4">
           <app-song-card [song]="sortedSong" [cdkCopyToClipboard]="'!play '+sortedSong.name" (click)="ss.onClick()"></app-song-card>
         </div>
       </div>
