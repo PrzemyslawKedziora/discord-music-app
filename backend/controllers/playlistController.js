@@ -250,7 +250,7 @@ const removeSongFromPlaylist = asyncHandler(async(req, res) => {
   playlist.songs = playlist.songs.filter(el => el != songID);
   const saved = await playlist.save();
 
-  res.status(200).json({message: "Successfully deletef song from this playlist"})
+  res.status(200).json({message: "Successfully deleted song from playlist"})
 }); 
 
 module.exports = {
