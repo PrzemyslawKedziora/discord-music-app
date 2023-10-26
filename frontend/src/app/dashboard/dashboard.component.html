@@ -1,6 +1,5 @@
 <div class="cont1">
      <app-sidebar *ngIf="!sharedService.isSmallScreen; else smallSidebar"></app-sidebar>
-
   <div>
     <ng-template #smallSidebar>
       <span class="btn-hover" [ngStyle]="isHidden ? {'background-color': '2B2D31'}: {}">
@@ -22,7 +21,7 @@
         <button class="btn btn-danger" (click)="user.logOut()">Log Out</button>
       </ng-template>
     </div>
-    <div  class=" login-bar d-flex" *ngIf="!isHidden" style="height: 38px; color: #2B2D31">Log In</div>
+    <div class="l1 login-bar d-flex" *ngIf="!isHidden" style="height: 38px; color: #313338">Log In</div>
     <router-outlet></router-outlet>
   </div>
 
