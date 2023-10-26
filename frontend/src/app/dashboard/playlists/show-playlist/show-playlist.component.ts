@@ -7,6 +7,7 @@ import {PlaylistService} from "../playlist.service";
 import {SongModel} from "../../../models/song.model";
 import axios from "axios";
 import {SharedService} from "../../../services/shared/shared.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-show-playlist',
@@ -25,7 +26,8 @@ export class ShowPlaylistComponent{
               private dialogRef: MatDialogRef<ShowPlaylistComponent>,
               public ss:SongService,
               public ps: PlaylistService,
-              public sharedService: SharedService) {
+              public sharedService: SharedService,
+              private sb: MatSnackBar) {
     let loggedUser!:UserModel;
     this.botCommand = localStorage.getItem('botCommand') || '';
     if (sessionStorage.getItem('user')){
@@ -51,6 +53,10 @@ export class ShowPlaylistComponent{
     axios.post(url,{songID: song._id},{headers}).then(()=>{
       this.data.dialog.songs.splice(index,1);
       this.isPlaylistChanged = true;
+      this.sb.open('Song has been successfully removed from playlist!','',{
+        duration: 2000,
+        panelClass: ['success-snackBar']
+      })
       console.log('usunieto');
     })
   }

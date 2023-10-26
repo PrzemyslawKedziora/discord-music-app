@@ -1,6 +1,10 @@
 <div mat-dialog-content class="container" *ngIf="data.dialog.songs.length>0; else emptyPlaylist">
   <div *ngIf="!sharedService.isSmallScreen; else smallScreen">
-
+    <div class="row">
+      <div class="col playlist-name border-bottom text-center">
+        <p>{{data.dialog.name}}</p>
+      </div>
+    </div>
     <div class="row">
       <div class="col">
         {{data.dialog.authorID.username}}
@@ -45,7 +49,7 @@
       </div>
     <div class="card d-flex flex-row" *ngFor="let song of data.dialog.songs">
 
-      <img class="song-card-img card-in-playlist" [src]="song.thumbnail" alt="{{song.name}}">
+      <img class="song-card-img" [src]="song.thumbnail" alt="{{song.name}}">
       <div class="song-info d-flex flex-column justify-content-between">
 
         <div class="d-flex flex-column align-content-between song-main-info">
