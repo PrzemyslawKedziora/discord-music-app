@@ -33,7 +33,6 @@ export class HomeComponent implements OnInit {
               private as: AuthorService) {
     sessionStorage.getItem('username') ? this.isLoggedIn = true : this.isLoggedIn = false;
 
-    if (this.songs.length == 0) {
       ss.getSongs().then(()=> {
         this.songs = ss.songs;
         this.songsSortedByDate = ss.songs
@@ -48,7 +47,6 @@ export class HomeComponent implements OnInit {
         this.dialogData.category = cs.categories;
 
       })
-    }
   }
 
   ngOnInit(): void {

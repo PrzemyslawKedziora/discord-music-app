@@ -26,7 +26,6 @@ export class NewSongComponent{
   ) {
     this.songData=this.sharedService.sharedSongsArray;
     this.artists = this.sharedService.sharedArtistsArray;
-    console.log(data.category)
   }
 
   newSongForm = this.fb.group({
@@ -66,7 +65,6 @@ export class NewSongComponent{
               duration: duration,
               panelClass: ['success-snackBar']
             });
-            console.log('Song has been succesfully added!\n', res);
           }).catch((e) => {
           handleError(e)
         });

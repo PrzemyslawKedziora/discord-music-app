@@ -26,8 +26,9 @@ export class DeleteAuthorDialogComponent {
     const headers = {
       Authorization: 'Bearer ' + accessToken,
     };
-    this.data.authors.splice(this.data.index,1);
+
      axios.delete(this.apiUrl, {headers}).then(()=> {
+       this.data.authors.splice(this.data.index,1);
        this.sb.open('Artist has been succesfully removed.','', {
            duration: 3000,
            panelClass: ['success-snackBar']

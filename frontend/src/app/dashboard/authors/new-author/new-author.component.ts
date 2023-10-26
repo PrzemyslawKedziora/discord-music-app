@@ -30,7 +30,7 @@ export class NewAuthorComponent{
   });
 
   addAuthorStatus!: boolean;
-  authors: AuthorModel[] =[];
+  authors: AuthorModel[] = this.sharedService.sharedArtistsArray;
 
   addAuthor(){
     let duration:number=3000; //3sec
@@ -43,7 +43,6 @@ export class NewAuthorComponent{
         axios.post(this.apiUrl, this.authorForm.value, {headers})
           .then((res) => {
             const newAuthor = new AuthorRecord(res.data._id,res.data.name, res.data.pictureURL, res.data.userID);
-            console.log(newAuthor)
             this.authors.push(newAuthor);
             this.sharedService.addNewAuthor(newAuthor);
             this.sb.open('Author has been successfully added!', '', {
