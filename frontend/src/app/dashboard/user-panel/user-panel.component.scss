@@ -43,3 +43,6 @@ mat-form-field{
     max-width: 150px;
   }
 }
+input:disabled:hover{
+  cursor: not-allowed;
+ }

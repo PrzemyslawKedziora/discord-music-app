@@ -10,12 +10,12 @@
         <i class="bi bi-search icon"></i>
       </div>
 
-      <div class="input-container" *ngIf="loginStatus">
+      <div class="input-container" *ngIf="loginStatus && playlists.length!=0">
         <input type="checkbox" id="show-owned" (click)="filterPlaylists('owned')">
         <label for="show-owned">Show only playlists added by you</label>
       </div>
 
-      <div class="input-container" *ngIf="loginStatus">
+      <div class="input-container" *ngIf="loginStatus && playlists.length!=0">
         <input type="checkbox" id="show-liked" (click)="filterPlaylists('liked')">
         <label for="show-liked">Show only liked playlists</label>
       </div>
@@ -37,7 +37,7 @@
     </div>
   </div>
   <div class="row row-group">
-    <div class="col-lg-4" *ngFor="let playlist of playlistsTemp; index as index">
+    <div class="col-xl-4 col-lg-6" *ngFor="let playlist of playlistsTemp; index as index">
       <app-playlist-card [playlist]="playlist" (click)="showPlaylist(playlist,index)"></app-playlist-card>
     </div>
   </div>

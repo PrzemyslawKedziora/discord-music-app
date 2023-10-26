@@ -45,7 +45,7 @@
       </div>
     <div class="card d-flex flex-row" *ngFor="let song of data.dialog.songs">
 
-      <img class="song-card-img" [src]="song.thumbnail" alt="{{song.name}}" style="width: 150px">
+      <img class="song-card-img card-in-playlist" [src]="song.thumbnail" alt="{{song.name}}">
       <div class="song-info d-flex flex-column justify-content-between">
 
         <div class="d-flex flex-column align-content-between song-main-info">
@@ -110,6 +110,6 @@
   </div>
 </ng-template>
 <div class="d-flex gap-3 justify-content-center button-group">
-  <div class="btn btn-primary d-flex justify-content-center vw-10" *ngIf="isYourPlaylist" (click)="ps.deletePlaylist(this.data.dialog,this.data.index)">Delete</div>
-  <div class="btn btn-primary d-flex justify-content-center vw-10" (click)="close()">Close</div>
+  <button mat-raised-button color="primary" class="btn d-flex justify-content-center vw-10" *ngIf="isYourPlaylist" (click)="ps.deletePlaylist(this.data.dialog,this.data.index)">Delete</button>
+  <button mat-raised-button class="btn  d-flex justify-content-center vw-10" (click)="close()">Close</button>
 </div>

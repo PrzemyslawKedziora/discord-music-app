@@ -8,7 +8,7 @@
         <i class="bi bi-search icon"></i>
       </div>
 
-      <div class="input-container" *ngIf="loginStatus">
+      <div class="input-container" *ngIf="loginStatus && authors.length!=0">
         <input type="checkbox" id="show-owned" (click)="filterArtists('owned')">
         <label for="show-owned">Show only artists added by you</label>
       </div>

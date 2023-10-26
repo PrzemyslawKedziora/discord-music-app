@@ -9,7 +9,7 @@
         >
         <i class="bi bi-search icon"></i>
       </div>
-      <div class="filters-container" *ngIf="isBigScreen">
+      <div class="filters-container" *ngIf="isBigScreen && songs.length!=0">
         <div class="filters-inner-container">
 
           <mat-form-field color="primary">
@@ -30,12 +30,12 @@
       </div>
     </div>
 
-      <div class="input-container" *ngIf="isLoggedIn">
+      <div class="input-container" *ngIf="isLoggedIn && songs.length!=0">
         <input type="checkbox" id="show-owned" (click)="filterSongs('owned')">
         <label for="show-owned">Show only songs added by you</label>
       </div>
 
-      <div class="input-container" *ngIf="isLoggedIn">
+      <div class="input-container" *ngIf="isLoggedIn && songs.length!=0">
         <input type="checkbox" id="show-liked" (click)="filterSongs('liked')">
         <label for="show-liked">Show only liked songs</label>
       </div>

@@ -21,7 +21,6 @@
           <mat-label>Author</mat-label>
           <mat-select formControlName="authors" multiple>
             <mat-option *ngFor="let author of  artists" [value]="author"><p>{{author.name}}</p>
-<!--              <img [src]="author.pictureURL" *ngIf="author.pictureURL" style="height: 100px" alt="author's img">-->
             </mat-option>
           </mat-select>
           <mat-error *ngIf="newSongForm.get('authors')?.hasError('required')">Choose your author</mat-error>

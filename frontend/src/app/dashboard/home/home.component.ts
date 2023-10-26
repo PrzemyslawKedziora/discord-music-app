@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   dialogData: AddDialogModel={category:[],author:[]};
 
   constructor(public ss: SongService,
-              private sharedService : SharedService,
+              public sharedService : SharedService,
               public userService: UserService,
               private dialog: MatDialog,
               private cs: CategoryService,
