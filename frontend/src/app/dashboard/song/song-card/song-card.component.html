@@ -1,14 +1,11 @@
 <div class="card d-flex flex-row" [ngClass]="{'card-on-small' : !isBigScreen}" [cdkCopyToClipboard]="this.botCommand+' '+song.name" (click)="ss.onClick()">
-
   <img class="song-card-img" [src]="song.thumbnail" alt="{{song.name}}">
   <div class="song-info d-flex flex-column justify-content-between">
-
     <div class="d-flex flex-column align-content-between song-main-info">
       <span *ngIf="song.name.length < maxTitleLength; else shortenedText" class="title">{{song.name}}</span>
       <ng-template #shortenedText>
-        <span [ngStyle]="{'color': 'white'}">{{song.name.slice(0,25)+'...'}}</span>
+        <span [ngStyle]="{'color': 'white'}">{{song.name.slice(0,30)+'...'}}</span>
       </ng-template>
-
       <span class="author" *ngFor="let author of song.authors;last as last; first as first">
         <span *ngIf="ss.calcAuthorsLength(song.authors)< 20 else shortenedAuthors">
           {{author.name}}{{!last ? ', ':''}}
@@ -20,22 +17,18 @@
         </ng-template>
       </span>
     </div>
-
     <div class="stats d-flex justify-content-between">
       <div class="likes">
         <i class="bi bi-fire"
         [ngStyle]="{'color' : song.likes.includes(userID) ? '#FF6C6C' : 'white'}"></i>
         <span class="like-number"> {{song.likes.length}}</span>
       </div>
-
       <div>
         <i class="bi bi-calendar "></i>
         <span class="date">
           {{song.createdAt | date: 'dd.MM.YYYY'}}
         </span>
       </div>
-
     </div>
-
   </div>
 </div>
