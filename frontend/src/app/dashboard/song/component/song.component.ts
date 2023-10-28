@@ -140,7 +140,7 @@ export class SongComponent {
       this.songsTemp = this.songs;
     } else {
       this.songsTemp = this.songs.filter((song) =>
-        this.selectedAuthors.some((author) =>
+        this.selectedAuthors.every((author) =>
           song.authors.some((songAuthor) => songAuthor._id === author._id)
         )
       );
@@ -152,7 +152,7 @@ export class SongComponent {
       this.songsTemp = this.songs;
     } else {
       this.songsTemp = this.songs.filter((song) =>
-        this.selectedCategories.some((category) =>
+        this.selectedCategories.every((category) =>
           song.categories.some((cat) => cat._id === category._id)
         )
       );

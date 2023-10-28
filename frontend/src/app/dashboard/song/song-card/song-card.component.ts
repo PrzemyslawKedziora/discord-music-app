@@ -12,14 +12,19 @@ export class SongCardComponent{
   @Input() song!: SongModel;
   @Input() songData!: SongModel[];
   @Input() songIndex!: number;
-  @Input() botCommand!: string;
   @Input() isBigScreen!:boolean;
+  maxTitleLength:number = 25;
+  userID = sessionStorage.getItem('id');
+  botCommand!:string;
 
   constructor(public ss: SongService) {
   }
 
-  maxTitleLength:number = 25;
-  userID = sessionStorage.getItem('id');
+  ngOnInit(){
+   this.botCommand = localStorage.getItem('botCommand') || '';
+  }
+
+
 
 
 
