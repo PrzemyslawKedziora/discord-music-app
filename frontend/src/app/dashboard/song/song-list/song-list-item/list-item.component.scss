@@ -1,7 +1,4 @@
 @import "../../../../../variables";
-.container{
-  color: $main-clay-color;
-}
 .list-group-horizontal{
   width: 80vw;
   height: 10vh;
@@ -9,8 +6,12 @@
 .list-group-horizontal:hover{
   color: whitesmoke;
 }
-.my-auto{
-  max-width: 400px;
+.row{
+  color: $main-clay-color;
+}
+.row:hover{
+  background: $hover-blue-nav-color;
+  border-radius: 25px;
 }
 .song-description {
   width: 20vw;
@@ -40,7 +41,6 @@
   color: #FF6C6C;
 }
 .action-first{
-  //width: 8vw;
   display: flex;
   align-items: center;
 }

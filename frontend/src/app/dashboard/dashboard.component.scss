@@ -65,3 +65,9 @@ app-sidebar{
 .l1:hover{
   cursor: default;
 }
+@media screen and (width>1920px){
+ app-sidebar{
+   min-width: 15vw;
+ }
+}
+

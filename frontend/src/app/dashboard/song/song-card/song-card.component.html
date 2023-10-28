@@ -1,4 +1,4 @@
-<div class="card d-flex flex-row" [ngClass]="{'card-on-small' : !isBigScreen}">
+<div class="card d-flex flex-row" [ngClass]="{'card-on-small' : !isBigScreen}" [cdkCopyToClipboard]="this.botCommand+' '+song.name" (click)="ss.onClick()">
 
   <img class="song-card-img" [src]="song.thumbnail" alt="{{song.name}}">
   <div class="song-info d-flex flex-column justify-content-between">

@@ -6,7 +6,7 @@ $text-size: 0.9rem;
   padding: 1rem;
   margin: 1vh 10px;
   background-color: $background-color;
-  //aspect-ratio: 18/9;
+  color: $main-clay-color;
 }
 .song-card-img{
   border-radius: 0.5rem;
@@ -19,10 +19,6 @@ $text-size: 0.9rem;
 .song-info {
   padding: 0 10px;
   width: 100%;
-}
-.title {
-  color: white;
-  font-size: $text-size;
 }
 .author {
   font-size: 0.9 * $text-size;

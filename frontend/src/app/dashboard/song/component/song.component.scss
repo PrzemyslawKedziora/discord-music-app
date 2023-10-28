@@ -1,12 +1,12 @@
 @import "src/variables";
 $icon-width: 3rem;
-// ----------------------------------------------------------------
 song-list-item:hover{
   background: $hover-blue-nav-color;
   border-radius: 25px;
 }
 .number{
   width: 25px;
+  margin-left: 0.8rem;
 }
 .thumbnail{
   width: 140px;
@@ -35,13 +35,14 @@ app-sidebar{
 .cont1{
   background: $background-main-color;
 }
-.description-list:first-child, .description-list:last-child{
+.description-list{
   display: flex;
   justify-content: space-between;
   margin: 0 10px;
 }
-// =============================================================
-
+.description-list:last-child, .description-list:first-child{
+  margin-right: 2rem;
+}
 .main-container {
   width: 80vw;
   height: 100%;
@@ -67,6 +68,8 @@ app-sidebar{
   text-align: left;
   color: $font-color;
   margin: 1.5rem 0;
+  position: relative;
+  right: 15px;
 }
 .filters-container{
   width: 100%;
@@ -78,13 +81,13 @@ app-sidebar{
   display: flex;
   justify-content: space-between;
 }
-
+.rbb{
+  margin: 1vh 0;
+}
 mat-form-field {
   width: 45%;
   color: $font-color;
 }
-
-// Add button
 .add-button {
   height: 100%;
   width: 25rem;
@@ -92,7 +95,9 @@ mat-form-field {
   font-size: 1.3rem;
   color: white;
   padding: 0 2rem;
-  text-align: center
+  text-align: center;
+  position: relative;
+  right: 15px;
 }
 .add-button:hover  {
   cursor: pointer;
