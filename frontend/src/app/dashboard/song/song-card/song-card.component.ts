@@ -24,6 +24,15 @@ export class SongCardComponent{
    this.botCommand = localStorage.getItem('botCommand') || '';
   }
 
+  onDoubleClick(event: MouseEvent){
+
+    if (this.ss.doubleClickTimeout !== null) {
+      clearTimeout(this.ss.doubleClickTimeout);
+      this.ss.doubleClickTimeout = null;
+      this.ss.like(this.song);
+    }
+  }
+
 
 
 

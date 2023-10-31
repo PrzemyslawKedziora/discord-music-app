@@ -1,4 +1,5 @@
-<div class="card d-flex flex-row" [ngClass]="{'card-on-small' : !isBigScreen}" [cdkCopyToClipboard]="this.botCommand+' '+song.name" (click)="ss.onClick()">
+<div class="card d-flex flex-row" [ngClass]="{'card-on-small' : !isBigScreen}"
+     [cdkCopyToClipboard]="this.botCommand+' '+song.name" (click)="ss.onClick($event)" (dblclick)="onDoubleClick($event)">
   <img class="song-card-img" [src]="song.thumbnail" alt="{{song.name}}">
   <div class="song-info d-flex flex-column justify-content-between">
     <div class="d-flex flex-column align-content-between song-main-info">

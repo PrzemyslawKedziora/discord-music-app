@@ -19,7 +19,7 @@
                (click)="ss.openInYT(song.ytURL)"
           >
         </div>
-        <div class=" my-auto song-description" (click)="ss.onClick()" [cdkCopyToClipboard]="this.botCommand +' '+ song.name">
+        <div class=" my-auto song-description" (click)="ss.onClick($event)" [cdkCopyToClipboard]="this.botCommand +' '+ song.name">
           <div class="song-name data">{{song.name}}</div>
           <div class="song-author-name my-auto data">
           <span *ngFor="let author of song.authors; let last = last">

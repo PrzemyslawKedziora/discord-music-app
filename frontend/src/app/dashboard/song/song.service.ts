@@ -21,6 +21,7 @@ export class SongService {
   songsTemp: SongModel[]=[];
   dialogData: AddDialogModel={category:[],author:[]};
   isLiked!:boolean;
+  doubleClickTimeout: any;
 
   getSongs(): Promise<void>{
     return axios.get('https://discord-music-app-backend.vercel.app/api/songs/all').then((response) => {
@@ -35,11 +36,17 @@ export class SongService {
     });
 
   }
-  onClick(){
-    this.sb.open('Song has been successfully copied to clipboard.','',{
-      duration: 2000,
-      panelClass: ['success-snackBar']
-    });
+  onClick(event: MouseEvent){
+    if (this.doubleClickTimeout == null) {
+      this.doubleClickTimeout = setTimeout(() => {
+        this.sb.open('Song has been successfully copied to clipboard.','',{
+          duration: 2000,
+          panelClass: ['success-snackBar']
+        });
+        clearTimeout(this.doubleClickTimeout);
+        this.doubleClickTimeout = null;
+      }, 200);
+    }
   }
 
   like(song: SongModel) {

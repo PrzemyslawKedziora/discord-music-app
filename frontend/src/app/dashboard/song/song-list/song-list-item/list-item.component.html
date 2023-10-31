@@ -6,7 +6,7 @@
         <img [src]="songRecord.thumbnail" class="data" alt="image" style="height: 80px; width: 140px"
         (click)="ss.openInYT(songRecord.ytURL)">
       </div>
-      <div class=" my-auto song-description" (click)="ss.onClick()" [cdkCopyToClipboard]="this.botCommand +' '+ songRecord.name">
+      <div class=" my-auto song-description" (click)="ss.onClick($event)" [cdkCopyToClipboard]="this.botCommand +' '+ songRecord.name">
         <div class="song-name data">{{songRecord.name}}</div>
         <div class="song-author-name my-auto data">
           <span *ngFor="let author of songRecord.authors; let last = last">
