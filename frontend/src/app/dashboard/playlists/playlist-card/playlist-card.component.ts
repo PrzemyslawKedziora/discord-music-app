@@ -15,7 +15,7 @@ export class PlaylistCardComponent{
   }
 
   isImgValid():string{
-    if (!(this.playlist.pictureURL)){
+    if (!(this.playlist.pictureURL) || !(this.playlist.pictureURL.startsWith('http'))){
       return this.playlist.pictureURL = '../../../assets/unknown.png'
     }
     else return this.playlist.pictureURL

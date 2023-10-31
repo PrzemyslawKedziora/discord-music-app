@@ -25,7 +25,7 @@ export class ShowPlaylistComponent{
   constructor(@Inject(MAT_DIALOG_DATA) public data: {dialog: PlaylistModel,index:number,song:SongModel},
               private dialogRef: MatDialogRef<ShowPlaylistComponent>,
               public ss:SongService,
-              public ps: PlaylistService,
+              private ps: PlaylistService,
               public sharedService: SharedService,
               private sb: MatSnackBar) {
     let loggedUser!:UserModel;
@@ -61,7 +61,10 @@ export class ShowPlaylistComponent{
   }
 
   onPlaylistDelete(playlist: PlaylistModel,index:number){
-    this.ps.deletePlaylist(playlist,index)
+    this.ps.deletePlaylist(playlist,index);
+    setTimeout(()=>{
+      this.dialogRef.close();
+    },1000);
   }
 
 }

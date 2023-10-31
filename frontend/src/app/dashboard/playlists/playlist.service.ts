@@ -31,7 +31,7 @@ export class PlaylistService {
      this.sb.open('Song has been succesfully removed','',{
        duration:2000,
        panelClass: ['success-snackBar']
-     })
+     });
    }).catch((e) => {
      this.sb.open(e || 'blad','',{
        duration: 2000,
