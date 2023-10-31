@@ -29,6 +29,7 @@
 }
 
 .pepeband-gif{
+  animation: slide-up 1.4s ease-out forwards;
   height: 25%;
 }
 
@@ -99,6 +100,15 @@
   position: fixed;
   bottom: 0;
   left: 0;
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(300%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 @media screen and (max-width: 766px) {
   .btn{
