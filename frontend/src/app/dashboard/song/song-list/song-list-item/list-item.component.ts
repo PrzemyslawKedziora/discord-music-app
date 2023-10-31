@@ -18,10 +18,10 @@ export class ListItemComponent implements OnInit {
   @Input() songRecord!: SongModel;
   @Input() songIndex!: number;
   @Input('botCommand') botCommand!: string;
+  expanded:boolean=false;
   isLiked!: boolean;
   isLoggedIn!: boolean;
   user?: any;
-  expanded=false;
 
   constructor(public sc: SongComponent,
               private sb: MatSnackBar,

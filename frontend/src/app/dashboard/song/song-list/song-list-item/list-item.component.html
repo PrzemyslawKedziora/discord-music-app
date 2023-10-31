@@ -1,4 +1,4 @@
-<div class="row r1" *ngIf="songData">
+<div class="row r1" *ngIf="songData" (mouseleave)="expanded=false">
     <div
     class="d-flex align-baseline list-group-horizontal justify-content-between col-sm-5">
       <div class="index d-flex align-items-center">{{songIndex+1}}</div>
