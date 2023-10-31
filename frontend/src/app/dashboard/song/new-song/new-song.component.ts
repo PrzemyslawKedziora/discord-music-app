@@ -16,7 +16,18 @@ import {AuthorModel} from "../../../models/author.model";
 export class NewSongComponent{
 
   private apiUrl = 'https://discord-music-app-backend.vercel.app/api/songs/add';
+  addSongStatus!: boolean;
+  songData!: SongModel[];
+  artists!: AuthorModel[];
+  newSongForm = this.fb.group({
+    ytURL: ['', Validators.required],
+    authors: [[], Validators.required],
+    categories: [[], Validators.required],
+    userID: sessionStorage.getItem('userID'), //temp
+    createdAt: (new Date).toISOString(),
+    updatedAt: (new Date).toISOString()
 
+  });
   constructor(public dialogRef: MatDialogRef<NewSongComponent>,
               private fb: FormBuilder,
               private sb: MatSnackBar,
@@ -28,18 +39,7 @@ export class NewSongComponent{
     this.artists = this.sharedService.sharedArtistsArray;
   }
 
-  newSongForm = this.fb.group({
-    ytURL: ['', Validators.required],
-    authors: [[], Validators.required],
-    categories: [[], Validators.required],
-    userID: sessionStorage.getItem('userID'), //temp
-    createdAt: (new Date).toISOString(),
-    updatedAt: (new Date).toISOString()
 
-  });
-  addSongStatus!: boolean;
-  songData!: SongModel[];
-  artists!: AuthorModel[];
   getCategoryNameById(categoryId: string): string {
     const category = this.data.category.find(cat => cat._id === categoryId);
     return category ? category.name : 'none';

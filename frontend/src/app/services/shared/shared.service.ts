@@ -9,8 +9,6 @@ import {UserModel} from "../../models/user.model";
 })
 export class SharedService {
 
-  constructor() { }
-
   private _sharedAddingSongStatus!: boolean;
   private _isLoggedInStatus!:boolean;
   private _sharedAddingAuthorStatus!: boolean;

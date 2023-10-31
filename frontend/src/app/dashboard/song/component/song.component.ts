@@ -26,7 +26,7 @@ export class SongComponent {
   isLoggedIn!: boolean;
   authorID!: string;
   catID!: string;
-  author: AuthorModel | undefined;
+  author!: AuthorModel;
   botCommand:string='';
   isLiked!:boolean;
   searchQuery!:string;

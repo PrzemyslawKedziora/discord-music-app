@@ -11,12 +11,9 @@ import {DeleteAuthorDialogComponent} from "../delete-author-dialog/delete-author
 })
 export class AuthorCardComponent {
 
-
-
   constructor(private router : Router,
               public dialog: MatDialog) {
     sessionStorage.getItem('user') ? this.loginStatus = true : this.loginStatus = false;
-
   }
 
   @Input() author!: AuthorModel;

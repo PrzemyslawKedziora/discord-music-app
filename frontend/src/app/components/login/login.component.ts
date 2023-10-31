@@ -13,6 +13,9 @@ import {UserModel} from "../../models/user.model";
 })
 export class LoginComponent {
 
+  isSubmitted = false;
+  isLoggedIn = false;
+
   constructor(private fb: FormBuilder,
               private sharedService: SharedService,
               private sb: MatSnackBar,
@@ -24,9 +27,6 @@ export class LoginComponent {
     email: ['',Validators.required],
     password: ['',Validators.required]
   });
-
-  isSubmitted = false;
-  isLoggedIn = false;
 
   onSubmit(): void {
     if (!this.loginForm.invalid) this.isSubmitted=true;
@@ -60,8 +60,6 @@ export class LoginComponent {
           });
         }).catch((e)=> {
           handleError(e);
-
-
       });
       let handleError = (error: any): void => {
         this.isLoggedIn = false;

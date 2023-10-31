@@ -8,16 +8,15 @@ import {OnInit, Component, ElementRef, ViewChild} from '@angular/core';
 export class LandingPageComponent implements OnInit{
   @ViewChild('imageElement') animationElement!: ElementRef;
   isImageVisible:boolean = false;
-
   pepeBandGif: string = './assets/peepoband.gif';
   pepeBandJpeg: string = './assets/peepoband-s.gif';
-
   nyanCatSRC: string = './assets/nyan-cat.gif';
   pepeJamSRC: string = './assets/pepe-pepejam.gif';
   pepeBandSRC: string = this.pepeBandJpeg;
   backgroundImageSRC: string = './assets/main-background.jpeg';
   isPlaying:boolean=false;
   nyanCatAudio = new Audio('./assets/NyanCatSound.mp3');
+
   playNyanCat() {
     this.isPlaying = !this.isPlaying;
     if (this.isPlaying){

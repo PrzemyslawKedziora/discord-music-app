@@ -8,10 +8,10 @@ import {SharedService} from "../../services/shared/shared.service";
 })
 export class SidebarComponent{
 
+  @Output() sideBarEvent = new EventEmitter<boolean>;
   loginStatus:boolean=false;
   windowWidth!:number;
   isVisible=false;
-  @Output() sideBarEvent = new EventEmitter<boolean>;
   constructor(public sharedService: SharedService) {
     sessionStorage.getItem('user') ? this.loginStatus = true : this.loginStatus = false;
   }

@@ -36,7 +36,4 @@ export class DashboardComponent{
   changeVisibility(){
     this.isHidden = !this.isHidden;
   }
-  tempFun(){
-
-  }
 }

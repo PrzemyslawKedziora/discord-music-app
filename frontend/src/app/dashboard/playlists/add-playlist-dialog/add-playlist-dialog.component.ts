@@ -13,22 +13,19 @@ import {PlaylistService} from "../playlist.service";
 })
 export class AddPlaylistDialogComponent {
 
-  constructor(private dialogRef: MatDialogRef<AddPlaylistDialogComponent>,
-              private fb: FormBuilder,
-              private sb: MatSnackBar,
-              private ps: PlaylistService,
-              @Inject(MAT_DIALOG_DATA) public data: PlaylistModel) {
-    console.log('pierwotnie',this.playlists)
-  }
-
   playlistForm = this.fb.group({
     _id: '',
     name: ['',Validators.required],
     songs: [[]],
     pictureURL: [''],
   });
-
   playlists:PlaylistModel[]=[];
+  constructor(private dialogRef: MatDialogRef<AddPlaylistDialogComponent>,
+              private fb: FormBuilder,
+              private sb: MatSnackBar,
+              private ps: PlaylistService,
+              @Inject(MAT_DIALOG_DATA) public data: PlaylistModel) {
+  }
 
   createPlaylist(){
     const apiURL = 'https://discord-music-app-backend.vercel.app/api/playlists/add';
@@ -56,8 +53,6 @@ export class AddPlaylistDialogComponent {
             duration: 3000,
             panelClass: ['success-snackBar']
           });
-
-          console.log(res);
         } catch (e: any) {
           const errorMessage = e.response.data.message || 'The URL has wrong format';
           console.log(errorMessage);

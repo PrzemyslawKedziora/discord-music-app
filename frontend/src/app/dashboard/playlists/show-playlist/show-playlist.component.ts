@@ -57,7 +57,6 @@ export class ShowPlaylistComponent{
         duration: 2000,
         panelClass: ['success-snackBar']
       })
-      console.log('usunieto');
     })
   }
 

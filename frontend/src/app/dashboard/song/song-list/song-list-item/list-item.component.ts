@@ -18,18 +18,16 @@ export class ListItemComponent implements OnInit {
   @Input() songRecord!: SongModel;
   @Input() songIndex!: number;
   @Input('botCommand') botCommand!: string;
+  isLiked!: boolean;
+  isLoggedIn!: boolean;
+  user?: any;
+  expanded=false;
 
   constructor(public sc: SongComponent,
               private sb: MatSnackBar,
               private dialog: MatDialog,
               public ss: SongService) {
-
   }
-
-  isLiked!: boolean;
-  isLoggedIn!: boolean;
-  user?: any;
-  expanded=false;
 
   ngOnInit(): void {
     sessionStorage.getItem('user') ? this.isLoggedIn=true : this.isLoggedIn=false;

@@ -13,7 +13,6 @@ import {AuthorModel, AuthorRecord} from "../../../models/author.model";
 })
 export class NewAuthorComponent{
 
-  private apiUrl = 'https://discord-music-app-backend.vercel.app/api/authors/add';
 
   constructor(public dialogRef: MatDialogRef<NewAuthorComponent>,
               private fb: FormBuilder,
@@ -22,15 +21,15 @@ export class NewAuthorComponent{
               @Inject(MAT_DIALOG_DATA) public data: AuthorModel) {
   }
 
+  addAuthorStatus!: boolean;
+  authors: AuthorModel[] = this.sharedService.sharedArtistsArray;
+  private apiUrl = 'https://discord-music-app-backend.vercel.app/api/authors/add';
 
   authorForm = this.fb.group({
     name: ['', Validators.required],
     pictureURL: '',
     userID: sessionStorage.getItem('id')
   });
-
-  addAuthorStatus!: boolean;
-  authors: AuthorModel[] = this.sharedService.sharedArtistsArray;
 
   addAuthor(){
     let duration:number=3000; //3sec
@@ -51,8 +50,6 @@ export class NewAuthorComponent{
             });
             this.addAuthorStatus = true;
             this.sharedService.sharedAddingAuthorStatus = this.addAuthorStatus;
-
-            console.log('Author has been succesfully added!\n', res);
           }).catch((e) => {
           handleError(e)
         });
