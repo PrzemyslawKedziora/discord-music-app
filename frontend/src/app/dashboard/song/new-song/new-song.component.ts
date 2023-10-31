@@ -39,7 +39,6 @@ export class NewSongComponent{
     this.artists = this.sharedService.sharedArtistsArray;
   }
 
-
   getCategoryNameById(categoryId: string): string {
     const category = this.data.category.find(cat => cat._id === categoryId);
     return category ? category.name : 'none';
@@ -59,12 +58,13 @@ export class NewSongComponent{
           .then((res) => {
             this.addSongStatus = true;
             this.sharedService.sharedAddingSongStatus = this.addSongStatus;
-            this.songData.push(new SongRecord(res.data._id,res.data.authors,res.data.thumbnail,res.data.categories,
+            this.sharedService.sharedSongsArray.push(new SongRecord(res.data._id,res.data.authors,res.data.thumbnail,res.data.categories,
               res.data.likes,res.data.name,res.data.userID,res.data.ytURL,res.data.createdAt))
             this.sb.open('Song has been succesfully added!','', {
               duration: duration,
               panelClass: ['success-snackBar']
             });
+            this.newSongForm.reset();
           }).catch((e) => {
           handleError(e)
         });
