@@ -72,6 +72,13 @@
                 <song-list-item [songData]="songs" [songRecord]="song" [songIndex]="index + (pageEvent.pageIndex * pageEvent.pageSize)"
                                 [botCommand]="botCommand" ></song-list-item>
               </div>
+              <mat-paginator
+                [length]="paginationLength"
+                [pageSize]="5"
+                [pageSizeOptions]="[5, 10, 20, songs.length]"
+                (page)="OnPageChange($event)"
+              >
+              </mat-paginator>
             </div>
             <ng-template #smallScreen>
               <div class="container">
@@ -83,15 +90,10 @@
                   </div>
                 </div>
               </div>
-            </ng-template></div>
+            </ng-template>
+          </div>
 
       </div>
-    <mat-paginator
-      [length]="songs.length"
-      [pageSize]="5"
-      [pageSizeOptions]="[5, 10, 20, songs.length]"
-      (page)="OnPageChange($event)"
-    >
-    </mat-paginator>
+
     </div>
 </div>

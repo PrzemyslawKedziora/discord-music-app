@@ -1,4 +1,4 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {CategoryModel} from "../../../models/category.model";
 import {AuthorModel} from "../../../models/author.model";
 import {SongModel} from "../../../models/song.model";
@@ -17,12 +17,12 @@ import {PageEvent} from "@angular/material/paginator";
   templateUrl: './song.component.html',
   styleUrls: ['./song.component.scss', '../song-card/song-card.component.scss'],
 })
-export class SongComponent {
+export class SongComponent implements OnInit{
+
 
   categories!: CategoryModel[];
   artists!: AuthorModel[];
   songs: SongModel[]=[];
-  // songsTemp: SongModel[]=[];
   dialogData: AddDialogModel={category:[],author:[]};
   isLoggedIn!: boolean;
   authorID!: string;
@@ -37,6 +37,7 @@ export class SongComponent {
   paginatedSongs: SongModel[]=[];
   pageEvent: PageEvent = { pageIndex: 0, pageSize: 5, length: 0 };
   pageSlice = this.songs.slice(0,5);
+  paginationLength:number = this.songs.length;
   isBigScreen=true;
 
   constructor(public dialog: MatDialog,
@@ -49,8 +50,8 @@ export class SongComponent {
 
     songService.getSongs().then(()=> {
       this.songs = this.sharedService.sharedSongsArray;
-      // this.songsTemp = this.songs;
-      this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
+      this.paginatedSongs = this.songs;
+      this.paginationLength = this.songs.length;
     });
     categoryService.getCategories().then(()=> {
       this.categories = this.categoryService.categories;
@@ -68,15 +69,20 @@ export class SongComponent {
               this.paginatedSongs = this.songs.filter(song =>
                 song.authors.some(author => author.name === criteria)
               );
+              this.paginationLength = this.songs.filter(song => song.authors.some(author => author.name === criteria)).length;
             });
           }
           else{
             this.categoryService.getCategories().then(()=> {
-              this.paginatedSongs = this.songs.filter(song => song.categories.some(category => category.name ===criteria))
+              this.paginatedSongs = this.songs.filter(song => song.categories.some(category => category.name ===criteria));
+              this.paginationLength = this.songs.filter(song => song.categories.some(category => category.name ===criteria)).length;
             })
           }
         } else {
-          this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
+          this.paginationLength = this.songs.length;
+          this.isBigScreen ?
+          this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize) :
+            this.paginatedSongs = this.songs;
         }
       });
 
@@ -90,6 +96,8 @@ export class SongComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
     this.checkScreenSize();
+    this.isBigScreen ? this.paginatedSongs = this.paginatedSongs.slice(0,this.pageEvent.pageSize) :
+      this.paginatedSongs = this.songs;
   }
 
   ngOnInit(): void {
@@ -117,8 +125,11 @@ export class SongComponent {
   }
 
   searchSong(){
+    this.isBigScreen ?
     this.paginatedSongs = this.songs.filter(song =>
-      song.name.toLowerCase().includes(this.searchQuery.toLowerCase())).slice(0,this.pageEvent.pageSize);
+      song.name.toLowerCase().includes(this.searchQuery.toLowerCase())).slice(0,this.pageEvent.pageSize) :
+      this.paginatedSongs = this.songs.filter(song =>
+        song.name.toLowerCase().includes(this.searchQuery.toLowerCase()))
   }
 
   filterSongs(filterQuery: string){
@@ -180,7 +191,6 @@ export class SongComponent {
     if (endIndex > this.songs.length) {
       endIndex = this.songs.length;
     }
-
     this.paginatedSongs = this.songs.slice(startIndex, endIndex);
 
   }
