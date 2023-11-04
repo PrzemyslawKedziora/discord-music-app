@@ -1,6 +1,6 @@
 <div class="main-container" [ngStyle]="sharedService.isSmallScreen ? {'width' : '95vw'} : {}">
 
-  <div class="row main-row">
+  <div class="row main-row d-flex">
     <div class="col d-flex justify-content-center flex-column align-items-center management-panel">
 
       <div class="input-container" *ngIf="songs.length!=0">
@@ -54,37 +54,44 @@
       <p style="color: #97A9B4;">Loading...</p>
     </div>
       <div class="container">
-        <div class="row">
-          <div class="col description-list" *ngIf="isBigScreen">
-            <div class="number">#</div>
-            <div class="thumbnail">YouTube thumbnail</div>
-            <div class="title2">Title</div>
-            <div class="genre">Genre</div>
-            <div class="like-group">Likes</div>
-            <div class="like-group" *ngIf="isLoggedIn">Action</div>
-          </div>
-          <div class="row border-bottom rbb"></div>
 
-          <div class="row" *ngIf="isBigScreen; else smallScreen">
-            <div *ngFor="let song of songsTemp; index as index"
-                 class="col-12">
-              <song-list-item [songData]="songs" [songRecord]="song" [songIndex]="index"
-                              [botCommand]="botCommand" ></song-list-item>
+          <div class="row">
+            <div class="col description-list" *ngIf="isBigScreen">
+              <div class="number">#</div>
+              <div class="thumbnail">YouTube thumbnail</div>
+              <div class="title2">Title</div>
+              <div class="genre">Genre</div>
+              <div class="like-group">Likes</div>
+              <div class="like-group" *ngIf="isLoggedIn">Action</div>
             </div>
-          </div>
-          <ng-template #smallScreen>
+            <div class="row border-bottom rbb"></div>
+
+            <div class="row" *ngIf="isBigScreen; else smallScreen">
+              <div *ngFor="let song of paginatedSongs; index as index"
+                   class="col-12">
+                <song-list-item [songData]="songs" [songRecord]="song" [songIndex]="index + (pageEvent.pageIndex * pageEvent.pageSize)"
+                                [botCommand]="botCommand" ></song-list-item>
+              </div>
+            </div>
+            <ng-template #smallScreen>
               <div class="container">
                 <div class="row">
-                  <div *ngFor="let song of songsTemp; index as index" class="col-md-6">
-                    <app-song-card [songData]="songs" [song]="song" [songIndex]="index"
+                  <div *ngFor="let song of paginatedSongs;" class="col-md-6">
+                    <app-song-card [songData]="songs" [song]="song"
                                    [isBigScreen]="isBigScreen"
                     ></app-song-card>
                   </div>
                 </div>
               </div>
-          </ng-template>
-        </div>
-      </div>
+            </ng-template></div>
 
+      </div>
+    <mat-paginator
+      [length]="songs.length"
+      [pageSize]="5"
+      [pageSizeOptions]="[5, 10, 20, songs.length]"
+      (page)="OnPageChange($event)"
+    >
+    </mat-paginator>
     </div>
 </div>

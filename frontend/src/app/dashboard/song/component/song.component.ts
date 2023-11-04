@@ -10,6 +10,7 @@ import {AuthorService} from "../../authors/author.service";
 import {ActivatedRoute} from "@angular/router";
 import {CategoryService} from "../../categories/category.service";
 import {NewSongComponent} from "../new-song/new-song.component";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-song',
@@ -21,7 +22,7 @@ export class SongComponent {
   categories!: CategoryModel[];
   artists!: AuthorModel[];
   songs: SongModel[]=[];
-  songsTemp: SongModel[]=[];
+  // songsTemp: SongModel[]=[];
   dialogData: AddDialogModel={category:[],author:[]};
   isLoggedIn!: boolean;
   authorID!: string;
@@ -33,7 +34,9 @@ export class SongComponent {
   firstCheck:boolean=true;
   selectedAuthors:AuthorModel[]=[];
   selectedCategories:CategoryModel[]=[];
-
+  paginatedSongs: SongModel[]=[];
+  pageEvent: PageEvent = { pageIndex: 0, pageSize: 5, length: 0 };
+  pageSlice = this.songs.slice(0,5);
   isBigScreen=true;
 
   constructor(public dialog: MatDialog,
@@ -46,8 +49,8 @@ export class SongComponent {
 
     songService.getSongs().then(()=> {
       this.songs = this.sharedService.sharedSongsArray;
-      this.songsTemp = this.songs;
-
+      // this.songsTemp = this.songs;
+      this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
     });
     categoryService.getCategories().then(()=> {
       this.categories = this.categoryService.categories;
@@ -62,24 +65,25 @@ export class SongComponent {
         if (criteria != 'music') {
           if (this.authorService.artists.some(author => author.name === criteria)) {
             this.authorService.getAuthors().then(() => {
-              this.songsTemp = this.songs.filter(song =>
+              this.paginatedSongs = this.songs.filter(song =>
                 song.authors.some(author => author.name === criteria)
               );
             });
           }
           else{
             this.categoryService.getCategories().then(()=> {
-              this.songsTemp = this.songs.filter(song => song.categories.some(category => category.name ===criteria))
+              this.paginatedSongs = this.songs.filter(song => song.categories.some(category => category.name ===criteria))
             })
           }
         } else {
-          this.songsTemp = this.songs;
+          this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
         }
       });
 
     });
     this.sharedService.isLoggedInStatus = this.isLoggedIn;
     this.isLoggedIn = !!sessionStorage.getItem("token");
+
 
   }
 
@@ -113,8 +117,8 @@ export class SongComponent {
   }
 
   searchSong(){
-    this.songsTemp = this.songs.filter(song =>
-      song.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+    this.paginatedSongs = this.songs.filter(song =>
+      song.name.toLowerCase().includes(this.searchQuery.toLowerCase())).slice(0,this.pageEvent.pageSize);
   }
 
   filterSongs(filterQuery: string){
@@ -122,45 +126,63 @@ export class SongComponent {
     const liked = <HTMLInputElement> document.getElementById('show-liked');
     const userID = sessionStorage.getItem('id')
     if (filterQuery =='owned' && owned.checked) {
-      this.songsTemp = this.songs.filter(song => song.userID._id == userID);
+      this.paginatedSongs = this.songs.filter(song => song.userID._id == userID).slice(0,this.pageEvent.pageSize);
       this.firstCheck = false;
     }
     else if (filterQuery =='liked' && liked.checked) {
-      this.songsTemp = this.songs.filter(song => song.likes.includes(userID));
+      this.paginatedSongs = this.songs.filter(song => song.likes.includes(userID)).slice(0,this.pageEvent.pageSize);
       this.firstCheck = false;
     }
     else if (!this.firstCheck){
-      this.songsTemp = this.songs;
+      this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
     }
     else this.searchSong();
   }
 
   filterSongsByAuthors() {
     if (this.selectedAuthors.length === 0) {
-      this.songsTemp = this.songs;
+      this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
     } else {
-      this.songsTemp = this.songs.filter((song) =>
+      this.paginatedSongs = this.songs.filter((song) =>
         this.selectedAuthors.every((author) =>
           song.authors.some((songAuthor) => songAuthor._id === author._id)
         )
-      );
+      ).slice(0,this.pageEvent.pageSize);
     }
   }
 
   filterSongsByCategories() {
     if (this.selectedCategories.length === 0) {
-      this.songsTemp = this.songs;
+      this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
     } else {
-      this.songsTemp = this.songs.filter((song) =>
+      this.paginatedSongs = this.songs.filter((song) =>
         this.selectedCategories.every((category) =>
           song.categories.some((cat) => cat._id === category._id)
         )
-      );
+      ).slice(0,this.pageEvent.pageSize);
     }
   }
 
   checkScreenSize(){
     this.isBigScreen = window.innerWidth > 1000;
+  }
+
+  OnPageChange(event: PageEvent){
+    const pageSize = event.pageSize;
+    const pageIndex = event.pageIndex;
+
+    this.pageEvent.pageIndex = pageIndex;
+    this.pageEvent.pageSize = pageSize;
+
+    const startIndex = pageIndex * pageSize;
+    let endIndex = startIndex + pageSize;
+
+    if (endIndex > this.songs.length) {
+      endIndex = this.songs.length;
+    }
+
+    this.paginatedSongs = this.songs.slice(startIndex, endIndex);
+
   }
 
 }

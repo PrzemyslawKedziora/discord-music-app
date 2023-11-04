@@ -14,7 +14,9 @@ export class SongService {
 
   constructor(public dialog: MatDialog,
               public sharedService: SharedService,
-              private sb: MatSnackBar,) {}
+              private sb: MatSnackBar) {
+
+  }
 
   categories: CategoryModel[]=[];
   songs: SongModel[]=[];

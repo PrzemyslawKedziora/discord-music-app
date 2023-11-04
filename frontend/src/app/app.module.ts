@@ -41,6 +41,7 @@ import { AddPlaylistDialogComponent } from './dashboard/playlists/add-playlist-d
 import {MatListModule} from "@angular/material/list";
 import { AddSongToPlaylistComponent } from './dashboard/playlists/add-song-to-playlist/add-song-to-playlist.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
@@ -91,7 +92,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         MatIconModule,
         MatRadioModule,
         MatListModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatPaginatorModule
     ],
   providers: [],
   bootstrap: [AppComponent]
