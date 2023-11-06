@@ -10,7 +10,7 @@
         <div class="song-name data">{{songRecord.name}}</div>
         <div class="song-author-name my-auto data">
           <span *ngFor="let author of songRecord.authors; let last = last">
-            {{author.name || 'loading...'}}{{ !last ? ', ' : '' }}
+            {{author.name || 'loading...' | titlecase}}{{ !last ? ', ' : '' }}
           </span>
         </div>
       </div>

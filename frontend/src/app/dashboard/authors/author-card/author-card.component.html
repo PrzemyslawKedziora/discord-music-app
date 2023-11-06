@@ -3,7 +3,7 @@
   <mat-card-content class="d-flex flex-column align-items-center">
 
     <img [src]="isImgValid()" alt="{{author.name}}">
-    <p>{{author.name}}</p>
+    <p>{{author.name | titlecase}}</p>
     <div class="controls">
       <button class="btn button-info" (click)="showAuthorSongs(author.name)">Show songs</button>
       <button class="btn button-delete" *ngIf="loginStatus" (click)="deleteAuthor(author)">

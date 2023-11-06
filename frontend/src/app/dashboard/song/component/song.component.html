@@ -15,7 +15,7 @@
           <mat-form-field color="primary">
             <mat-label>Artists</mat-label>
             <mat-select multiple [(ngModel)]="selectedAuthors" (ngModelChange)="filterSongsByAuthors()">
-              <mat-option *ngFor="let artist of artists" [value]="artist">{{artist.name}}</mat-option>
+              <mat-option *ngFor="let artist of artists" [value]="artist">{{artist.name | titlecase}}</mat-option>
             </mat-select>
           </mat-form-field>
 
