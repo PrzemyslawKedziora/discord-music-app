@@ -9,7 +9,7 @@
       </ng-template>
       <span class="author" *ngFor="let author of song.authors;last as last; first as first">
         <span *ngIf="ss.calcAuthorsLength(song.authors)< 20 else shortenedAuthors">
-          {{author.name}}{{!last ? ', ':''}}
+          {{author.name | titlecase}}{{!last ? ', ':''}}
         </span>
         <ng-template #shortenedAuthors>
           <span *ngIf="first">
