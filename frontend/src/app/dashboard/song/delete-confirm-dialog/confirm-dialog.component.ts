@@ -27,6 +27,7 @@ export class ConfirmDialogComponent {
     axios.delete(requestString,{headers}).then(()=> {
       const index = this.data.index;
       this.data.songs.splice(index,1);
+      this.close();
       this.sb.open('Song has been succesfully removed','',{
         duration:2000,
         panelClass: ['success-snackBar']

@@ -112,9 +112,11 @@ export class SongComponent implements OnInit{
       data: this.categoryService.dialogData
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result)
+    dialogRef.afterClosed().subscribe((result: number) => {
+      console.log('The dialog was closed', result);
+      this.paginationLength = result;
     });
+
 
   }
 
@@ -138,16 +140,22 @@ export class SongComponent implements OnInit{
     const userID = sessionStorage.getItem('id')
     if (filterQuery =='owned' && owned.checked) {
       this.paginatedSongs = this.songs.filter(song => song.userID._id == userID).slice(0,this.pageEvent.pageSize);
+      this.paginationLength = this.songs.filter(song => song.userID._id == userID).length;
       this.firstCheck = false;
     }
     else if (filterQuery =='liked' && liked.checked) {
-      this.paginatedSongs = this.songs.filter(song => song.likes.includes(userID)).slice(0,this.pageEvent.pageSize);
+      const filteredSongs = this.songs.filter(song => song.likes.includes(userID));
+      this.paginatedSongs = filteredSongs.slice(0,this.pageEvent.pageSize);
+      this.paginationLength = filteredSongs.length;
       this.firstCheck = false;
     }
     else if (!this.firstCheck){
       this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
+      this.paginationLength = this.songs.length;
     }
-    else this.searchSong();
+    else {
+      this.searchSong();
+    }
   }
 
   filterSongsByAuthors() {
