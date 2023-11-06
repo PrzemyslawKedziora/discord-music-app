@@ -16,6 +16,7 @@ export class LandingPageComponent implements OnInit{
   backgroundImageSRC: string = './assets/main-background.jpeg';
   isPlaying:boolean=false;
   nyanCatAudio = new Audio('./assets/NyanCatSound.mp3');
+  isLoggedIn=false;
 
   playNyanCat() {
     this.isPlaying = !this.isPlaying;
@@ -34,6 +35,8 @@ export class LandingPageComponent implements OnInit{
     setTimeout(() => {
       this.pepeBandSRC= this.pepeBandGif;
     },1500);
+
+    sessionStorage.getItem('user') ? this.isLoggedIn = true : this.isLoggedIn = false;
   }
 
 }
