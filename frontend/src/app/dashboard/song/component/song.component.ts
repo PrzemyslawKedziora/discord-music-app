@@ -23,6 +23,7 @@ export class SongComponent implements OnInit{
   categories!: CategoryModel[];
   artists!: AuthorModel[];
   songs: SongModel[]=[];
+  songsTemp: SongModel[]=[];
   dialogData: AddDialogModel={category:[],author:[]};
   isLoggedIn!: boolean;
   authorID!: string;
@@ -50,6 +51,7 @@ export class SongComponent implements OnInit{
 
     songService.getSongs().then(()=> {
       this.songs = this.sharedService.sharedSongsArray;
+      this.songsTemp = this.songs;
       this.paginatedSongs = this.songs;
       this.paginationLength = this.songs.length;
     });
@@ -94,7 +96,7 @@ export class SongComponent implements OnInit{
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any): void {
+  onResize(): void {
     this.checkScreenSize();
     this.isBigScreen ? this.paginatedSongs = this.paginatedSongs.slice(0,this.pageEvent.pageSize) :
       this.paginatedSongs = this.songs;
@@ -139,22 +141,25 @@ export class SongComponent implements OnInit{
     const liked = <HTMLInputElement> document.getElementById('show-liked');
     const userID = sessionStorage.getItem('id')
     if (filterQuery =='owned' && owned.checked) {
-      this.paginatedSongs = this.songs.filter(song => song.userID._id == userID).slice(0,this.pageEvent.pageSize);
-      this.paginationLength = this.songs.filter(song => song.userID._id == userID).length;
+      this.songs = this.songs.filter(song => song.userID._id == userID);
+      this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
+      this.paginationLength = this.songs.length;
       this.firstCheck = false;
     }
     else if (filterQuery =='liked' && liked.checked) {
-      const filteredSongs = this.songs.filter(song => song.likes.includes(userID));
-      this.paginatedSongs = filteredSongs.slice(0,this.pageEvent.pageSize);
-      this.paginationLength = filteredSongs.length;
+      this.songs = this.songs.filter(song => song.likes.includes(userID));
+      this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
+      this.paginationLength = this.songs.length;
       this.firstCheck = false;
     }
     else if (!this.firstCheck){
+      this.songs = this.songsTemp;
       this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
       this.paginationLength = this.songs.length;
     }
     else {
       this.searchSong();
+
     }
   }
 
