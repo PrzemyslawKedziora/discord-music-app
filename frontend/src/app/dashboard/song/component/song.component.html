@@ -3,13 +3,13 @@
   <div class="row main-row d-flex">
     <div class="col d-flex justify-content-center flex-column align-items-center management-panel">
 
-      <div class="input-container" *ngIf="songs.length!=0">
+      <div class="input-container" *ngIf="songsTemp.length!=0">
         <input type="text" class="search-bar" [(ngModel)]="searchQuery" [placeholder]="' search by song\'s name'"
                (input)="searchSong()"
         >
         <i class="bi bi-search icon"></i>
       </div>
-      <div class="filters-container" *ngIf="isBigScreen && songs.length!=0">
+      <div class="filters-container" *ngIf="isBigScreen && songsTemp.length!=0">
         <div class="filters-inner-container">
 
           <mat-form-field color="primary">
@@ -30,14 +30,24 @@
       </div>
     </div>
 
-      <div class="input-container" *ngIf="isLoggedIn && songs.length!=0">
+      <div class="input-container" *ngIf="isLoggedIn && songsTemp.length!=0">
         <input type="checkbox" id="show-owned" (click)="filterSongs('owned')">
         <label for="show-owned">Show only songs added by you</label>
       </div>
 
-      <div class="input-container" *ngIf="isLoggedIn && songs.length!=0">
+      <div class="input-container" *ngIf="isLoggedIn && songsTemp.length!=0">
         <input type="checkbox" id="show-liked" (click)="filterSongs('liked')">
         <label for="show-liked">Show only liked songs</label>
+      </div>
+    <div class="input-container" *ngIf="(
+      this.searchQuery ||
+     this.selectedCategories.length!=0 ||
+      this.selectedAuthors.length!=0 ||
+      this.hasParams) &&
+      songsTemp.length!=0">
+        <button class="btn add-button" (click)="clearFilters()" style="margin-bottom: 20px">
+          <span>Clear filters</span>
+        </button>
       </div>
 
       <div class="input-container" *ngIf="isLoggedIn">
@@ -48,7 +58,7 @@
       </div>
 
       <div class="title">Songs</div>
-    <div *ngIf="songs.length==0" style="width: 80vw"
+    <div *ngIf="songsTemp.length==0" style="width: 80vw"
          class="d-flex flex-column justify-content-center align-items-center gap-2">
       <mat-spinner></mat-spinner>
       <p style="color: #97A9B4;">Loading...</p>

@@ -7,7 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {SharedService} from "../../../services/shared/shared.service";
 import {SongService} from "../song.service";
 import {AuthorService} from "../../authors/author.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CategoryService} from "../../categories/category.service";
 import {NewSongComponent} from "../new-song/new-song.component";
 import {PageEvent} from "@angular/material/paginator";
@@ -40,18 +40,20 @@ export class SongComponent implements OnInit{
   pageSlice = this.songs.slice(0,5);
   paginationLength:number = this.songs.length;
   isBigScreen=true;
+  hasParams:boolean=false;
 
   constructor(public dialog: MatDialog,
               public sharedService: SharedService,
               private songService: SongService,
               private authorService: AuthorService,
               private route : ActivatedRoute,
-              private categoryService: CategoryService) {
+              private categoryService: CategoryService,
+              private router: Router) {
     this.sharedService.filterStatus=false;
 
     songService.getSongs().then(()=> {
       this.songs = this.sharedService.sharedSongsArray;
-      this.songsTemp = this.songs;
+      this.songsTemp = this.sharedService.sharedSongsArray;
       this.paginatedSongs = this.songs;
       this.paginationLength = this.songs.length;
     });
@@ -66,18 +68,20 @@ export class SongComponent implements OnInit{
       this.route.params.subscribe(params => {
         const criteria = params['authorName'];
         if (criteria != 'music') {
+          this.hasParams = true;
           if (this.authorService.artists.some(author => author.name === criteria)) {
             this.authorService.getAuthors().then(() => {
-              this.paginatedSongs = this.songs.filter(song =>
-                song.authors.some(author => author.name === criteria)
-              );
-              this.paginationLength = this.songs.filter(song => song.authors.some(author => author.name === criteria)).length;
+              this.songs = this.songs.filter(song =>
+                song.authors.some(author => author.name === criteria));
+              this.paginatedSongs = this.songs;
+              this.paginationLength = this.songs.length;
             });
           }
           else{
             this.categoryService.getCategories().then(()=> {
-              this.paginatedSongs = this.songs.filter(song => song.categories.some(category => category.name ===criteria));
-              this.paginationLength = this.songs.filter(song => song.categories.some(category => category.name ===criteria)).length;
+              this.songs = this.songs.filter(song => song.categories.some(category => category.name ===criteria));
+              this.paginatedSongs = this.songs;
+              this.paginationLength = this.songs.length;
             })
           }
         } else {
@@ -133,7 +137,7 @@ export class SongComponent implements OnInit{
     this.paginatedSongs = this.songs.filter(song =>
       song.name.toLowerCase().includes(this.searchQuery.toLowerCase())).slice(0,this.pageEvent.pageSize) :
       this.paginatedSongs = this.songs.filter(song =>
-        song.name.toLowerCase().includes(this.searchQuery.toLowerCase()))
+        song.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
   }
 
   filterSongs(filterQuery: string){
@@ -185,6 +189,16 @@ export class SongComponent implements OnInit{
         )
       ).slice(0,this.pageEvent.pageSize);
     }
+  }
+
+  clearFilters(){
+    this.selectedAuthors = [];
+    this.selectedCategories = [];
+    this.songs = this.songsTemp;
+    this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
+    this.hasParams = false;
+    this.searchQuery = '';
+    this.router.navigate(['dashboard/music']);
   }
 
   checkScreenSize(){
