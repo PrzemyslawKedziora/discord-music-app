@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import {UserModel} from "../../models/user.model";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import axios from "axios";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserService} from "../../services/user/user.service";
+import {HttpClient} from "@angular/common/http";
+import {catchError} from "rxjs";
+import {SharedService} from "../../services/shared/shared.service";
 
 @Component({
   selector: 'app-user-panel',
@@ -21,7 +23,9 @@ export class UserPanelComponent {
 
   constructor(private fb: FormBuilder,
               private sb: MatSnackBar,
-              public userService: UserService) {
+              public userService: UserService,
+              private http: HttpClient,
+              private ss: SharedService) {
     const sessionUser = sessionStorage.getItem('user');
     this.user = JSON.parse(sessionUser!) as UserModel;
     this.botCommand = localStorage.getItem('botCommand') || ' ';
@@ -64,28 +68,22 @@ export class UserPanelComponent {
     const headers = {
       Authorization: 'Bearer ' + accessToken,
     };
-    axios.post(urlString,this.userForm.value,{headers}).then((res)=> {
+    this.http.post(urlString,this.userForm.value,{headers}).pipe(
+      catchError((err)=>{
+        return this.ss.handleError(err);
+      })
+    ).subscribe((res: UserModel)=> {
       sessionStorage.setItem('user',JSON.stringify({
-        _id:res.data._id,username: res.data.username,
-      email: res.data.email,password:this.userForm.get('password')?.value,
-        profilePicture: res.data.profilePicture,botCommand: res.data.botCommand,
-        token:res.data.token}));
-      localStorage.setItem('botCommand',res.data.botCommand);
+        _id:res._id,username: res.username,
+      email: res.email,password:this.userForm.get('password')?.value,
+        profilePicture: res.profilePicture,botCommand: res.botCommand,
+        token:res.token}));
+      localStorage.setItem('botCommand',res.botCommand);
       this.sb.open('User has been succesfully updated!','',{
         duration: 3000,
         panelClass: ['success-snackBar']
       });
-    }).catch((e)=> {
-      handleError(e)
-    });
-    let handleError = (error: any): void => {
-      const errorMessage = error.response.data.message;
-      console.log(error.response.data.message);
-      this.sb.open(errorMessage || 'The error has occurred' ,'',{
-        duration: 3000,
-        panelClass: ['failed-snackBar']
-      })
-    }
+    })
   }
 
 }

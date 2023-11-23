@@ -1,17 +1,18 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PlaylistModel} from "../../../models/playlist.model";
 import {PlaylistService} from "../playlist.service";
-import axios from "axios";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SharedService} from "../../../services/shared/shared.service";
+import {HttpClient} from "@angular/common/http";
+import {catchError} from "rxjs";
 
 @Component({
   selector: 'app-add-song-to-playlist',
   templateUrl: './add-song-to-playlist.component.html',
   styleUrls: ['./add-song-to-playlist.component.scss']
 })
-export class AddSongToPlaylistComponent{
+export class AddSongToPlaylistComponent implements OnInit{
 
   playlists!:PlaylistModel[];
   playlistID:string='';
@@ -20,12 +21,16 @@ export class AddSongToPlaylistComponent{
                private ps: PlaylistService,
                private sb: MatSnackBar,
                public sharedService: SharedService,
-               public dialogRef: MatDialogRef<AddSongToPlaylistComponent>) {
+               public dialogRef: MatDialogRef<AddSongToPlaylistComponent>,
+               private http: HttpClient) { }
+
+  ngOnInit(): void {
     const user = sessionStorage.getItem('id')
-    ps.getPlaylists().then(()=>{
-      this.playlists = ps.playlists.filter(playlist => playlist.authorID._id == user);
+    this.ps.getPlaylists().subscribe(res =>{
+      this.playlists = res.filter(playlist => playlist.authorID._id == user);
     })
   }
+
   addToPlaylist(songID:string){
     songID = this.data.songID;
     const url = 'https://discord-music-app-backend.vercel.app/api/playlists/'+this.playlistID+'/add-song';
@@ -33,17 +38,15 @@ export class AddSongToPlaylistComponent{
     const headers = {
       Authorization: 'Bearer ' + accessToken,
     };
-    axios.post(url,{songID : songID},{headers}).then((res)=> {
+    this.http.post(url,{songID : songID},{headers}).pipe(
+      catchError((err)=>{
+        return this.sharedService.handleError(err);
+      })
+    ).subscribe(()=>{
       this.sb.open('Song has been succesfully added to playlist!','',{
         duration: 2000,
         panelClass: ['success-snackBar']
       })
-    }).catch(e =>{
-      this.sb.open(e.response.data.message,'',{
-        duration: 2000,
-        panelClass: ['failed-snackBar']
-      })
-      console.log(e.response.data.message);
     })
   }
 

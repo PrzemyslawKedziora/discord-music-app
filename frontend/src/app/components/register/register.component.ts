@@ -1,21 +1,30 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
-import axios from "axios";
 import {SharedService} from "../../services/shared/shared.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {catchError, Subscription} from "rxjs";
 
 @Component({
   selector: 'register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent{
+export class RegisterComponent implements OnDestroy{
+
+  req$!:Subscription;
+  isValidated!: boolean;
+  passwordsNotConfirmed!: boolean;
+  registerStatus!:boolean;
+  registerForm: FormGroup;
 
   constructor(private fb: FormBuilder,
               private sharedService: SharedService,
               private sb: MatSnackBar,
-              private router: Router) {
+              private router: Router,
+              private http: HttpClient) {
+
     this.registerForm = this.fb.group({
       email: ['',[Validators.required,Validators.email]],
       username: ['',[Validators.required,Validators.minLength(3)]],
@@ -26,11 +35,10 @@ export class RegisterComponent{
     )
   }
 
+  ngOnDestroy(): void {
+    this.req$.unsubscribe();
+  }
 
-  isValidated!: boolean;
-  passwordsNotConfirmed!: boolean;
-  registerStatus!:boolean;
-  registerForm: FormGroup;
 
   onSubmit(): void {
     this.checkForm();
@@ -39,33 +47,32 @@ export class RegisterComponent{
       throw new Error('niewypelniony formularz');
     }
     else{
-      axios.post('https://discord-music-app-backend.vercel.app/api/users/register',this.registerForm.value).then(()=> {
+     this.req$ =  this.http.post('https://discord-music-app-backend.vercel.app/api/users/register',this.registerForm.value).pipe(
+        catchError((err)=>{
+          return this.sharedService.handleError(err);
+        })
+      ).subscribe(()=>{
         this.sb.open('User has been successfully registered!\n Please,log in.','', {
-          duration: 3000,
-          panelClass: ['success-snackBar']
-        });
-        this.registerStatus = true;
-        this.sharedService.registerUserStatus = this.registerStatus;
-        setTimeout(()=>{
-          this.router.navigate(['/login'])
-        },3000)
-      }).catch((e)=> {
-        this.handleError(e);
-      });
-
+              duration: 3000,
+              panelClass: ['success-snackBar']
+            });
+            this.registerStatus = true;
+            this.sharedService.registerUserStatus = this.registerStatus;
+            setTimeout(()=>{
+              this.router.navigate(['/login'])
+            },3000)
+      })
     }
   }
 
   handleError = (error: any): void => {
     this.registerStatus = false;
     this.sharedService.sharedAddingSongStatus = this.registerStatus;
-    this.sb.open(error.response.data.message,'', {
+    this.sb.open(error.error.message,'', {
       duration: 3000,
       panelClass: ['failed-snackBar']
     })
   }
-
-
 
    matchValuesValidator(controlName: string, matchingControlName: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {

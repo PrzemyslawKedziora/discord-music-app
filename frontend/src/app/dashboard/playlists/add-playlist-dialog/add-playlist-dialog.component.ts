@@ -1,10 +1,12 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, Validators} from "@angular/forms";
-import axios from "axios";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {PlaylistModel, PlaylistRecord} from "../../../models/playlist.model";
 import {PlaylistService} from "../playlist.service";
+import {HttpClient} from "@angular/common/http";
+import {catchError} from "rxjs";
+import {SharedService} from "../../../services/shared/shared.service";
 
 @Component({
   selector: 'app-add-playlist-dialog',
@@ -24,6 +26,8 @@ export class AddPlaylistDialogComponent {
               private fb: FormBuilder,
               private sb: MatSnackBar,
               private ps: PlaylistService,
+              private ss: SharedService,
+              private http: HttpClient,
               @Inject(MAT_DIALOG_DATA) public data: PlaylistModel) {
   }
 
@@ -42,13 +46,16 @@ export class AddPlaylistDialogComponent {
       likes: []
     };
 
-    this.ps.playlists.push(newPlaylist);
-    axios.post(apiURL, newPlaylist, { headers })
-      .then(res => {
-        try {
-          const responseData = res.data;
-          newPlaylist._id = responseData._id;
 
+    this.http.post(apiURL, newPlaylist, { headers }).pipe(
+      catchError((err)=>{
+        return this.ss.handleError(err);
+      })
+    )
+      .subscribe((res)=>{
+        try {
+          newPlaylist._id = res._id;
+          this.ss.sharedPlaylistArray.push(newPlaylist);
           this.sb.open('Playlist has been successfully added!', '', {
             duration: 3000,
             panelClass: ['success-snackBar']
@@ -62,15 +69,6 @@ export class AddPlaylistDialogComponent {
           });
         }
       })
-      .catch(e => {
-        const errorMessage = e.response.data.message || 'The URL has wrong format';
-        console.log(errorMessage);
-        this.sb.open(errorMessage, '', {
-          duration: 3000,
-          panelClass: ['failed-snackBar']
-        });
-      });
-
   }
 
   close(){

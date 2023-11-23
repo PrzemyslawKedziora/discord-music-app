@@ -1,12 +1,13 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import axios from "axios";
 import {FormBuilder, Validators} from "@angular/forms";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SharedService} from "../../../services/shared/shared.service";
 import {AddDialogModel} from "../../../models/add-dialog.model";
 import {SongRecord, SongModel} from "../../../models/song.model";
 import {AuthorModel} from "../../../models/author.model";
+import {HttpClient} from "@angular/common/http";
+import {catchError} from "rxjs";
 
 @Component({
   selector: 'app-new-song',
@@ -32,6 +33,7 @@ export class NewSongComponent{
               private fb: FormBuilder,
               private sb: MatSnackBar,
               private sharedService: SharedService,
+              private http: HttpClient,
               @Inject(MAT_DIALOG_DATA) public data: AddDialogModel,
 
   ) {
@@ -54,8 +56,12 @@ export class NewSongComponent{
         const headers = {
           Authorization: 'Bearer ' + accessToken,
         };
-        axios.post(this.apiUrl, this.newSongForm.value, {headers})
-          .then((res) => {
+        this.http.post(this.apiUrl, this.newSongForm.value, {headers}).pipe(
+          catchError((err)=>{
+            return this.sharedService.handleError(err);
+          })
+        )
+          .subscribe((res)=>{
             this.addSongStatus = true;
             this.sharedService.sharedAddingSongStatus = this.addSongStatus;
             this.sharedService.sharedSongsArray.push(new SongRecord(res.data._id,res.data.authors,res.data.thumbnail,res.data.categories,
@@ -65,18 +71,6 @@ export class NewSongComponent{
               panelClass: ['success-snackBar']
             });
             this.newSongForm.reset();
-          }).catch((e) => {
-          handleError(e)
-        });
-     let handleError = (error: any): void => {
-      this.addSongStatus = false;
-      this.sharedService.sharedAddingSongStatus = this.addSongStatus;
-      const errorMessage = error.response.data.message;
-      console.log(error.response.data.message);
-       this.sb.open(errorMessage || 'The URL has wrong format' ,'',{
-         duration: 3000,
-         panelClass: ['failed-snackBar']
-       })
-    }
+          })
   }
 }

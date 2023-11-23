@@ -1,6 +1,7 @@
 import {Component,OnInit} from '@angular/core';
 import {SongService} from "../song/song.service";
 import {SongModel} from "../../models/song.model";
+import {AuthorModel} from "../../models/author.model";
 import {SharedService} from "../../services/shared/shared.service";
 import {UserService} from "../../services/user/user.service";
 import {NewSongComponent} from "../song/new-song/new-song.component";
@@ -10,6 +11,7 @@ import {AddPlaylistDialogComponent} from "../playlists/add-playlist-dialog/add-p
 import {PlaylistModel} from "../../models/playlist.model";
 import {AuthorService} from "../authors/author.service";
 import {AddDialogModel} from "../../models/add-dialog.model";
+import {CategoryModel} from "../../models/category.model";
 
 @Component({
   selector: 'app-home',
@@ -19,11 +21,12 @@ import {AddDialogModel} from "../../models/add-dialog.model";
 export class HomeComponent implements OnInit {
 
   songs: SongModel[]=[];
+  authors: AuthorModel[]=[];
   songsTemp: SongModel[]=[];
   songsSortedByDate: SongModel[]=[];
   isLoggedIn!:boolean;
   dialogContent!:PlaylistModel[];
-  dialogData: AddDialogModel={category:[],author:[]};
+  dialogData: AddDialogModel={category:[],author:this.authors};
 
   constructor(public ss: SongService,
               public sharedService : SharedService,
@@ -32,24 +35,25 @@ export class HomeComponent implements OnInit {
               private cs: CategoryService,
               private as: AuthorService) {
     sessionStorage.getItem('username') ? this.isLoggedIn = true : this.isLoggedIn = false;
-
-      ss.getSongs().then(()=> {
-        this.songs = ss.songs;
-        this.songsSortedByDate = ss.songs
-          .sort((song1,song2)=> Number.parseFloat(song2.createdAt.toString()) - Number.parseFloat(song1.createdAt.toString()))
-          .slice(0,6);
-        this.songs = this.songs.sort((song1,song2)=> song2.likes.length - song1.likes.length).slice(0,6);
-      });
-      as.getAuthors().then(()=> {
-        this.dialogData.author = as.artists;
-      });
-      cs.getCategories().then(()=> {
-        this.dialogData.category = cs.categories;
-
-      })
   }
 
   ngOnInit(): void {
+    this.ss.getSongs().subscribe((res:SongModel[])=>{
+      this.songs = res;
+      this.songsSortedByDate = res
+        .sort((song1,song2)=> Number.parseFloat(song2.createdAt.toString()) - Number.parseFloat(song1.createdAt.toString()))
+        .slice(0,6);
+      this.songs = this.songs.sort((song1,song2)=> song2.likes.length - song1.likes.length).slice(0,6);
+    })
+    this.as.getAuthors().subscribe((res: AuthorModel[]) => {
+      res = res.sort((art1,art2)=> art1.name.localeCompare(art2.name));
+      this.sharedService.sharedArtistsArray = res;
+      this.dialogData.author = res;
+    });
+    this.cs.getCategories().subscribe((res: CategoryModel[]) =>{
+      res = res.sort((cat1,cat2)=> cat1.name.localeCompare(cat2.name))
+      this.dialogData.category = res;
+    })
     sessionStorage.getItem('token') ?
       this.sharedService.isLoggedInStatus = true : this.sharedService.isLoggedInStatus=false;
 

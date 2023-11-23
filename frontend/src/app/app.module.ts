@@ -44,6 +44,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatPaginatorModule} from "@angular/material/paginator";
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,7 +94,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
         MatRadioModule,
         MatListModule,
         MatProgressSpinnerModule,
-        MatPaginatorModule
+        MatPaginatorModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

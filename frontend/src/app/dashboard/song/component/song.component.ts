@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {AfterContentChecked, Component, HostListener, OnInit} from '@angular/core';
 import {CategoryModel} from "../../../models/category.model";
 import {AuthorModel} from "../../../models/author.model";
 import {SongModel} from "../../../models/song.model";
@@ -17,9 +17,9 @@ import {PageEvent} from "@angular/material/paginator";
   templateUrl: './song.component.html',
   styleUrls: ['./song.component.scss', '../song-card/song-card.component.scss'],
 })
-export class SongComponent implements OnInit{
+export class SongComponent implements OnInit,AfterContentChecked{
 
-
+  loaded = this.sharedService.isLoaded;
   categories!: CategoryModel[];
   artists!: AuthorModel[];
   songs: SongModel[]=[];
@@ -49,54 +49,10 @@ export class SongComponent implements OnInit{
               private route : ActivatedRoute,
               private categoryService: CategoryService,
               private router: Router) {
+    this.sharedService.sharedArtistsArray;
     this.sharedService.filterStatus=false;
-
-    songService.getSongs().then(()=> {
-      this.songs = this.sharedService.sharedSongsArray;
-      this.songsTemp = this.sharedService.sharedSongsArray;
-      this.paginatedSongs = this.songs;
-      this.paginationLength = this.songs.length;
-    });
-    categoryService.getCategories().then(()=> {
-      this.categories = this.categoryService.categories;
-      this.dialogData.category = this.categoryService.categories;
-    });
-    authorService.getAuthors().then(()=>{
-      this.artists = this.sharedService.sharedArtistsArray;
-    });
-    this.initializeArtistsAsync().then(() => {
-      this.route.params.subscribe(params => {
-        const criteria = params['authorName'];
-        if (criteria != 'music') {
-          this.hasParams = true;
-          if (this.authorService.artists.some(author => author.name === criteria)) {
-            this.authorService.getAuthors().then(() => {
-              this.songs = this.songs.filter(song =>
-                song.authors.some(author => author.name === criteria));
-              this.paginatedSongs = this.songs;
-              this.paginationLength = this.songs.length;
-            });
-          }
-          else{
-            this.categoryService.getCategories().then(()=> {
-              this.songs = this.songs.filter(song => song.categories.some(category => category.name ===criteria));
-              this.paginatedSongs = this.songs;
-              this.paginationLength = this.songs.length;
-            })
-          }
-        } else {
-          this.paginationLength = this.songs.length;
-          this.isBigScreen ?
-          this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize) :
-            this.paginatedSongs = this.songs;
-        }
-      });
-
-    });
     this.sharedService.isLoggedInStatus = this.isLoggedIn;
     this.isLoggedIn = !!sessionStorage.getItem("token");
-
-
   }
 
   @HostListener('window:resize', ['$event'])
@@ -107,9 +63,63 @@ export class SongComponent implements OnInit{
   }
 
   ngOnInit(): void {
+     this.songService.getSongs().subscribe((res)=>{
+       this.sharedService.sharedSongsArray = res;
+       this.songs = res;
+       this.songsTemp = this.sharedService.sharedSongsArray;
+       this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
+       this.paginationLength = this.songs.length;
+
+     })
+     this.sharedService.isLoaded = true;
+
+    this.categoryService.getCategories().subscribe((res: CategoryModel[])=>{
+      this.categories = res.sort((a1,a2)=>a1.name.localeCompare(a2.name));
+      this.dialogData.category = res;
+    });
+    this.authorService.getAuthors().subscribe((res: AuthorModel[]) =>{
+      this.artists = res.sort((a1,a2)=>a1.name.localeCompare(a2.name));
+      this.sharedService.sharedArtistsArray = this.artists;
+      sessionStorage.setItem('artists',this.artists.map(artist => artist.name).toString());
+      this.dialogData.author = res;
+    });
+    this.route.params.subscribe(params => {
+      const criteria = params['authorName'];
+      if (criteria != 'music') {
+        this.hasParams = true;
+        const artistsLS = sessionStorage.getItem('artists') || '';
+        if (artistsLS.includes(criteria)) {
+          this.authorService.getAuthors().subscribe(()=>{
+            this.songs = this.songs.filter(song =>
+              song.authors && song.authors.some(author => author.name.toLowerCase() === criteria.toLowerCase())
+            );
+            this.paginatedSongs = this.songs;
+            this.paginationLength = this.songs.length;
+          });
+        }
+        else{
+          this.categoryService.getCategories().subscribe(()=>{
+            this.songs = this.songs.filter(song => song.categories.some(category => category.name ===criteria));
+            this.paginatedSongs = this.songs;
+            this.paginationLength = this.songs.length;
+          })
+        }
+      } else {
+        this.paginationLength = this.songs.length;
+        this.isBigScreen ?
+          this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize) :
+          this.paginatedSongs = this.songs;
+      }
+    });
+
     this.botCommand = localStorage.getItem('botCommand') || '';
     this.checkScreenSize();
   }
+
+  ngAfterContentChecked(): void {
+    this.pageEvent.pageSize = 5;
+  }
+
 
   addSong(){
     const dialogRef = this.dialog.open(NewSongComponent, {
@@ -124,12 +134,6 @@ export class SongComponent implements OnInit{
     });
 
 
-  }
-
-  async initializeArtistsAsync() {
-    return this.authorService.getAuthors().then(() => {
-      this.artists = this.sharedService.sharedArtistsArray;
-    });
   }
 
   searchSong(){

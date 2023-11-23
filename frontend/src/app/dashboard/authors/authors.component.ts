@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthorModel} from "../../models/author.model";
 import {AuthorService} from "./author.service";
 import {UserService} from "../../services/user/user.service";
@@ -9,7 +9,7 @@ import {SharedService} from "../../services/shared/shared.service";
   templateUrl: './authors.component.html',
   styleUrls: ['./authors.component.scss']
 })
-export class AuthorsComponent{
+export class AuthorsComponent implements OnInit{
 
   authors: AuthorModel[] = [];
   searchQuery!:string;
@@ -21,11 +21,16 @@ export class AuthorsComponent{
               public userService: UserService,
               public sharedService: SharedService){
     sessionStorage.getItem('username') ? this.loginStatus = true : this.loginStatus = false;
+  }
 
-    this.authorService.getAuthors().then(() => {
-      this.authors = this.authorService.artists;
-      this.filteredAuthors = this.authorService.artists;
-    });
+  ngOnInit(): void {
+   this.authorService.getAuthors().subscribe((res: AuthorModel[])=>{
+          res = res.sort((a, b) => a.name.localeCompare(b.name));
+          this.authors = res;
+          this.authorService.dialogData.author = this.authors;
+          this.sharedService.sharedArtistsArray = this.authors;
+          this.filteredAuthors = this.sharedService.sharedArtistsArray;
+    })
   }
 
   filterNames() {
@@ -43,7 +48,7 @@ export class AuthorsComponent{
     else if (!this.firstCheck) {
       this.filteredAuthors = this.authors;
     }
-    else this.filterNames()
+    else this.filterNames();
   }
 
 }

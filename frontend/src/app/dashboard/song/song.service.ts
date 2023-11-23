@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import axios from "axios";
 import {CategoryModel} from "../../models/category.model";
 import {SongModel} from "../../models/song.model";
 import {AddDialogModel} from "../../models/add-dialog.model";
 import {MatDialog} from "@angular/material/dialog";
 import {SharedService} from "../../services/shared/shared.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class SongService {
 
   constructor(public dialog: MatDialog,
               public sharedService: SharedService,
-              private sb: MatSnackBar) {
+              private sb: MatSnackBar,
+              private http: HttpClient) {
 
   }
 
@@ -25,19 +27,10 @@ export class SongService {
   isLiked!:boolean;
   doubleClickTimeout: any;
 
-  getSongs(): Promise<void>{
-    return axios.get('https://discord-music-app-backend.vercel.app/api/songs/all').then((response) => {
-     if (this.songs.length ==0){
-       for (let i = 0; i < response.data.length; i++) {
-         response.data[i].createdAt = Date.parse(response.data[i].createdAt)
-         this.songs.push(response.data[i]);
-       }
-     }
-      this.songsTemp = this.songs;
-      this.sharedService.sharedSongsArray = this.songs;
-    });
-
+  getSongs(): Observable<any> {
+    return this.http.get('https://discord-music-app-backend.vercel.app/api/songs/all');
   }
+
   onClick(event: MouseEvent){
     if (this.doubleClickTimeout == null) {
       this.doubleClickTimeout = setTimeout(() => {
@@ -58,7 +51,8 @@ export class SongService {
       const headers = {
       Authorization: 'Bearer ' + accessToken,
      };
-      axios.post(url,song._id,{headers}).then(()=> {
+
+    this.http.post(url,song._id,{headers}).subscribe(()=> {
         if (song.likes.includes(userID)){
           song.likes = song.likes.filter(id => id !== userID);
           return false;

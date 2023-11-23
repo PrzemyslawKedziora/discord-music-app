@@ -84,7 +84,7 @@
               </div>
               <mat-paginator
                 [length]="paginationLength"
-                [pageSize]="5"
+                [pageSize]="this.pageEvent.pageSize"
                 [pageSizeOptions]="[5, 10, 20, songs.length]"
                 (page)="OnPageChange($event)"
               >

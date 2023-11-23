@@ -5,9 +5,9 @@ import {SongService} from "../../song/song.service";
 import {UserModel} from "../../../models/user.model";
 import {PlaylistService} from "../playlist.service";
 import {SongModel} from "../../../models/song.model";
-import axios from "axios";
 import {SharedService} from "../../../services/shared/shared.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-show-playlist',
@@ -27,7 +27,8 @@ export class ShowPlaylistComponent{
               public ss:SongService,
               private ps: PlaylistService,
               public sharedService: SharedService,
-              private sb: MatSnackBar) {
+              private sb: MatSnackBar,
+              private http: HttpClient) {
     let loggedUser!:UserModel;
     this.botCommand = localStorage.getItem('botCommand') || '';
     if (sessionStorage.getItem('user')){
@@ -50,7 +51,7 @@ export class ShowPlaylistComponent{
     const headers = {
       Authorization: 'Bearer ' + accessToken,
     };
-    axios.post(url,{songID: song._id},{headers}).then(()=>{
+    this.http.post(url,{songID: song._id},{headers}).subscribe(()=>{
       this.data.dialog.songs.splice(index,1);
       this.isPlaylistChanged = true;
       this.sb.open('Song has been successfully removed from playlist!','',{
@@ -61,7 +62,9 @@ export class ShowPlaylistComponent{
   }
 
   onPlaylistDelete(playlist: PlaylistModel,index:number){
+    console.log(index)
     this.ps.deletePlaylist(playlist,index);
+
     setTimeout(()=>{
       this.dialogRef.close();
     },1000);
