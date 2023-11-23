@@ -40,9 +40,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.ss.getSongs().subscribe((res:SongModel[])=>{
       this.songs = res;
-      this.songsSortedByDate = res
-        .sort((song1,song2)=> Number.parseFloat(song2.createdAt.toString()) - Number.parseFloat(song1.createdAt.toString()))
-        .slice(0,6);
+      this.songsSortedByDate = this.songs.sort((song1, song2) => {
+        const date1 = new Date(song1.createdAt).getTime();
+        const date2 = new Date(song2.createdAt).getTime();
+        return date2 - date1;
+      }).slice(0,6);
+      console.log(this.songsSortedByDate)
       this.songs = this.songs.sort((song1,song2)=> song2.likes.length - song1.likes.length).slice(0,6);
     })
     this.as.getAuthors().subscribe((res: AuthorModel[]) => {
