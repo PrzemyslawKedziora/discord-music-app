@@ -8,7 +8,8 @@ frontend and Express.js 4.18.2 for backend of application.The database we chose 
 ### Songs:
 - Adding song using YoutubeAPI
 - Filtering songs by name,author or category
-- Copying prepared command to play chosen music on your discord server
+- Copying prepared command to play chosen music on your discord server (LPM on song)
+- Adding song to list of liked songs (double click/ single click on heart icon)
 - Removing songs
 
 ### Artists
@@ -37,5 +38,3 @@ frontend and Express.js 4.18.2 for backend of application.The database we chose 
 
 # How To Use:
 To use that application,you need to click this [link](https://discord-music-app-frontend.vercel.app/landing-page) or just go to the website linked in release section of this repository.
-
-
