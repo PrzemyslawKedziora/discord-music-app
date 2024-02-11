@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit {
         const date2 = new Date(song2.createdAt).getTime();
         return date2 - date1;
       }).slice(0,6);
-      console.log(this.songsSortedByDate)
       this.songs = this.songs.sort((song1,song2)=> song2.likes.length - song1.likes.length).slice(0,6);
     })
     this.as.getAuthors().subscribe((res: AuthorModel[]) => {

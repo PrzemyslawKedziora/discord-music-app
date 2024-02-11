@@ -127,7 +127,7 @@ export class SongComponent implements OnInit,AfterContentChecked{
       width:'100vw',
       data: this.categoryService.dialogData
     });
-
+    console.log(this.categoryService.dialogData)
     dialogRef.afterClosed().subscribe((result: number) => {
       console.log('The dialog was closed', result);
       this.paginationLength = result;
@@ -202,7 +202,7 @@ export class SongComponent implements OnInit,AfterContentChecked{
     this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
     this.hasParams = false;
     this.searchQuery = '';
-    this.router.navigate(['dashboard/music']);
+    this.router.navigate(['dashboard/music/']);
   }
 
   checkScreenSize(){
