@@ -8,6 +8,7 @@ import {SongRecord, SongModel} from "../../../models/song.model";
 import {AuthorModel} from "../../../models/author.model";
 import {HttpClient} from "@angular/common/http";
 import {catchError} from "rxjs";
+import {CategoryService} from "../../categories/category.service";
 
 @Component({
   selector: 'app-new-song',
@@ -33,11 +34,16 @@ export class NewSongComponent{
               private fb: FormBuilder,
               private sb: MatSnackBar,
               private sharedService: SharedService,
+              private categoryService: CategoryService,
               private http: HttpClient,
               @Inject(MAT_DIALOG_DATA) public data: AddDialogModel,
   ) {
     this.songData=this.sharedService.sharedSongsArray;
     this.artists = this.sharedService.sharedArtistsArray;
+    this.categoryService.getCategories().subscribe((res)=>{
+      this.data.category = res;
+    });
+    console.log(this.data.category)
   }
 
   getCategoryNameById(categoryId: string): string {
@@ -46,7 +52,7 @@ export class NewSongComponent{
   }
 
   closeDialog() {
-    this.dialogRef.close(this.sharedService.sharedSongsArray.length);
+    this.dialogRef.close(this.sharedService.sharedSongsArray ? this.sharedService.sharedSongsArray.length : 0);
   }
 
   addSong() {
@@ -61,10 +67,18 @@ export class NewSongComponent{
           })
         )
           .subscribe((res)=>{
+            console.log(res);
             this.addSongStatus = true;
             this.sharedService.sharedAddingSongStatus = this.addSongStatus;
-            this.sharedService.sharedSongsArray.push(new SongRecord(res.data._id,res.data.authors,res.data.thumbnail,res.data.categories,
-              res.data.likes,res.data.name,res.data.userID,res.data.ytURL,res.data.createdAt));
+            this.sharedService.sharedSongsArray.push(new SongRecord(
+              res.data?._id,
+              res.data?.authors,
+              res.data?.thumbnail,
+              res.data?.categories,
+              res.data?.likes,
+              res.data?.name,
+              res.data?.userID,
+              res.data?.ytURL,res.data?.createdAt));
             this.sb.open('Song has been succesfully added!','', {
               duration: duration,
               panelClass: ['success-snackBar']
