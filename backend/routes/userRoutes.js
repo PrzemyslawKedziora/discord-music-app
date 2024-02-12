@@ -18,8 +18,7 @@ router.post("/register", [
         body("password", "Invalid password").notEmpty().isString().isLength({ min: 5 })
     ],
     validateRequest,
-    registerUser
-);
+    registerUser);
 
 router.post("/login", [
         body("email", "Invalid email").notEmpty().isEmail(),

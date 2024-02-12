@@ -10,7 +10,7 @@ const sendResponse = (res, statusCode, success, data = {}, errorMessage = '') =>
     const responsePayload = {
         success,
         data: success ? data : {},
-        error: !success ? { message: errorMessage } : "",
+        error: !success ? errorMessage : "",
     };
 
     return res.status(statusCode).json(responsePayload);
