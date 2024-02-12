@@ -3,157 +3,135 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const mongoose = require("mongoose");
+const sendResponse = require('../utils/sendResponse');
 
-// ======================= P U B L I C   R O U T E S =======================
-
-//@desc Registering a user
-//@route POST api/users/register
-//@access public
-const registerUser = asyncHandler( async (req, res) => {
-
+/**
+ * @desc Registering a user
+ * @route POST api/users/register
+ * @access public
+ */
+const registerUser = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
-
-    // <---- Checking if user sent all necessary fields ---->
-    if (!username || !email || !password) {
-        res.status(400).json({message: "You need to fulfil all fields!" });
-        throw new Error("You need to fulfil all fields!");
-    }
-
+    
     // <---- Checking if user with given email already exists ---->
     let existingUser = await User.findOne({ email });
     if (existingUser) {
-        res.status(400).json({message:"User with this email already exists!" });
-        throw new Error("User with this email already exists!");
+        return sendResponse(res, 400, false, {}, "User with this email already exists!");
     }
     // <---- Checking if user with given username already exists ---->
     existingUser = await User.findOne({ username });
     if (existingUser) {
-        res.status(400).json({message: "User with this username already exists!"});
-        throw new Error("User with this username already exists!");
+        return sendResponse(res, 400, false, {}, "User with this username already exists!");
     }
 
     // <---- Hashing the password ---->
     const hashedPassword = await bcrypt.hash(password, 10);
-    
-    // <---- Creating new user ---->
-    const newUser = {
-        username,
-        email,
-        password: hashedPassword
-    };
-    const user = User.create(newUser);
-    console.log("New user created! ", user);
 
-    if (user) {
-        res.status(201).json({ _id: user.id, email: user.email });
-    } else {
-        res.status(400).json({message: "User data was not valid!" });
-        throw new Error("User data was not valid!");
+    try {
+        const user = await User.create({
+            username,
+            email,
+            password: hashedPassword
+        });
+        const userPayload = { _id: user.id, email: user.email };
+        sendResponse(res, 201, true, userPayload);
+    } catch (error) {
+        sendResponse(res, 500, false, {}, "Internal server error");
     }
 });
 
-//@desc Login user
-//@route /api/users/login
-//@access public
+/**
+ * @desc Login user
+ * @route POST /api/users/login
+ * @access public
+ */
 const loginUser = asyncHandler( async (req, res) => {
-
     const { email, password } = req.body;
 
-    // <---- Checking if user sent all necessary fields ---->
-    if (!email || !password) {
-        res.status(400).json({message: "You need to fulfil all fields!" });
-        throw new Error("You need to fulfil all fields!");
-    };
-
-    const user = await User.findOne({ email })
-
     // <---- Checking if user with given email exists ---->
+    const user = await User.findOne({ email })
     if (!user) {
-        res.status(400).json({message: "No user with this email!"});
-        throw new Error("No user with this email!");
+        return res.status(400).json({message: "No user with this email!"});
     };
 
     // <---- Checking if given password matches the email ---->
     if (await bcrypt.compare(password, user.password)) {
-        const accessToken = jwt.sign(
-            {
-                user: {
-                    username: user.username,
-                    email: user.email,
-                    id: user.id,
-                    password,
-                    profilePicture: user.profilePicture,
-                    botCommand: user.botCommand
-                },
-            },
-            process.env.JWT_PRIVATE_KEY,
-            { expiresIn: "100m"}
-        );
-        res.status(200).json({ accessToken , username: user.username, id: user.id,
+        const userInfo = {
+            username: user.username,
             email: user.email,
-            password, profilePicture: user.profilePicture, botCommand: user.botCommand});
+            id: user.id,
+            profilePicture: user.profilePicture,
+            botCommand: user.botCommand
+        };
+        const accessToken = jwt.sign(
+            { user: userInfo },
+            process.env.JWT_PRIVATE_KEY,
+            { expiresIn: "100m" }
+        );
+    
+        const userPayload = { ...userInfo, accessToken };
+        sendResponse(res, 200, true, userPayload, "");
     } else {
-        res.status(401).json({message: "Wrong password!" });
-        throw new Error("Wrong password!")
+        sendResponse(res, 401, false, {}, "Wrong password");
     }
 });
 
-//@desc Current user information
-//@route /api/users/current
-//@access private
+/**
+ * @desc Returns currently logged in user information
+ * @route POST /api/users/current
+ * @access private
+ */
 const currentUser = asyncHandler(async (req, res) => {
     // <---- req.user was added in the jwt token validation middleware ---->,
-    res.json(req.user);
+    if (req.user) {
+        sendResponse(res, 200, true, req.user, "");
+    } else {
+        sendResponse(res, 500, false, {}, "Internal server error");
+    }
 });
 
-//@desc Edits an existing user
-//@route /api/users/:userID/edit
-//@access private
+/**
+ * @desc Edits an existing user
+ * @route POST /api/users/:userID/edit
+ * @access private
+ */
 const editUser = asyncHandler(async (req,res) => {
     const userID = req.params.userID;
-    const { username, email, password, profilePicture,botCommand } = req.body;
+    const { username, email, password, profilePicture, botCommand } = req.body;
 
     // <---- Checking if the provided user id is valid ---->
     if (!mongoose.Types.ObjectId.isValid(userID)) {
-      res.status(400).json({message: "Invalid user ID!" });
-      throw new Error("Invalid user!");
+        sendResponse(res, 400, false, {}, "Invalid user ID");
     }
   // <---- Finding the user in the database ---->
     const user = await User.findById(userID);
     if (!user) {
-        res.status(500).json({message: "There was a problem trying to get the user object from the database!"});
-        throw new Error(
-            "There was a problem trying to get the user object from the database!"
-        );
+        sendResponse(res, 500, false, {}, "Internal server error");
     }
 
-// <---- Checking if the current user is the edited user ---->
-  if (user._id.toString() !== req.user.id) {
-    res.status(403).json({message:"You cannot change other users' ids'!" });
-    throw new Error("You cannot change other users' ids'!");
-  }
-
-// <---- Giving the user new values if they have been sent ---->
-  user.username = username ? username : user.username;
-  user.email = email ? email : user.email;
-  user.profilePicture = profilePicture ? profilePicture : user.profilePicture;
-  user.botCommand = botCommand ? botCommand : user.botCommand;
-
-// <---- If exists, validating, hashing and setting new password ---->
-  if (password) {
-    if (password.length < 5) {
-        res.status(400).json({message: "Password not long enough"});
-        throw new Error("Password not long enough");
+    // <---- Checking if the current user is the edited user ---->
+    if (user._id.toString() !== req.user.id.toString()) {
+        sendResponse(res, 403, false, {}, "Access denied. You do not have permission to modify another user's data.");
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
-    user.password = hashedPassword;
-  }
+
+    // <---- Giving the user new values if they have been sent ---->
+    user.username = username ? username : user.username;
+    user.email = email ? email : user.email;
+    user.profilePicture = profilePicture ? profilePicture : user.profilePicture;
+    user.botCommand = botCommand ? botCommand : user.botCommand;
+    // <---- If exists, validating, hashing and setting new password ---->
+    if (password) {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        user.password = hashedPassword;
+    }
 
     // <---- Saving the updated song in the database ---->
-    const updatedUser = await user.save();
-
-    // <---- Sending the updated song as a response ---->
-    res.status(200).json(updatedUser);
+    try {
+        const updatedUser = await user.save();
+        sendResponse(res, 200, true, updatedUser, "");
+    } catch (error) {
+        sendResponse(res, 500, false, {}, "Internal server error");
+    }
 });
 
 module.exports = {

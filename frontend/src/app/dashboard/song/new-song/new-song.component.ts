@@ -35,7 +35,6 @@ export class NewSongComponent{
               private sharedService: SharedService,
               private http: HttpClient,
               @Inject(MAT_DIALOG_DATA) public data: AddDialogModel,
-
   ) {
     this.songData=this.sharedService.sharedSongsArray;
     this.artists = this.sharedService.sharedArtistsArray;

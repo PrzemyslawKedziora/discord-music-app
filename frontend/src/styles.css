@@ -3,6 +3,9 @@ body,html{
   background: #313338;
   color: white;
 }
+body::-webkit-scrollbar{
+  display: none;
+}
 .container-img-background{
   background-image: url('src/assets/fire-background.jpg');
   background-repeat: no-repeat;
