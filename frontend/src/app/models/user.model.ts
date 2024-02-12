@@ -5,5 +5,5 @@ export interface UserModel{
   password:string,
   profilePicture:string,
   botCommand:string,
-  token:string
+  accessToken:string
 }

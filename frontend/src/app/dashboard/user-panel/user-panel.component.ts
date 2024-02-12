@@ -77,7 +77,7 @@ export class UserPanelComponent {
         _id:res._id,username: res.username,
       email: res.email,password:this.userForm.get('password')?.value,
         profilePicture: res.profilePicture,botCommand: res.botCommand,
-        token:res.token}));
+        token:res.accessToken}));
       localStorage.setItem('botCommand',res.botCommand);
       this.sb.open('User has been succesfully updated!','',{
         duration: 3000,
