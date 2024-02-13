@@ -61,7 +61,8 @@ const loginUser = asyncHandler( async (req, res) => {
             email: user.email,
             id: user.id,
             profilePicture: user.profilePicture,
-            botCommand: user.botCommand
+            botCommand: user.botCommand,
+            isAdmin: user.isAdmin,
         };
         const accessToken = jwt.sign(
             { user: userInfo },

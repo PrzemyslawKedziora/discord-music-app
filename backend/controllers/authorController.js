@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const Author = require("../models/authorModel");
 const Song = require("../models/songModel");
 const mongoose = require("mongoose");
-const sendResponse = require("../utils/sendResponse")
+const sendResponse = require("../utils/sendResponse");
 
 /**
  * @desc Adds an author
@@ -15,7 +15,7 @@ const addAuthor = asyncHandler(async (req, res) => {
   // <---- Checking if author with given name already exists ---->
   const existingAuthor = await Author.findOne({ name });
   if (existingAuthor) {
-    return sendResponse(res, 409, false, {}, "Author with this name already exists")
+    return sendResponse(res, 409, false, {}, "Author with this name already exists");
   }
 
   const newAuthor = {
@@ -28,7 +28,7 @@ const addAuthor = asyncHandler(async (req, res) => {
     const author = await Author.create(newAuthor);
     return sendResponse(res, 200, true, author, "");
   } catch(error) {
-    return sendResponse(res, 500, false, {}, "Internal server error")
+    return sendResponse(res, 500, false, {}, "Internal server error");
   }
 });
 
@@ -68,7 +68,7 @@ const editAuthor = asyncHandler(async (req, res) => {
   }
 
   // <---- Checking if user have permission to modify this author ---->
-  if (author.userID.toString() !== req.user.id) {
+  if (author.userID.toString() !== req.user.id.toString()) {
     return sendResponse(res, 403, false, {}, "Access denied. You do not have permission to modify another user's author.");
   }
 
@@ -110,7 +110,6 @@ const deleteAuthor = asyncHandler(async (req, res) => {
   }
 
   // <---- Deleting this author from all the songs
-  // authorID - the author's id (string)
   const DeleteAuthorFromSongs = async (authorID) => {
     const filter = { authors: { $in: [authorID] } };
     const update = { $pull: { authors: authorID } };
