@@ -1,124 +1,123 @@
 const asyncHandler = require("express-async-handler");
 const Category = require("../models/categoryModel");
+const Song = require("../models/songModel");
+const mongoose = require("mongoose");
+const sendResponse = require("../utils/sendResponse");
 
-//@desc Adds a category.
-//@route POST api/categories/add
-//@access private
+/**
+ * @desc Adds a category.
+ * @route POST api/categories/add
+ * @access admin only
+ **/
 const addCategory = asyncHandler(async (req, res) => {
   const { name } = req.body;
 
-  // <---- Checking if user sent all necessary fields ---->
-  if (!name) {
-    res.status(400).json({message: "You need to provide category's name!"});
-    throw new Error("You need to provide category's name!");
-  }
-
-  // <---- Checking if author with given name already exists ---->
+  // <---- Checking if category with given name already exists ---->
   const existingCategory = await Category.findOne({ name });
   if (existingCategory) {
-    res.status(400).json({message: "Category with this name already exists!"});
-    throw new Error("Category with this name already exists!");
+    return sendResponse(res, 409, false, {}, "Category with this name already exists");
   }
 
   const newCategory = {
     name,
     userID: req.user.id,
   };
-  const category = await Category.create(newCategory);
-  console.log(category);
 
-  if (category) {
-    res.status(200).json(category);
-  } else {
-    res.status(400).json({message: "category data was not valid!"});
-    throw new Error("category data was not valid!");
+  try {
+    const category = await Category.create(newCategory);
+    return sendResponse(res, 200, true, category, "");
+  } catch (error) {
+    return sendResponse(res, 500, false, {}, "Internal server error");
   }
 });
 
-//@desc Sending list of all categories
-//@route POST api/categories/all
-//@access  public
+/**
+ * @desc Sending list of all categories
+ * @route POST api/categories/all
+ * @access public
+ **/
 const getAllCategories = asyncHandler(async (req, res) => {
   const categoryList = await Category.find();
 
-  if (!categoryList) {
-    res.status(500).json({message: "There was a problem trying to get categories from the database!"});
-    throw new Error(
-      "There was a problem trying to get categories from the database!"
-    );
+  if (categoryList) {
+    return sendResponse(res, 200, true, categoryList, "");
   } else {
-    res.status(200).json(categoryList);
+    return sendResponse(res, 500, false, {}, "Internal server error");
   }
 });
 
-//@desc Edits an existing category
-//@route /api/users/:categoryID/edit
-//@access private
+/**
+ * @desc Edits an existing category
+ * @route POST /api/users/:categoryID/edit
+ * @access admin only
+ **/
 const editCategory = asyncHandler(async (req, res) => {
   const categoryID = req.params.categoryID;
   const { name } = req.body;
 
-  // <---- Checking if the provided user id is valid ---->
+  // <---- Checking if the provided category id is valid ---->
   if (!mongoose.Types.ObjectId.isValid(categoryID)) {
-    res.status(400).json({message: "Invalid category!"});
-    throw new Error("Invalid category!");
+    return sendResponse(res, 400, false, {}, "Invalid category ID");
   }
   // <---- Finding the user in the database ---->
   const category = await Category.findById(categoryID);
   if (!category) {
-    res.status(500).json({message:  "There was a problem trying to get the category object from the database!"});
-    throw new Error(
-      "There was a problem trying to get the category object from the database!"
-    );
+    return sendResponse(res, 500, false, {}, "Internal server error");
   }
 
   // <---- Checking if user have permission to modify this category ---->
-  if (category.userID.toString() !== req.user.id) {
-    res.status(403).json({message: "You cannot change other users' ids'!"});
-    throw new Error("You cannot change other users' ids'!");
+  if (category.userID.toString() !== req.user.id.toString()) {
+    return sendResponse(res, 403, false, {}, "Access denied. You do not have permission to modify another user's category.");
   }
 
-  // <---- Giving the category new value if they have been sent ---->
-  category.name = name ? name : category.name;
-
   // <---- Saving the updated category in the database ---->
-  const updatedCategory = await Category.save();
-
-  // <---- Sending the category as a response ---->
-  res.status(200).json(updatedCategory);
+  category.name = name ? name : category.name;
+  try {
+    const updatedCategory = await Category.save();
+    return sendResponse(res, 200, true, updatedCategory, "");
+  } catch(error) {
+    return sendResponse(res, 500, false, {}, "Internal server error");
+  }
 });
 
-//@desc Deletes a category
-//@route DELETE api/categories/:categoryID/delete
-//@access private
+/**
+ * @desc Deletes a category
+ * @route DELETE api/categories/:categoryID/delete
+ * @access admin only
+ **/
 const deleteCategory = asyncHandler(async (req, res) => {
-    const categoryID = req.params.categoryID;
-  
-    // <---- Checking if the provided category id is valid ---->
-    if (!mongoose.Types.ObjectId.isValid(categoryID)) {
-      res.status(400).json({message: "Invalid category!"});
-      throw new Error("Invalid category!");
-    }
-  
-    // <---- Finding the author in the database ---->
-    const category = await Category.findById(categoryID);
-    if (!category) {
-      res.status(500).json({message: "There was a problem trying to get the category object from the database!"});
-      throw new Error(
-        "There was a problem trying to get the category object from the database!"
-      );
-    }
-  
-    // <---- Checking if the current user is the category's creator ---->
-    if (category.userID.toString() !== req.user.id) {
-      res.status(403).json({message: "You cannot a category author that was not added by you!"});
-      throw new Error("You cannot a category author that was not added by you!");
-    }
-  
-    // <---- Deleting song and sending the response ---->
+  const categoryID = req.params.categoryID;
+
+  // <---- Checking if the provided category id is valid ---->
+  if (!mongoose.Types.ObjectId.isValid(categoryID)) {
+    return sendResponse(res, 400, false, {}, "Invalid category ID");
+  }
+
+  // <---- Finding the category in the database ---->
+  const category = await Category.findById(categoryID);
+  if (!category) {
+    return sendResponse(res, 500, false, {}, "Internal server error");
+  }
+
+  // <---- Deleting this category from all the songs
+  const DeleteCategoriesFromSongs = async (categoryID) => {
+    const filter = { categories: { $in: [categoryID] } };
+    const update = { $pull: { categories: categoryID } };
+    return await Song.updateMany(filter, update);
+  };
+
+  // <---- Deleting song and sending the response ---->
+  try {
+    const response = await DeleteCategoriesFromSongs(category._id);
     await category.deleteOne();
-    res.status(200).json({ message: "Category deleted!" });
-  });
+    return sendResponse(res, 200, true, {
+      message: `Category deleted, updated ${response.modifiedCount} songs`,
+      songsUpdated: response.modifiedCount, // number of songs that the author's ID have been deleted from
+    }, "");
+  } catch (error) {
+    return sendResponse(res, 400, false, {}, "Failed to delete category from all songs");
+  }
+});
 
 module.exports = {
   addCategory,

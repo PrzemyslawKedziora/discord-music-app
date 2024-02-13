@@ -2,24 +2,20 @@ const asyncHandler = require("express-async-handler");
 const Author = require("../models/authorModel");
 const Song = require("../models/songModel");
 const mongoose = require("mongoose");
+const sendResponse = require("../utils/sendResponse");
 
-//@desc Adds an author
-//@route POST api/authors/add
-//@access private
+/**
+ * @desc Adds an author
+ * @route POST api/authors/add
+ * @access private
+ **/
 const addAuthor = asyncHandler(async (req, res) => {
   const { name, pictureURL } = req.body;
-
-  // <---- Checking if user sent all necessary fields ---->
-  if (!name) {
-    res.status(400).json({ message: "You need to provide author's name!" });
-    throw new Error("You need to provide author's name!");
-  }
 
   // <---- Checking if author with given name already exists ---->
   const existingAuthor = await Author.findOne({ name });
   if (existingAuthor) {
-    res.status(400).json({ message: "Author with this name already exists!" });
-    throw new Error("Author with this name already exists!");
+    return sendResponse(res, 409, false, {}, "Author with this name already exists");
   }
 
   const newAuthor = {
@@ -27,134 +23,109 @@ const addAuthor = asyncHandler(async (req, res) => {
     pictureURL,
     userID: req.user.id,
   };
-  console.log(req.body);
 
-  const author = await Author.create(newAuthor);
-  console.log(author);
-
-  if (author) {
-    res.status(200).json(author);
-  } else {
-    res.status(400).json({ message: "author data was not valid!" });
-    throw new Error("author data was not valid!");
+  try {
+    const author = await Author.create(newAuthor);
+    return sendResponse(res, 200, true, author, "");
+  } catch(error) {
+    return sendResponse(res, 500, false, {}, "Internal server error");
   }
 });
 
-//@desc Sending list of all authors
-//@route POST api/authors/all
-//@access  public
+/**
+ * @desc Sending list of all authors
+ * @route POST api/authors/all
+ * @access public
+ **/
 const getAllAuthors = asyncHandler(async (req, res) => {
   const authorList = await Author.find();
 
-  if (!authorList) {
-    res.status(500).json({
-      message: "There was a problem trying to get authors from the database!",
-    });
-    throw new Error(
-      "There was a problem trying to get authors from the database!"
-    );
+  if (authorList) {
+    return sendResponse(res, 200, true, authorList, "");
   } else {
-    res.status(200).json(authorList);
+    return sendResponse(res, 500, false, {}, "Internal server error");
   }
 });
 
-//@desc Edits an existing author
-//@route /api/users/:authorID/edit
-//@access private
+/**
+ * @desc Edits an existing author
+ * @route POST api/users/:authorID/edit
+ * @access private
+ **/
 const editAuthor = asyncHandler(async (req, res) => {
   const authorID = req.params.authorID;
   const { name, pictureURL } = req.body;
 
   // <---- Checking if the provided author id is valid ---->
   if (!mongoose.Types.ObjectId.isValid(authorID)) {
-    res.status(400).json({ message: "Invalid author ID" });
-    throw new Error("Invalid author ID!");
+    return sendResponse(res, 400, false, {}, "Invalid author ID");
   }
+  
   // <---- Finding the author in the database ---->
   const author = await Author.findById(authorID);
   if (!author) {
-    res.status(500).json({
-      message:
-        "There was a problem trying to get the author object from the database!",
-    });
-    throw new Error(
-      "There was a problem trying to get the author object from the database!"
-    );
+    return sendResponse(res, 500, false, {}, "Internal server error");
   }
 
   // <---- Checking if user have permission to modify this author ---->
-  if (author.userID.toString() !== req.user.id) {
-    res.status(403).json({ message: "You cannot change other authors' ids'!" });
-    throw new Error("You cannot change other authors' ids'!");
+  if (author.userID.toString() !== req.user.id.toString()) {
+    return sendResponse(res, 403, false, {}, "Access denied. You do not have permission to modify another user's author.");
   }
 
   // <---- Giving the author new values if they have been sent ---->
   author.name = name ? name : author.name;
-  author.pictureURL = name ? name : author.name;
+  author.pictureURL = name ? pictureURL : author.pictureURL;
 
   // <---- Saving the updated category in the database ---->
-  const updatedAuthor = await Author.save();
-
-  // <---- Sending the category as a response ---->
-  res.status(200).json(updatedAuthor);
+  try {
+    const updatedAuthor = await Author.save();
+    return sendResponse(res, 200, true, updatedAuthor, "");
+  } catch(error) {
+    return sendResponse(res, 500, false, {}, "Internal server error");
+  }
 });
 
-//@desc Deletes an author
-//@route DELETE api/authors/:authorID/delete
-//@access private
+/**
+ * @desc Deletes an author
+ * @route DELETE api/authors/:authorID/delete
+ * @access private
+ **/
 const deleteAuthor = asyncHandler(async (req, res) => {
   const authorID = req.params.authorID;
 
   // <---- Checking if the provided author id is valid ---->
   if (!mongoose.Types.ObjectId.isValid(authorID)) {
-    res.status(400).json({ message: "Invalid author! ID" });
-    throw new Error("Invalid author!");
+    return sendResponse(res, 400, false, {}, "Invalid author ID");
   }
 
   // <---- Finding the author in the database ---->
   const author = await Author.findById(authorID);
   if (!author) {
-    res.status(500).json({
-      message:
-        "There was a problem trying to get the author object from the database!",
-    });
-    throw new Error(
-      "There was a problem trying to get the author object from the database!"
-    );
+    return sendResponse(res, 500, false, {}, "Internal server error");
   }
 
   // <---- Checking if the current user is the author's creator ---->
   if (author.userID.toString() !== req.user.id) {
-    res
-      .status(403)
-      .json({ message: "You cannot delete author that was not added by you!" });
-    throw new Error("You cannot delete author that was not added by you!");
+    return sendResponse(res, 403, false, {}, "Access denied. You do not have permission to delet another user's author.");
   }
 
   // <---- Deleting this author from all the songs
-  // authorID - the author's id (string)
   const DeleteAuthorFromSongs = async (authorID) => {
     const filter = { authors: { $in: [authorID] } };
     const update = { $pull: { authors: authorID } };
-
-    try {
-      const response = await Song.updateMany(filter, update);
-      return response;
-    } catch (error) {
-      res
-        .status(400)
-        .json({ message: "Failed to delete author from all songs", error });
-    }
+    return await Song.updateMany(filter, update);
   };
 
-  const response = DeleteAuthorFromSongs(author._id);
-
-  // <---- Deleting author and sending the response ---->
-  await author.deleteOne();
-  res.status(200).json({
-    message: "Author deleted!",
-    songWithDeletedAuthor: response.modifiedCount, // number of songs that the author's ID have been deleted from
-  });
+  try {
+    const response = await DeleteAuthorFromSongs(author._id);
+    await author.deleteOne();
+    return sendResponse(res, 200, true, {
+        message: `Author deleted, updated ${response.modifiedCount} songs`,
+        songsUpdated: response.modifiedCount, // number of songs that the author's ID have been deleted from
+      }, "");
+  } catch (error) {
+    return sendResponse(res, 400, false, {}, "Failed to delete author from all songs");
+  }
 });
 
 module.exports = {

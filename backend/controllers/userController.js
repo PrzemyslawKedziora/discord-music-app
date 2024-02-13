@@ -16,12 +16,12 @@ const registerUser = asyncHandler(async (req, res) => {
     // <---- Checking if user with given email already exists ---->
     let existingUser = await User.findOne({ email });
     if (existingUser) {
-        return sendResponse(res, 400, false, {}, "User with this email already exists!");
+        return sendResponse(res, 409, false, {}, "User with this email already exists");
     }
     // <---- Checking if user with given username already exists ---->
     existingUser = await User.findOne({ username });
     if (existingUser) {
-        return sendResponse(res, 400, false, {}, "User with this username already exists!");
+        return sendResponse(res, 409, false, {}, "User with this username already exists");
     }
 
     // <---- Hashing the password ---->
@@ -61,7 +61,8 @@ const loginUser = asyncHandler( async (req, res) => {
             email: user.email,
             id: user.id,
             profilePicture: user.profilePicture,
-            botCommand: user.botCommand
+            botCommand: user.botCommand,
+            isAdmin: user.isAdmin,
         };
         const accessToken = jwt.sign(
             { user: userInfo },
