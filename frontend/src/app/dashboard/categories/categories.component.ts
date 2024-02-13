@@ -19,8 +19,8 @@ export class CategoriesComponent {
               private categoryService: CategoryService,
               private router : Router) {
     categoryService.getCategories().subscribe(res =>{
-      this.categories = res;
-      this.filteredCategories = res;
+      this.categories = res.data;
+      this.filteredCategories = res.data;
     })
 
   }

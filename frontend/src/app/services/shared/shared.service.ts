@@ -141,7 +141,7 @@ export class SharedService {
   }
 
   handleError = (error: any): Observable<any> => {
-    const errorMessage = error.error.message;
+    const errorMessage = error.error;
     this.sb.open(errorMessage ,'',{
       duration: 3000,
       panelClass: ['failed-snackBar']

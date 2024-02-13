@@ -12,6 +12,7 @@ import {PlaylistModel} from "../../models/playlist.model";
 import {AuthorService} from "../authors/author.service";
 import {AddDialogModel} from "../../models/add-dialog.model";
 import {CategoryModel} from "../../models/category.model";
+import {ApiResponse} from "../../models/api.response";
 
 @Component({
   selector: 'app-home',
@@ -47,14 +48,14 @@ export class HomeComponent implements OnInit {
       }).slice(0,6);
       this.songs = this.songs.sort((song1,song2)=> song2.likes.length - song1.likes.length).slice(0,6);
     })
-    this.as.getAuthors().subscribe((res: AuthorModel[]) => {
-      res = res.sort((art1,art2)=> art1.name.localeCompare(art2.name));
-      this.sharedService.sharedArtistsArray = res;
-      this.dialogData.author = res;
+    this.as.getAuthors().subscribe((res: ApiResponse<AuthorModel[]>) => {
+      res.data = res.data.sort((art1,art2)=> art1.name.localeCompare(art2.name));
+      this.sharedService.sharedArtistsArray = res.data;
+      this.dialogData.author = res.data;
     });
-    this.cs.getCategories().subscribe((res: CategoryModel[]) =>{
-      res = res.sort((cat1,cat2)=> cat1.name.localeCompare(cat2.name))
-      this.dialogData.category = res;
+    this.cs.getCategories().subscribe((res: ApiResponse<CategoryModel[]>) =>{
+      res.data = res.data.sort((cat1,cat2)=> cat1.name.localeCompare(cat2.name))
+      this.dialogData.category = res.data;
     })
     sessionStorage.getItem('token') ?
       this.sharedService.isLoggedInStatus = true : this.sharedService.isLoggedInStatus=false;

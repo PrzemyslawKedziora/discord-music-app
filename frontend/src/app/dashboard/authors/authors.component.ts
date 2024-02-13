@@ -3,6 +3,7 @@ import {AuthorModel} from "../../models/author.model";
 import {AuthorService} from "./author.service";
 import {UserService} from "../../services/user/user.service";
 import {SharedService} from "../../services/shared/shared.service";
+import {ApiResponse} from "../../models/api.response";
 
 @Component({
   selector: 'app-authors',
@@ -24,9 +25,9 @@ export class AuthorsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-   this.authorService.getAuthors().subscribe((res: AuthorModel[])=>{
-          res = res.sort((a, b) => a.name.localeCompare(b.name));
-          this.authors = res;
+   this.authorService.getAuthors().subscribe((res: ApiResponse<AuthorModel[]>)=>{
+          res.data = res.data.sort((a, b) => a.name.localeCompare(b.name));
+          this.authors = res.data;
           this.authorService.dialogData.author = this.authors;
           this.sharedService.sharedArtistsArray = this.authors;
           this.filteredAuthors = this.sharedService.sharedArtistsArray;

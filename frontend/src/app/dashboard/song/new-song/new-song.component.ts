@@ -9,6 +9,8 @@ import {AuthorModel} from "../../../models/author.model";
 import {HttpClient} from "@angular/common/http";
 import {catchError} from "rxjs";
 import {CategoryService} from "../../categories/category.service";
+import {ApiResponse} from "../../../models/api.response";
+import {CategoryModel} from "../../../models/category.model";
 
 @Component({
   selector: 'app-new-song',
@@ -40,10 +42,9 @@ export class NewSongComponent{
   ) {
     this.songData=this.sharedService.sharedSongsArray;
     this.artists = this.sharedService.sharedArtistsArray;
-    this.categoryService.getCategories().subscribe((res)=>{
-      this.data.category = res;
+    this.categoryService.getCategories().subscribe((res: ApiResponse<CategoryModel[]>)=>{
+      this.data.category = res.data;
     });
-    console.log(this.data.category)
   }
 
   getCategoryNameById(categoryId: string): string {
@@ -61,13 +62,12 @@ export class NewSongComponent{
         const headers = {
           Authorization: 'Bearer ' + accessToken,
         };
-        this.http.post(this.apiUrl, this.newSongForm.value, {headers}).pipe(
+        this.http.post<ApiResponse<SongModel>>(this.apiUrl, this.newSongForm.value, {headers}).pipe(
           catchError((err)=>{
-            return this.sharedService.handleError(err);
+            return this.sharedService.handleError(err.error);
           })
         )
           .subscribe((res)=>{
-            console.log(res);
             this.addSongStatus = true;
             this.sharedService.sharedAddingSongStatus = this.addSongStatus;
             this.sharedService.sharedSongsArray.push(new SongRecord(
