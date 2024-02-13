@@ -6,7 +6,7 @@
     <p>{{author.name | titlecase}}</p>
     <div class="controls">
       <button class="btn button-info" (click)="showAuthorSongs(author.name)">Show songs</button>
-      <button class="btn button-delete" *ngIf="loginStatus" (click)="deleteAuthor(author)">
+      <button class="btn button-delete" *ngIf="loginStatus && author.userID == userID" (click)="deleteAuthor(author)">
         <i class="bi bi-x-lg"></i>
       </button>
     </div>

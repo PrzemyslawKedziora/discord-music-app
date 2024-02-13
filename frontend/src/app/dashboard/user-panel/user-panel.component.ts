@@ -63,7 +63,7 @@ export class UserPanelComponent {
   }
 
   updateUser(){
-    let urlString ='https://discord-music-app-backend.vercel.app/api/users/'+this.user._id+'/edit';
+    let urlString ='https://discord-music-app-backend.vercel.app/api/users/'+this.user.id+'/edit';
     const accessToken = sessionStorage.getItem('token');
     const headers = {
       Authorization: 'Bearer ' + accessToken,
@@ -74,7 +74,7 @@ export class UserPanelComponent {
       })
     ).subscribe((res: UserModel)=> {
       sessionStorage.setItem('user',JSON.stringify({
-        _id:res._id,username: res.username,
+        _id:res.id,username: res.username,
       email: res.email,password:this.userForm.get('password')?.value,
         profilePicture: res.profilePicture,botCommand: res.botCommand,
         token:res.accessToken}));

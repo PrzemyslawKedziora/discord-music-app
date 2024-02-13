@@ -15,6 +15,7 @@ export class AuthorCardComponent {
   @Input() authors!:AuthorModel[];
   @Input() index!:number;
   loginStatus!:boolean;
+  userID = sessionStorage.getItem('id')
 
   constructor(private router : Router,
               public dialog: MatDialog) {

@@ -43,9 +43,9 @@ export class LoginComponent {
         }))
         .subscribe((res) => {
             if (res.success && (res.data as UserModel)) {
-            const user: UserModel = res.data!;
+            const user: UserModel = res.data;
             sessionStorage.setItem('user', JSON.stringify(user));
-            sessionStorage.setItem('id', user._id);
+            sessionStorage.setItem('id', user.id);
             sessionStorage.setItem('username', user.username);
             sessionStorage.setItem('token', user.accessToken);
             localStorage.setItem('botCommand', user.botCommand);

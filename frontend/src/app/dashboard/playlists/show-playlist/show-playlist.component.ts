@@ -33,7 +33,7 @@ export class ShowPlaylistComponent{
     this.botCommand = localStorage.getItem('botCommand') || '';
     if (sessionStorage.getItem('user')){
       loggedUser = JSON.parse(sessionStorage.getItem('user') || '');
-      this.data.dialog.authorID._id == loggedUser._id ? this.isYourPlaylist = true : this.isYourPlaylist = false;
+      this.data.dialog.authorID._id == loggedUser.id ? this.isYourPlaylist = true : this.isYourPlaylist = false;
     }
   }
 
