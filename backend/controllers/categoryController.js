@@ -62,7 +62,7 @@ const editCategory = asyncHandler(async (req, res) => {
   // <---- Finding the user in the database ---->
   const category = await Category.findById(categoryID);
   if (!category) {
-    return sendResponse(res, 500, false, {}, "Internal server error");
+    return sendResponse(res, 400, false, {}, "Cannot find category with provided ID");
   }
 
   // <---- Checking if user have permission to modify this category ---->

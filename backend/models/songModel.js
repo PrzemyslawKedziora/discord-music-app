@@ -27,7 +27,7 @@ const songSchema = mongoose.Schema(
       ref: "Author",
     }],
     categories: [{
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
     }],
     likes: {

@@ -28,7 +28,6 @@ export class NewSongComponent{
     userID: sessionStorage.getItem('userID'), //temp
     createdAt: (new Date).toISOString(),
     updatedAt: (new Date).toISOString()
-
   });
   constructor(public dialogRef: MatDialogRef<NewSongComponent>,
               private fb: FormBuilder,

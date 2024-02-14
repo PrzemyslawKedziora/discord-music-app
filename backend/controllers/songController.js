@@ -3,37 +3,26 @@ const mongoose = require("mongoose");
 const Song = require("../models/songModel");
 const Playlist = require("../models/playlistModel");
 const getVideoData = require("../APIs/getVideoData");
+const sendResponse = require("../utils/sendResponse");
 
-//@desc Adds new song
-//@route POST api/songs/add
-//@access private
+/**
+ * @desc Adds new song
+ * @route POST api/songs/add
+ * @access private
+ */
 const addSong = asyncHandler(async (req, res) => {
-  const { name, ytURL, authors, categories } = req.body;
-
-  // <---- Checking if user sent all necessary fields ---->
-  if (!ytURL) {
-    res.status(400).json({ message: "You need to fulfill all fields!" });
-    throw new Error("You need to fulfill all fields!");
-  }
+  const { ytURL, authors, categories } = req.body;
 
   // <---- Checking if user with given YouTube URL exists ---->
   const existingSong = await Song.findOne({ ytURL });
   if (existingSong) {
-    res
-      .status(400)
-      .json({ message: "Song with this YouTube URL already exists!" });
-    throw new Error("Song with this YouTube URL already exists!");
+    return sendResponse(res, 409, false, {}, "Song with this YouTube URL already exists");
   }
 
-  // <---- Checking if user send any categories ---->
+  // <---- Checking if user send any categories and maping them to string(id) array ---->
   let newCategories;
-  if (categories && categories.length > 0) {
-    newCategories = categories;
-
-    // <---- Mapping expected array of objects to array of strings(id) ---->
-    if ("_id" in newCategories[0]) {
-      newCategories = newCategories.map((category) => category._id);
-    }
+  if (categories) {
+      newCategories = categories.map((category) => category._id);
   } else {
     newCategories = [];
   }
@@ -41,7 +30,6 @@ const addSong = asyncHandler(async (req, res) => {
   // <---- Using YouTube API to get thumbnail in Base64 format ---->
   const songData = await getVideoData(ytURL);
 
-  // <---- Creating new song ---->
   const newSong = {
     name: songData.name,
     userID: req.user.id,
@@ -51,20 +39,20 @@ const addSong = asyncHandler(async (req, res) => {
     categories: newCategories,
     likes: [],
   };
-  const song = await Song.create(newSong);
 
-  if (song) {
-    console.log("New song created! ", song);
-    res.status(201).json(song);
-  } else {
-    res.status(400).json({ message: "Song data was not valid!" });
-    throw new Error("Song data was not valid!");
+  try {
+    const song = await Song.create(newSong);
+    return sendResponse(res, 201, true, song, "");
+  } catch (error) {
+    return sendResponse(res, 500, false, {}, "Internal server error");
   }
 });
 
-//@desc Edits an existing song, only author and categories
-//@route GET api/songs/edit/:songID
-//@access private
+/**
+ * @desc Edits an existing song, only author and categories
+ * @route GET api/songs/edit/:songID
+ * @access private
+ **/
 const editSong = asyncHandler(async (req, res) => {
   const songID = req.params.songID;
   const { authors, categories } = req.body;
@@ -72,311 +60,194 @@ const editSong = asyncHandler(async (req, res) => {
   // <---- Finding a song with ID fiven i params ---->
   const song = await Song.findById(songID);
   if (!song) {
-    req.status(400).json({ message: "There is no song with this ID!" });
-    throw new Error("There is no song with this ID!");
+    return sendResponse(res, 400, false, {}, "Cannot find song with provided ID");
   }
 
   // <---- Checking if user have permission to modify this song ---->
-  if (req.user.id !== song.userID) {
-    req
-      .status(401)
-      .json({ message: "You don't have permission to edit this song!" });
-    throw new Error("You don't have permission to edit this song!");
+  if (req.user.id.toString() !== song.userID.toString()) {
+    return sendResponse(res, 403, false, {}, "Access denied. You do not have permission to modify another user's song.");
   }
 
   // <---- Updating the song with the new data ---->
   song.authors = authors;
-
-  // Clearing the existing categories and adding the new ones
-  if (categories && categories.length > 0) {
+  if (categories) {
     song.categories = categories;
-  } else {
-    song.categories = [];
   }
-  // <---- Saving the updated song in the database ---->
-  const updatedSong = await song.save();
 
-  // <---- Sending the updated song as a response ---->
-  res.status(200).json(updatedSong);
+  try {
+    const updatedSong = await song.save();
+    res.status(200).json(updatedSong);
+  } catch (error) {
+    return sendResponse(res, 500, false, {}, "Internal server error");
+  }
 });
 
-//@desc Sending list of all songs
-//@route GET api/songs/all
-//@access public
-const getAllSongs = asyncHandler(async (req, res) => {
-  const songList = await Song.find()
+/**
+ * @desc Sending list of all songs
+ * @route GET api/songs/all
+ * @access public
+ **/
+const getSongs = asyncHandler(async (req, res) => {
+  const { authorID, categoryID } = req.query;
+  let filter = {};
+
+  // Dodajemy filtr dla authorID, jeśli jest dostarczony i jest ważnym ID
+  if (authorID && mongoose.Types.ObjectId.isValid(authorID)) {
+    filter.authors = { $in: [authorID] };
+  }
+  // Dodajemy filtr dla categoryID, jeśli jest dostarczony i jest ważnym ID
+  if (categoryID && mongoose.Types.ObjectId.isValid(categoryID)) {
+    filter.categories = { $in: [categoryID] };
+  }
+
+  try {
+    const songList = await Song.find(filter)
     .populate("userID", "username")
     .populate("authors", "name")
     .populate("categories", "name");
-  if (!songList) {
-    res.status(500).json({
-      message: "There was a problem trying to get Songs from the database!",
-    });
-    throw new Error(
-      "There was a problem trying to get Songs from the database!"
-    );
-  } else {
-    res.status(200).json(songList);
+
+    return sendResponse(res, 200, true, songList, "");
+  } catch (error) {
+    return sendResponse(res, 500, false, {}, "Internal server error");
   }
 });
 
-//@desc sending list of all song of given author
-//@route POST api/songs/author/:authorID
-//@access public
-const getSongsByAuthor = asyncHandler(async (req, res) => {
-  const authorID = req.params.authorID;
-
-  // <---- Checking if the provided author id is valid ---->
-  if (!mongoose.Types.ObjectId.isValid(authorID)) {
-    res.status(400).json({ message: "Invalid author" });
-    throw new Error("Invalid author");
-  }
-
-  // <---- Finding songs by the provided authorId ---->
-  const songs = await Song.find({ authors: { $in: [authorID] } })
-    .populate("userID", "username")
-    .populate("authors", "name")
-    .populate("categories", "name")
-    .exec();
-
-  if (songs.length > 0) {
-    res.status(200).json(songs);
-  } else {
-    res.status(404).json({ message: "No songs with this author found!" });
-    throw new Error("No songs with this author found!");
-  }
-});
-
-//@desc sending list of all song of given category
-//@route POST api/song/category/:categoryID
-//@access public
-const getSongsByCategory = asyncHandler(async (req, res) => {
-  const categoryID = req.params.categoryID;
-
-  // <---- Checking if the provided category id is valid ---->
-  if (!mongoose.Types.ObjectId.isValid(categoryID)) {
-    res.status(400).json({ message: "Invalid category" });
-    throw new Error("Invalid category");
-  }
-
-  // <---- Finding songs by the provided categoryID ---->
-  const songs = await Song.find({ categories: { $in: [categoryID] } })
-    .populate("userID", "username")
-    .populate("authors", "name")
-    .populate("categories", "name")
-    .exec();
-
-  if (songs.length > 0) {
-    res.status(200).json(songs);
-  } else {
-    res.status(404).json({ message: "No songs with this author found!" });
-    throw new Error("No songs with this author found!");
-  }
-});
-
-//@desc sending list of all song of given category
-//@route POST api/song/most-liked/:count
-//@access public
+/**
+ * @desc sending list of all song of given category
+ * @route GET api/song/most-liked/:count
+ * @access public
+ **/
 const getMostLikedSongs = asyncHandler(async (req, res) => {
   const count = parseInt(req.params.count);
 
   // make sure count is a valid number
-  if (isNaN(count) || count <= 0) {
-    return res.status(400).json({ message: "Invalid count parameter" });
+  if (isNaN(count) || count < 0) {
+    return sendResponse(res, 400, false, {}, "Invalid count parameter");
   }
 
   // Get all the songs and sort them by descending number of likes with the limit of 'count'
-  const songs = Song.find({}).sort({ "likes.length": -1 }).limit(count);
-  if (!songs) {
-    res.status(500).json({
-      message: "There was a problem trying to get Songs from the database!",
-    });
+  try {
+    const songs = await Song.find()
+      .sort({ 'likes.length': -1 }) // Sortowanie po długości tablicy 'likes' w porządku malejącym
+      .limit(count) // Ograniczenie liczby wyników do 'count'
+      .populate("userID", "username")
+      .populate("authors", "name")
+      .populate("categories", "name");
+    return sendResponse(res, 200, true, songs, "");
+  } catch (error) {
+    return sendResponse(res, 500, false, {}, "Internal server error");
   }
-
-  res.status(200).json(songs);
 });
 
-//@desc Sending a random song
-//@route GET api/songs/random
-//@access public
+/**
+ * @desc Sending a random song
+ * @route GET api/songs/random
+ * @access public
+ **/
 const getRandomSong = asyncHandler(async (req, res) => {
-  const randomSong = await Song.aggregate([{ $sample: { size: 1 } }])
-    .populate("userID", "username")
-    .populate("authors", "name")
-    .populate("categories", "name")
-    .exec();
-
-  if (!randomSong) {
-    res.status(500).json({
-      message: "There was a problem trying to get a Song from the database!",
-    });
-    throw new Error(
-      "There was a problem trying to get a Song from the database!"
-    );
-  } else {
-    res.status(200).json(randomSong);
+  try {
+    const count = await Song.countDocuments(); // Krok 1: Pobierz liczbę wszystkich piosenek
+    const random = Math.floor(Math.random() * count); // Krok 2: Wygeneruj losowy indeks
+    const song = await Song.findOne() // Krok 3: Pobierz losową piosenkę
+                           .skip(random)
+                           .populate("userID", "_id username") // Krok 4: Populate userID
+                           .populate("authors", "_id name") // Możesz dodać więcej pól do populacji
+                           .populate("categories", "_id name");
+    if (song) {
+      sendResponse(res, 200, true, song, "");
+    } else {
+      sendResponse(res, 404, false, {}, "No songs found");
+    }
+  } catch (error) {
+    sendResponse(res, 500, false, {}, "Internal server error");
   }
 });
 
-//@desc Likes a song
-//@route POST api/songs/:songID/like
-//@access private
+/**
+ * @desc Likes a song
+ * @route POST api/songs/:songID/like
+ * @access private
+ **/
 const likeSong = asyncHandler(async (req, res) => {
   const songID = req.params.songID;
 
   // <---- Checking if the provided song id is valid ---->
   if (!mongoose.Types.ObjectId.isValid(songID)) {
-    res.status(400).json({ message: "Invalid song id" });
-    throw new Error("Invalid song");
+    return sendResponse(res, 400, false, {}, "Invalid song id");
   }
 
-  // <---- Finding the song in the database ---->
   const song = await Song.findById(songID);
-
-  if (!song) {
-    res.status(500).json({
-      message:
-        "There was a problem trying to get a song object from the database!",
-    });
-    throw new Error(
-      "There was a problem trying to get a song object from the database!"
-    );
+  if(!song) {
+    return sendResponse(res, 400, false, {}, "Cannot find song with provided ID");
   }
 
   // <---- Placing/taking like (current user ID) into/from song's likes array ---->
   const userLiked = song.likes.includes(req.user.id);
-
   const update = userLiked
     ? { $pull: { likes: req.user.id } }
     : { $push: { likes: req.user.id } };
 
-  const updatedSong = await Song.findOneAndUpdate({ _id: songID }, update, {
-    new: true,
-  });
-
-  if (updatedSong) {
-    const message = userLiked
-      ? "The song has been disliked!"
-      : "The song has been liked!";
-    res.status(200).json({ message });
-  } else {
-    res.status(400).json({ message: "Failed to update song!" });
+  try {
+    const updatedSong = await Song.findOneAndUpdate(
+      { _id: songID }, 
+      update, 
+      { new: true,}
+    );
+    return sendResponse(res, 200, true, updatedSong, "");
+  } catch (error) {
+    return sendResponse(res, 500, false, {}, "Internal server error");
   }
 });
 
-//@desc deletes a song
-//@route DELETE api/songs/:songID/delete
-//@access private
+/**
+ * @desc deletes a song
+ * @route DELETE api/songs/:songID/delete
+ * @access private
+ **/
 const deleteSong = asyncHandler(async (req, res) => {
   const songID = req.params.songID;
 
   // <---- Checking if the provided song id is valid ---->
   if (!mongoose.Types.ObjectId.isValid(songID)) {
-    res.status(400).json({ message: "Invalid song ID!" });
-    throw new Error("Invalid song!");
+    return sendResponse(res, 400, false, {}, "Invalid song id");
   }
 
   // <---- Finding the song in the database ---->
   const song = await Song.findById(songID);
   if (!song) {
-    res.status(500).json({
-      message:
-        "There was a problem trying to get the song object from the database!",
-    });
-    throw new Error(
-      "There was a problem trying to get the song object from the database!"
-    );
+    return sendResponse(res, 400, false, {}, "Cannot find song with provided ID");
   }
 
   // <---- Checking if the current user is the song's creator ---->
-  if (song.userID.toString() !== req.user.id) {
-    res
-      .status(403)
-      .json({ message: "You cannot delete song that was not added by you!" });
-    res
-      .status(403)
-      .json({ message: "You cannot delete song that was not added by you!" });
-    throw new Error("You cannot delete song that was not added by you!");
+  if (song.userID.toString() !== req.user.id.toString()) {
+    return sendResponse(res, 403, false, {}, "Access denied. You do not have permission to modify another user's songs.");
   }
 
   // <---- Deleting this song from every playlist ---->
   const deleteSongsFromPlaylists = async (songID) => {
     const filter = { songs: { $in: [songID] } };
     const update = { $pull: { songs: songID } };
-
-    try {
-      const response = await Playlist.updateMany(filter, update);
-      return response;
-    } catch (error) {
-      res
-        .status(400)
-        .json({ message: "failed to delete song from all playlists", error });
-    }
+    return await Playlist.updateMany(filter, update);
   };
 
-  const response = await deleteSongsFromPlaylists(song._id);
-
-  // <---- Deleting song and sending the response ---->
-  await song.deleteOne();
-  res.status(200).json({ message: "Song deleted!" });
-});
-
-//@desc Gives a category to a song
-//@route DELETE api/songs/give-category/:songID/:categoryID
-//@access private
-const giveCategory = asyncHandler(async (req, res) => {
-  const { songID, categoryID } = req.params;
-
-  // <---- Checking if the provided song id is valid ---->
-  if (
-    !mongoose.Types.ObjectId.isValid(songID) ||
-    !mongoose.Types.ObjectId.isValid(CategoryID)
-  ) {
-    res.status(400).json({ message: "Invalid or Category!!" });
-    throw new Error("Invalid or Category!!");
+  try {
+    const response = await deleteSongsFromPlaylists(song._id);
+    await song.deleteOne();
+    return sendResponse(res, 200, true, {
+      message: `Song deleted, updated ${response.modifiedCount} playlists`,
+      playlistsUpdated: response.modifiedCount, // number of playlists that the song ID have been deleted from
+    }, "");
+  } catch (error) {
+    return sendResponse(res, 400, false, {}, "Failed to delete song from all playlist");
   }
-
-  // <---- Finding the song in the database ---->
-  const song = await Song.findById(songID);
-  if (!song) {
-    res.status(500).json({
-      message:
-        "There was a problem trying to get the song object from the database!",
-    });
-    throw new Error(
-      "There was a problem trying to get the song object from the database!"
-    );
-  }
-
-  // <---- Finding the category in the database ---->
-  const category = await Category.findById(categoryID);
-  if (!category) {
-    res.status(400).json({ message: "Category not found!" });
-    throw new Error("Category not found!");
-  }
-
-  // <---- Checking if user have permission to modify this song ---->
-  if (!req.user.id == song.userID) {
-    req
-      .status(401)
-      .json({ message: "You don't have permission to edit this song!" });
-    throw new Error("You don't have permission to edit this song!");
-  }
-
-  song.categories.push(new mongoose.Types.ObjectId(categoryID));
-  await song.save();
-  res.status(200).json({ message: "song have been updated!" });
 });
 
 module.exports = {
   addSong,
-  getAllSongs,
+  getSongs,
   getRandomSong,
   getMostLikedSongs,
-  getSongsByAuthor,
-  getSongsByCategory,
   editSong,
   likeSong,
   deleteSong,
-  giveCategory,
 };
