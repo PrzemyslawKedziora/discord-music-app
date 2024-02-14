@@ -11,6 +11,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CategoryService} from "../../categories/category.service";
 import {NewSongComponent} from "../new-song/new-song.component";
 import {PageEvent} from "@angular/material/paginator";
+import {ApiResponse} from "../../../models/api.response";
 
 @Component({
   selector: 'app-song',
@@ -63,7 +64,7 @@ export class SongComponent implements OnInit,AfterContentChecked{
   }
 
   ngOnInit(): void {
-     this.songService.getSongs().subscribe((res)=>{
+     this.songService.getSongs().subscribe((res: SongModel[])=>{
        this.sharedService.sharedSongsArray = res;
        this.songs = res;
        this.songsTemp = this.sharedService.sharedSongsArray;
@@ -73,15 +74,15 @@ export class SongComponent implements OnInit,AfterContentChecked{
      })
      this.sharedService.isLoaded = true;
 
-    this.categoryService.getCategories().subscribe((res: CategoryModel[])=>{
-      this.categories = res.sort((a1,a2)=>a1.name.localeCompare(a2.name));
-      this.dialogData.category = res;
+    this.categoryService.getCategories().subscribe((res: ApiResponse<CategoryModel[]>)=>{
+        this.categories = res.data.sort((a1,a2)=>a1.name.localeCompare(a2.name));
+        this.dialogData.category = res.data;
     });
-    this.authorService.getAuthors().subscribe((res: AuthorModel[]) =>{
-      this.artists = res.sort((a1,a2)=>a1.name.localeCompare(a2.name));
+    this.authorService.getAuthors().subscribe((res: ApiResponse<AuthorModel[]>) =>{
+      this.artists = res.data.sort((a1,a2)=>a1.name.localeCompare(a2.name));
       this.sharedService.sharedArtistsArray = this.artists;
       sessionStorage.setItem('artists',this.artists.map(artist => artist.name).toString());
-      this.dialogData.author = res;
+      this.dialogData.author = res.data;
     });
     this.route.params.subscribe(params => {
       const criteria = params['authorName'];
@@ -127,7 +128,6 @@ export class SongComponent implements OnInit,AfterContentChecked{
       width:'100vw',
       data: this.categoryService.dialogData
     });
-    console.log(this.categoryService.dialogData)
     dialogRef.afterClosed().subscribe((result: number) => {
       console.log('The dialog was closed', result);
       this.paginationLength = result;

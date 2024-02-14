@@ -27,8 +27,8 @@ export class SongService {
   isLiked!:boolean;
   doubleClickTimeout: any;
 
-  getSongs(): Observable<any> {
-    return this.http.get('https://discord-music-app-backend.vercel.app/api/songs/all');
+  getSongs(): Observable<SongModel[]> {
+    return this.http.get<SongModel[]>('https://discord-music-app-backend.vercel.app/api/songs/all');
   }
 
   onClick(event: MouseEvent){

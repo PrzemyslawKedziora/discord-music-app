@@ -7,6 +7,7 @@ import {AddDialogModel} from "../../models/add-dialog.model";
 import {NewAuthorComponent} from "./new-author/new-author.component";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {ApiResponse} from "../../models/api.response";
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class AuthorService {
               public sharedService: SharedService,
               private http: HttpClient) { }
 
-  getAuthors(): Observable<any> {
-    return this.http.get('https://discord-music-app-backend.vercel.app/api/authors/all');
+  getAuthors(): Observable<ApiResponse<AuthorModel[]>> {
+    return this.http.get<ApiResponse<AuthorModel[]>>('https://discord-music-app-backend.vercel.app/api/authors/all');
   }
 
   addArtist() {

@@ -3,6 +3,7 @@ import {CategoryModel} from "../../models/category.model";
 import {AddDialogModel} from "../../models/add-dialog.model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {ApiResponse} from "../../models/api.response";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
-  getCategories(): Observable<any>{
-    return this.http.get('https://discord-music-app-backend.vercel.app/api/categories/all');
+  getCategories(): Observable<ApiResponse<CategoryModel[]>> {
+    return this.http.get<ApiResponse<CategoryModel[]>>('https://discord-music-app-backend.vercel.app/api/categories/all');
   }
 }
