@@ -39,8 +39,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ss.getSongs().subscribe((res:SongModel[])=>{
-      this.songs = res;
+    this.ss.getSongs().subscribe((res:ApiResponse<SongModel[]>)=>{
+      this.songs = res.data;
       this.songsSortedByDate = this.songs.sort((song1, song2) => {
         const date1 = new Date(song1.createdAt).getTime();
         const date2 = new Date(song2.createdAt).getTime();

@@ -8,6 +8,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {EditSongComponent} from "./edit-song/edit-song.component";
+import {ApiResponse} from "../../models/api.response";
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,8 @@ export class SongService {
   isLiked!:boolean;
   doubleClickTimeout: any;
 
-  getSongs(): Observable<SongModel[]> {
-    return this.http.get<SongModel[]>('https://discord-music-app-backend.vercel.app/api/songs/all');
+  getSongs(): Observable<ApiResponse<SongModel[]>> {
+    return this.http.get<ApiResponse<SongModel[]>>('https://discord-music-app-backend.vercel.app/api/songs/all');
   }
 
   onClick(event: MouseEvent){

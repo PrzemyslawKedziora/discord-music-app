@@ -38,7 +38,7 @@
   </div>
   <div class="hidden-list">
     <mat-nav-list *ngIf="contextMenuVisible">
-      <mat-list-item >Add to playlist</mat-list-item>
+      <mat-list-item *ngIf="userID">Add to playlist</mat-list-item>
       <mat-list-item *ngIf="song.userID._id == userID" (click)="ss.editSongDialog(song)">Edit</mat-list-item>
       <mat-list-item *ngIf="song.userID._id == userID">Remove</mat-list-item>
     </mat-nav-list>

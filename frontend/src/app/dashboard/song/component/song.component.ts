@@ -64,9 +64,9 @@ export class SongComponent implements OnInit,AfterContentChecked{
   }
 
   ngOnInit(): void {
-     this.songService.getSongs().subscribe((res: SongModel[])=>{
-       this.sharedService.sharedSongsArray = res;
-       this.songs = res;
+     this.songService.getSongs().subscribe((res: ApiResponse<SongModel[]>)=>{
+       this.sharedService.sharedSongsArray = res.data;
+       this.songs = res.data;
        this.songsTemp = this.sharedService.sharedSongsArray;
        this.paginatedSongs = this.songs.slice(0,this.pageEvent.pageSize);
        this.paginationLength = this.songs.length;
