@@ -107,7 +107,7 @@ const editUser = asyncHandler(async (req,res) => {
   // <---- Finding the user in the database ---->
     const user = await User.findById(userID);
     if (!user) {
-        sendResponse(res, 500, false, {}, "Internal server error");
+        return sendResponse(res, 400, false, {}, "Cannot find user with provided ID");
     }
 
     // <---- Checking if the current user is the edited user ---->
