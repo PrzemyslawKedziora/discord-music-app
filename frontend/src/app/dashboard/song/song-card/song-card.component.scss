@@ -37,3 +37,10 @@ $text-size: 0.9rem;
 .stats{
   width: 100%;
 }
+.hidden-list{
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  border-radius: 5%;
+  background: $background-main-color;
+}

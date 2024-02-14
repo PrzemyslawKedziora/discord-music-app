@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {SongModel} from "../../../models/song.model";
 import {SongService} from "../song.service";
+import {UserModel} from "../../../models/user.model";
 
 @Component({
   selector: 'app-song-card',
@@ -13,15 +14,24 @@ export class SongCardComponent{
   @Input() songData!: SongModel[];
   @Input() songIndex!: number;
   @Input() isBigScreen!:boolean;
-  maxTitleLength:number = 25;
-  userID = sessionStorage.getItem('id');
+  maxTitleLength = 25;
+  userID = '';
   botCommand!:string;
+  contextMenuVisible: boolean = false;
 
   constructor(public ss: SongService) {
+    const userDataString = sessionStorage.getItem('user');
+    if (userDataString) {
+      const userData: UserModel = JSON.parse(userDataString);
+      this.userID = userData.id
+    } else {
+      console.error('Brak danych w sessionStorage');
+    }
   }
 
   ngOnInit(){
    this.botCommand = localStorage.getItem('botCommand') || '';
+
   }
 
   onDoubleClick(event: MouseEvent){
@@ -34,7 +44,11 @@ export class SongCardComponent{
   }
 
 
+  onContextMenu(event: MouseEvent, song: SongModel): void {
+    event.preventDefault();
+    this.contextMenuVisible = !this.contextMenuVisible;
+    return;
+  }
 
-
-
+  protected readonly oncontextmenu = oncontextmenu;
 }
