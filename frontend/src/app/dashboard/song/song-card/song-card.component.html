@@ -1,5 +1,9 @@
 <div class="card d-flex flex-row" [ngClass]="{'card-on-small' : !isBigScreen}"
-     [cdkCopyToClipboard]="this.botCommand+' '+song.name" (click)="ss.onClick($event)" (dblclick)="onDoubleClick($event)">
+     [cdkCopyToClipboard]="this.botCommand+' '+song.name"
+     (click)="ss.onClick($event)"
+     (dblclick)="onDoubleClick($event)"
+     (contextmenu)="onContextMenu($event, song)"
+     (mouseleave)="contextMenuVisible=false">
   <img class="song-card-img" [src]="song.thumbnail" alt="{{song.name}}" (click)="ss.openInYT(song.ytURL)">
   <div class="song-info d-flex flex-column justify-content-between">
     <div class="d-flex flex-column align-content-between song-main-info">
@@ -31,5 +35,12 @@
         </span>
       </div>
     </div>
+  </div>
+  <div class="hidden-list">
+    <mat-nav-list *ngIf="contextMenuVisible">
+      <mat-list-item >Add to playlist</mat-list-item>
+      <mat-list-item *ngIf="song.userID._id == userID" (click)="ss.editSongDialog(song)">Edit</mat-list-item>
+      <mat-list-item *ngIf="song.userID._id == userID">Remove</mat-list-item>
+    </mat-nav-list>
   </div>
 </div>

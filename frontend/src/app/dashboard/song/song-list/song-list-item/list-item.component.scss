@@ -43,13 +43,13 @@
 .action-first{
   display: flex;
   align-items: center;
+  justify-content: center
 }
 .action-first:hover{
   cursor: pointer;
 }
 .hidden-list{
   position: relative;
-  top: 4vh;
   right: 85%;
   border-radius: 5%;
   background: $background-main-color;

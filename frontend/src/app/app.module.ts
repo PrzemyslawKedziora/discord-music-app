@@ -42,6 +42,7 @@ import {MatListModule} from "@angular/material/list";
 import { AddSongToPlaylistComponent } from './dashboard/playlists/add-song-to-playlist/add-song-to-playlist.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { EditSongComponent } from './dashboard/song/edit-song/edit-song.component';
 
 
 
@@ -70,7 +71,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     ShowPlaylistComponent,
     PlaylistCardComponent,
     AddPlaylistDialogComponent,
-    AddSongToPlaylistComponent
+    AddSongToPlaylistComponent,
+    EditSongComponent
 
 
   ],

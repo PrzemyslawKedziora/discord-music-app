@@ -65,18 +65,4 @@ export class ListItemComponent implements OnInit {
     })
 
   }
-
-  showList() {
-    const clickableElements = document.querySelectorAll('.clickable');
-    const hiddenList = document.querySelector('.hidden-list') as HTMLElement;
-    clickableElements.forEach((element) => {
-      element.addEventListener('click', () => {
-        if (hiddenList!.style.display === 'none' || hiddenList!.style.display === '') {
-          hiddenList!.style.display = 'block';
-        } else {
-          hiddenList!.style.display = 'none';
-        }
-      });
-    });
-  }
 }

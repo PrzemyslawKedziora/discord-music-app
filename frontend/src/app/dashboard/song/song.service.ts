@@ -7,6 +7,7 @@ import {SharedService} from "../../services/shared/shared.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {EditSongComponent} from "./edit-song/edit-song.component";
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,17 @@ export class SongService {
         this.doubleClickTimeout = null;
       }, 200);
     }
+  }
+  editSongDialog(song: SongModel) {
+
+    this.dialog.open(EditSongComponent, {
+      disableClose: true,
+      data: song
+    })
+
+  }
+  editSong(){
+
   }
 
   like(song: SongModel) {

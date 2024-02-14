@@ -26,10 +26,13 @@
         >{{songRecord.likes.length}}</i>
       </div>
       <div class="action-first clickable data like-group my-auto" (click)="expanded = !expanded" *ngIf="isLoggedIn">
-        Action
+        <i class="bi bi-list"></i>
       <div class="hidden-list" *ngIf="expanded">
         <mat-nav-list>
           <mat-list-item (click)="openAddToPlaylistDialog(songRecord._id)">Add to playlist</mat-list-item>
+          <mat-list-item *ngIf="this.sc.isLoggedIn && this.songRecord.userID.username == user"
+                         (click)="ss.editSongDialog(songRecord)"
+          >Edit</mat-list-item>
           <mat-list-item *ngIf="this.sc.isLoggedIn && this.songRecord.userID.username == user"
                          (click)="openConfirmDeleteDialog(songRecord._id,songIndex)"
           >Remove</mat-list-item>

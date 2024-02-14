@@ -1,0 +1,48 @@
+<mat-dialog-content class="d-flex justify-content-center align-items-center flex-column">
+  <h3>Edit song details</h3>
+  <form [formGroup]="editSongForm">
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>URL</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="URL"
+            [value]="data.ytURL"
+            formControlName="ytURL"
+          >
+          <mat-error *ngIf="editSongForm.get('ytURL')?.hasError('required')">How do you want to add song?</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Author</mat-label>
+          <mat-select formControlName="authors" multiple [(ngModel)]="data.authors" [compareWith]="compareByID">
+            <mat-option *ngFor="let author of  artists" [value]="author">
+              {{author.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="editSongForm.get('authors')?.hasError('required')">Choose your author</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Song type</mat-label>
+          <mat-select formControlName="categories" multiple [compareWith]="compareByID">
+            <mat-option *ngFor="let category of  categories" [value]="category">{{category.name}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="editSongForm.get('categories')?.hasError('required')">Select proper genre</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  <div class="button-group">
+    <button mat-raised-button class="buttonText" color="primary" (click)="songService.editSong()">Edit song</button>
+    <button mat-raised-button class="buttonText" (click)="closeDialog()">Close</button>
+  </div>
+</mat-dialog-content>
