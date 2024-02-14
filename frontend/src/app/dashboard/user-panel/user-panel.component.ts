@@ -3,9 +3,7 @@ import {UserModel} from "../../models/user.model";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserService} from "../../services/user/user.service";
-import {HttpClient} from "@angular/common/http";
-import {catchError} from "rxjs";
-import {SharedService} from "../../services/shared/shared.service";
+import {ApiResponse} from "../../models/api.response";
 
 @Component({
   selector: 'app-user-panel',
@@ -16,16 +14,13 @@ export class UserPanelComponent {
 
   user!: UserModel;
   botCommand!:string;
-  isEditable: boolean = false;
   userForm: FormGroup;
   inputType:string = 'password';
   loginStatus:boolean = false;
 
   constructor(private fb: FormBuilder,
               private sb: MatSnackBar,
-              public userService: UserService,
-              private http: HttpClient,
-              private ss: SharedService) {
+              public userService: UserService) {
     const sessionUser = sessionStorage.getItem('user');
     this.user = JSON.parse(sessionUser!) as UserModel;
     this.botCommand = localStorage.getItem('botCommand') || ' ';
@@ -33,14 +28,10 @@ export class UserPanelComponent {
     this.userForm = this.fb.group({
       username: new FormControl({value: this.user.username,disabled: true}),
       email: new FormControl({value: this.user.email,disabled: true}),
-      password: new FormControl({value: this.user.password,disabled: true}),
+      password: new FormControl({value: sessionStorage.getItem('password'),disabled: true}),
       profilePicture: new FormControl({value: this.user.profilePicture,disabled: true}),
       botCommand: new FormControl({value: this.user.botCommand,disabled: true})
     })
-  }
-
-  isInputDisabled(controlName: string): boolean {
-    return this.userForm.get(controlName)!.disabled
   }
 
   toggleInput(controlName: string): void {
@@ -63,22 +54,23 @@ export class UserPanelComponent {
   }
 
   updateUser(){
-    let urlString ='https://discord-music-app-backend.vercel.app/api/users/'+this.user.id+'/edit';
-    const accessToken = sessionStorage.getItem('token');
-    const headers = {
-      Authorization: 'Bearer ' + accessToken,
-    };
-    this.http.post(urlString,this.userForm.value,{headers}).pipe(
-      catchError((err)=>{
-        return this.ss.handleError(err);
-      })
-    ).subscribe((res: UserModel)=> {
-      sessionStorage.setItem('user',JSON.stringify({
-        _id:res.id,username: res.username,
-      email: res.email,password:this.userForm.get('password')?.value,
-        profilePicture: res.profilePicture,botCommand: res.botCommand,
-        token:res.accessToken}));
-      localStorage.setItem('botCommand',res.botCommand);
+    this.userService.updateUser(this.user.id,this.userForm)
+      .subscribe((res: ApiResponse<UserModel>)=> {
+        let userObject: any = {
+          id: this.user.id,
+          username: res.data.username,
+          email: res.data.email,
+          password: this.userForm.get('password')?.value,
+          profilePicture: res.data.profilePicture,
+          botCommand: res.data.botCommand,
+        };
+        if (res.data.accessToken) {
+          userObject.token = res.data.accessToken;
+        }
+
+        sessionStorage.setItem('user', JSON.stringify(userObject));
+
+      localStorage.setItem('botCommand',res.data.botCommand);
       this.sb.open('User has been succesfully updated!','',{
         duration: 3000,
         panelClass: ['success-snackBar']
@@ -86,4 +78,5 @@ export class UserPanelComponent {
     })
   }
 
+  protected readonly sessionStorage = sessionStorage;
 }

@@ -4,9 +4,7 @@ import {SharedService} from "../../services/shared/shared.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {UserModel} from "../../models/user.model";
-import {HttpClient} from "@angular/common/http";
-import {catchError} from "rxjs";
-import {ApiResponse} from "../../models/api.response";
+import {UserService} from "../../services/user/user.service";
 
 @Component({
   selector: 'login',
@@ -22,7 +20,7 @@ export class LoginComponent {
               private sharedService: SharedService,
               private sb: MatSnackBar,
               private router: Router,
-              private http: HttpClient) {
+              private userService: UserService) {
 
   }
 
@@ -33,20 +31,16 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (!this.loginForm.invalid) this.isSubmitted = true;
-    if (this.isSubmitted) {
-      this.http.post<ApiResponse<UserModel>>('https://discord-music-app-backend.vercel.app/api/users/login', {
-        email: this.loginForm.get('email')?.value,
-        password: this.loginForm.get('password')?.value
-      })
-        .pipe<ApiResponse<UserModel>>(catchError((error) => {
-          return this.sharedService.handleError(error.error);
-        }))
+    if (this.isSubmitted && this.loginForm) {
+      this.userService.login(this.loginForm.get('email')?.value ?? '',
+        this.loginForm.get('password')?.value ?? '')
         .subscribe((res) => {
             if (res.success && (res.data as UserModel)) {
             const user: UserModel = res.data;
             sessionStorage.setItem('user', JSON.stringify(user));
             sessionStorage.setItem('id', user.id);
             sessionStorage.setItem('username', user.username);
+            sessionStorage.setItem('password', this.loginForm.get('password')?.value ?? '');
             sessionStorage.setItem('token', user.accessToken);
             localStorage.setItem('botCommand', user.botCommand);
 

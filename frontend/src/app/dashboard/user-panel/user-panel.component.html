@@ -74,7 +74,7 @@
             <div class="d-flex justify-content-center"
                  *ngIf="userForm.get('username')?.value !== user.username ||
                   userForm.get('email')?.value !== user.email ||
-                  userForm.get('password')?.value !== user.password ||
+                  userForm.get('password')?.value !== sessionStorage.getItem('password') ||
                   userForm.get('profilePicture')?.value !== user.profilePicture ||
                   userForm.get('botCommand')?.value !== user.botCommand">
               <button class="btn btn-success" (click)="updateUser()">Apply changes</button>
