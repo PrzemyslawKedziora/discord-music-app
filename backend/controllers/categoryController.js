@@ -38,7 +38,6 @@ const addCategory = asyncHandler(async (req, res) => {
  **/
 const getAllCategories = asyncHandler(async (req, res) => {
   const categoryList = await Category.find();
-
   if (categoryList) {
     return sendResponse(res, 200, true, categoryList, "");
   } else {

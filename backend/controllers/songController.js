@@ -171,11 +171,6 @@ const getRandomSong = asyncHandler(async (req, res) => {
 const likeSong = asyncHandler(async (req, res) => {
   const songID = req.params.songID;
 
-  // <---- Checking if the provided song id is valid ---->
-  if (!mongoose.Types.ObjectId.isValid(songID)) {
-    return sendResponse(res, 400, false, {}, "Invalid song id");
-  }
-
   const song = await Song.findById(songID);
   if(!song) {
     return sendResponse(res, 400, false, {}, "Cannot find song with provided ID");
@@ -206,11 +201,6 @@ const likeSong = asyncHandler(async (req, res) => {
  **/
 const deleteSong = asyncHandler(async (req, res) => {
   const songID = req.params.songID;
-
-  // <---- Checking if the provided song id is valid ---->
-  if (!mongoose.Types.ObjectId.isValid(songID)) {
-    return sendResponse(res, 400, false, {}, "Invalid song id");
-  }
 
   // <---- Finding the song in the database ---->
   const song = await Song.findById(songID);
