@@ -4,6 +4,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient} from "@angular/common/http";
 import {catchError, Observable} from "rxjs";
 import {SharedService} from "../../services/shared/shared.service";
+import {ApiResponse} from "../../models/api.response";
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class PlaylistService {
 
   playlists:PlaylistModel[]=[];
 
-  getPlaylists(): Observable<PlaylistModel[]>{
-    return this.http.get<PlaylistModel[]>('https://discord-music-app-backend.vercel.app/api/playlists/all');
+  getPlaylists(): Observable<ApiResponse<PlaylistModel[]>>{
+    return this.http.get<ApiResponse<PlaylistModel[]>>('https://discord-music-app-backend.vercel.app/api/playlists/all');
   }
 
   deletePlaylist(playlist:PlaylistModel,index:number){
@@ -57,7 +58,7 @@ export class PlaylistService {
       Authorization: 'Bearer ' + accessToken,
     };
 
-    this.http.post(url,playlist._id,{headers}).subscribe(res=>{
+    this.http.post<ApiResponse<PlaylistModel>>(url,playlist._id,{headers}).subscribe(res=>{
       if (playlist.likes.includes(userID)){
         playlist.likes = playlist.likes.filter(id => id !== userID);
         return false;

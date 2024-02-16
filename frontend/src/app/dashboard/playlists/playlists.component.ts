@@ -34,7 +34,7 @@ export class PlaylistsComponent implements OnInit{
 
   ngOnInit(): void {
     this.ps.getPlaylists().subscribe((res)=>{
-      this.sharedService.sharedPlaylistArray = res;
+      this.sharedService.sharedPlaylistArray = res.data;
       this.playlists = this.sharedService.sharedPlaylistArray;
       this.playlistsTemp = this.playlists;
     });

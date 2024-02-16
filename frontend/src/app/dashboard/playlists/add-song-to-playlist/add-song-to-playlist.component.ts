@@ -27,7 +27,7 @@ export class AddSongToPlaylistComponent implements OnInit{
   ngOnInit(): void {
     const user = sessionStorage.getItem('id')
     this.ps.getPlaylists().subscribe(res =>{
-      this.playlists = res.filter(playlist => playlist.authorID._id == user);
+      this.playlists = res.data.filter(playlist => playlist.authorID._id == user);
     })
   }
 

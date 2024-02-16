@@ -2,10 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {SongModel} from "../../../../models/song.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
-import {ConfirmDialogComponent} from "../../delete-confirm-dialog/confirm-dialog.component";
 import {SongComponent} from "../../component/song.component";
 import {SongService} from "../../song.service";
-import {AddSongToPlaylistComponent} from "../../../playlists/add-song-to-playlist/add-song-to-playlist.component";
 
 @Component({
   selector: 'song-list-item',
@@ -40,17 +38,6 @@ export class ListItemComponent implements OnInit {
     }
   }
 
-
-  openConfirmDeleteDialog(songID: string, index: number) {
-
-    this.dialog.open(ConfirmDialogComponent, {
-      disableClose: true,
-      width: '50%',
-      data: {songs: this.songData, songID: songID, index: index}
-    })
-
-  }
-
   wrongUser() {
     this.sb.open('You cannot delete song that was not added by you!', '', {
       duration: 2000,
@@ -58,11 +45,4 @@ export class ListItemComponent implements OnInit {
     });
   }
 
-  openAddToPlaylistDialog(songID: string) {
-    this.dialog.open(AddSongToPlaylistComponent, {
-      width: '50%',
-      data: {songID: songID}
-    })
-
-  }
 }

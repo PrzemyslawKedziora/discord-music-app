@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
     this.cs.getCategories().subscribe((res: ApiResponse<CategoryModel[]>) =>{
       res.data = res.data.sort((cat1,cat2)=> cat1.name.localeCompare(cat2.name))
       this.dialogData.category = res.data;
+      this.sharedService.sharedCategoriesArray = res.data;
     })
     sessionStorage.getItem('token') ?
       this.sharedService.isLoggedInStatus = true : this.sharedService.isLoggedInStatus=false;

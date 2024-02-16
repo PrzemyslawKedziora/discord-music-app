@@ -15,7 +15,7 @@
               {{author.name}}
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="editSongForm.get('authors')?.hasError('required')">Choose your author</mat-error>
+          <mat-error *ngIf="editSongForm.get('authors')?.hasError('required')">Song must have an author!</mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -26,7 +26,7 @@
           <mat-select formControlName="categories" multiple [(ngModel)]="data.categories" [compareWith]="compareByID">
             <mat-option *ngFor="let category of  categories" [value]="category">{{category.name}}</mat-option>
           </mat-select>
-          <mat-error *ngIf="editSongForm.get('categories')?.hasError('required')">Select proper genre</mat-error>
+          <mat-error *ngIf="editSongForm.get('categories')?.hasError('required')">Genre cannot be empty.</mat-error>
         </mat-form-field>
       </div>
     </div>

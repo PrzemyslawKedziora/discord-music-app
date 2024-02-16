@@ -10,6 +10,7 @@ const {
     editPlaylist,
     deletePlaylist,
     getAllPlaylists,
+    getPlaylist,
     addSongToPlaylist,
     removeSongFromPlaylist,
 } = require('../controllers/playlistController');
@@ -56,6 +57,8 @@ router.post("/:playlistID/add-song",
     validateRequest, 
     addSongToPlaylist
 );
+
+router.get("/:playlistID/info", getPlaylist);
 
 router.post("/:playlistID/remove-song", 
     validateToken,   [

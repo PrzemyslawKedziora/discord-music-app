@@ -29,12 +29,12 @@
         <i class="bi bi-list"></i>
       <div class="hidden-list" *ngIf="expanded">
         <mat-nav-list>
-          <mat-list-item (click)="openAddToPlaylistDialog(songRecord._id)">Add to playlist</mat-list-item>
+          <mat-list-item (click)="ss.openAddToPlaylistDialog(songRecord._id)">Add to playlist</mat-list-item>
           <mat-list-item *ngIf="this.sc.isLoggedIn && this.songRecord.userID.username == user"
                          (click)="ss.editSongDialog(songRecord)"
           >Edit</mat-list-item>
           <mat-list-item *ngIf="this.sc.isLoggedIn && this.songRecord.userID.username == user"
-                         (click)="openConfirmDeleteDialog(songRecord._id,songIndex)"
+                         (click)="ss.openConfirmDeleteDialog(songRecord._id,songIndex)"
           >Remove</mat-list-item>
         </mat-nav-list>
       </div>

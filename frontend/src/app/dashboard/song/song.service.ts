@@ -8,6 +8,8 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {EditSongComponent} from "./edit-song/edit-song.component";
 import {ApiResponse} from "../../models/api.response";
+import {ConfirmDialogComponent} from "./delete-confirm-dialog/confirm-dialog.component";
+import {AddSongToPlaylistComponent} from "../playlists/add-song-to-playlist/add-song-to-playlist.component";
 
 @Injectable({
   providedIn: 'root'
@@ -92,6 +94,24 @@ export class SongService {
       length+= author.name.length;
     }
     return length;
+  }
+
+  openConfirmDeleteDialog(songID: string, index: number) {
+
+    this.dialog.open(ConfirmDialogComponent, {
+      disableClose: true,
+      width: '50%',
+      data: {songs: this.songs, songID: songID, index: index}
+    })
+
+  }
+
+  openAddToPlaylistDialog(songID: string) {
+    this.dialog.open(AddSongToPlaylistComponent, {
+      width: '50%',
+      data: {songID: songID}
+    })
+
   }
 
 }
