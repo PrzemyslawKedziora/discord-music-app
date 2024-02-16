@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SongModel} from "../../../../models/song.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MatDialog} from "@angular/material/dialog";
 import {SongComponent} from "../../component/song.component";
 import {SongService} from "../../song.service";
 
@@ -15,6 +14,7 @@ export class ListItemComponent implements OnInit {
   @Input() songData!: SongModel[];
   @Input() songRecord!: SongModel;
   @Input() songIndex!: number;
+  @Input() copyMode!:string;
   @Input('botCommand') botCommand!: string;
   expanded:boolean=false;
   isLiked!: boolean;
@@ -23,7 +23,6 @@ export class ListItemComponent implements OnInit {
 
   constructor(public sc: SongComponent,
               private sb: MatSnackBar,
-              private dialog: MatDialog,
               public ss: SongService) {
   }
 

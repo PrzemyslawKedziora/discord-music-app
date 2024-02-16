@@ -58,7 +58,7 @@
                 </div>
               </div>
             </div>
-            <div class="row last-row">
+            <div class="row">
               <div class="col settings-row">
                 <div class="input-group">
                   <label>Bot Command</label>
@@ -71,12 +71,28 @@
                 </div>
               </div>
             </div>
+            <div class="row last-row">
+              <div class="col settings-row">
+                <div class="input-group">
+                  <label>Copy by</label>
+                    <mat-radio-group formControlName="copyMode">
+                      <mat-radio-button value="url">URL</mat-radio-button>
+                      <mat-radio-button value="name">Name</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                  <button class="btn btn-primary" (click)="toggleInput('copyMode')">edit</button>
+                </div>
+              </div>
+            </div>
             <div class="d-flex justify-content-center"
                  *ngIf="userForm.get('username')?.value !== user.username ||
                   userForm.get('email')?.value !== user.email ||
                   userForm.get('password')?.value !== sessionStorage.getItem('password') ||
                   userForm.get('profilePicture')?.value !== user.profilePicture ||
-                  userForm.get('botCommand')?.value !== user.botCommand">
+                  userForm.get('botCommand')?.value !== user.botCommand ||
+                  userForm.get('copyMode')?.value !== user.copyMode
+                    ">
               <button class="btn btn-success" (click)="updateUser()">Apply changes</button>
             </div>
           </div>

@@ -10,9 +10,13 @@
 }
 .user-container{
   background-color: $background-hover-color;
-  padding-top: 100px;
+  padding: 100px 0 40px 0;
   width: 60%;
   min-height: 640px;
+}
+.content-container{
+  position: relative;
+  bottom: 12vh;
 }
 mat-form-field{
   display: flex;

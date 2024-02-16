@@ -17,10 +17,10 @@ export class UserPanelComponent {
   userForm: FormGroup;
   inputType:string = 'password';
   loginStatus:boolean = false;
-
   constructor(private fb: FormBuilder,
               private sb: MatSnackBar,
               public userService: UserService) {
+
     const sessionUser = sessionStorage.getItem('user');
     this.user = JSON.parse(sessionUser!) as UserModel;
     this.botCommand = localStorage.getItem('botCommand') || ' ';
@@ -30,7 +30,8 @@ export class UserPanelComponent {
       email: new FormControl({value: this.user.email,disabled: true}),
       password: new FormControl({value: sessionStorage.getItem('password'),disabled: true}),
       profilePicture: new FormControl({value: this.user.profilePicture,disabled: true}),
-      botCommand: new FormControl({value: this.user.botCommand,disabled: true})
+      botCommand: new FormControl({value: this.user.botCommand,disabled: true}),
+      copyMode: new FormControl({value: this.user.copyMode,disabled: true})
     })
   }
 
@@ -63,6 +64,7 @@ export class UserPanelComponent {
           password: this.userForm.get('password')?.value,
           profilePicture: res.data.profilePicture,
           botCommand: res.data.botCommand,
+          copyMode: res.data.copyMode
         };
         if (res.data.accessToken) {
           userObject.token = res.data.accessToken;
@@ -71,6 +73,7 @@ export class UserPanelComponent {
         sessionStorage.setItem('user', JSON.stringify(userObject));
 
       localStorage.setItem('botCommand',res.data.botCommand);
+      localStorage.setItem('copyMode',res.data.copyMode);
       this.sb.open('User has been succesfully updated!','',{
         duration: 3000,
         panelClass: ['success-snackBar']
@@ -79,4 +82,5 @@ export class UserPanelComponent {
   }
 
   protected readonly sessionStorage = sessionStorage;
+  protected readonly console = console;
 }

@@ -14,6 +14,7 @@ export class SongCardComponent{
   @Input() songData!: SongModel[];
   @Input() songIndex!: number;
   @Input() isBigScreen!:boolean;
+  @Input() copyMode!:string;
   maxTitleLength = 25;
   userID = '';
   botCommand!:string;

@@ -42,6 +42,7 @@ export class SongComponent implements OnInit,AfterContentChecked{
   paginationLength:number = this.songs.length;
   isBigScreen=true;
   hasParams:boolean=false;
+  copyMode:string = localStorage.getItem('copyMode') ?? '';
 
   constructor(public dialog: MatDialog,
               public sharedService: SharedService,

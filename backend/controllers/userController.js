@@ -62,6 +62,7 @@ const loginUser = asyncHandler( async (req, res) => {
             id: user.id,
             profilePicture: user.profilePicture,
             botCommand: user.botCommand,
+            copyMode: user.copyMode,
             isAdmin: user.isAdmin,
         };
         const accessToken = jwt.sign(
@@ -98,7 +99,7 @@ const currentUser = asyncHandler(async (req, res) => {
  */
 const editUser = asyncHandler(async (req,res) => {
     const userID = req.params.userID;
-    const { username, email, password, profilePicture, botCommand } = req.body;
+    const { username, email, password, profilePicture, botCommand, copyMode } = req.body;
 
     // <---- Checking if the provided user id is valid ---->
     if (!mongoose.Types.ObjectId.isValid(userID)) {
@@ -120,6 +121,7 @@ const editUser = asyncHandler(async (req,res) => {
     user.email = email ? email : user.email;
     user.profilePicture = profilePicture ? profilePicture : user.profilePicture;
     user.botCommand = botCommand ? botCommand : user.botCommand;
+    user.copyMode = copyMode ? copyMode : user.copyMode;
     // <---- If exists, validating, hashing and setting new password ---->
     if (password) {
         const hashedPassword = await bcrypt.hash(password, 10);

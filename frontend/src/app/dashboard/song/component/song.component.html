@@ -80,7 +80,7 @@
               <div *ngFor="let song of paginatedSongs; index as index"
                    class="col-12">
                 <song-list-item [songData]="songs" [songRecord]="song" [songIndex]="index + (pageEvent.pageIndex * pageEvent.pageSize)"
-                                [botCommand]="botCommand" ></song-list-item>
+                                [botCommand]="botCommand" [copyMode]="copyMode" ></song-list-item>
               </div>
               <mat-paginator
                 [length]="paginationLength"
@@ -96,6 +96,7 @@
                   <div *ngFor="let song of paginatedSongs;" class="col-md-6">
                     <app-song-card [songData]="songs" [song]="song"
                                    [isBigScreen]="isBigScreen"
+                                   [copyMode]="copyMode"
                     ></app-song-card>
                   </div>
                 </div>

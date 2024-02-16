@@ -29,6 +29,10 @@ const userSchema = mongoose.Schema(
       type: String,
       default: "",
     },
+    copyMode: {
+      type: String,
+      default: "name",
+    },
       isAdmin: {
       type: Boolean,
       default: false,

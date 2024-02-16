@@ -1,5 +1,5 @@
 <div class="card d-flex flex-row" [ngClass]="{'card-on-small' : !isBigScreen}"
-     [cdkCopyToClipboard]="this.botCommand+' '+song.name"
+     [cdkCopyToClipboard]="copyMode == 'name' ? this.botCommand +' '+ song.name : this.botCommand +' '+ song.ytURL"
      (click)="ss.onClick($event)"
      (dblclick)="onDoubleClick($event)"
      (contextmenu)="onContextMenu($event, song)"

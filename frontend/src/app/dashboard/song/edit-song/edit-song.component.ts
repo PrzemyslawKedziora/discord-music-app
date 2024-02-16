@@ -51,7 +51,9 @@ export class EditSongComponent implements OnInit{
           duration: 3000,
           panelClass: ['success-snackBar']
         })
-    })
+      this.closeDialog();
+    }
+    )
   }
   compareByID(ob1: any, ob2: any): boolean {
       return ob1 && ob2 ? ob1._id === ob2._id : ob1 === ob2;

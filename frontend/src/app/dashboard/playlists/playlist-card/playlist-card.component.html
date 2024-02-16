@@ -7,7 +7,7 @@
     <img [src]="isImgValid()" [ngStyle]="{'width':'150px'}"
       alt="{{playlist.name.slice(0,20)}}+'...'">
   </div>
-  <div class="playlist-main-info d-flex flex-column justify-content-between">
+  <div class="d-flex flex-column justify-content-between playlist-main-info ">
     <div class="info-name-author">
       <p class="name">{{playlist.name.slice(0,20)}}</p>
       <p class="author">{{playlist.authorID.username}}</p>
@@ -17,5 +17,4 @@
       <div>{{playlist.likes ? playlist.likes.length : 0}}</div>
     </div>
   </div>
-
 </mat-card>
