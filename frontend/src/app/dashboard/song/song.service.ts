@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {CategoryModel} from "../../models/category.model";
 import {SongModel} from "../../models/song.model";
-import {AddDialogModel} from "../../models/add-dialog.model";
 import {MatDialog} from "@angular/material/dialog";
 import {SharedService} from "../../services/shared/shared.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -15,19 +14,21 @@ import {ApiResponse} from "../../models/api.response";
 })
 export class SongService {
 
+  categories: CategoryModel[]=[];
+  songs: SongModel[]=[];
+
+  doubleClickTimeout: any;
+  userID = sessionStorage.getItem('id')
+  accessToken = sessionStorage.getItem('token');
+  headers = {
+    Authorization: 'Bearer ' + this.accessToken,
+  };
   constructor(public dialog: MatDialog,
               public sharedService: SharedService,
               private sb: MatSnackBar,
               private http: HttpClient) {
-
   }
 
-  categories: CategoryModel[]=[];
-  songs: SongModel[]=[];
-  songsTemp: SongModel[]=[];
-  dialogData: AddDialogModel={category:[],author:[]};
-  isLiked!:boolean;
-  doubleClickTimeout: any;
 
   getSongs(): Observable<ApiResponse<SongModel[]>> {
     return this.http.get<ApiResponse<SongModel[]>>('https://discord-music-app-backend.vercel.app/api/songs/all');
@@ -53,25 +54,23 @@ export class SongService {
     })
 
   }
-  editSong(){
-
+  editSong(song: SongModel): Observable<ApiResponse<SongModel>>{
+    const url ='https://discord-music-app-backend.vercel.app/api/songs/edit/'+song._id;
+    return this.http.post<ApiResponse<SongModel>>(url,{
+      authors: song.authors,
+      categories: song.categories
+    }, {headers: this.headers});
   }
 
   like(song: SongModel) {
       const url ='https://discord-music-app-backend.vercel.app/api/songs/'+song._id+'/like';
-      const accessToken = sessionStorage.getItem('token');
-      const userID = sessionStorage.getItem('id');
-      const headers = {
-      Authorization: 'Bearer ' + accessToken,
-     };
-
-    this.http.post(url,song._id,{headers}).subscribe(()=> {
-        if (song.likes.includes(userID)){
-          song.likes = song.likes.filter(id => id !== userID);
+    this.http.post(url,song._id,{headers: this.headers}).subscribe(()=> {
+        if (song.likes.includes(this.userID)){
+          song.likes = song.likes.filter(id => id !== this.userID);
           return false;
         }
         else {
-          song.likes.push(userID);
+          song.likes.push(this.userID);
           return true;
          }
         }
@@ -84,8 +83,7 @@ export class SongService {
   }
 
   checkIsLiked(song:SongModel):boolean{
-    const userID = sessionStorage.getItem('id');
-    return song.likes.includes(userID || '');
+    return song.likes.includes(this.userID || '');
   }
 
   calcAuthorsLength(authors: {_id:string,name:string}[]){

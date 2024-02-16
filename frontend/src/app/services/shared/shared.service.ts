@@ -5,6 +5,7 @@ import {Observable, of, Subject} from "rxjs";
 import {UserModel} from "../../models/user.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {PlaylistModel} from "../../models/playlist.model";
+import {CategoryModel} from "../../models/category.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class SharedService {
   private _sharedAddingAuthorStatus!: boolean;
   private _sharedSongsArray!: SongModel[];
   private _sharedArtistsArray!: AuthorModel[];
+  private _sharedCategoriesArray!: CategoryModel[];
   private _sharedPlaylistArray!: PlaylistModel[];
   private newAuthorSubject = new Subject<AuthorModel>();
   private _loginUserStatus!:boolean;
@@ -138,6 +140,15 @@ export class SharedService {
 
   set sharedPlaylistArray(value: PlaylistModel[]) {
     this._sharedPlaylistArray = value;
+  }
+
+
+  get sharedCategoriesArray(): CategoryModel[] {
+    return this._sharedCategoriesArray;
+  }
+
+  set sharedCategoriesArray(value: CategoryModel[]) {
+    this._sharedCategoriesArray = value;
   }
 
   handleError = (error: any): Observable<any> => {

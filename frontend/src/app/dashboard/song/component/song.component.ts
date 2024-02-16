@@ -51,6 +51,7 @@ export class SongComponent implements OnInit,AfterContentChecked{
               private categoryService: CategoryService,
               private router: Router) {
     this.sharedService.sharedArtistsArray;
+    this.sharedService.sharedCategoriesArray;
     this.sharedService.filterStatus=false;
     this.sharedService.isLoggedInStatus = this.isLoggedIn;
     this.isLoggedIn = !!sessionStorage.getItem("token");
@@ -76,6 +77,7 @@ export class SongComponent implements OnInit,AfterContentChecked{
 
     this.categoryService.getCategories().subscribe((res: ApiResponse<CategoryModel[]>)=>{
         this.categories = res.data.sort((a1,a2)=>a1.name.localeCompare(a2.name));
+        this.sharedService.sharedCategoriesArray = this.categories;
         this.dialogData.category = res.data;
     });
     this.authorService.getAuthors().subscribe((res: ApiResponse<AuthorModel[]>) =>{

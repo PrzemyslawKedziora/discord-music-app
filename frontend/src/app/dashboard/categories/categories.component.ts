@@ -18,8 +18,9 @@ export class CategoriesComponent {
   constructor(public sharedService: SharedService,
               private categoryService: CategoryService,
               private router : Router) {
-    categoryService.getCategories().subscribe(res =>{
+    this.categoryService.getCategories().subscribe(res =>{
       this.categories = res.data;
+      this.sharedService.sharedCategoriesArray = res.data;
       this.filteredCategories = res.data;
     })
 

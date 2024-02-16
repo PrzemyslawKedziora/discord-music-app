@@ -16,7 +16,7 @@
       </div>
       <div class="song-categories my-auto">
         <span *ngFor="let category of songRecord.categories; let last = last">
-    {{ category.name || 'loading...'}}{{ !last ? ', ' : '' }}
+    {{ category.name || 'loading...' | titlecase}}{{ !last ? ', ' : '' }}
   </span>
       </div>
       <div class="my-auto data like-group" (click)="ss.like(songRecord)">

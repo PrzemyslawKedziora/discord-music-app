@@ -2,17 +2,17 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SharedService} from "../../../services/shared/shared.service";
-import {CategoryService} from "../../categories/category.service";
 import {SongModel} from "../../../models/song.model";
 import {AuthorModel} from "../../../models/author.model";
 import {CategoryModel} from "../../../models/category.model";
-import {ApiResponse} from "../../../models/api.response";
 import {SongService} from "../song.service";
+import {catchError} from "rxjs";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-edit-song',
   templateUrl: './edit-song.component.html',
-  styleUrls: ['../new-song/new-song.component.scss']
+  styleUrls: ['../new-song/new-song.component.scss', './edit-song.component.scss']
 })
 export class EditSongComponent implements OnInit{
 
@@ -25,26 +25,34 @@ export class EditSongComponent implements OnInit{
               public songService: SongService,
               private fb: FormBuilder,
               private sharedService: SharedService,
-              private categoryService: CategoryService,
+              private sb: MatSnackBar
   ) {
     this.artists = this.sharedService.sharedArtistsArray;
-    this.categoryService.getCategories().subscribe((res: ApiResponse<CategoryModel[]>)=>{
-      this.categories = res.data;
-    });
+    this.categories = this.sharedService.sharedCategoriesArray;
   }
 
   ngOnInit(): void {
     this.editSongForm = this.fb.group({
-      ytURL: [this.data.ytURL, Validators.required],
+      _id: this.data._id,
       authors: [this.data.authors, Validators.required],
       categories: [this.data.categories, Validators.required],
-      userID: sessionStorage.getItem('userID'), //temp
       updatedAt: (new Date).toISOString()
 
     });
   }
 
-
+  editSongFun(){
+    this.songService.editSong(this.editSongForm.value).pipe(
+      catchError((err)=>{
+        return this.sharedService.handleError(err);
+      })
+    ).subscribe(res=>{
+        this.sb.open('Song data has been succesfully changed!','',{
+          duration: 3000,
+          panelClass: ['success-snackBar']
+        })
+    })
+  }
   compareByID(ob1: any, ob2: any): boolean {
       return ob1 && ob2 ? ob1._id === ob2._id : ob1 === ob2;
   }
