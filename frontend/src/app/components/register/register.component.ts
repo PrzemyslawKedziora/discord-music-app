@@ -1,21 +1,18 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {SharedService} from "../../services/shared/shared.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
-import {catchError, Subscription} from "rxjs";
+import {UserService} from "../../services/user/user.service";
 
 @Component({
   selector: 'register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnDestroy{
+export class RegisterComponent{
 
-  req$!:Subscription;
   isValidated!: boolean;
-  passwordsNotConfirmed!: boolean;
   registerStatus!:boolean;
   registerForm: FormGroup;
 
@@ -23,11 +20,11 @@ export class RegisterComponent implements OnDestroy{
               private sharedService: SharedService,
               private sb: MatSnackBar,
               private router: Router,
-              private http: HttpClient) {
+              private us: UserService) {
 
     this.registerForm = this.fb.group({
       email: ['',[Validators.required,Validators.email]],
-      username: ['',[Validators.required,Validators.minLength(3)]],
+      username: ['',[Validators.required,Validators.minLength(3),Validators.maxLength(16)]],
       password: ['',[Validators.required,Validators.minLength(5),Validators.maxLength(16)]],
       confirmPassword: ['',Validators.required],
     },
@@ -35,23 +32,14 @@ export class RegisterComponent implements OnDestroy{
     )
   }
 
-  ngOnDestroy(): void {
-    this.req$.unsubscribe();
-  }
-
-
   onSubmit(): void {
-    this.checkForm();
+     this.isValidated = this.checkForm();
     if(this.isValidated){
       this.handleError(new Error('niewypelniony formularz'))
       throw new Error('niewypelniony formularz');
     }
     else{
-     this.req$ =  this.http.post('https://discord-music-app-backend.vercel.app/api/users/register',this.registerForm.value).pipe(
-        catchError((err)=>{
-          return this.sharedService.handleError(err);
-        })
-      ).subscribe(()=>{
+     this.us.registerUser(this.registerForm).subscribe(()=>{
         this.sb.open('User has been successfully registered!\n Please,log in.','', {
               duration: 3000,
               panelClass: ['success-snackBar']
@@ -68,7 +56,7 @@ export class RegisterComponent implements OnDestroy{
   handleError = (error: any): void => {
     this.registerStatus = false;
     this.sharedService.sharedAddingSongStatus = this.registerStatus;
-    this.sb.open(error.error.message,'', {
+    this.sb.open(error.message,'', {
       duration: 3000,
       panelClass: ['failed-snackBar']
     })
@@ -89,9 +77,10 @@ export class RegisterComponent implements OnDestroy{
       return null;
     };
   }
-  checkForm(){
-    this.isValidated = (this.registerForm.get('email')?.value == '' ||
-      this.registerForm.get('username')?.value == '' || this.registerForm.get('password')?.value == ''
-      || this.registerForm.get('confirmPassword')?.value == '');
+  checkForm(): boolean{
+    return (this.registerForm.get('email')?.value == '' ||
+      this.registerForm.get('username')?.value == '' ||
+      this.registerForm.get('password')?.value == '' ||
+      this.registerForm.get('confirmPassword')?.value == '');
   }
 }

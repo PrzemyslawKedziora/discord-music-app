@@ -52,4 +52,12 @@ export class UserService {
       })
     )
   }
+
+  registerUser(form: FormGroup): Observable<ApiResponse<UserModel>>{
+    return this.http.post<ApiResponse<UserModel>>('https://discord-music-app-backend.vercel.app/api/users/register',form.value).pipe(
+      catchError((err)=>{
+        return this.sharedService.handleError(err);
+      })
+    )
+  }
 }

@@ -11,13 +11,14 @@
         class="input"
         placeholder="Email adress"
         formControlName="email"
+
         [class.invalid]="loginForm.get('email')?.invalid &&
-        (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)"
+        (loginForm.get('email')?.touched || loginForm.get('email')?.dirty || isSubmitted)"
       >
         <div *ngIf="loginForm.get('email')?.hasError('required') &&
         (loginForm.get('email')?.touched || loginForm.get('email')?.dirty || isSubmitted)"
              class="error">
-          Email adress is mandatory
+          Email address is mandatory
         </div>
       <input type="password" placeholder="Password" formControlName="password">
         <div *ngIf="loginForm.get('password')?.invalid &&

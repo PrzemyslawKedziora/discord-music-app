@@ -15,23 +15,20 @@ export class LoginComponent {
 
   isSubmitted = false;
   isLoggedIn = false;
+  loginForm = this.fb.group({
+    email: ['',[Validators.required,Validators.email]],
+    password: ['',Validators.required]
+  });
 
   constructor(private fb: FormBuilder,
               private sharedService: SharedService,
               private sb: MatSnackBar,
               private router: Router,
               private userService: UserService) {
-
   }
-
-  loginForm = this.fb.group({
-    email: ['',Validators.required],
-    password: ['',Validators.required]
-  });
-
   onSubmit(): void {
-    if (!this.loginForm.invalid) this.isSubmitted = true;
-    if (this.isSubmitted && this.loginForm) {
+    !this.loginForm.invalid ? this.isSubmitted = false : this.isSubmitted=true;
+    if (!this.isSubmitted && this.loginForm) {
       this.userService.login(this.loginForm.get('email')?.value ?? '',
         this.loginForm.get('password')?.value ?? '')
         .subscribe((res) => {

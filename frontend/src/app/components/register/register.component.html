@@ -16,7 +16,7 @@
           <div *ngIf="registerForm.get('email')?.hasError('required') &&
         (registerForm.get('email')?.touched || registerForm.get('email')?.dirty || isValidated)"
                class="error">
-            Email adress is mandatory
+            Email address is mandatory
           </div>
           <div *ngIf="registerForm.get('email')?.hasError('email') &&
         (registerForm.get('email')?.touched || registerForm.get('email')?.dirty || isValidated)"
@@ -41,7 +41,7 @@
             Username is too short
           </div>
           <div *ngIf="
-        (registerForm.get('username')?.value?.length>16)"
+        (registerForm.get('username')?.errors?.['maxlength'])"
                class="error">
             Username is too long
           </div>
@@ -56,7 +56,7 @@
             Password is too short
           </div>
           <div *ngIf="
-        (registerForm.get('password')?.value?.length>16)"
+        (registerForm.get('password')?.errors?.['maxlength'])"
                class="error">
             Password is too long
           </div>
