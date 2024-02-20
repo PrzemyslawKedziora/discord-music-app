@@ -17,9 +17,10 @@ export class UserPanelComponent {
   userForm: FormGroup;
   inputType:string = 'password';
   loginStatus:boolean = false;
+  fieldActivationMap: { [key: string]: boolean } = {};
   constructor(private fb: FormBuilder,
               private sb: MatSnackBar,
-              public userService: UserService) {
+              public userService: UserService,) {
 
     const sessionUser = sessionStorage.getItem('user');
     this.user = JSON.parse(sessionUser!) as UserModel;
@@ -39,6 +40,7 @@ export class UserPanelComponent {
     const control = this.userForm.get(controlName);
     if (control) {
       control.disabled ? control.enable() : control.disable();
+      this.fieldActivationMap[controlName] = control.enabled;
     }
   }
   togglePasswordInput(){

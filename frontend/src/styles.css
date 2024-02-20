@@ -11,7 +11,9 @@ body::-webkit-scrollbar{
   background-repeat: no-repeat;
   background-size: cover;
 }
-
+.app-name:hover{
+  cursor: pointer;
+}
 .success-snackBar {
   background: #198754;
   --mdc-snackbar-container-color: #198754;

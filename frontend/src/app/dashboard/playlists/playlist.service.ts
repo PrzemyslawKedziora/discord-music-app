@@ -11,12 +11,11 @@ import {ApiResponse} from "../../models/api.response";
 })
 export class PlaylistService {
 
+  playlists:PlaylistModel[]=[];
   constructor(private sb: MatSnackBar,
               private sharedService: SharedService,
               private http: HttpClient) {
   }
-
-  playlists:PlaylistModel[]=[];
 
   getPlaylists(): Observable<ApiResponse<PlaylistModel[]>>{
     return this.http.get<ApiResponse<PlaylistModel[]>>('https://discord-music-app-backend.vercel.app/api/playlists/all');

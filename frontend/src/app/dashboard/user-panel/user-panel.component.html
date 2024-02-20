@@ -15,7 +15,9 @@
                   </mat-form-field>
                 </div>
                 <div>
-                  <button class="btn btn-primary" (click)="toggleInput('username')">edit</button>
+                  <button class="btn btn-primary" (click)="toggleInput('username')">
+                    <i class="bi" [ngClass]="{'bi-x-square' : !fieldActivationMap['username'], 'bi-check-square' : fieldActivationMap['username']}"></i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -28,7 +30,9 @@
                   </mat-form-field>
                 </div>
                 <div>
-                  <button class="btn btn-primary" (click)="toggleInput('email')">edit</button>
+                  <button class="btn btn-primary" (click)="toggleInput('email')">
+                    <i class="bi" [ngClass]="{'bi-x-square' : !fieldActivationMap['email'], 'bi-check-square' : fieldActivationMap['email']}"></i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -41,7 +45,9 @@
                   </mat-form-field>
                 </div>
                 <div>
-                  <button class="btn btn-primary" (click)="togglePasswordInput()">edit</button>
+                  <button class="btn btn-primary" (click)="togglePasswordInput()">
+                    <i class="bi" [ngClass]="{'bi-x-square' : !fieldActivationMap['password'], 'bi-check-square' : fieldActivationMap['password']}"></i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -54,7 +60,9 @@
                   </mat-form-field>
                 </div>
                 <div>
-                  <button class="btn btn-primary" (click)="toggleInput('profilePicture')">edit</button>
+                  <button class="btn btn-primary" (click)="toggleInput('profilePicture')">
+                    <i class="bi" [ngClass]="{'bi-x-square' : !fieldActivationMap['copyMode'], 'bi-check-square' : fieldActivationMap['copyMode']}"></i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -67,7 +75,9 @@
                   </mat-form-field>
                 </div>
                 <div>
-                  <button class="btn btn-primary" (click)="toggleInput('botCommand')">edit</button>
+                  <button class="btn btn-primary" (click)="toggleInput('botCommand')">
+                    <i class="bi" [ngClass]="{'bi-x-square' : !fieldActivationMap['botCommand'], 'bi-check-square' : fieldActivationMap['botCommand']}"></i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -81,7 +91,9 @@
                     </mat-radio-group>
                 </div>
                 <div>
-                  <button class="btn btn-primary" (click)="toggleInput('copyMode')">edit</button>
+                  <button class="btn btn-primary" (click)="toggleInput('copyMode')">
+                    <i class="bi" [ngClass]="{'bi-x-square' : !fieldActivationMap['copyMode'], 'bi-check-square' : fieldActivationMap['copyMode']}"></i>
+                  </button>
                 </div>
               </div>
             </div>

@@ -35,8 +35,7 @@ export class RegisterComponent{
   onSubmit(): void {
      this.isValidated = this.checkForm();
     if(this.isValidated){
-      this.handleError(new Error('niewypelniony formularz'))
-      throw new Error('niewypelniony formularz');
+      this.handleError(new Error('The form is not fullfilled properly!'))
     }
     else{
      this.us.registerUser(this.registerForm).subscribe(()=>{
