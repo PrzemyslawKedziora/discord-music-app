@@ -45,7 +45,7 @@
                   </mat-form-field>
                 </div>
                 <div>
-                  <button class="btn btn-primary" (click)="togglePasswordInput()">
+                  <button class="btn btn-primary" (click)="toggleInput('password')">
                     <i class="bi" [ngClass]="{'bi-x-square' : !fieldActivationMap['password'], 'bi-check-square' : fieldActivationMap['password']}"></i>
                   </button>
                 </div>
@@ -61,7 +61,7 @@
                 </div>
                 <div>
                   <button class="btn btn-primary" (click)="toggleInput('profilePicture')">
-                    <i class="bi" [ngClass]="{'bi-x-square' : !fieldActivationMap['copyMode'], 'bi-check-square' : fieldActivationMap['copyMode']}"></i>
+                    <i class="bi" [ngClass]="{'bi-x-square' : !fieldActivationMap['profilePicture'], 'bi-check-square' : fieldActivationMap['profilePicture']}"></i>
                   </button>
                 </div>
               </div>

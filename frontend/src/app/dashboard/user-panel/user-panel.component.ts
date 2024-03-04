@@ -40,20 +40,9 @@ export class UserPanelComponent {
     const control = this.userForm.get(controlName);
     if (control) {
       control.disabled ? control.enable() : control.disable();
+      this.inputType = control.disabled && controlName === 'password' ? 'password' : 'text';
       this.fieldActivationMap[controlName] = control.enabled;
     }
-  }
-  togglePasswordInput(){
-    const control = this.userForm.get('password');
-    if (control) {
-      if(control.disabled) {
-        this.inputType = 'text';
-        control.enable();
-      }
-      else {
-        control.disable();
-        this.inputType = 'password'
-      }   }
   }
 
   updateUser(){
