@@ -24,7 +24,7 @@ router.post(
     body("authors", "Invalid authors array")
       .isArray({min: 1})
       .withMessage("authors must be an array of ID's")
-      .custom(array => array.every(id => mongoose.Types.ObjectId.isValid(id)))
+      .custom(array => array.every(id => !mongoose.Types.ObjectId.isValid(id)))
       .withMessage("Each author ID must be a valid MongoDB ObjectId"),
     body("categories", "Invalid array of category ID's").optional().isArray({ min: 0 })
       .optional()
