@@ -76,17 +76,9 @@ export class SongComponent implements OnInit,AfterContentChecked{
      })
      this.sharedService.isLoaded = true;
 
-    this.categoryService.getCategories().subscribe((res: ApiResponse<CategoryModel[]>)=>{
-        this.categories = res.data.sort((a1,a2)=>a1.name.localeCompare(a2.name));
-        this.sharedService.sharedCategoriesArray = this.categories;
-        this.dialogData.category = res.data;
-    });
-    this.authorService.getAuthors().subscribe((res: ApiResponse<AuthorModel[]>) =>{
-      this.artists = res.data.sort((a1,a2)=>a1.name.localeCompare(a2.name));
-      this.sharedService.sharedArtistsArray = this.artists;
-      sessionStorage.setItem('artists',this.artists.map(artist => artist.name).toString());
-      this.dialogData.author = res.data;
-    });
+    this.sortRecordsBy('categories');
+    this.sortRecordsBy('authors');
+
     this.route.params.subscribe(params => {
       const criteria = params['authorName'];
       if (criteria != 'music') {
@@ -118,6 +110,24 @@ export class SongComponent implements OnInit,AfterContentChecked{
 
     this.botCommand = localStorage.getItem('botCommand') || '';
     this.checkScreenSize();
+  }
+
+  private sortRecordsBy(criteria: string) {
+    if (criteria === 'categories'){
+      this.categoryService.getCategories().subscribe((res: ApiResponse<CategoryModel[]>) => {
+        this.categories = res.data.sort((a1, a2) => a1.name.localeCompare(a2.name));
+        this.sharedService.sharedCategoriesArray = this.categories;
+        this.dialogData.category = res.data;
+      });
+    }
+    else if (criteria === 'authors'){
+      this.authorService.getAuthors().subscribe((res: ApiResponse<AuthorModel[]>) =>{
+        this.artists = res.data.sort((a1,a2)=>a1.name.localeCompare(a2.name));
+        this.sharedService.sharedArtistsArray = this.artists;
+        sessionStorage.setItem('artists',this.artists.map(artist => artist.name).toString());
+        this.dialogData.author = res.data;
+      });
+    }
   }
 
   ngAfterContentChecked(): void {
