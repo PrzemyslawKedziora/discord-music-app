@@ -1,7 +1,7 @@
 <div class="row r1" *ngIf="songData" (mouseleave)="expanded=false">
     <div
-    class="d-flex align-baseline list-group-horizontal justify-content-between col-sm-5">
-      <div class="index d-flex align-items-center">{{songIndex+1}}</div>
+    class="d-flex align-baseline list-group-horizontal justify-content-between col-sm-5 main-info">
+      <div class="index">{{songIndex+1}}</div>
       <div class="my-auto">
         <img [src]="songRecord.thumbnail" class="data" alt="image" style="height: 80px; width: 140px"
         (click)="ss.openInYT(songRecord.ytURL)">

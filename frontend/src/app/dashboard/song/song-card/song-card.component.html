@@ -25,7 +25,7 @@
     <div class="stats d-flex justify-content-between">
       <div class="likes">
         <i class="bi bi-fire"
-        [ngStyle]="{'color' : song.likes.includes(userID) ? '#FF6C6C' : 'white'}"></i>
+        [ngStyle]="{'color' : song.likes.includes(userID) ? '#FF6C6C' : 'white'}" (click)="ss.like(song)"></i>
         <span class="like-number"> {{song.likes.length}}</span>
       </div>
       <div>

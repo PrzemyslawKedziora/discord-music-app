@@ -8,16 +8,21 @@
 }
 .row{
   color: $main-clay-color;
+  border-radius: 25px;
 }
 .row:hover{
   background: $hover-blue-nav-color;
-  border-radius: 25px;
+  transform: translateY(-5%);
+  transition: ease-in 0.2s;
 }
 .song-description {
   width: 20vw;
 }
 .index{
   width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .song-categories{
   width: 70px;
@@ -43,7 +48,8 @@
 .action-first{
   display: flex;
   align-items: center;
-  justify-content: center
+  justify-content: center;
+  transition: 0.3s ease-in-out;
 }
 .action-first:hover{
   cursor: pointer;
@@ -53,6 +59,10 @@
   right: 85%;
   border-radius: 5%;
   background: $background-main-color;
+
+}
+mat-nav-list:hover{
+
 }
 
 
