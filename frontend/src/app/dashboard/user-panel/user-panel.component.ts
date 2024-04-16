@@ -40,11 +40,12 @@ export class UserPanelComponent {
     const control = this.userForm.get(controlName);
     if (control) {
       control.disabled ? control.enable() : control.disable();
-      this.inputType = control.disabled && controlName === 'password' ? 'password' : 'text';
+      if (controlName === 'password') {
+        this.inputType = control.disabled ? 'password' : 'text';
+      }
       this.fieldActivationMap[controlName] = control.enabled;
     }
   }
-
   updateUser(){
     this.userService.updateUser(this.user.id,this.userForm)
       .subscribe((res: ApiResponse<UserModel>)=> {
