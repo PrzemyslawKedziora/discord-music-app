@@ -13,7 +13,7 @@ export class SidebarComponent{
   windowWidth!:number;
   isVisible=false;
   constructor(public sharedService: SharedService) {
-    sessionStorage.getItem('user') ? this.loginStatus = true : this.loginStatus = false;
+   this.loginStatus = !!sessionStorage.getItem('user');
   }
 
   hideSidebar(){
